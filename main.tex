@@ -1,15 +1,86 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
+\documentclass[a4paper]{report}
 
-\title{2022-Hugo-Phd-thesis}
-\author{Josef Sivic}
-\date{October 2022}
+\input{math_commands.tex}
+
+\usepackage[utf8]{inputenc}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{biblatex}
+\usepackage{setspace}
+
+\doublespacing
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{nameref}
+\usepackage{mathtools}
+\usepackage[stretch=10]{microtype}
+\usepackage{acronym}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{xspace}
+\usepackage{url}
+
+\usepackage{anyfontsize}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\bigeg}{E.g.,\xspace}
+\newcommand{\etal}{\textit{et~al.\xspace}}
+\newcommand{\etc}{etc.\@\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\bigie}{I.e.,\xspace}
+\usepackage[symbol]{footmisc}
+
+
+% Please leave these options as they are
+\usepackage{hyperref}
+\usepackage{cleveref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=magenta,
+    urlcolor=blue,
+    citecolor=purple,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+
+\def\smtt#1{\texttt{\textsc{#1}}}
+\acrodef{WADE}[WADE]{Weighted Average Data Efficiency}
+\acrodef{RNN}[RNN]{recurrent neural network}
+
+\urldef\projecturl\url{https://hugocisneros.com/ALIFE-Paper-2020/}
+
+\title{
+{Unsupervised learning in complex systems}\\
+{\large École normale supérieure}\\
+% {\includegraphics{uni.jpg}}
+}
+\author{Hugo Cisneros}
+\date{2022}
+
+\addbibresource{lib1.bib}
+\addbibresource{lib2.bib}
+\addbibresource{lib3.bib}
+
 
 \begin{document}
-
 \maketitle
 
-\section{Introduction}
+\tableofcontents
+
+\include{intro}
+\include{literature_review}
+\include{measure_complexity}
+\include{visualize_computations}
+\include{learning_efficiency}
+\include{conclusion}
+
+\printbibliography
 
 \end{document}
 
@@ -43,4 +114,4 @@
 % - Future work (2-3 pages)
 % 
 % Appendix
-% 
+%
