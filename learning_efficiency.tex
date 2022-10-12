@@ -25,7 +25,7 @@ Most machine learning models are evaluated by measuring performance on a
 specific dataset or task. Learning efficiency -- the ability to learn,
 generalize, and adapt quickly from a few examples -- is crucial for practical
 intelligence \cite{kanazawaGeneralIntelligenceDomainspecific2004} as well as
-low-data machine learning applications yet rarely used to evaluate models.
+low-data machine learning applications, yet rarely used to evaluate models.
 Supervised learning systems are theoretically limited in their learning speed by
 the optimization algorithms used for training. These algorithms such as
 stochastic gradient descent (SGD) have various speed guarantees depending on the
@@ -34,7 +34,7 @@ optimized~\cite{bottouOptimizationMethodsLargescale2018}. However, when
 intelligent beings learn, they appear to quickly re-use past knowledge and
 progressively improve over time. Their learning speed depends on a dynamically
 evolving internal state.
-To measure the learning efficiency of various systems, we propose in this work the \ac{WADE}
+To measure the learning efficiency of various systems, in this work, we propose the \ac{WADE}
 metric based on the time taken to reach several test accuracy checkpoints. We
 also design a simple modular benchmark composed of a set of sequential tasks.
 They begin with the task of recognizing a simple periodic sequence in an input
@@ -47,7 +47,7 @@ Established sequential supervised models such as recurrent neural networks
 \cite{vaswaniAttentionAllYou2017} lack essential properties such as learning
 beyond the training phase or the ability to adapt over time after being trained. These models can also be expensive to train, requiring a large number
 of labeled training examples to reach reasonable performance, leading to poor
-learning speeds. In this work, we use the newly proposed \ac{WADE} metric and the benchmark dataset to experimentally compare the learning speed of these well established models, such as RNNs, LSTMs and Transformers, to less explored {\em reservoir computing} models.
+learning speeds. In this work, we use the newly proposed \ac{WADE} metric and the benchmark dataset to experimentally compare the learning speed of these well-established models, such as RNNs, LSTMs and Transformers, with less explored {\em reservoir computing models}.
 
 Reservoir computing is a computational framework that aims to exploit the states
 of a complex dynamical system. The simplest example of a reservoir computer is a
@@ -256,9 +256,9 @@ $\text{T}(\alpha, \va)$ is in $[1, + \infty [$.
  \includegraphics[width=.9\linewidth]{figures/metric_tto}
  \vspace{-7pt}
  \captionof{figure}{Illustration of the calculation of $\text{T}(\cdot, \cdot)$,
-   representing the number of training steps (x-axis) needed to reach a certain test
-   accuracy $\alpha$ (y-axis) from a learning curve. In this example,
-   $\sA = [0.1, \ldots, 0.8]$ (y-axis). $\text{T}(0.6, \va)$ is highlighted in red.
+   representing the number of training steps (x axis) needed to reach a certain test
+   accuracy $\alpha$ (y axis) from a learning curve. In this example,
+   $\sA = [0.1, \ldots, 0.8]$ (y axis). $\text{T}(0.6, \va)$ is highlighted in red.
    $\text{T}(0.8, \va) = +\infty$ as the accuracy of 0.8 is never reached.}
   \label{fig:metric_tto}
 \end{minipage}
@@ -270,22 +270,22 @@ intuition of $\text{T}(\cdot, \cdot)$ is given in \figref{fig:metric_tto}.
 
 
 The choice of checkpoints $\sA$ does not need to be tuned in any specific way
-because $\text{WADE}(\va)$ converges quickly to a single value when $\sA$
+because $\text{WADE}(\va)$ quickly converges to a single value when $\sA$
 approaches the continuous interval $[0, 1]$. The approximation is good enough as
 long as $\sA$ is not too coarse (more than ten elements was enough in our
 experiments) and the WADE values computed from the same set $\sA$ are
 comparable.
 
-The time-to-threshold $\text{T}$ is always above or equal to 1 step for any threshold and sequence of accuracy scores.
+The time-to-threshold $\text{T}$ is always greater than or equal to 1 step for any threshold and sequence of accuracy scores.
 We have
-$\forall\: \alpha \in [0, 1],\;  \forall\: \va = (\eva_{n})_{I \subset \{\mathbb{N}\; \cup \{+\infty\} \}}$, it holds that
+$\forall\: \alpha \in [0, 1],\;  \forall\: \va = (\eva_{n})_{I \subset \{\mathbb{N}\; \cup \{+\infty\} \}}$, and we have
 \begin{equation}
   \label{eq:wade-0-1}
 \frac{1}{\text{T}(\alpha, \va)} \leq 1,
 \end{equation}
-and therefore we always get that $0 \leq \text{WADE}(\va) \leq 1$. The metric is equal to $0$
-for systems that never get past the smallest possible accuracy while a $1$
-corresponds to reaching a perfect test accuracy in only one training step. Such
+and therefore we always get $0 \leq \text{WADE}(\va) \leq 1$. The metric is equal to $0$
+for systems that never get past the smallest possible accuracy, while $1$
+corresponds to reaching a perfect test accuracy in one single training step. Such
 a system would also be considered to be performing well according to the
 underlying performance metric with which it is usually evaluated. Therefore,
 maximizing WADE also maximizes performance.
@@ -297,9 +297,8 @@ This section provides a more detailed description of each task in our benchmark.
 The tasks are designed to be language modeling tasks, where the goal is to
 predict some tokens from sequences of previously processed tokens. An overview
 of the tasks is given in Table~\ref{tab:all-tasks}. The tasks are divided into three
-groups: (i) binary tasks -- with only binary symbols, (ii) general symbolic tasks
--- symbolic manipulations with arbitrary symbols -- and (iii) language-based tasks
--- the symbols represent words in English and behave like a language. We introduce
+groups: (i) binary tasks with only binary symbols, (ii) general symbolic tasks
+-- symbolic manipulations with arbitrary symbols, and (iii) language-based tasks, where symbols represent words in English and behave like a language. We introduce
 this benchmark together with the WADE metric, but both can be used in other
 contexts as well to measure the learning speed of other systems. Individual
 sentences are generated and divided into a training set and a test set for
@@ -310,7 +309,7 @@ each task below\footnote{The tasks are also available as a
 \subsubsection{Binary}
 \paragraph{Simple periodic pattern identification.}
 
-The goal of the periodic binary task is for the model to learn a fixed-length
+The goal of the periodic binary task is to teach the model a fixed-length
 regular pattern. As the system is presented with new binary input tokens, it has
 to learn the periodic pattern on the fly and correctly predict the next token. A
 pattern of size $n$ is chosen at random and repeated $k$ times to produce a
@@ -334,7 +333,7 @@ arithmetic increase in the size of the period. We set the pattern length to incr
 \subsubsection{Symbolic counting}
 
 These tasks consist of reading patterns from an input sequence and answering a
-simple query about the number of patterns. Unlike the previous tasks, these
+simple query about the number of patterns. Unlike previous tasks, these
 require implementing a form of addressable memory that can be queried after the prompt has
 ended.
 
@@ -354,7 +353,7 @@ The symbol \texttt{x} is the query symbol (QS) that marks the beginning of the
 query. In the first example above, the goal is to predict the token \texttt{5}
 because the symbol \texttt{A} appears 5 times. As detailed in
 Sect.~\ref{sec:compared-methods}, we represent these nonbinary symbols with
-one-hot encoding, so the numerical nature of some tokens is not encoded a priori.
+one hot encoding, so the numerical nature of some tokens is not encoded a priori.
 
 \paragraph{Pattern counting.}
 This aim of this task is to count the number of occurrences of delimited patterns
@@ -377,9 +376,9 @@ predict.
 
 \subsubsection{Basic language understanding}
 To make the tasks progressively more complex, we steer them towards general
-language understanding tasks. The tasks described below  are generated automatically, but gradually incorporate more complex skills
+language understanding tasks. The tasks described below are generated automatically, but gradually incorporate more complex skills
 required for advanced language processing.
-The last task is a step towards understanding general language albeit with a limited vocabulary.
+The last task is a step towards understanding the general language albeit with a limited vocabulary.
 
 \paragraph{Elementary question answering (QA).}
 This task introduces elements of natural language. Each example is composed of a
@@ -390,7 +389,7 @@ basic elements:
 (iii) Answers (\texttt{YES} or \texttt{NO}),
 (iv) Additional words and symbols (\texttt{I, DO, NOT, AND, BUT, ?, .}).
 
-A random subset of names is selected and we generate a random prompt/question
+A random subset of names is selected, and we generate a random prompt/question
 pair from it.
 The question is drawn to ensure an equal proportion of
 positive and negative answers. For example, sentences may look like this:
