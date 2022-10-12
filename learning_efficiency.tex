@@ -227,7 +227,6 @@ We introduce the Weighted Average Data Efficiency (WADE) metric as a way to
 measure how quickly a model learns, using a weighted average of inverse times
 taken to reach various test accuracy \emph{checkpoints} over time.
 
-\begin{minipage}[htbp]{.65\linewidth}
 It is computed for an evenly distributed set of target accuracies $\sA$. They
 represent the \emph{checkpoints} at which the speed of learning is estimated.
 For example, we may choose $\sA = [0.1, 0.2, 0.3, 0.4, \ldots, 1.]$. The metric is
@@ -250,18 +249,18 @@ We also define $\text{T}(\alpha, \va) = +\infty$ if the accuracy value $\alpha$ 
 reached in $\va$. This is equivalent to appending an additional term $\eva_{+\infty}$
 to $\va$, always set to the maximum accuracy 1. Note that by construction,
 $\text{T}(\alpha, \va)$ is in $[1, + \infty [$.
-\end{minipage}
-\hfill
-\begin{minipage}[htbp]{.330\linewidth}
- \includegraphics[width=.9\linewidth]{figures/metric_tto}
- \vspace{-7pt}
- \captionof{figure}{Illustration of the calculation of $\text{T}(\cdot, \cdot)$,
+
+\begin{figure}[htbp]
+  \centering
+ \includegraphics[width=.4\linewidth]{figures/metric_tto}
+ \caption{Illustration of the calculation of $\text{T}(\cdot, \cdot)$,
    representing the number of training steps (x axis) needed to reach a certain test
    accuracy $\alpha$ (y axis) from a learning curve. In this example,
    $\sA = [0.1, \ldots, 0.8]$ (y axis). $\text{T}(0.6, \va)$ is highlighted in red.
    $\text{T}(0.8, \va) = +\infty$ as the accuracy of 0.8 is never reached.}
   \label{fig:metric_tto}
-\end{minipage}
+
+\end{figure}
 
 
 Since $\text{T}$ can be $+\infty$ we define
@@ -437,16 +436,17 @@ For example, below we show a generated group of sentences followed by several qu
 The difficulty of each of these tasks can be modulated by changing the size of the
 base vocabulary, the length of sequences, or the number of queries. Our particular setting of these parameters will be described in section~\ref{sec:task-gen-params}.
 
-\section{Evaluating speed of learning on a standard language classification task}
+\section{Standard language classification task}
 
-To show the usefulness of measuring \ac{WADE} on standard language classification tasks, we
-train various text classifiers on the IMDB dataset and compare their \ac{WADE}
-scores with a usual performance metric for classification: accuracy. This
-classification task, first proposed by \cite{maassRealTimeComputingStable2002},
-consists of deciding if a movie review is positive or negative from its text. It
-contains 25000 training examples and 25000 test examples. The two labels are
-balanced in both the training and test set. This dataset is a high dimensional
-language-based task with a binary output.
+To show the usefulness of measuring \ac{WADE} on standard language
+classification tasks, we train various text classifiers on the IMDB dataset and
+compare their \ac{WADE} scores with a usual performance metric for
+classification: accuracy. This classification task, first proposed by
+\cite{maassRealTimeComputingStable2002}, consists of deciding if a movie review
+is positive or negative from its text. It contains 25000 training examples and
+25000 test examples. The two labels are balanced in both the training and test
+set. This dataset is a high dimensional language-based task with a binary
+output.
 
 We study five standard models: (i) an Elman recurrent neural network (RNN)
 \cite{elmanFindingStructureTime1990} with $\tanh$ activation functions trained
@@ -766,6 +766,184 @@ computations and memory usage by using \emph{replay}-inspired methods
   rebuffiIcarlIncrementalClassifier2017} that retrain the models with past
 stored inputs. The results in Table~\ref{tab:summary} used each input sequence
 once.
+
+\section{Human performance evaluation}
+\label{sec:human}
+The proposed benchmark is relatively simple to understand and hence one may ask what would be the human performance and what WADE values this would correspond to. In
+particular, the language tasks appear to be readily solvable just from one's
+understanding of the English language. However, similar to how words are encoded
+as vectors before being processed by a neural network, we need to remove any
+language-based prior to make the comparison with human performance fair. This
+could be achieved in a number of ways. For example, if we map all the available
+tokens to random letters of the alphabet the apparently trivial task
+{\small \begin{align*}
+          & \texttt{I DO NOT SEE PAUL . DO I SEE PAUL ? NO} \\
+          & \texttt{I HEAR JAMES BUT I DO NOT HEAR PAUL AND JOHN . DO I HEAR JAMES ? YES}
+\end{align*}}
+
+would become significantly less obvious to humans
+{\small
+\begin{align*}
+  & \texttt{w K k A D r K w A D l W} \\
+  & \texttt{w Z t g w K k Z D G C r K w Z t l H}.
+\end{align*}
+}
+
+One would need to read through several of these sentences to identify patterns
+such as the fact that \texttt{W} and \texttt{H} represent Yes or No or that
+\texttt{r} plays the role of a full stop.
+
+We apply the following procedure in our human evaluation experiments:
+\begin{enumerate}
+  \item Choose a random task among 10.
+  \item Apply a random mapping from the task token to letters of the alphabet.
+  \item Present the sequences one by one with the tokens to be predicted hidden.
+  \item The user enters his predicted answer.
+  \item The valid sequence is shown so the user can learn from their mistakes.
+  \item Step 3-5 are repeated until 10 sequences are correctly solved in a row.
+  Then we go back to step 2 with a new task.
+\end{enumerate}
+We add the requirement that no external device such as pen and paper or
+note-taking program should be used during the experiment so the user relies
+solely on their memory. The accuracy is computed by counting the number of right
+answers in a row. For example, three right answers in a row would correspond to an
+accuracy of 30\%, while ten right answers in a row is 100\% which also
+corresponds to a switch of a task. This accuracy score is attributed to the first
+correct answer of the series of correct answers. This means that a series of five correct answers starting from question 6 until question 11 will correspond to reaching the accuracy of 50\% on question 6.
+This ensures that ten correct answers on the
+first attempt will yield a WADE score of 1.
+
+\section{Experimental parameters}
+\label{sec:parameters}
+We report all the parameters used in our experiments in table \ref{tab:appendix-params}:
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lp{.2\linewidth}p{.35\linewidth}}
+    \toprule
+    & \bfseries Reservoir-based & \bfseries Fully trained \\
+    \midrule
+    \bfseries Total number of sequences per task & 1200 & 1200 \\
+    \bfseries Number of training sequences & 960 & 960 \\
+    \bfseries Number of testing sequences & 240 & 240 \\
+    \bfseries Passes over the data (epochs) & 1 & 10 \\
+    \bfseries Random runs per task & 100 & 100\\
+    \bfseries Algorithm & SGD & Adam \citep{kingmaAdamMethodStochastic2015}\\
+    \bfseries Learning rate & $0.001$ & $0.001$ \\
+    \bfseries Regularization & weight decay $0.001$ & None \\
+    \bfseries Internal state (hidden) size & $1800$ & $h$ task-dependent \\
+    \bfseries Number of trainable parameters & $1800 \times \text{dictionary\_size}$ &
+      $h^{2} + 2 \times h \times \text{dictionary\_size}$ for the RNN\textsuperscript{2}\\
+    \bfseries Output non-linearity & Softmax & Softmax \\
+    \bfseries Internal non-linearity & Not applicable & $\tanh$ \\
+    \bfseries Batch size  & 1 & 1 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Experimental parameters common to all tasks. Some of the sizes (such
+    as $h$) vary from task to task.}
+  \label{tab:appendix-params}
+\end{table}
+
+\subsection{Task generation parameters\label{sec:task-gen-params}}
+The tasks are generated according to the procedures described in
+Section~\ref{sec:tasks}. They have some parameters that allow the
+difficulty of the task to be adjusted. We report results on ten tasks. The parameters
+chosen for our experiments are listed below:
+\vspace{-8pt}
+\begin{description}
+  \item[Periodic (1) and Increasing period (2):] Sequences are generated from patterns of
+        length between 1 and 10.
+  \item[Easy symbol counting (3):] Available symbols are \texttt{A}, \texttt{B} and
+        \texttt{C}. Generated sequences have between 1 and 10 of these symbols
+        in the prompt, and the query has either one, two, or all three symbols.
+  \item[Hard symbol counting (4):] Available symbols are the same as for the previous
+        task. Generated sequences have between 1 and 45 symbols
+        with separators in the prompt. There is a minimum of 1 query, and can be
+        as many queries as there are different patterns in the prompt.
+  \item[Question answering (5):] There are five available names and two verbs. The
+        prompt consists of between one and five names, and the question is about one
+        of these names.
+  \item[Harder question answering :] There are eleven available names and five
+        verbs. The prompt is made of between one and five names, and the
+        question is about one of these names.
+  \item[Question answering with world (7), with counting (8):] There are thirteen available
+        names and seven verbs.
+  \item[Adjective question answering (9), with counting (10):] There are eight
+        available names, six verbs, four color adjectives, and five size
+        adjectives. The prompt consists of between one and six statements, and
+        there are up to eight questions.
+\end{description}
+
+\vspace{-8pt}
+We chose relatively small values of these parameters because we are interested in simple tasks
+so that models that can learn from less than 100 examples. Moreover, the
+number of possible sentences generated from these small values is already huge,
+with more than $10^{35}$ possible sentences for task 4, for example. These
+parameters could also be varied dynamically to change the task's difficulty when
+needed or turn each task into multiple sub-tasks or levels of difficulty. We
+chose the ten separate tasks/settings pairs listed above to get a broad overview of our
+benchmarked models on a range of task difficulties.
+\footnotetext{$h$ is chosen to match the number of parameters of the reservoir-based methods.}
+
+\section{Reservoir models\label{sec:res-models}}
+We describe in more details the two reservoir-based models used in our experiments.
+\subsection{Echo-state network}
+The echo-state network is based on the
+following update equation:
+\begin{equation}
+  \label{eq:esn}
+  \vr_{t + 1} = (1 - \alpha) \vr_{t} +
+  \beta \tanh(\mW\: \vr_{t} + \mW_{\text{in}}\: \vx_{t + 1}),
+\end{equation}
+where $\vr_{t}$ is the $K$-dimensional state vector -- corresponding to the hidden neurons
+--- at time $t$, $\beta$ is the leaking rate, $\mW \in \mathbb{R}^{K \times K}$ is a sparsely
+connected random hidden layer matrix, and $\mW_{\text{in}} \in \mathbb{R}^{L \times K}$ is the
+input projection matrix. The matrices $\mW$ and $\mW_{\text{in}}$ are
+initialized randomly using the recommendations of
+\citet{jaegerLongShortTermMemory2012}: $\mW$ has an average of 10 non-zeros
+entries per row, all sampled uniformly in $[-1, 1]$, $\mW_{\text{in}}$ has its
+entries uniformly sampled in $[-1, 1]$.
+
+The $L$-dimensional outputs are computed at times $t > 0$ as
+\begin{equation}
+  \label{eq:esn-res}
+\tilde{\vx}_{t+ 1} = D(\vr_{t}),
+\end{equation}
+where $D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is a (trained) decoding function. For echo-state networks, the
+decoder is often a linear transformation
+$D(\vr_{t}) = \mW_{\text{out}} \vr_{t}$ where $\mW_{\text{out}}$ is a
+$K \times L$-dimensional matrix. In our experiments, we set $\beta = 0$, which was
+empirically observed to yield the best results on our tasks. The parameter $\beta$,
+as well as the randomly sampled weight matrix, are sometimes tuned for each task
+\citep{jaegerLongShortTermMemory2012}. We only use
+default values to get a task-independent setup with
+the least possible assumptions and to make the methods comparable.
+
+\subsection{Reservoir cellular automata\label{sec:app-ca-res}}
+
+The Cellular Automaton (CA) update function $\Phi$ is applied at time $t$ on the previous state vector
+$\vs_{t - 1}$ --- also called the grid. The input vector $\vx_{t}$ at time $t$ is
+projected onto a vector $\vp_{t}$ the same size as $\vs_{t}$ using a method proposed in
+\cite{yilmazReservoirComputingUsing2014}. To combine inputs with CA states,
+we XOR the two vectors together
+\citep{gloverDynamicalLandscapeReservoir2021},
+\begin{equation}
+  \label{eq:ca-xor}
+  \vs'_{t} = \vp_{t}\otimes \vs_{t},
+\end{equation}
+where $\vs'_{t}$ is the temporary CA state resulting from the combination of the
+CA state and input vectors at time $t$. We then compute the next CA states by
+applying the update function $\Phi$,
+\begin{equation}
+  \label{eq:ca-state}
+  \vs_{t + 1} = \Phi(\vs'_{t}).
+\end{equation}
+The final reservoir state $\vr_{t + 1}$ is obtained by concatenating $r$ consecutive CA
+states obtained from a single combined state $\vs'$ by applying $\Phi$ again. If
+the size of the state is $n$, the resulting reservoir vector $\vr$ has a dimension
+$K = r \times n$, where $r$ is defined above. As for the echo-state network (ESN), the $L$-dimensional output tokens are
+calculated at times $t > 0$ as $\tilde{\vx}_{t+ 1} = D(\vr_{t})$ where
+$D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is the (trained) decoding function. We use linear decoding functions in
+our experiments such that $D(\vr_{t}) = \mW_{\text{out}}\vr_{t}$.
 
 \section{Conclusions}
 

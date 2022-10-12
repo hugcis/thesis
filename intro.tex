@@ -6,8 +6,21 @@
 
 The goal of this thesis is to develop methods for studying and using the
 computations of complex dynamical systems to construct learning algorithms that
-use a limited amount of supervision.
-We break down this objective into the following subgoals: (i)
+use a limited amount of supervision. We break down this objective into the
+following subgoals: (i) Identify complex dynamical systems with the potential to
+exhibit emergent open-ended growth of complexity and evolutionary-like
+properties. (ii) Measure the fraction of systems that have the most complex and
+rapidly evolving behavior. Defining these notions is also part of the goal. We
+believe those systems to be the most promising for further use. (iii) Work on
+applying these promising systems to challenging tasks where classical machine
+learning models might fail or may prove less efficient.
+
+This work is not about
+
+In this thesis we work towards attaining these goal, focusing on one particular
+complex system: the \acl{CA}. This model has been studied extensively
+because of its simple definition yet surprisingly complex behavior. We provide a
+more precise definition of \aclp{CA} in Section .
 
 
 \section{Motivation}
@@ -22,21 +35,26 @@ algorithms learning from untagged data, objectives are still used. For instance,
 the well-known K-means clustering algorithm minimizes the sum of square distance
 to cluster centers.
 
-This reliance on objective functions creates two main
-issues: (i) the objective is not always clearly defined. For example, the
-objective function of a walking robot could be to ``not fall when stepping
-through its surrounding environment''. But (ii) Using such functions as goals
-can be counter-productive, because, as many example in nature demonstrate, the
-path to these objectives are often deceptive. They involve going in a unexpected
-direction that may initially seem against the original goal
-\cite{stanleyWhyGreatnessCannot2015}.
+This reliance on objective functions creates two main issues: (i) the objective
+is not always clearly defined. For example, the objective function of a walking
+robot could be to ``not fall when stepping through its surrounding
+environment''. But (ii) Using such functions as goals can be counter-productive,
+because, as many example in nature demonstrate, the path to these objectives are
+often deceptive. They involve going in a unexpected direction that may initially
+seem against the original goal \cite{stanleyWhyGreatnessCannot2015}.
 
-
+In this thesis, the term \emph{unsupervised} refers to a form of learning with
+no predefined objective. Like for natural evolution, we expect unsupervised
+algorithms to develop new features autonomously and become progressively more
+complex over time. Such algorithms would regularly learn to solve problems on
+their own without the need to explicitly guide them, thereby discovering robust
+and diverse solutions to deceptive problems.
 
 
 \section{Challenges}
 
-The study of complex systems poses a range of challenges
+The study of complex systems poses a range of challenges by itself \cite{sanmiguelChallengesComplexSystems2012}. Interesting
+dynamics
 
 \section{Contributions}
 
