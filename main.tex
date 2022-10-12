@@ -1,7 +1,13 @@
-\documentclass[a4paper]{report}
+\documentclass[a4paper,11pt]{report}
 
 \input{math_commands.tex}
 
+\usepackage[
+includehead,
+nomarginpar,
+includefoot,
+textheight=24cm,
+footskip=2cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -24,6 +30,7 @@
 \usepackage{multirow}
 \usepackage{xspace}
 \usepackage{url}
+\usepackage{xhfill}
 
 \usepackage{anyfontsize}
 \newcommand{\eg}{e.g.,\xspace}
@@ -34,7 +41,7 @@
 \newcommand{\bigie}{I.e.,\xspace}
 \usepackage[symbol]{footmisc}
 
-
+\usepackage{fancyhdr}
 % Please leave these options as they are
 \usepackage{hyperref}
 \usepackage{cleveref}
@@ -52,11 +59,19 @@
 \def\smtt#1{\texttt{\textsc{#1}}}
 \acrodef{WADE}[WADE]{Weighted Average Data Efficiency}
 \acrodef{RNN}[RNN]{recurrent neural network}
+\newacro{ESN}{echo-state network}
+\newacro{DS}{dynamical system}
+\newacro{CA}{cellular automaton}
+\acrodefplural{CA}[CA]{cellular automata}
+\newacro{NCA}{neural cellular automaton}
+\acrodefplural{NCA}[NCA]{neural cellular automata}
+\newacro{CNN}{convolutional neural network}
+
 
 \urldef\projecturl\url{https://hugocisneros.com/ALIFE-Paper-2020/}
 
 \title{
-{Unsupervised learning in complex systems}\\
+{Unsupervised Learning in Complex Systems}\\
 {\large École normale supérieure}\\
 % {\includegraphics{uni.jpg}}
 }
@@ -66,12 +81,21 @@
 \addbibresource{lib1.bib}
 \addbibresource{lib2.bib}
 \addbibresource{lib3.bib}
+\addbibresource{main.bib}
 
 
 \begin{document}
 \maketitle
 
 \tableofcontents
+
+\pagestyle{fancy}
+%... then configure it.
+\fancyhead{} % clear all header fields
+\fancyhead[RO,LE]{\rightmark} \fancyhead[RE,LO]{\thepage}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[CO,CE]{---\quad \textbf{H. Cisneros: Unsupervised Learning in
+    Complex Systems}\quad ---}
 
 \include{intro}
 \include{literature_review}

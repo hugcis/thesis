@@ -7,14 +7,56 @@
 The goal of this thesis is to develop methods for studying and using the
 computations of complex dynamical systems to construct learning algorithms that
 use a limited amount of supervision.
+We break down this objective into the following subgoals: (i)
 
-The goal can be broken down into the following subgoals: (i)
 
 \section{Motivation}
+
+Most of existing machine learning algorithms rely on the choice of an objective,
+function: a clearly defined mapping from the current state and parameters of a
+model to a real value, which indicates the performance of that model. The
+function depends on the goal of the model. For a supervised learning problem, we
+may count the number of misclassified objects or a distance between the
+predictions and expected results. In unsupervised learning, the family of
+algorithms learning from untagged data, objectives are still used. For instance,
+the well-known K-means clustering algorithm minimizes the sum of square distance
+to cluster centers.
+
+This reliance on objective functions creates two main
+issues: (i) the objective is not always clearly defined. For example, the
+objective function of a walking robot could be to ``not fall when stepping
+through its surrounding environment''. But (ii) Using such functions as goals
+can be counter-productive, because, as many example in nature demonstrate, the
+path to these objectives are often deceptive. They involve going in a unexpected
+direction that may initially seem against the original goal
+\cite{stanleyWhyGreatnessCannot2015}.
+
 
 
 
 \section{Challenges}
 
+The study of complex systems poses a range of challenges
+
 \section{Contributions}
+
+The main contributions of this thesis are
+\begin{enumerate}
+  \item A thorough literature review making the connection between cellular
+        automata and other complex systems literature and machine learning
+        literature.
+
+  \item The development of a general complexity metric that can help identify
+  complex systems with interesting behavior.
+
+  \item The development of a coarse graining method for visualizing computations
+        in cellular automata and other discrete systems with local interactions.
+
+  \item The introduction of a metric for learning efficiency for learning
+        algorithms as well as a benchmark dataset of progressively harder
+        language tasks.
+\end{enumerate}
+
 \section{Thesis overview}
+
+\section{Publications and software}

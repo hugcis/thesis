@@ -174,7 +174,6 @@ reaching a target accuracy on a validation set.
 
 \begin{table}[htbp]
   \centering
-{\fontsize{8}{8.0}\selectfont
   \begin{tabular}{cp{.37\linewidth}p{.48\linewidth}}
     \toprule
     \bfseries Task id & \bfseries Name & \bfseries Description \\
@@ -209,7 +208,6 @@ reaching a target accuracy on a validation set.
                                                      sequence of prompts. \\
     \arrayrulecolor{black}\bottomrule
   \end{tabular}
-}\vspace{-5pt}
   \caption{General description of all the tasks in the benchmark.}
   \label{tab:all-tasks}
 \end{table}
@@ -316,12 +314,12 @@ The goal of the periodic binary task is for the model to learn a fixed-length
 regular pattern. As the system is presented with new binary input tokens, it has
 to learn the periodic pattern on the fly and correctly predict the next token. A
 pattern of size $n$ is chosen at random and repeated $k$ times to produce a
-sequence of length $n \times k$. Examples include: {\fontsize{9}{10.8}\selectfont
+sequence of length $n \times k$. Examples include:
 \begin{align*}
   \begin{split}
   \smtt{\textbf{01}01010101010101010101010101010101} & \quad\text{Pattern with period 2}\\
   \smtt{\textbf{0011}001100110011001100110011001100} & \quad\text{Pattern with period 4}\\
-  \texttt{\textbf{011}0110110110110110110110110110110} & \quad\text{Pattern with period 3}
+  \smtt{\textbf{011}0110110110110110110110110110110} & \quad\text{Pattern with period 3}
 \end{split}\label{eq:1}
 \end{align*}
 
@@ -345,16 +343,14 @@ The first version of the counting task focuses on counting single symbols from
 an input sequence. The sequence ends with a \emph{query} for the count of
 one of the symbols. The goal is to predict the last token (in bold) of sequences
 of the following form:
-{\fontsize{8}{9.6}\selectfont
-  \begingroup
-\addtolength{\jot}{-.5em}
+
 \begin{align*}
   \underbrace{\smtt{AABBCBABAAB}}_{\text{Input symbols}}
   & \underbrace{\texttt{x}}_{\text{QS}} \texttt{A}
     \underbrace{\textbf{\texttt{5}}}_{\text{Answer}} \\
 \end{align*}
-\endgroup
-}The symbol \texttt{x} is the query symbol (QS) that marks the beginning of the
+
+The symbol \texttt{x} is the query symbol (QS) that marks the beginning of the
 query. In the first example above, the goal is to predict the token \texttt{5}
 because the symbol \texttt{A} appears 5 times. As detailed in
 Sect.~\ref{sec:compared-methods}, we represent these nonbinary symbols with
@@ -365,13 +361,16 @@ This aim of this task is to count the number of occurrences of delimited pattern
 instead of single symbols. A sequence is still divided between a prompt --- before
 \texttt{x} --- and a query --- after \texttt{x}. One has to predict the symbol
 coming after each separator symbol (S) \texttt{y} in the query part of the
-sentence. For example, sentences are of the form: {\fontsize{8}{9.6}\selectfont
+sentence. For example, sentences are of the form:
+
 \begin{align*}
   &\underbrace{\texttt{AA}}_{\text{Pattern 1}}\underbrace{\texttt{y}}_{\text{S}}
     \underbrace{\texttt{BBC}}_{\text{Pattern 2}}\underbrace{\texttt{y}}_{\text{S}}\underbrace{\texttt{BAB}}_{\text{Pattern 3}}\underbrace{\texttt{y}}_{\text{S}}\underbrace{\texttt{AA}}_{\text{Pattern 4}}\underbrace{\texttt{y}}_{\text{S}}\underbrace{\texttt{B}}_{\text{Pattern 5}}
     \underbrace{\texttt{x}}_{\text{QS}}\underbrace{\texttt{AAy}}_{\text{Query 1}}\underbrace{\texttt{\textbf{2}}}_{\text{Answer 1}}
     \underbrace{\texttt{By}}_{\text{Query 2}}\underbrace{\texttt{\textbf{1}}}_{\text{Answer 2}} \\
-\end{align*}}Multiple queries are presented successively, which requires keeping and being
+\end{align*}
+
+Multiple queries are presented successively, which requires keeping and being
 able to retrieve several counts simultaneously. A query is composed of a
 pattern, a separator symbol, and the pattern count that the system should
 predict.
@@ -395,14 +394,12 @@ A random subset of names is selected and we generate a random prompt/question
 pair from it.
 The question is drawn to ensure an equal proportion of
 positive and negative answers. For example, sentences may look like this:
-{\fontsize{8}{9.6}\selectfont
-  \begingroup
-\addtolength{\jot}{-.5em}
+
 \begin{align*}
 &  \texttt{I HEAR JOHN AND PAUL .}\texttt{ DO I HEAR PAUL ?} \texttt{\textbf{ YES}}\\
 &    \texttt{I SEE JOHN BUT I DO NOT SEE PAUL AND TOM . DO I SEE TOM ? \textbf{NO}}
 \end{align*}
-\endgroup}
+
 The only token to predict is the binary answer \texttt{YES} or \texttt{NO}.
 
 \paragraph{Question answering (QA) with adjectives.}
@@ -410,9 +407,7 @@ The only token to predict is the binary answer \texttt{YES} or \texttt{NO}.
 This task extends the previous task by adding adjectives and modifiers to the
 object names. The queries may be about the subject-verb relation or the
 subject-adjective relation.
-{\fontsize{8}{9.6}\selectfont
-  \begingroup
-\addtolength{\jot}{-.5em}
+
 \begin{align*}
   &\texttt{I SEE A SMALL BANANA .}\texttt{ WHAT IS THE SIZE OF THE BANANA I SEE ? } \texttt{\textbf{SMALL}}\\
   &  \texttt{I SEE A LARGE GREEN APPLE BUT I DO NOT SEE A RED APPLE .} \\
@@ -420,8 +415,7 @@ subject-adjective relation.
   &  \texttt{I SEE A SMALL GREEN APPLE BUT I DO NOT SEE A BANANA .}\\
   &\quad\quad\texttt{WHAT IS THE COLOR OF THE APPLE I SEE ? \textbf{GREEN}}
 \end{align*}
-\endgroup
-}
+
 Here the task output space is slightly larger because the model may be
 predicting \texttt{YES}, \texttt{NO}, \texttt{SMALL}, \texttt{GREEN}, \etc
 
@@ -432,9 +426,6 @@ defined in one or more sentences, and an unknown number of questions follow.
 This is more akin to a real-world conversation where stored facts should be
 remembered longer and accessed on demand.
 For example, below we show a generated group of sentences followed by several questions:
-{\fontsize{8}{9.6}\selectfont
-  \begingroup
-\addtolength{\jot}{-.5em}
 \begin{align*}
   &\texttt{I SEE A SMALL BANANA .}\\
   &  \texttt{I SEE A LARGE GREEN APPLE BUT I DO NOT SEE A RED APPLE .} \\
@@ -443,7 +434,7 @@ For example, below we show a generated group of sentences followed by several qu
   &\quad\quad\texttt{HOW MANY THINGS DO I SMELL ? \textbf{ONE}}\\
   & \quad\quad\texttt{DO I SEE A LARGE APPLE ? \textbf{YES}}. \\
 \end{align*}
-\endgroup}
+
 The difficulty of each of these tasks can be modulated by changing the size of the
 base vocabulary, the length of sequences, or the number of queries. Our particular setting of these parameters will be described in section~\ref{sec:task-gen-params}.
 
@@ -472,10 +463,6 @@ Each model's hyperparameters are chosen to ensure they have a similar number of
 trainable parameters except for the logistic regression whose parameter count is
 solely determined by the input and output dimensions.
 
-\begin{minipage}[htbp]{.66\linewidth}
-% \begin{table}[htbp]
- \vspace{21pt}
-  \centering
   \begin{tabular}{c|cc}
 \toprule
 & \bfseries WADE $\times 10^{-2}$ (std.) $\uparrow$ & \bfseries Max test accuracy (std.) $\uparrow$ \\
@@ -492,18 +479,14 @@ Transformer & \bfseries 8.716 ${\scriptstyle \pm0.720}$ & 0.872 ${\scriptstyle \
     classification dataset. Results are averaged over 50 separate runs. ($\uparrow$
     indicates that higher is better).
     \label{tab:comp-sup-acc}}
-% \end{table}
-\end{minipage}
-\hfill
-\begin{minipage}[htbp]{.32\linewidth}
-  \vfill
+
+  \begin{figure}
+
   \centering
-  \includegraphics[width=\linewidth]{figures/wade_supervised_fixed.pdf}
-  \vspace{-20pt}
-  \captionof{figure}{Test accuracy curves for each model. Shaded areas are
+  \includegraphics[width=.4\linewidth]{figures/wade_supervised_fixed.pdf}
+  \caption{Test accuracy curves for each model. Shaded areas are
     $\pm 1\sigma$ around the average over 50 runs.\label{fig:wade-sup}}%
-  \vfill
-\end{minipage}
+  \end{figure}
 
 Table~\Ref{tab:comp-sup-acc} shows the results of all models on the IMDB dataset
 reporting both the standard test accuracy as well as our new WADE metric
