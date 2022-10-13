@@ -1,4 +1,5 @@
 \chapter{Learning efficiency of complex systems for reservoir computing}
+\label{cha:learn-effic-compl}
 
   It is common to evaluate the performance of a machine learning model by
   measuring its predictive power on a test dataset. This approach favors
@@ -827,7 +828,7 @@ We report all the parameters used in our experiments in table \ref{tab:appendix-
     \bfseries Number of testing sequences & 240 & 240 \\
     \bfseries Passes over the data (epochs) & 1 & 10 \\
     \bfseries Random runs per task & 100 & 100\\
-    \bfseries Algorithm & SGD & Adam \citep{kingmaAdamMethodStochastic2015}\\
+    \bfseries Algorithm & SGD & Adam \cite{kingmaAdamMethodStochastic2015}\\
     \bfseries Learning rate & $0.001$ & $0.001$ \\
     \bfseries Regularization & weight decay $0.001$ & None \\
     \bfseries Internal state (hidden) size & $1800$ & $h$ task-dependent \\
@@ -899,7 +900,7 @@ where $\vr_{t}$ is the $K$-dimensional state vector -- corresponding to the hidd
 connected random hidden layer matrix, and $\mW_{\text{in}} \in \mathbb{R}^{L \times K}$ is the
 input projection matrix. The matrices $\mW$ and $\mW_{\text{in}}$ are
 initialized randomly using the recommendations of
-\citet{jaegerLongShortTermMemory2012}: $\mW$ has an average of 10 non-zeros
+\cite{jaegerLongShortTermMemory2012}: $\mW$ has an average of 10 non-zeros
 entries per row, all sampled uniformly in $[-1, 1]$, $\mW_{\text{in}}$ has its
 entries uniformly sampled in $[-1, 1]$.
 
@@ -914,7 +915,7 @@ $D(\vr_{t}) = \mW_{\text{out}} \vr_{t}$ where $\mW_{\text{out}}$ is a
 $K \times L$-dimensional matrix. In our experiments, we set $\beta = 0$, which was
 empirically observed to yield the best results on our tasks. The parameter $\beta$,
 as well as the randomly sampled weight matrix, are sometimes tuned for each task
-\citep{jaegerLongShortTermMemory2012}. We only use
+\cite{jaegerLongShortTermMemory2012}. We only use
 default values to get a task-independent setup with
 the least possible assumptions and to make the methods comparable.
 
@@ -925,7 +926,7 @@ $\vs_{t - 1}$ --- also called the grid. The input vector $\vx_{t}$ at time $t$ i
 projected onto a vector $\vp_{t}$ the same size as $\vs_{t}$ using a method proposed in
 \cite{yilmazReservoirComputingUsing2014}. To combine inputs with CA states,
 we XOR the two vectors together
-\citep{gloverDynamicalLandscapeReservoir2021},
+\cite{gloverDynamicalLandscapeReservoir2021},
 \begin{equation}
   \label{eq:ca-xor}
   \vs'_{t} = \vp_{t}\otimes \vs_{t},

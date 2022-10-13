@@ -15,7 +15,8 @@ believe those systems to be the most promising for further use. (iii) Work on
 applying these promising systems to challenging tasks where classical machine
 learning models might fail or may prove less efficient.
 
-This work is not about
+This work is not about what the machine learning community commonly refers to as
+``unsupervised learning'', that is learning from untagged data.
 
 In this thesis we work towards attaining these goal, focusing on one particular
 complex system: the \acl{CA}. This model has been studied extensively
@@ -40,8 +41,8 @@ is not always clearly defined. For example, the objective function of a walking
 robot could be to ``not fall when stepping through its surrounding
 environment''. But (ii) Using such functions as goals can be counter-productive,
 because, as many example in nature demonstrate, the path to these objectives are
-often deceptive. They involve going in a unexpected direction that may initially
-seem against the original goal \cite{stanleyWhyGreatnessCannot2015}.
+often deceptive. They involve developing in unexpected directions that may
+initially seem against the original goal \cite{stanleyWhyGreatnessCannot2015}.
 
 In this thesis, the term \emph{unsupervised} refers to a form of learning with
 no predefined objective. Like for natural evolution, we expect unsupervised
@@ -59,16 +60,23 @@ emergent property that arises from its intricate structure, its number of
 elements, how it functions, and how it responds to different kinds of external
 influence.
 
+Another challenge is posed by the absence of clear objective in the design of
+our unsupervised learning systems. Because it is essential to understand which
+system to pick from all available options, we need to design metrics that
+achieve that without being another objective function.
+
 \section{Contributions}
 
 The main contributions of this thesis are
 \begin{enumerate}
   \item A thorough literature review making the connection between cellular
         automata and other complex systems literature and machine learning
-        literature.
+        literature. Studying these two fields under a single point of view is
+        relatively novel, and we consider a review necessary for placing the
+        rest of our work in its context.
 
   \item The development of a general complexity metric that can help identify
-  complex systems with interesting behavior.
+        complex systems with interesting behavior.
 
   \item The development of a coarse graining method for visualizing computations
         in cellular automata and other discrete systems with local interactions.
@@ -80,4 +88,45 @@ The main contributions of this thesis are
 
 \section{Thesis overview}
 
+In Chapter \ref{cha:literature-review}, we review relevant methods and tools for
+measuring the complexity of complex systems and using their computations for
+various tasks.
+
+Chapter \ref{cha:background} presents some background notions about complex
+systems, cellular automata, and reservoir computing.
+
+Chapter \ref{cha:meas-compl-evolv} introduces a complexity metric which allows
+selecting complex systems with interesting behavior. The metric measures the
+``novelty'' of the temporal states of a system compared to a reference one. We
+build a dataset of interesting cellular automata to validate the quality of the
+metric.
+
+Chapter \ref{cha:visu-comp-large} addresses the question of large scale complex
+systems and the applicability of complexity metrics at multiple scales. We
+propose three algorithms for coarse-graining of cellular automata. The allow
+reducing the size of large scale systems while retaining the interesting parts
+of the behavior.
+
+Chapter \ref{cha:learn-effic-compl} presents a learning efficiency metric and a
+dataset for measuring the speed of learning of various systems. We show that
+reservoir computing-based systems using cellular automata can be more efficient
+than usual machine learning algorithms in constrained data and computation
+settings.
+
+
 \section{Publications and software}
+
+The thesis has led to the following publications:
+
+\begin{itemize}
+  \item \fullcite{cisnerosEvolvingStructuresComplex2019}
+  \item \fullcite{cisnerosVisualizingComputationLargescale2020}
+  \item \fullcite{cisnerosBenchmarkingLearningEfficiency2022a}
+\end{itemize}
+
+The code to reproduce experiments from all three publications is available on
+GitHub.
+
+We also published a dataset which we used for our benchmark in our last
+publication. It is available at
+\url{https://github.com/hugcis/incremental_tasks/}.
