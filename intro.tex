@@ -7,7 +7,7 @@
 The goal of this thesis is to develop methods for studying and using the
 computations of complex dynamical systems to construct learning algorithms that
 use a limited amount of supervision. We break down this objective into the
-following subgoals: (i) Identify complex dynamical systems with the potential to
+following subgoals: (i) identify complex dynamical systems with the potential to
 exhibit emergent open-ended growth of complexity and evolutionary-like
 properties. (ii) Measure the fraction of systems that have the most complex and
 rapidly evolving behavior. Defining these notions is also part of the goal. We
@@ -16,36 +16,38 @@ applying these promising systems to challenging tasks where classical machine
 learning models might fail or may prove less efficient.
 
 This work is not about what the machine learning community commonly refers to as
-``unsupervised learning'', that is learning from untagged data.
+``unsupervised learning'', that is, learning from untagged data. In machine learning, 
+supervision refers to a label, a number or collection of numbers that represents the 
+expected outcome from some input data.
 
-In this thesis we work towards attaining these goal, focusing on one particular
+In this thesis we work towards attaining these goals, focusing on one particular
 complex system: the \acl{CA}. This model has been studied extensively
-because of its simple definition yet surprisingly complex behavior. We provide a
+because of its simple definition and surprisingly complex behavior. We provide a
 more precise definition of \aclp{CA} in Section .
 
 
 \section{Motivation}
 
-Most of existing machine learning algorithms rely on the choice of an objective,
+Most of existing machine learning algorithms rely on the choice of an objective 
 function: a clearly defined mapping from the current state and parameters of a
 model to a real value, which indicates the performance of that model. The
-function depends on the goal of the model. For a supervised learning problem, we
+function depends on the objective of the model. For a supervised learning problem, we
 may count the number of misclassified objects or a distance between the
 predictions and expected results. In unsupervised learning, the family of
-algorithms learning from untagged data, objectives are still used. For instance,
+algorithms learning from untagged data, objectives are still used. For example,
 the well-known K-means clustering algorithm minimizes the sum of square distance
 to cluster centers.
 
 This reliance on objective functions creates two main issues: (i) the objective
 is not always clearly defined. For example, the objective function of a walking
 robot could be to ``not fall when stepping through its surrounding
-environment''. But (ii) Using such functions as goals can be counter-productive,
-because, as many example in nature demonstrate, the path to these objectives are
+environment''. But (ii) Using such functions as goals can be counterproductive
+because, as many examples in nature demonstrate, the paths to these objectives are
 often deceptive. They involve developing in unexpected directions that may
 initially seem against the original goal \cite{stanleyWhyGreatnessCannot2015}.
 
 In this thesis, the term \emph{unsupervised} refers to a form of learning with
-no predefined objective. Like for natural evolution, we expect unsupervised
+no predefined objective. Like natural evolution, we expect unsupervised
 algorithms to develop new features autonomously and become progressively more
 complex over time. Such algorithms would regularly learn to solve problems on
 their own without the need to explicitly guide them, thereby discovering robust
@@ -60,9 +62,9 @@ emergent property that arises from its intricate structure, its number of
 elements, how it functions, and how it responds to different kinds of external
 influence.
 
-Another challenge is posed by the absence of clear objective in the design of
+Another challenge is posed by the absence of a clear objective in the design of
 our unsupervised learning systems. Because it is essential to understand which
-system to pick from all available options, we need to design metrics that
+system to choose from all available options, we need to design metrics that
 achieve that without being another objective function.
 
 \section{Contributions}
@@ -71,14 +73,14 @@ The main contributions of this thesis are
 \begin{enumerate}
   \item A thorough literature review making the connection between cellular
         automata and other complex systems literature and machine learning
-        literature. Studying these two fields under a single point of view is
+        literature. Studying these two fields from a single point of view is
         relatively novel, and we consider a review necessary for placing the
         rest of our work in its context.
 
   \item The development of a general complexity metric that can help identify
         complex systems with interesting behavior.
 
-  \item The development of a coarse graining method for visualizing computations
+  \item The development of a coarse-graining method for visualizing computations
         in cellular automata and other discrete systems with local interactions.
 
   \item The introduction of a metric for learning efficiency for learning
@@ -95,16 +97,16 @@ various tasks.
 Chapter \ref{cha:background} presents some background notions about complex
 systems, cellular automata, and reservoir computing.
 
-Chapter \ref{cha:meas-compl-evolv} introduces a complexity metric which allows
-selecting complex systems with interesting behavior. The metric measures the
+Chapter \ref{cha:meas-compl-evolv} introduces a complexity metric that allows us 
+to select complex systems with interesting behavior. The metric measures the
 ``novelty'' of the temporal states of a system compared to a reference one. We
 build a dataset of interesting cellular automata to validate the quality of the
 metric.
 
-Chapter \ref{cha:visu-comp-large} addresses the question of large scale complex
+Chapter \ref{cha:visu-comp-large} addresses the question of large-scale complex
 systems and the applicability of complexity metrics at multiple scales. We
-propose three algorithms for coarse-graining of cellular automata. The allow
-reducing the size of large scale systems while retaining the interesting parts
+propose three algorithms for coarse-graining of cellular automata. This allows
+reducing the size of large-scale systems while retaining the interesting parts
 of the behavior.
 
 Chapter \ref{cha:learn-effic-compl} presents a learning efficiency metric and a
@@ -124,7 +126,7 @@ The thesis has led to the following publications:
   \item \fullcite{cisnerosBenchmarkingLearningEfficiency2022a}
 \end{itemize}
 
-The code to reproduce experiments from all three publications is available on
+The code to reproduce the experiments of all three publications is available on
 GitHub.
 
 We also published a dataset which we used for our benchmark in our last
