@@ -9,16 +9,65 @@ computations of complex dynamical systems to construct learning algorithms that
 use a limited amount of supervision. We break down this objective into the
 following subgoals: (i) identify complex dynamical systems with the potential to
 exhibit emergent open-ended growth of complexity and evolutionary-like
-properties. (ii) Measure the fraction of systems that have the most complex and
-rapidly evolving behavior. Defining these notions is also part of the goal. We
-believe those systems to be the most promising for further use. (iii) Work on
-applying these promising systems to challenging tasks where classical machine
-learning models might fail or may prove less efficient.
+properties.
+\begin{figure}[htbp]
+  \centering
+\begin{subfigure}[b]{.4\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{figures/disord2.png}
+  \caption{A disordered cellular automaton.}
+ \label{fig:disordered_sys}
+\end{subfigure}
+\hspace{30pt}
+\begin{subfigure}[b]{.4\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{figures/micro4.png}
+  \caption{A cellular automaton with visible emergent structures.}
+  \label{fig:structured_sys}
+\end{subfigure}
+  \caption{Two example complex systems with different behavior types. Cellular
+    automata are promising }
+  \label{fig:comparison_ca}
+\end{figure}
 
-This work is not about what the machine learning community commonly refers to as
-``unsupervised learning'', that is, learning from untagged data. In machine learning, 
-supervision refers to a label, a number or collection of numbers that represents the 
-expected outcome from some input data.
+(ii) Measure the fraction of systems that have the most complex and rapidly
+evolving behavior. Defining these notions is also part of the goal. We believe
+those systems to be the most promising for further use since they may exhibit
+open-ended complexity growth.
+
+\begin{figure}[htbp]
+  \centering
+ \includegraphics[width=.9\linewidth]{figures/rule18_small}
+ \caption{Filtering the behavior of elementary cellular automaton rule 18. This
+   uncovers a highly structured behavior with the propagation of area boundaries
+   within the apparent randomness.}
+  \label{fig:rule_18}
+\end{figure}
+
+
+(iii) Apply the promising systems to challenging tasks where classical machine
+learning models may fail or prove less efficient. An example application is
+illustrated in Figure~\ref{fig:ca_lm}, where a cellular automaton is used to
+implement a language model.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.9\linewidth]{figures/ca_lm}
+  \caption{An example of using a cellular automaton and reservoir computing to
+    implement a language model. Tokens are encoded within the cellular automaton
+  internal state. The CA update rule is then applied and an output value is
+  decoded from the final state.}
+  \label{fig:ca_lm}
+\end{figure}
+
+
+In this work, we do not focus our attention on what the machine learning
+community commonly refers to as ``unsupervised learning'', that is, learning
+from untagged data. In machine learning, supervision refers to a label, a number
+or collection of numbers that represents the expected outcome from some input
+data. Since our goal is to construct models that develop autonomously, we first
+seek systems that behave this way, and postponing the issue of learning to
+optimize a particular objective function.
 
 In this thesis we work towards attaining these goals, focusing on one particular
 complex system: the \acl{CA}. This model has been studied extensively
@@ -28,23 +77,25 @@ more precise definition of \aclp{CA} in Section .
 
 \section{Motivation}
 
-Most of existing machine learning algorithms rely on the choice of an objective 
+Most of existing machine learning algorithms rely on the choice of an objective
 function: a clearly defined mapping from the current state and parameters of a
 model to a real value, which indicates the performance of that model. The
-function depends on the objective of the model. For a supervised learning problem, we
-may count the number of misclassified objects or a distance between the
-predictions and expected results. In unsupervised learning, the family of
-algorithms learning from untagged data, objectives are still used. For example,
-the well-known K-means clustering algorithm minimizes the sum of square distance
-to cluster centers.
+function depends on the objective of the model. For a supervised learning
+problem, we may count the number of misclassified objects or a distance between
+the predictions and expected results. Even in unsupervised learning --- the family of
+algorithms learning from untagged data, objectives are still used. For
+example, the well-known K-means clustering algorithm minimizes the sum of square
+distance to cluster centers.
 
 This reliance on objective functions creates two main issues: (i) the objective
-is not always clearly defined. For example, the objective function of a walking
-robot could be to ``not fall when stepping through its surrounding
-environment''. But (ii) Using such functions as goals can be counterproductive
-because, as many examples in nature demonstrate, the paths to these objectives are
-often deceptive. They involve developing in unexpected directions that may
-initially seem against the original goal \cite{stanleyWhyGreatnessCannot2015}.
+is not always clearly defined. For example, a satisfying objective function for
+a walking robot could be to ``not fall when stepping through its surrounding
+environment''. This function is impractical to define, and will vary a lot
+depending on the parameters of the environment. Furthermore, (ii) Using such
+functions as goals can be counterproductive because, as many examples in nature
+demonstrate, the paths to these objectives are often deceptive. They involve
+developing in unexpected directions that may initially seem against the original
+goal \cite{stanleyWhyGreatnessCannot2015}.
 
 In this thesis, the term \emph{unsupervised} refers to a form of learning with
 no predefined objective. Like natural evolution, we expect unsupervised
@@ -56,16 +107,70 @@ and diverse solutions to deceptive problems.
 
 \section{Challenges}
 
-The study of complex systems poses a range of challenges in and of itself
-\cite{sanmiguelChallengesComplexSystems2012}. The complexity of a system is an
-emergent property that arises from its intricate structure, its number of
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.9\linewidth]{figures/challenges}
+  \caption{The challenges of working with complex systems encountered across
+    this thesis can be broken down in several categories. (top-left) The choice
+    and design of the system, (top-right) the control of the system, the search
+    for open-ended evolution properties, (bottom-left) the issue of sending
+    inputs and (bottom-right) reading outputs from the internal state of a
+    complex system.}
+  \label{fig:challenges}
+\end{figure}
+
+The study of complex systems poses a range of difficult challenges in and of
+itself \cite{sanmiguelChallengesComplexSystems2012}. The complexity of a system
+is an emergent property that arises from its intricate structure, its number of
 elements, how it functions, and how it responds to different kinds of external
-influence.
+influence. For many complex systems the emergent mechanisms are poorly
+understood.
+
+
+\subsection{Design of a complex system}
+
+The definition of complex systems is general, and several systems with
+interesting dynamics can be studied. For example L-Systems, Random boolean
+networks, Turing machines, and Cellular automata. In the thesis, we focused
+mostly on the latter: cellular automata. Even when limiting ourselves to the
+study of cellular automata, many variants can be considered. Cellular automata
+can have continuous or discrete states, and operate on continuous or discrete
+space. For discrete state and space cellular automata, the number of states and
+window of the update function can vary, as well as the topology of the discrete
+space.
+
+Choosing the right complex system architecture is essential because it defines
+the search space over which interesting and useful systems can be found.
+Parametrizing that space can be challenging, because too many degrees of freedom
+make it difficult to find good systems, while too few might indicate a lack of
+expressevity.
+
+\subsection{Complex systems control}
+
+Many complex systems are chaotic. A deterministic dynamical system is said to be
+chaotic if its evolution is highly sensitive to its initial conditions. Because
+of this property, it is often very hard to predict how a given system will
+evolve over time and therefore hard to steer its evolution towards a particular
+final state or along a chosen trajectory.
+
+\subsection{Open-ended evolution without objectives}
 
 Another challenge is posed by the absence of a clear objective in the design of
-our unsupervised learning systems. Because it is essential to understand which
-system to choose from all available options, we need to design metrics that
-achieve that without being another objective function.
+unsupervised learning systems. Even without an objective, it is still essential
+to understand which complex systems to choose from all available options or how
+to tune them. This is why we need metrics that can help select interesting
+systems without being another replacement objective function. The goal is to
+make system with the property of evolving in an open-ended way.
+
+\subsection{Complex systems inputs and outputs}
+
+Some of the complex systems we study in this thesis are closed systems. They do
+not expect inputs or have any well-defined outputs. A common challenge for such
+systems is defining inputs and outputs in a way that preserves their internal
+dynamics. Throughout this work, we use reservoir computing for that purpose.
+Reservoir computing allows harvesting the internal computations of a complex
+systems, or \emph{read} information from its internal state.
+
 
 \section{Contributions}
 
