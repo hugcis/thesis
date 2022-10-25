@@ -7,18 +7,19 @@ The \acf{CA} was originally proposed by Stanislaw Ulam and John Von
 Neumann in the 1940s as a model of the growth of crystals and an attempt at
 constructing a self-replicating system \cite{von_neumann_theory_1966}.
 
+\paragraph{Definition}
 It is usually defined on a regular lattice in one or two dimension. Each of its
-components is called a cell, and can be in a state $k \in \mathcal{S}$.
+components is called a cell, and can be in a state $k \in \mathcal{S}$. $\mathcal{S}$ is the space of
+available states for the cells, usually chosen to be $\{0, 1\}$ for binary
+\acp{CA} or $\{1, \ldots, n\}$ for \acp{CA} with $n$ states.
 
-A neighborhood
-function $\boldsymbol{N}$ is defined which associates each cell with its
-neighbors on the lattice.
-In general, a \ac{CA} can be constructed on any space $\mathcal{L}$ where such a function
-can be defined. The space $\mathcal{L}$ specifies an indexing and the relation between the
-cells. In practice, regular finite or infinite grids are chosen, $\mathcal{L} \subset \mathbb{Z}$ or
-$\mathcal{L} \subset \mathbb{Z}^{2}$. For example, the grid could be a 1-dimensional torus with 10 cells,
-that is $\mathcal{L}_{{T_{10}}} = \{1, 2, \ldots, 10 \}$. The neighborhood function has the
-form
+A neighborhood function $\boldsymbol{N}$ is defined which associates each cell
+with its neighbors on the lattice. In general, a \ac{CA} can be constructed on
+any space $\mathcal{L}$ where such a function can be defined. The space $\mathcal{L}$ specifies an
+indexing and the relation between the cells. In practice, regular finite or
+infinite grids are chosen, $\mathcal{L} \subset \mathbb{Z}$ or $\mathcal{L} \subset \mathbb{Z}^{2}$. For example, the grid could
+be a 1-dimensional torus with 10 cells, that is
+$\mathcal{L}_{{T_{10}}} = \{1, 2, \ldots, 10 \}$. The neighborhood function has the form
 \begin{equation}
   \begin{aligned}
 \boldsymbol{N}_{\mathcal{L}} :\quad & \mathcal{S} \rightarrow \mathcal{S}^{s}\\
@@ -40,6 +41,7 @@ corresponds to the following neighborhood function:
                        [c_{9}, c_{10}, c_{1}], & \text{if} \quad i = 10. \\
                     \end{cases}
   \end{aligned}
+  \label{eq:torus_index}
 \end{equation}
 
 On two dimensional grids, there are multiple ways to define the neighborhood.
@@ -110,22 +112,44 @@ a list of values $[o_1, \ldots, o_{s^{|\mathcal{S}|}}]$, with $\forall i,\ o_{i}
 the number of cells in a neighborhood, $\mathcal{S}$ is the space of available states and
 $|\mathcal{S}|$ is the number of available states per cell. Using the $o_{i}$ as the
 digits of a base-$|\mathcal{S}|$ number, each rule is uniquely represented by a number.
+For example, as explained in more details in Section \ref{sec:elem-cell-autom},
+the 256 binary rules in one dimension with neighborhood size 3 can be numbered from
+0 to 255, and are referred to by their number in the literature.
 
 \paragraph{Boundary conditions}
+The grid of a \ac{CA} can be finite or infinite. In the infinite case, the grid
+is assumed to be initialized to a uniform state except for a few cells set to
+other states. The simulation is then run on these few cells while the rest of
+the infinite grid does not have to be simulated from the start. For a finite
+grid, and exhaustive simulation can be run, but there is a need to define
+boundary conditions. The boundaries can be set to wrap to the other side of the
+grid, forming a torus. An example of the corresponding indexing is given in
+\eqref{eq:torus_index}. Other choices of boundary condition consists in adding
+virtual padding cells outside of the main grid. They can be set to a fixed
+state, a randomly chosen state, or mirror the cells on the inside of the grid.
+Each of these choices affects the evolution and properties of the \ac{CA}, but
+the importance of these boundaries decreases for very large grids.
 
 A large number of variants of \acp{CA} have been constructed, modifying or
 constraining various part of the definition above. We list some of them here.
 
-\subsection{Elementary cellular automata}
+\subsection{Elementary cellular automata \label{sec:elem-cell-autom}}
 \Acp{ECA} are the 1 dimensional \acp{CA} with two states per cell and
 neighborhood size 3 --- the cell and its neighbors. There are 8 possible
 configurations of a neighborhood with 3 cells and 2 states per cell, which
 corresponds to 256 possible ways to define an \ac{ECA}. This small number of
 rules enables exhaustively exploring the rule space and mapping out the \ac{ECA}
-properties.
+properties, which would not be possible for general \acp{CA}.
 
-\cite{wolframNewKindScience2002, hudcovaClassificationComplexSystems2020,
-  hudcovaComputationalHierarchyElementary2021}
+These \acp{CA} are studied extensively, and offer an interesting combination of
+trivial definition and implementation and complex and unpredictable properties.
+One fundamental problem of \ac{CA} research is to classify the 256 rules into
+well-defined behavior types and order them by complexity, which was attempted in
+several previous works
+\cite{wolframNewKindScience2002,
+  zenilCompressionBasedInvestigationDynamical2010,
+  hudcovaClassificationComplexSystems2020,
+  hudcovaComputationalHierarchyElementary2021}.
 
 \subsection{Asynchronous cellular automata}
 A cellular automaton is said to be asynchronous when its cells are not all
@@ -140,3 +164,5 @@ In a stochastic cellular automaton, the update function $\boldsymbol{\Phi}$ is s
 \subsection{Continuous}
 
 \section{Reservoir computing}
+
+\section{Measuring complexity}
