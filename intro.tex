@@ -15,18 +15,19 @@ properties.
 \begin{subfigure}[b]{.4\linewidth}
   \centering
   \includegraphics[width=\linewidth]{figures/disord2.png}
-  \caption{A disordered cellular automaton.}
+  \caption{A disordered \acl{CA}.}
  \label{fig:disordered_sys}
 \end{subfigure}
 \hspace{30pt}
 \begin{subfigure}[b]{.4\linewidth}
   \centering
   \includegraphics[width=\linewidth]{figures/micro4.png}
-  \caption{A cellular automaton with visible emergent structures.}
+  \caption{A \acl{CA} with visible emergent structures.}
   \label{fig:structured_sys}
 \end{subfigure}
-  \caption{Two example complex systems with different behavior types. Cellular
-    automata are promising }
+\caption{Two example complex systems with different behavior types. Some
+  \aclp{CA} appear more promising than others for the design of unsupervised
+  learning systems because of their emergent complex structures (visible in \ref{fig:structured_sys}).}
   \label{fig:comparison_ca}
 \end{figure}
 
@@ -38,7 +39,7 @@ open-ended complexity growth.
 \begin{figure}[htbp]
   \centering
  \includegraphics[width=.9\linewidth]{figures/rule18_small}
- \caption{Filtering the behavior of elementary cellular automaton rule 18. This
+ \caption{Filtering the behavior of elementary \acl{CA} rule 18. This
    uncovers a highly structured behavior with the propagation of area boundaries
    within the apparent randomness.}
   \label{fig:rule_18}
@@ -47,16 +48,16 @@ open-ended complexity growth.
 
 (iii) Apply the promising systems to challenging tasks where classical machine
 learning models may fail or prove less efficient. An example application is
-illustrated in Figure~\ref{fig:ca_lm}, where a cellular automaton is used to
+illustrated in Figure~\ref{fig:ca_lm}, where a \ac{CA} is used to
 implement a language model.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.9\linewidth]{figures/ca_lm}
-  \caption{An example of using a cellular automaton and reservoir computing to
-    implement a language model. Tokens are encoded within the cellular automaton
-  internal state. The CA update rule is then applied and an output value is
-  decoded from the final state.}
+  \caption{An example of using a \acl{CA} and reservoir computing to implement a
+    language model. Tokens are encoded within the \acl{CA} internal state. The
+    \acl{CA} update rule is then applied and an output value is decoded from the
+    final state.}
   \label{fig:ca_lm}
 \end{figure}
 

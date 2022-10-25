@@ -80,7 +80,7 @@ self-organize and exhibit increasingly complex behaviors
 In this paper we wish to investigate whether complex dynamical systems --- in particular RNNs with frozen weights (echo-state networks) \cite{jaegerEchoStateApproach2001} and reservoir cellular automata \cite{yilmazReservoirComputingUsing2014} ---
 create representations that allow them to learn faster as measured by our
 metric.
-\vspace{-8pt}
+
 \paragraph{Contributions.} In this paper, we make the following main contributions: First, we introduce the
 \acf{WADE} metric to measure the learning speed of various learning systems and use it to benchmark a few standard models on the IMDB text
 classification task \cite{maasLearningWordVectors2011}.
@@ -88,7 +88,7 @@ Second, we present a benchmark of language-based tasks of increasing difficulty
 to evaluate the learning speed in different conditions. The proposed tasks require a wide range of computational primitives, such as memory or the ability to compute Boolean functions, to be effectively solved.  Third, we study the
 learning speed of reservoir computing learning models
 and compare them with more standard supervised solutions.
-\vspace{-8pt}
+
 \section{Related work}
 The \ac{WADE} metric is a generalization of the \emph{Time-to-threshold} metric
 \cite{taylorCrossdomainTransferReinforcement2007,
@@ -849,7 +849,7 @@ The tasks are generated according to the procedures described in
 Section~\ref{sec:tasks}. They have some parameters that allow the
 difficulty of the task to be adjusted. We report results on ten tasks. The parameters
 chosen for our experiments are listed below:
-\vspace{-8pt}
+
 \begin{description}
   \item[Periodic (1) and Increasing period (2):] Sequences are generated from patterns of
         length between 1 and 10.
@@ -874,7 +874,6 @@ chosen for our experiments are listed below:
         there are up to eight questions.
 \end{description}
 
-\vspace{-8pt}
 We chose relatively small values of these parameters because we are interested in simple tasks
 so that models that can learn from less than 100 examples. Moreover, the
 number of possible sentences generated from these small values is already huge,

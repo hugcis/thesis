@@ -32,22 +32,23 @@ dynamics often arise from uniform laws at a smaller
 scale~\cite{andersonMoreDifferent1972}. It seems unlikely that such complex
 processes, like artificial evolution, could happen in too small CAs because
 higher order dynamics do not have enough capacity to emerge. However, several
-issues arise when scaling CAs to large sizes: \vspace{-5pt}
+issues arise when scaling CAs to large sizes:
+
 \begin{itemize}
 \item Time complexity rapidly becomes a bottleneck. Updating a large number of
   cells is costly. Tricks such as caching of some of the computations can help,
   but do not always improve performance
   significantly~\cite{gosperExploitingRegularitiesLarge1984}.
-  \vspace{-6pt}
+
 \item Memory complexity can also become an issue when dealing with numerous
   states, and especially grids in 3 dimensions and more. In that case, even the
   underlying rule of the system cannot be stored within reasonable memory
   capacity.
-  \vspace{-6pt}
+
 \item Visual inspection of these large grids is infeasible. Studying CA
   complexity is rendered difficult by the highly variable nature of emergent
   processes. It is especially the case for large-scale systems.
-  \vspace{-5pt}
+
 \end{itemize}
 When working with such large systems, it is less relevant to focus on the local
 behaviors at the single cell level. This is similar to other complex systems
@@ -56,7 +57,7 @@ irrelevant to large-scale air mass movements. Much richer behaviors can be
 observed from studying large patterns' formation and their evolution. This
 should also hold true for CAs; we further discuss this question in
 \nameref{sec:conclusion}.
-\vspace{-6pt}
+
 \begin{figure}[th]
   \centering
   \includegraphics[width=.93\linewidth]{figures/rule18_small.pdf}
@@ -66,7 +67,7 @@ should also hold true for CAs; we further discuss this question in
     initialized rule 18 simulation. Notice the complex structures made visible
     in \textbf{(b)} with our method.}
 \end{figure}
-\vspace{-6pt}
+
 In this paper, we investigate techniques which can help us visualize large
 space-time diagrams of CAs. We demonstrate that simple clustering and
 coarse-graining techniques can be used in order to perceive structures which
