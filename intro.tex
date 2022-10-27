@@ -142,8 +142,8 @@ Correctly parametrizing that space can also be challenging, because too many
 degrees of freedom make it difficult to find good systems, while too few might
 indicate a lack of expressivity. An example parametrization of \ac{CA} with
 little expressivity is Langton's lambda parameter
-\parencite{langton_computation_1990}. On the other end of the spectrum, the \ac{CA}
-rule is a simple parametrization with many degrees of freedom, making it
+\parencite{langton_computation_1990}. On the other end of the spectrum, the
+\ac{CA} rule is a simple parametrization with many degrees of freedom, making it
 impractical.
 
 Even when limiting ourselves to the study of \ac{CA}, many variants
@@ -153,15 +153,18 @@ automata, the number of states and window of the update function can vary, as
 well as the topology of the discrete space.
 
 
-\subsection{Complex systems control}
+\subsection{Complex systems control}\label{sec:compl-syst-contr}
 
 Many complex systems are chaotic. A deterministic dynamical system is said to be
 chaotic if its evolution is highly sensitive to its initial conditions. Because
 of this property, it is often very hard to predict how a given system will
 evolve over time and therefore hard to steer its evolution towards a particular
-final state or along a chosen trajectory. This is an advantage
+final state or along a chosen trajectory. This is an advantage for creating
+open-ended systems but it can make it challenging to apply these systems to some
+basic tasks.
 
-\subsection{Open-ended evolution without objectives}
+\subsection{Open-ended evolution without
+  objectives}\label{sec:open-ended-evolution}
 
 Another challenge is posed by the absence of a clear objective in the design of
 unsupervised learning systems. Even without an objective, it is still essential
@@ -173,9 +176,16 @@ make system with the property of evolving in an open-ended way.
 \subsection{Complex systems inputs and outputs}
 
 Some of the complex systems we study in this thesis are closed systems. They do
-not expect inputs or have any well-defined outputs. A common challenge for such
+not expect inputs or have any well-defined outputs. Some examples of this
+property are \ac{CA} and \ac{RBN}.
+
+A common challenge for such
 systems is defining inputs and outputs in a way that preserves their internal
-dynamics. Throughout this work, we use reservoir computing for that purpose.
+dynamics. This is also connected to the control problem of Section
+\ref{sec:compl-syst-contr}, because controlling a complex system implies being
+able to send a control signal and read back its current state.
+
+Throughout this work, we use reservoir computing for that purpose.
 Reservoir computing allows harvesting the internal computations of a complex
 systems, or \emph{read} information from its internal state.
 

@@ -25,13 +25,13 @@
 Most machine learning models are evaluated by measuring performance on a
 specific dataset or task. Learning efficiency -- the ability to learn,
 generalize, and adapt quickly from a few examples -- is crucial for practical
-intelligence \cite{kanazawaGeneralIntelligenceDomainspecific2004} and
+intelligence \parencite{kanazawaGeneralIntelligenceDomainspecific2004} and
 low-data machine learning applications, yet rarely used to evaluate models.
 Supervised learning systems are theoretically limited in their learning speed by
 the optimization algorithms used for training. These algorithms such as
 stochastic gradient descent (SGD) have various speed guarantees depending on the
 structure of the function to be
-optimized~\cite{bottouOptimizationMethodsLargescale2018}. However, when
+optimized~\parencite{bottouOptimizationMethodsLargescale2018}. However, when
 intelligent beings learn, they appear to quickly re-use past knowledge and
 progressively improve over time. Their learning speed depends on a dynamically
 evolving internal state.
@@ -43,9 +43,9 @@ string and end with elaborate question answering tasks that require counting
 occurrences of patterns and long-term memory.
 
 Established sequential supervised models such as recurrent neural networks
-\cite[RNNs; ][]{elmanFindingStructureTime1990}, long short-term memory networks
-\cite[LSTMs;][]{hochreiterLongShortTermMemory1997} or Transformers
-\cite{vaswaniAttentionAllYou2017} lack essential properties such as learning
+\parencite[RNNs; ][]{elmanFindingStructureTime1990}, long short-term memory networks
+\parencite[LSTMs;][]{hochreiterLongShortTermMemory1997} or Transformers
+\parencite{vaswaniAttentionAllYou2017} lack essential properties such as learning
 beyond the training phase or the ability to adapt over time after being trained. These models can also be expensive to train, requiring a large number
 of labeled training examples to reach reasonable performance, leading to poor
 learning speeds. In this work, we use the newly proposed \ac{WADE} metric and the benchmark dataset to experimentally compare the learning speed of these well-established models, such as RNNs, LSTMs and Transformers, with less explored {\em reservoir computing models}.
@@ -57,7 +57,7 @@ on its hidden state in reaction to each new input.
 Interestingly, it has been shown that with a
 specific initialization of the frozen weights, these \ac{RNN}s (called Echo
 state networks) can keep a memory of past inputs
-\cite{jaegerEchoStateApproach2001}.
+\parencite{jaegerEchoStateApproach2001}.
 Usually, a standard linear regression is
 added as a decoder to extract valuable representation from the hidden state for
 some downstream task. Freezing the weights of these recurrent models is useful
@@ -71,19 +71,19 @@ functions that can be combined using the last trainable layer.
 
 When evolving in response to input stimuli, complex recurrent systems such as
 \acp{RNN} are building dynamically changing representations of data within their
-internal state \cite{boccaraModelingComplexSystems2010}. We know that these
+internal state \parencite{boccaraModelingComplexSystems2010}. We know that these
 internal states can be interesting on their own because of their ability to
 self-organize and exhibit increasingly complex behaviors
-\cite{koppelAlmostMachineindependentTheory1991,
+\parencite{koppelAlmostMachineindependentTheory1991,
   bennettLogicalDepthPhysical1995, allenEvolutionEmergenceLearning2003,
   goldsteinEmergenceComplexSystems2011, cisnerosEvolvingStructuresComplex2019}.
-In this paper we wish to investigate whether complex dynamical systems --- in particular RNNs with frozen weights (echo-state networks) \cite{jaegerEchoStateApproach2001} and reservoir cellular automata \cite{yilmazReservoirComputingUsing2014} ---
+In this paper we wish to investigate whether complex dynamical systems --- in particular RNNs with frozen weights (echo-state networks) \parencite{jaegerEchoStateApproach2001} and reservoir cellular automata \cite{yilmazReservoirComputingUsing2014} ---
 create representations that allow them to learn faster as measured by our
 metric.
 
 \paragraph{Contributions.} In this paper, we make the following main contributions: First, we introduce the
 \acf{WADE} metric to measure the learning speed of various learning systems and use it to benchmark a few standard models on the IMDB text
-classification task \cite{maasLearningWordVectors2011}.
+classification task \parencite{maasLearningWordVectors2011}.
 Second, we present a benchmark of language-based tasks of increasing difficulty
 to evaluate the learning speed in different conditions. The proposed tasks require a wide range of computational primitives, such as memory or the ability to compute Boolean functions, to be effectively solved.  Third, we study the
 learning speed of reservoir computing learning models
@@ -91,7 +91,7 @@ and compare them with more standard supervised solutions.
 
 \section{Related work}
 The \ac{WADE} metric is a generalization of the \emph{Time-to-threshold} metric
-\cite{taylorCrossdomainTransferReinforcement2007,
+\parencite{taylorCrossdomainTransferReinforcement2007,
   taylorTransferLearningInterTask2007} introduced for measuring transfer
 learning in reinforcement learning contexts. In general, the Time-to-threshold
 is simply defined as the number of training steps needed to reach a fixed
@@ -104,7 +104,7 @@ Other metrics for measuring how quickly a model adpats to new tasks have been
 introduced in the context of transfer learning, few-shot and zero-shot learning.
 In few-shot learning, one tries to obtain the best performance for a particular
 task using a small amount of labeled data compared to the task's fully
-supervised equivalent~\cite{wangGeneralizingFewExamples2020}. This correlates
+supervised equivalent~\parencite{wangGeneralizingFewExamples2020}. This correlates
 with a model's learning speed, but these problems often measure how much prior
 information about similar data has been encoded in the models. With our
 benchmark and the \ac{WADE} metric, we explicitly measure the number of steps to reach
@@ -112,36 +112,36 @@ multiple test accuracy values using all the data needed, effectively emphasizing
 data efficiency.
 
 Sample efficiency has also been studied in the context of
-reinforcement learning. \cite{chevalier-boisvertBabyaiPlatformStudy2018} use the
+reinforcement learning. \parencite{chevalier-boisvertBabyaiPlatformStudy2018} use the
 number of demonstrations before a task is solved to measure sample efficiency.
 This requires defining what solving the task means, which may vary from task to
 task. Another approach is to measure performance (cumulated reward, accuracy,
 \etc) after a fixed budget of training steps
-\cite{yaratsImprovingSampleEfficiency2019}. In this case, the most efficient
+\parencite{yaratsImprovingSampleEfficiency2019}. In this case, the most efficient
 model is the one that achieves the best performance within the allocated budget.
 In other cases, the sample efficiency is mentioned but not explicitly measured
 and one has to examine the learning curves
-\cite{buckmanSampleefficientReinforcementLearning2018}. The \ac{WADE} metric is
+\parencite{buckmanSampleefficientReinforcementLearning2018}. The \ac{WADE} metric is
 a general approach to measure the learning efficiency of machine learning
 models. We use it to benchmark a few standard models on the IMDB text
-classification tasks \cite{maasLearningWordVectors2011} and propose a set of
+classification tasks \parencite{maasLearningWordVectors2011} and propose a set of
 modular and extensible language based tasks.
 
 Synthetic tasks such as ours have played a vital role in a series of crucial
 advances in machine learning algorithms. For example, the XOR problem has
 partially motivated the development of neural networks
-\cite{minskyPerceptronsIntroductionComputational1972,
+\parencite{minskyPerceptronsIntroductionComputational1972,
   rumelhartLearningInternalRepresentations1985}, and the \emph{circle and ring}
 dataset has inspired the creation of novel clustering algorithms
-\cite{ngSpectralClusteringAnalysis2001}. The design of synthetic datasets has also been
+\parencite{ngSpectralClusteringAnalysis2001}. The design of synthetic datasets has also been
 an essential component of the development of learning algorithms with
 memory and general computational capabilities
-\cite{hochreiterLongShortTermMemory1997,
+\parencite{hochreiterLongShortTermMemory1997,
   joulinInferringAlgorithmicPatterns2015, gravesNeuralTuringMachines2014,
   westonAICompleteQuestionAnswering2016, richardsonProbingNaturalLanguage2020}.
 
 Other tasks are based on real datasets with artificial manipulations
-\cite{krizhevskyLearningMultipleLayers2009, srivastavaCompeteCompute2013a,
+\parencite{krizhevskyLearningMultipleLayers2009, srivastavaCompeteCompute2013a,
   goodfellowEmpiricalInvestigationCatastrophic2014,
   nguyenVariationalContinualLearning2017}. The goal of our dataset is to be
 truly progressive in difficulty yet simple to understand and extend, to allow
@@ -216,7 +216,7 @@ Standard benchmarks and metrics such as those introduced in this paper have
 always been essential in advancing various aspects of machine learning. For
 example, the LSTM network demonstrated a superior memory capacity on a set of
 synthetic tasks designed to challenge the memory of sequential learning systems
-\cite{hochreiterLongShortTermMemory1997}. Our goal with this benchmark is to
+\parencite{hochreiterLongShortTermMemory1997}. Our goal with this benchmark is to
 emphasize measuring learning speed across tasks of varying difficulties with a
 range of computational requirements rather than focusing on performance only. We describe the performance metric and the benchmark next.
 
@@ -443,22 +443,22 @@ To show the usefulness of measuring \ac{WADE} on standard language
 classification tasks, we train various text classifiers on the IMDB dataset and
 compare their \ac{WADE} scores with a usual performance metric for
 classification: accuracy. This classification task, first proposed by
-\cite{maassRealTimeComputingStable2002}, consists of deciding if a movie review
+\parencite{maassRealTimeComputingStable2002}, consists of deciding if a movie review
 is positive or negative from its text. It contains 25000 training examples and
 25000 test examples. The two labels are balanced in both the training and test
 set. This dataset is a high dimensional language-based task with a binary
 output.
 
 We study five standard models: (i) an Elman recurrent neural network (RNN)
-\cite{elmanFindingStructureTime1990} with $\tanh$ activation functions trained
+\parencite{elmanFindingStructureTime1990} with $\tanh$ activation functions trained
 with backpropagation through time. (ii) A long-short term memory (LSTM)
-recurrent neural network \cite{hochreiterLongShortTermMemory1997}, also trained
+recurrent neural network \parencite{hochreiterLongShortTermMemory1997}, also trained
 with backpropagation through time. (iii) A gated recurrent unit (GRU) recurrent
-neural network \cite{choPropertiesNeuralMachine2014}. (iv) A standard
-encoder-only transformer neural network model \cite{vaswaniAttentionAllYou2017}.
+neural network \parencite{choPropertiesNeuralMachine2014}. (iv) A standard
+encoder-only transformer neural network model \parencite{vaswaniAttentionAllYou2017}.
 (v) A logistic regression using a bag-of-words representation of each sentence
 as input features. All the models are trained with batches of training data
-using the Adam optimization algorithm \cite{kingmaAdamMethodStochastic2015}.
+using the Adam optimization algorithm \parencite{kingmaAdamMethodStochastic2015}.
 Each model's hyperparameters are chosen to ensure they have a similar number of
 trainable parameters except for the logistic regression whose parameter count is
 solely determined by the input and output dimensions.
@@ -564,26 +564,26 @@ the input and output vocabularies are the same.
 
 \subsection{Fully trained sequential models (RNN, LSTM and Transformer)}
 We first study two standard supervised recurrent models: (i) an Elman recurrent
-neural network (RNN) \cite{elmanFindingStructureTime1990} with $\tanh$
+neural network (RNN) \parencite{elmanFindingStructureTime1990} with $\tanh$
 activation functions trained with backpropagation through time. (ii) A
 long-short term memory (LSTM) recurrent neural network
-\cite{hochreiterLongShortTermMemory1997}, also trained with backpropagation
+\parencite{hochreiterLongShortTermMemory1997}, also trained with backpropagation
 through time. (iii) An encoder-only transformer model with positional encoding
-\cite{vaswaniAttentionAllYou2017}.
+\parencite{vaswaniAttentionAllYou2017}.
 
 The three models are trained with a batched Adam optimization algorithm
-\cite{kingmaAdamMethodStochastic2015} to minimize a cross-entropy loss function
+\parencite{kingmaAdamMethodStochastic2015} to minimize a cross-entropy loss function
 between the predicted and target tokens. No other training device, such as
 dropout, regularization, or normalization, is used for these fully trained baselines.
 
 \subsection{Echo-state networks and reservoir cellular automata\label{sec:echo-state-networks}}
 
 We use %the notation and
-names adapted from \cite{jaegerLongShortTermMemory2012} in
+names adapted from \parencite{jaegerLongShortTermMemory2012} in
 this section. An echo-state network is a random recurrent neural network with
 frozen weights and skip-connections. Its random weights are sampled in a
 specific way so that it performs random combinations of input vectors with its
-current state while keeping a history of past inputs \cite{jaegerEchoStateApproach2001}.
+current state while keeping a history of past inputs \parencite{jaegerEchoStateApproach2001}.
 
 
 % \subsection{Reservoir cellular automata}
@@ -593,7 +593,7 @@ but where a cellular automaton (CA) replaces the random RNN. The cellular
 automaton can be seen as a \ac{RNN} with additional weigth-sharing similar to
 convolutional neural network. The special structure of a recurrent CA update
 makes it more likely than random RNNs to generate complex structures
-\cite{wolframStatisticalMechanicsCellular1983, wolframNewKindScience2002}.
+\parencite{wolframStatisticalMechanicsCellular1983, wolframNewKindScience2002}.
 % A CA can also be seen as a special RNN with a large amount of parameter sharing.
 Because CAs were not designed to make use of inputs or produce outputs, we
 extend the model to make it accept input vectors and to make reading from the CA
@@ -620,7 +620,7 @@ examples --- and a test set with the remaining 240 examples. The reservoir is ru
 on each training example for the reservoir-based models, which creates the
 input features for training the decoder. The sequential supervised models use
 batches of single sequences with the Adam algorithm
-\cite{kingmaAdamMethodStochastic2015}. They are trained for ten epochs in total. With
+\parencite{kingmaAdamMethodStochastic2015}. They are trained for ten epochs in total. With
 reservoir models, only the last linear layer (the decoder) is trained. We minimize the
 cross-entropy loss with stochastic gradient descent (SGD), doing only a single
 pass over the 960 training examples.
@@ -661,9 +661,9 @@ state network (ESN) with the same internal state size for each task.
     \end{tabular}
     \caption{Comparison of WADE scores (also shown in parentheses in the legend
       in figure~\ref{fig:all_metrics}, higher is better) of the best cellular
-      automaton rules (\textbf{ReCA}, \cite{yilmazReservoirComputingUsing2014}) for each task against an echo-state
-      network (\textbf{ESN}, \cite{jaegerEchoStateApproach2001}), a \textbf{RNN}, a \textbf{LSTM} \cite{hochreiterLongShortTermMemory1997}, and a
-      \textbf{Transformer} \cite{vaswaniAttentionAllYou2017} with the same number of parameters.
+      automaton rules (\textbf{ReCA}, \parencite{yilmazReservoirComputingUsing2014}) for each task against an echo-state
+      network (\textbf{ESN}, \parencite{jaegerEchoStateApproach2001}), a \textbf{RNN}, a \textbf{LSTM} \cite{hochreiterLongShortTermMemory1997}, and a
+      \textbf{Transformer} \parencite{vaswaniAttentionAllYou2017} with the same number of parameters.
       %as the cellular automaton reservoir.
       The dash ``---'' indicates that the task was too
       difficult to complete from memory alone for the human
@@ -762,7 +762,7 @@ We note that we implicitly assume a fixed cost per training iteration in our
 experiments and that each training example is seen once. Without these
 requirements, one could achieve higher WADE results at the cost of additional
 computations and memory usage by using \emph{replay}-inspired methods
-\cite{hintonUsingFastWeights1987, robinsCatastrophicForgettingNeural1993a,
+\parencite{hintonUsingFastWeights1987, robinsCatastrophicForgettingNeural1993a,
   gepperthBioInspiredIncrementalLearning2016,
   rebuffiIcarlIncrementalClassifier2017} that retrain the models with past
 stored inputs. The results in Table~\ref{tab:summary} used each input sequence
@@ -828,7 +828,7 @@ We report all the parameters used in our experiments in table \ref{tab:appendix-
     \bfseries Number of testing sequences & 240 & 240 \\
     \bfseries Passes over the data (epochs) & 1 & 10 \\
     \bfseries Random runs per task & 100 & 100\\
-    \bfseries Algorithm & SGD & Adam \cite{kingmaAdamMethodStochastic2015}\\
+    \bfseries Algorithm & SGD & Adam \parencite{kingmaAdamMethodStochastic2015}\\
     \bfseries Learning rate & $0.001$ & $0.001$ \\
     \bfseries Regularization & weight decay $0.001$ & None \\
     \bfseries Internal state (hidden) size & $1800$ & $h$ task-dependent \\
@@ -899,7 +899,7 @@ where $\vr_{t}$ is the $K$-dimensional state vector -- corresponding to the hidd
 connected random hidden layer matrix, and $\mW_{\text{in}} \in \mathbb{R}^{L \times K}$ is the
 input projection matrix. The matrices $\mW$ and $\mW_{\text{in}}$ are
 initialized randomly using the recommendations of
-\cite{jaegerLongShortTermMemory2012}: $\mW$ has an average of 10 non-zeros
+\parencite{jaegerLongShortTermMemory2012}: $\mW$ has an average of 10 non-zeros
 entries per row, all sampled uniformly in $[-1, 1]$, $\mW_{\text{in}}$ has its
 entries uniformly sampled in $[-1, 1]$.
 
@@ -914,7 +914,7 @@ $D(\vr_{t}) = \mW_{\text{out}} \vr_{t}$ where $\mW_{\text{out}}$ is a
 $K \times L$-dimensional matrix. In our experiments, we set $\beta = 0$, which was
 empirically observed to yield the best results on our tasks. The parameter $\beta$,
 as well as the randomly sampled weight matrix, are sometimes tuned for each task
-\cite{jaegerLongShortTermMemory2012}. We only use
+\parencite{jaegerLongShortTermMemory2012}. We only use
 default values to get a task-independent setup with
 the least possible assumptions and to make the methods comparable.
 
@@ -923,9 +923,9 @@ the least possible assumptions and to make the methods comparable.
 The Cellular Automaton (CA) update function $\Phi$ is applied at time $t$ on the previous state vector
 $\vs_{t - 1}$ --- also called the grid. The input vector $\vx_{t}$ at time $t$ is
 projected onto a vector $\vp_{t}$ the same size as $\vs_{t}$ using a method proposed in
-\cite{yilmazReservoirComputingUsing2014}. To combine inputs with CA states,
+\parencite{yilmazReservoirComputingUsing2014}. To combine inputs with CA states,
 we XOR the two vectors together
-\cite{gloverDynamicalLandscapeReservoir2021},
+\parencite{gloverDynamicalLandscapeReservoir2021},
 \begin{equation}
   \label{eq:ca-xor}
   \vs'_{t} = \vp_{t}\otimes \vs_{t},
@@ -975,7 +975,7 @@ time according to a fixed update rule. These agents can be hidden neurons of a
 dynamics resulting from the actions of its parts rather than the decisions of a
 central controller. These dynamics lead to surprisingly complex behavior, which
 can be random, chaotic, or may lead to unbounded growth of complexity
-\cite{boccaraModelingComplexSystems2010}.
+\parencite{boccaraModelingComplexSystems2010}.
 Due to these properties, %this class of systems
 systems based on reservoir computing may be a promising alternative addressing
 the shortcomings of standard supervised models.

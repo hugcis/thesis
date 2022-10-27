@@ -18,18 +18,18 @@
 \section{Introduction}
 Cellular automata (CA) have been extensively studied since the 1960s. Originally
 designed and studied to create artificial evolution from self-replication
-\cite{vonneumannTheorySelfreproducingAutomata1966,
+\parencite{vonneumannTheorySelfreproducingAutomata1966,
   langtonSelfreproductionCellularAutomata1984}, previously studied cellular
 automata simulations were often of relatively modest sizes. Only specific rules
 with repetitive or predictable dynamics such as John Conway's Game of Life
-\cite{gardnerMathematicalGames1970} have been scaled up to larger grid sizes
+\parencite{gardnerMathematicalGames1970} have been scaled up to larger grid sizes
 ($10^4 \times 10^4$ or more cells).
 
 For complex phenomena such as artificial evolution to exist and be open-ended
 within those simulated worlds, there needs to be sufficient ``capacity'' --- a
 large enough state-space. In nature, complex and significantly different
 dynamics often arise from uniform laws at a smaller
-scale~\cite{andersonMoreDifferent1972}. It seems unlikely that such complex
+scale~\parencite{andersonMoreDifferent1972}. It seems unlikely that such complex
 processes, like artificial evolution, could happen in too small CAs because
 higher order dynamics do not have enough capacity to emerge. However, several
 issues arise when scaling CAs to large sizes:
@@ -38,7 +38,7 @@ issues arise when scaling CAs to large sizes:
 \item Time complexity rapidly becomes a bottleneck. Updating a large number of
   cells is costly. Tricks such as caching of some of the computations can help,
   but do not always improve performance
-  significantly~\cite{gosperExploitingRegularitiesLarge1984}.
+  significantly~\parencite{gosperExploitingRegularitiesLarge1984}.
 
 \item Memory complexity can also become an issue when dealing with numerous
   states, and especially grids in 3 dimensions and more. In that case, even the
@@ -79,7 +79,7 @@ in~\nameref{sec:results}.
 Reducing large grids to smaller sizes while preserving interesting behaviors
 such as pattern formation is essential to apply to these CAs complexity metrics
 designed to work on modestly sized
-grids~\cite{grassbergerQuantitativeTheorySelfgenerated1986,
+grids~\parencite{grassbergerQuantitativeTheorySelfgenerated1986,
   zenilCompressionBasedInvestigationDynamical2010,
   soler-toscanoCalculatingKolmogorovComplexity2014,
   zenilTwodimensionalKolmogorovComplexity2015}. Common metrics of complexity are
@@ -99,14 +99,14 @@ cellular automata.
 \subsection{Coarse-graining in cellular automata}
 Coarse-graining is an approximation procedure used to speed up computations in
 systems made of many components. It originated
-in~\cite{levittComputerSimulationProtein1975} and is now widely used in physics
+in~\parencite{levittComputerSimulationProtein1975} and is now widely used in physics
 to model complex systems at various granularity levels, and is successful at
-modeling bio-molecules \cite{potoyanRecentSuccessesCoarsegrained2013,
+modeling bio-molecules \parencite{potoyanRecentSuccessesCoarsegrained2013,
   ingolfssonPowerCoarseGraining2014, kmiecikCoarseGrainedProteinModels2016}.
 
 Exact coarse-graining of elementary cellular automata (ECA) has been
 investigated extensively
-in~\cite{israeliComputationalIrreducibilityPredictability2004,
+in~\parencite{israeliComputationalIrreducibilityPredictability2004,
   israeliCoarsegrainingCellularAutomata2006}. Authors found ways of rewriting
 one-dimensional CA rules into each other through coarse-graining of the
 transition rule. They built a graph of equivalence of all 256 ECA and identified
@@ -119,7 +119,7 @@ others.
 Filtering cellular automata (CA) was introduced to reduce a CA's behavior to its
 most relevant parts. The goal is to extract relevant irregularities from a CA's
 space-time diagram. Seminal work
-by~\cite{hansonAttractorbasinPortraitCellular1992,
+by~\parencite{hansonAttractorbasinPortraitCellular1992,
   hansonComputationalMechanicsCellular1997} formalized the notion of domains and
 coherent structures in cellular automata. They used a set of regular languages to
 represent cellular automata dynamics and extract relevant behaviors such as
@@ -129,7 +129,7 @@ Figure~\ref{fig:rule110} shows a filtering example for cellular automaton rule
 
 A filtering method similar to our proposed frequency-based coarse-graining ---
 originally presented as a complexity metric for cellular automata --- is
-introduced in~\cite{wuenscheClassifyingCellularAutomata1999}. The author
+introduced in~\parencite{wuenscheClassifyingCellularAutomata1999}. The author
 proposes to progressively filter out cells in cellular automata's space-time
 diagrams according to read frequency of the rule table. Cells that originated
 from frequent rule table lookups are set to a quiescent or null state. The
@@ -137,14 +137,14 @@ choice of threshold has to be decided by a user for each rule. Another notable
 difference is the method aims at making visualization of gliders easier without
 reducing the size of the grid or making more compact representations.
 
-More recent work by~\cite{shaliziAutomaticFiltersDetection2006} uses the
+More recent work by~\parencite{shaliziAutomaticFiltersDetection2006} uses the
 combination of a modified Lyapunov exponent approach with \emph{statistical
-  complexity} \cite{shaliziQuantifyingSelfOrganizationOptimal2004} to underline
+  complexity} \parencite{shaliziQuantifyingSelfOrganizationOptimal2004} to underline
 complex behaviors. However, the first method requires repeated perturbations and
 simulations of the system to study its sensitivity.
 
 \subsection{Scaling-up cellular automata}
-Hashlife \cite{gosperExploitingRegularitiesLarge1984} and other Game of
+Hashlife \parencite{gosperExploitingRegularitiesLarge1984} and other Game of
 Life-specific optimizations enable simulating a large number of cells for
 numerous timesteps. Nonetheless, these algorithms essentially exploit input
 redundancy. The regularity in patterns allowing such optimizations might
@@ -152,7 +152,7 @@ indicate a lack of novel patterns being generated by the system.
 
 This also means that Game of Life-based simulations are computationally
 reducible to a much simpler system, indicating that its computations are
-inefficient~\cite{wolframNewKindScience2002}. An optimally complex-behaving
+inefficient~\parencite{wolframNewKindScience2002}. An optimally complex-behaving
 computational model should be impossible to predict except when computing its
 actual evolution step by step.
 
@@ -250,7 +250,7 @@ It can be seen as another way of partitioning the histogram with variable
 thresholds that depend on a running quantization error.
 Figure~\ref{fig:close-up} shows a comparison of dithering and regular histogram
 partitioning (Floyd–Steinberg's algorithm was used
-\cite{floydAdaptiveAlgorithmSpatial1976}).
+\parencite{floydAdaptiveAlgorithmSpatial1976}).
 
 \setlength{\fboxsep}{0pt}
 \begin{figure}[th]
@@ -345,7 +345,7 @@ coarse state.
 
 Several distance functions may apply here, the most natural of which being
 Hamming distance, which measures how many states differ between two
-positions~\cite{hammingErrorDetectingError1950}. It is defined for two strings
+positions~\parencite{hammingErrorDetectingError1950}. It is defined for two strings
 of equal length $n$, $s_1 = [s_{(1, 1)}, \ldots, s_{(1,n)}]$ and $s_2 =
 [s_{(2,1)}, \ldots, s_{(2,n)}]$, as the number of positions where the two
 strings differ:
@@ -367,7 +367,7 @@ configuration, one can also try to automatically find a relevant representation
 with dimensionality reduction methods. Autoencoders are neural networks composed
 of an encoder part and a decoder part, originally designed to identify principal
 components of a collection of data
-points~\cite{baldiNeuralNetworksPrincipal1989,
+points~\parencite{baldiNeuralNetworksPrincipal1989,
   hintonConnectionistLearningProcedures1989,
   kramerNonlinearPrincipalComponent1991}. An encoder neural network converts
 data to a \emph{latent} vector of smaller dimension than the original input.
@@ -411,7 +411,7 @@ We evaluate our proposed coarse-graining methods in the following two different 
 \item We compare our results on elementary cellular automata (ECA) to previous
   works on particle and domain filtering.
 \item We use a metric which evaluates complexity of CAs introduced
-  in~\cite{cisnerosEvolvingStructuresComplex2019} in order to compare our
+  in~\parencite{cisnerosEvolvingStructuresComplex2019} in order to compare our
   methods' complexity metric scores of the coarse-grained systems and contrast
   the scores against a standard image processing baseline that computes local
   average of neighbouring cells followed by downscaling the grid. Using the
@@ -431,7 +431,7 @@ In the space-time diagrams of cellular automata, moving structures such as
 gliders are embedded in uniform or periodic backgrounds, or ``domains''. This
 domain is different depending on the rule: some ECAs have uniform backgrounds,
 checkerboard backgrounds or more complicated patterns (e.g.\ rule
-110).~\cite{crutchfieldTurbulentPatternBases1993} also identified chaotic
+110).~\parencite{crutchfieldTurbulentPatternBases1993} also identified chaotic
 domains, which cannot support regular gliders but have ``walls'' and
 ``particles''. Those correspond, respectively, to boundaries between two chaotic
 domains and propagating defects (localized structures with a pattern different
@@ -441,14 +441,14 @@ Our proposed coarse-graining methods offer interesting perspectives to filter
 cellular automata's space-time diagrams, which enables identifying gliders and
 studying the formation of large-scale patterns. We find that a simple histogram
 coarse-graining achieves results comparable to those reported
-in~\cite{hansonAttractorbasinPortraitCellular1992,
+in~\parencite{hansonAttractorbasinPortraitCellular1992,
   elorantaKinkCellularAutomaton1992, hansonComputationalMechanicsCellular1997,
   wuenscheExploringDiscreteDynamics2011} for ECA rules 18 and 54. A similar
-approach was undertaken in \cite{wuenscheClassifyingCellularAutomata1999} in
+approach was undertaken in \parencite{wuenscheClassifyingCellularAutomata1999} in
 which the authors used the entropy of rule table lookup frequencies to filter
 out regular domains in the space-time diagrams of cellular automata and to
 identify gliders and domain boundaries. However, Wuensche's approach described
-in~\cite{wuenscheClassifyingCellularAutomata1999} does not attempt to downscale
+in~\parencite{wuenscheClassifyingCellularAutomata1999} does not attempt to downscale
 space-time diagrams.
 
 \subsection{Results on elementary cellular automata}
@@ -462,7 +462,7 @@ space-time diagrams.
     our frequency coarse-graining (even). \textbf{(c)} Our domain boundaries
     extracted from the filtered domains in \textbf{(b)}. \textbf{(d)} Domain
     boundaries computed according to
-    \cite{hansonAttractorbasinPortraitCellular1992}. Note that \textbf{(a)}
+    \parencite{hansonAttractorbasinPortraitCellular1992}. Note that \textbf{(a)}
     shows semi-chaotic behaviour, which is hard to interpret, whereas our method
     \textbf{(b)} highlights distinct domains within the disordered space-diagram
     in (a). The detected domains and domain boundaries from previous work (d)
@@ -472,7 +472,7 @@ space-time diagrams.
 We apply frequency histogram-based coarse-graining on elementary cellular
 automata (ECA) and obtain space-time diagrams with suppressed background
 domains. Resulting partitions of ECAs' space-time diagram are similar to results
-reported by~\cite{hansonAttractorbasinPortraitCellular1992,
+reported by~\parencite{hansonAttractorbasinPortraitCellular1992,
   hansonComputationalMechanicsCellular1997}. Figure~\ref{fig:rule18}\textbf{(a)}
 and~\ref{fig:rule54}\textbf{(a)} show the space-time diagrams of rules 18 and 54
 with random initialization. Boundaries between different background patterns in
@@ -482,7 +482,7 @@ the same particles and defects without any prior information about the cellular
 automaton rule.
 
 Particles in Rule 54 have been used to implement
-computations~\cite{boccaraParticlelikeStructuresTheir1991,
+computations~\parencite{boccaraParticlelikeStructuresTheir1991,
   pivatoSpectralDomainBoundaries2007,
   martinezCompleteCharacterizationStructure2014}. Because the presented
 reduction reduces the size of the grid, it can merge some of those particles,
@@ -497,7 +497,7 @@ Our method is also arguably much simpler than computational mechanics (used by
 Hanson and Crutchfield) which requires some reverse-engineering of the rule and
 the construction of a finite-state transducer to generate output symbols.
 Although full automation has been demonstrated, this method introduces
-significant overhead~\cite{rupeLocalCausalStates2018}. On the other hand, our
+significant overhead~\parencite{rupeLocalCausalStates2018}. On the other hand, our
 method is sensitive to the quality of statistical estimation of the frequency
 histogram (see equation~\eqref{eq:stat_est}) and needs enough input examples to
 achieve a reasonable result --- examples in Figure~\ref{fig:rule18}
@@ -528,7 +528,7 @@ of particles in rule 110.
     position. \textbf{(b)} Filtered domain with our frequency coarse-graining
     (even). \textbf{(c)} Particles filtered from the domains in \textbf{(b)
       using our method}. \textbf{(d)} Domain boundaries computed using
-    computational mechanics \cite{hansonComputationalMechanicsCellular1997}.
+    computational mechanics \parencite{hansonComputationalMechanicsCellular1997}.
     Please note that particles are detected equally well using computational
     mechanics (d) and our (simpler) frequency-based method (c). Some close-by
     particle trails are merged using our method.}
@@ -583,7 +583,7 @@ of particles in rule 110.
 Coarse-graining is not only useful for detecting gliders and domains in
 space-time diagrams, but also as a tool to visualize large CAs. To evaluate the
 quality of our proposed coarse-graining methods, we compare complexity scores
-computed according to~\cite{cisnerosEvolvingStructuresComplex2019} for different
+computed according to~\parencite{cisnerosEvolvingStructuresComplex2019} for different
 coarse-graining methods. This metric was shown to correlate well with a user
 study for interesting automata. It uses neural networks to estimate how easy it
 is to learn a compressed representation of a CA\@. We also compute the scores on
@@ -745,7 +745,7 @@ be of great interest.
 
 Cellular automata are powerful computational models. Some of them have been
 shown to be Turing-complete, and can thus be expected to support arbitrarily
-complex computations~\cite{berlekampWinningWaysYour2001,
+complex computations~\parencite{berlekampWinningWaysYour2001,
   cookUniversalityElementaryCellular2004}. Naturally, most interesting CAs
 spontaneously generate a fraction of available computations at a time, usually
 supporting a few stable oscillators or moving structures. Proofs of universality
@@ -754,9 +754,9 @@ stable oscillators and structures, resulting in very brittle and inefficient
 universal computers. In practise, only elementary functions --- such as density
 classification, binary addition, etc. --- can be implemented. This requires
 searching for CA rules specifically targeted at a particular
-function~\cite{mitchellEvolvingCellularAutomata1996, wolframNewKindScience2002,
+function~\parencite{mitchellEvolvingCellularAutomata1996, wolframNewKindScience2002,
   sapinResearchCellularAutomaton2003}. Hierarchies are central to naturally
-occurring complex phenomena~\cite{simonArchitectureComplexity1962}, and may be
+occurring complex phenomena~\parencite{simonArchitectureComplexity1962}, and may be
 required for robust and complex processes to emerge in CAs.
 
 Viewing space-time diagrams of cellular automata is akin to visualizing a

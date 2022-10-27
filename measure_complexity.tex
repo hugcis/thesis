@@ -21,13 +21,13 @@ reproducing some very complex feats traditionally thought to be only achievable
 by living beings. However, making these systems adaptable and capable of
 developing and evolving on their own remains a challenge that might be crucial
 for eventually developing AI with general learning capabilities (for example as
-is further discussed in \cite{mikolov2016roadmap}). Building systems that mimic
+is further discussed in \parencite{mikolov2016roadmap}). Building systems that mimic
 some key aspects of the behavior of existing intelligent organisms (such as the
 ability to evolve, improve, adapt, etc.) might represent a promising path.
 Intelligent organisms --- e.g., human beings but also most living organisms if
 we consider a broad definition of intelligence --- are a form of spontaneously
 occurring, ever evolving complex systems that exhibit these kinds of properties
-\cite{booker_perspectives_2004}. The ability to sustain open-ended evolution
+\parencite{booker_perspectives_2004}. The ability to sustain open-ended evolution
 appears to be a requirement in order to enable emergence of arbitrarily complex
 adaptive systems.
 
@@ -35,7 +35,7 @@ Although a rigorous attempt at defining intelligence or life is beyond the scope
 of this paper, we assume that a system we might identify as evolving, with the
 potential of developing intelligence, should have the property of
 self-preservation and the ability to grow in complexity over time. These
-properties can be observed in living organisms \cite{booker_perspectives_2004}
+properties can be observed in living organisms \parencite{booker_perspectives_2004}
 and should also be a part of computational models that aim to mimic them.
 
 To recognize self-preservation and growth in complexity, one should be able to
@@ -54,12 +54,12 @@ that seem to evolve in time.
 
 Several works have attempted to artificially create open-ended evolution. A
 non-exhaustive list of some well known systems include Tierra
-\cite{s_ray_approach_1991}, Sims \cite{sims_evolving_1994}, Avida
-\cite{ofria_avida:_2004}, Polyworld \cite{yaeger_computational_1994}, Geb
-\cite{channon_improving_2003}, Division Blocks \cite{spector_division_2007} and
-Chromaria \cite{soros_identifying_2014}. Designs focusing on an objective, and
+\parencite{s_ray_approach_1991}, Sims \cite{sims_evolving_1994}, Avida
+\parencite{ofria_avida:_2004}, Polyworld \cite{yaeger_computational_1994}, Geb
+\parencite{channon_improving_2003}, Division Blocks \cite{spector_division_2007} and
+Chromaria \parencite{soros_identifying_2014}. Designs focusing on an objective, and
 making use of reinforcement learning methods to drive evolution are also being
-studied, e.g. in \cite{pathak_learning_2019}. Most of these simulated ``worlds''
+studied, e.g. in \parencite{pathak_learning_2019}. Most of these simulated ``worlds''
 have had some success in reproducing key aspects of evolving artificial life,
 enabling the emergence of complex behavior from simple organisms. However, they
 still work within constrained simulated environments and usually consider
@@ -80,14 +80,14 @@ dimensions, composed of cells that can be in a set of states. The cells are
 updated in discrete time steps using a transition table that defines the next
 state of a cell given the states of its neighbors.
 They were originally proposed by Stanislaw Ulam and studied by Von Neumann
-\cite{von_neumann_theory_1966}, who was interested in designing a computational
+\parencite{von_neumann_theory_1966}, who was interested in designing a computational
 system that can self-reproduce itself in a non-trivial way. The trivial
 self-reproducing patterns were then those that do not have potential to evolve,
 for example the growth of crystals.
 
 Stephen Wolfram later took a more bottom up approach, beginning with the study
 of the simple 1D binary cellular automata (CA), and identifying four qualitative
-classes of cellular automaton behavior \cite{wolfram_universality_1984}:
+classes of cellular automaton behavior \parencite{wolfram_universality_1984}:
 \begin{description}
 \item[Class 1]  evolves to a homogeneous state.
 \item[Class 2]  evolves to simple periodic patterns.
@@ -98,12 +98,12 @@ classes of cellular automaton behavior \cite{wolfram_universality_1984}:
 Wolfram and his colleagues also studied 2D CA using tools from information
 theory and dynamical systems theory, describing the global properties of
 these systems in terms of entropies and
-Lyapunov exponents \cite{packard_two-dimensional_1985}.
+Lyapunov exponents \parencite{packard_two-dimensional_1985}.
 
 Christopher Langton and colleagues also studied CA dynamics
-\cite{li_transition_1990} --- e.g. using the $\lambda$ parameter
-\cite{langton_computation_1990} --- and designed a self-replicating pattern much
-simpler than Von Neumann's \cite{langton_self-reproduction_1984}, now known as
+\parencite{li_transition_1990} --- e.g. using the $\lambda$ parameter
+\parencite{langton_computation_1990} --- and designed a self-replicating pattern much
+simpler than Von Neumann's \parencite{langton_self-reproduction_1984}, now known as
 Langton's loops. The main issues with his system and Von Neumann's universal
 replicator is the fact that they are very fragile and based on a large amount of
 human design. As a consequence, although they do self-replicate, they cannot
@@ -112,12 +112,12 @@ interactions with the environment.
 
 A genetic algorithm-based search for spontaneously occurring self-replicating
 patterns in 2D cellular automata with several states was undertaken in
-\cite{bilotta_artificial_2011} using entropy measures of the frequency
+\parencite{bilotta_artificial_2011} using entropy measures of the frequency
 distribution of $3\times 3$ patterns.
 
 \subsection{Compression and complexity}
 Compression has often been used as a measure of complexity. Lempel and Ziv have
-introduced in \cite{lempel_complexity_1976} the now widespread Lempel-Ziv (LZ)
+introduced in \parencite{lempel_complexity_1976} the now widespread Lempel-Ziv (LZ)
 algorithm as a method for measuring the complexity of a sequence. By
 constructing back-references to previous parts of a string, the LZ algorithm is
 capable of taking advantage of duplicate patterns in the input to reduce its
@@ -126,7 +126,7 @@ with Huffman coding for efficient representation of the symbols obtained after
 the first step. It is one of the most widespread compression algorithms and is
 for instance used in gzip and PNG file compression standards.
 
-The PAQ compression algorithm series \cite{mahoney_fast_2000} is an ensemble of
+The PAQ compression algorithm series \parencite{mahoney_fast_2000} is an ensemble of
 compression algorithms initially developed by Matt Mahoney with state of the art
 compression ratio on several compression benchmarks. Better compression of an
 input means a better approximation of the minimum description length and
@@ -134,24 +134,24 @@ implicit understanding of more of the underlying patterns in input data. The
 usefulness of a better compressor is that it can detect much more complex and
 intricate patterns that aren't simple repetitions of previous patterns.
 
-In \cite{zenil_compression-based_2010}, H. Zenil investigates the effects of a
+In \parencite{zenil_compression-based_2010}, H. Zenil investigates the effects of a
 compression-based metric to classify cellular automata and observes that it
 results in a partitioning of the space of 1D CA into several clusters that match
 Wolfram's classes of automata. He also used this approach on the output of
 simple Turing machines and some 1D automata with more than two states and larger
 neighborhoods. Extensions of this work include asymptotic sensitivity analysis
 of the compressed length for input configurations of growing complexity, as
-introduced in \cite{zenil_asymptotic_2013, zenil_what_2014}.
+introduced in \parencite{zenil_asymptotic_2013, zenil_what_2014}.
 
 Additionally, image decompression time as an approximation of Bennet's logical
-depth \cite{bennett_logical_1995, zenil_image_2012} and the output distribution
+depth \parencite{bennett_logical_1995, zenil_image_2012} and the output distribution
 of simple Turing machines combined with block decomposition of CA to approximate
 their algorithmic complexity have also been investigated
-\cite{zenil_two-dimensional_2015, soler-toscano_calculating_2014}. However, the
+\parencite{zenil_two-dimensional_2015, soler-toscano_calculating_2014}. However, the
 possible extent to which such measures of complexity could be applied to more
 complex automata and other complex systems has not yet been extensively studied.
 For a review of several measures of complexity and their applications, see
-\cite{grassberger_randomness_1989}.
+\parencite{grassberger_randomness_1989}.
 
 \section{Compression-based metric}\label{sec:compr-based-metr}
 
@@ -173,7 +173,7 @@ automata, meaning that the indices $i-r, ..., i+r$ above are taken modulo $n$
 the size of the automaton in 1D.  Boundary conditions can have some
 effect on a CA's evolution, but cyclic boundaries have been empirically
 observed to have limited effect on the complexity of automata in 1D
-\cite{luvalle_effects_2019}.
+\parencite{luvalle_effects_2019}.
 
 The definition given in the equation above can be extended to higher dimensional
 automata by modifying the neighborhood and the definition of $\phi$. A 2D
@@ -200,7 +200,7 @@ implicitly converted into string characters (with one symbol per unique state).
 outputs a compressed string, and length is the operator that returns the length
 of an input string.
 
-Similarly to \cite{kowaliw_measures_2008, zenil_compression-based_2010}, we use
+Similarly to \parencite{kowaliw_measures_2008, zenil_compression-based_2010}, we use
 zlib’s C implementation of DEFLATE to compress the final state of the automaton.
 If we apply the above metric to the 256 ECA run for 512 timesteps and
 initialized with one activated cell in the middle, we obtain the plot of
@@ -244,13 +244,13 @@ that correspond to similarly behaving rules.
 
 Ultimately, the theoretical goal of using compression algorithms is to approach
 the theoretical minimum description length of the input
-\cite{grunwald_minimum_2007}. For very regular inputs, this length should be
+\parencite{grunwald_minimum_2007}. For very regular inputs, this length should be
 relatively small and inversely for random inputs. However, gzip and PAQ are
 crude approximations of the minimum description length, and may only approach it
 in a given context. As an example, compressing text data (a task often performed
 with gzip in practice) is much more efficient with a language model that can
 assign a very low probability to non grammatically correct sentences. The
-Kolmogorov complexity \cite{kolmogorov_three_1968} of a cellular automaton is
+Kolmogorov complexity \parencite{kolmogorov_three_1968} of a cellular automaton is
 upper bounded by a value that is independent of the chosen rule, as it is
 entirely determined by the transition table, the grid size, initial
 configuration and number of steps.
@@ -366,7 +366,7 @@ on dictionary size.
 These higher dimensional automata might be better at generating complex
 dynamics, and the large size of their rule spaces makes it a challenge to
 explore. There has been at least one attempt to deal with these higher
-dimensional systems \cite{zenil_two-dimensional_2015} that lacks the scalability
+dimensional systems \parencite{zenil_two-dimensional_2015} that lacks the scalability
 to work with large inputs.
 
 An alternative to the linear compression-based method presented above would be
@@ -377,14 +377,14 @@ optimized for one type of input --- e.g. images with PNG.
 
 Another way to tackle the problem is to use a prediction based approach to
 compression. Similarly to methods described in
-\cite{schmidhuber_sequential_1996} and one of the first steps of the PAQ
-compression algorithm \cite{mahoney_fast_2000}, we learn a statistical model of
+\parencite{schmidhuber_sequential_1996} and one of the first steps of the PAQ
+compression algorithm \parencite{mahoney_fast_2000}, we learn a statistical model of
 input data to predict the content of a cell given its immediate predecessors.
 For compression, this is often followed by an encoding step --- using Huffman or
 arithmetic coding --- that encodes data which contains the least information
 (least ``surprising'' data) with the most compact representation. This approach
 can also be related to the texture synthesis method described in
-\cite{efros_texture_1999}, where the authors learn a non parametric model to
+\parencite{efros_texture_1999}, where the authors learn a non parametric model to
 predict the next pixel of a texture given a previously synthesized neighborhood.
 Additionally, because we don't need the operation to be reversible as in regular
 compression, it is not necessary to limit the prediction model to making
@@ -621,7 +621,7 @@ We also study the performance of our metrics --- lookup table and neural
 network-based --- as inputs of a binary classifier against two simple baselines
 on a random 70/30 split of our dataset. The first baseline classifies all
 example as negative. The second baseline is based on compressed length as
-defined in \cite{zenil_compression-based_2010} and computed by choosing a pair
+defined in \parencite{zenil_compression-based_2010} and computed by choosing a pair
 of thresholds that minimize mean square error when classifying examples in
 between as positive --- this is based on the observation made in
 Section~\ref{sec:compr-based-metr} that interesting rules have intermediate
@@ -637,7 +637,7 @@ the neural network gives the best score.
   \begin{tabular}{lm{.1\linewidth}m{.16\linewidth}m{.1\linewidth}m{.11\linewidth}}
     \toprule
     \bfseries  Metric & Baseline & Compressed length
-    \cite{zenil_compression-based_2010} &
+    \parencite{zenil_compression-based_2010} &
     Lookup Table & Neural network \\ \midrule
     \bfseries Accuracy & 0.90 & 0.913 & 0.926 & \bfseries 0.953 \\ \bottomrule
   \end{tabular}
@@ -645,7 +645,7 @@ the neural network gives the best score.
   \begin{flushleft}{\footnotesize Accuracy of each metric of complexity when
       used to classify which automatons do evolve interestingly, compared
       against the trivial all-negative baseline and the compressed length
-      metric~\cite{zenil_compression-based_2010}.}\end{flushleft}
+      metric~\parencite{zenil_compression-based_2010}.}\end{flushleft}
 \end{table}
 
 Above experiments demonstrate the capability of our proposed metric to match a
@@ -682,7 +682,7 @@ Therefore, we adopt a biased sampling strategy of the rules, selecting the
 proportion of transitions towards each state uniformly on the simplex --- e.g
 for 3 states we might get the triple $(0.1, 0.5, 0.4)$ and sample transitions
 according to these proportions. This parametrization can be related to Langton's
-lambda parameter \cite{langton_computation_1990} that takes into account the
+lambda parameter \parencite{langton_computation_1990} that takes into account the
 proportion of transitions towards a transient (inactive) state and all the other
 states. We obtain approximately 10\% interesting rules with this sampling as the
 proportions of our experimental dataset show.
