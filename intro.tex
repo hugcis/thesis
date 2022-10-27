@@ -142,24 +142,54 @@ degrees of freedom make it difficult to find good systems, while too few might
 indicate a lack of expressivity. An example parametrization of \ac{CA} with
 little expressivity is Langton's lambda parameter
 \parencite{langton_computation_1990}. On the other end of the spectrum, the
-\ac{CA} rule is a simple parametrization with many degrees of freedom, which makes it
-impractical.
+\ac{CA} rule is a simple parametrization with many degrees of freedom, which
+makes it impractical.
 
-Even when we limit ourselves to the study of \ac{CA}, many variants
-can be considered. Cellular automata can have continuous or discrete states and operate in continuous or discrete space. For discrete state and space cellular
-automata, the number of states and window of the update function can vary, as
-well as the topology of the discrete space.
+Even when we limit ourselves to the study of \ac{CA}, many variants can be
+considered. Cellular automata can have continuous or discrete states and operate
+in continuous or discrete space. For discrete state and space cellular automata,
+the number of states and window of the update function can vary, as well as the
+topology of the discrete space.
 
 
 \subsection{Complex systems control}\label{sec:compl-syst-contr}
 
-Many complex systems are chaotic. A deterministic dynamical system is said to be
-chaotic if its evolution is highly sensitive to its initial conditions. Because
-of this property, it is often very hard to predict how a given system will
-evolve over time, and therefore hard to steer its evolution towards a particular
-final state or along a chosen trajectory. This is an advantage for creating
-open-ended systems, but it can be challenging to apply these systems to some
-basic tasks.
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{.47\linewidth}
+    \centering
+    \includegraphics[width=.93\linewidth]{figures/ca_comp_a}
+    \caption{\ac{CA} rule 22 on a tape of size 100, ran for 50 steps from a
+      random initial state.}
+    \label{fig:ca_comp_a}
+  \end{subfigure}
+  \hspace{10pt}
+  \begin{subfigure}[t]{.47\linewidth}
+    \centering
+    \includegraphics[width=.93\linewidth]{figures/ca_comp_b}
+    \caption{\ac{CA} rule 22 on a tape of size 100, ran from a slightly
+      different initial state. The cells different from Figure \ref{fig:ca_comp_a} are
+      overlayed in red.}
+    \label{fig:ca_comp_b}
+  \end{subfigure}
+
+  \caption{Comparison of the same 1 dimensional \ac{CA} ran from two initial conditions
+    differing only by one cell. Each row is the state of the \ac{CA} at one time
+    step. The effect of the small perturbation of initial conditions grows
+    rapidly as the \ac{CA} evolves in time.}
+  \label{fig:ca_comp}
+\end{figure}
+
+
+Even if we want complex systems that evolve in unexpected directions and grow in
+an open-ended way with no supervision, it may still be useful to steer them
+locally towards specific targets. However, many complex systems are chaotic. A
+deterministic dynamical system is said to be chaotic if its evolution is highly
+sensitive to its initial conditions. Because of this property, it is often very
+hard to predict how a given system will evolve over time, and therefore hard to
+steer its evolution towards a particular final state or along a chosen
+trajectory. This is an advantage for creating open-ended systems, but it can be
+challenging to apply these systems to some basic tasks.
 
 \subsection{Open-ended evolution without
   objectives}\label{sec:open-ended-evolution}
@@ -185,7 +215,8 @@ able to send a control signal and read back its current state.
 
 Throughout this work, we use reservoir computing for this purpose.
 Reservoir computing allows one to harvest the internal computations of complex
-systems, or \emph{read} information from its internal state.
+systems, or \emph{read} information from its internal state by learning a linear
+regression that maps .
 
 
 \section{Contributions}
