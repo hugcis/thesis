@@ -5,7 +5,7 @@
 
 The \acf{CA} was originally proposed by Stanislaw Ulam and John Von
 Neumann in the 1940s as a model of the growth of crystals and an attempt at
-constructing a self-replicating system \cite{von_neumann_theory_1966}.
+constructing a self-replicating system \parencite{von_neumann_theory_1966}.
 
 \paragraph{Definition}
 It is usually defined on a regular lattice in one or two dimension. Each of its
@@ -146,10 +146,14 @@ trivial definition and implementation and complex and unpredictable properties.
 One fundamental problem of \ac{CA} research is to classify the 256 rules into
 well-defined behavior types and order them by complexity, which was attempted in
 several previous works
-\cite{wolframNewKindScience2002,
+\parencite{wolframNewKindScience2002,
   zenilCompressionBasedInvestigationDynamical2010,
   hudcovaClassificationComplexSystems2020,
   hudcovaComputationalHierarchyElementary2021}.
+
+\subsection{Totalistic cellular automata}
+
+\paragraph{Game of Life}
 
 \subsection{Asynchronous cellular automata}
 A cellular automaton is said to be asynchronous when its cells are not all
@@ -163,6 +167,408 @@ In a stochastic cellular automaton, the update function $\boldsymbol{\Phi}$ is s
 \subsection{Discrete}
 \subsection{Continuous}
 
+\section{Cellular automata and RNNs}
+The purpose of this document is to show that cellular automata and recurrent
+convolutional neural networks have very strong connections and to draw this
+parallel as clearly as possible.
+
+This connection yields interesting consequences both for the theoretical
+properties of these models and the potential applications of cellular automata
+and recurrent networks. It shows for instance that emergent properties with
+increasing complexity and perhaps open-ended development are possible within the
+hidden state of a recurrent neural network.
+
+The parallel between cellular automata and a form of Recurrent/Convolutional
+network has also been drawn by several other researchers
+\parencite{wulffLearningCellularAutomaton1993,
+  gilpinCellularAutomataConvolutional2018,
+  mordvintsevGrowingNeuralCellular2020}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.3\linewidth]{figures/ca_cnn}
+  \caption{\label{fig:ca_cnn}The CA update rule is local and can be represented
+    by convolution operations (linear transformation + non-linear function).}
+\end{figure}
+
+\subsection{RNN formalism}
+
+\begin{figure*}[!ht]
+  \centering
+  \includegraphics[width=\linewidth]{figures/rnn_and_gol.pdf}
+  \caption{\label{fig:standard_rnn} Standard RNN architecture (left) and Game of
+    Life seen as a RNN with no inputs and outputs (right). For the \ac{CA}, the
+    ``hidden'' state $h_t$ is the current state of the grid at timestep $t$. The
+    operator $\boldsymbol{\Phi}$ is the \ac{CA} update rule which is
+    equivalent to a \ac{CNN} (see Section~\ref{sec:transition-rule-as}). This
+    illustration is based on
+    \href{https://commons.wikimedia.org/wiki/File:Recurrent_neural_network_unfold.svg}{Recurrent
+      neural network unfold} by
+    \href{https://commons.wikimedia.org/wiki/User:Ixnay}{fdeloche}, licensed
+    under \href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY 4.0}.}
+\end{figure*}
+
+
+We write the definition of a cellular automaton with RNN-inspired formalism and
+notations. This parallel is illustrated on Figure~\ref{fig:standard_rnn}.
+
+The grid state at time $t$ is denoted $h_t$ and corresponds to the hidden state
+in a RNN\@. In the case of classical CAs, it is a 1 or 2D vector of discrete
+values, but~\parencite{mordvintsevGrowingNeuralCellular2020} and other CA extensions
+use continuous values, much like the usual RNNs.
+
+The transformation $\Phi$ operates on this hidden state only. It is equivalent
+to a convolutional layer as explained below in
+Section~\ref{sec:transition-rule-as}.
+
+Inputs and outputs $(\mathbf{x}, \mathbf{o})$ are not included in the classical
+definition of CAs but are an easily implementable extension as discussed in
+Section~\ref{sec:adding-inputs-outp}.
+
+\subsection{Transition rule as a set of convolutions\label{sec:transition-rule-as}}
+
+Each cell $c_i$ from the above definition is represented as a vector of size $k$
+the number of states. Cell $c_i$ is in state $s_i \in [0, \ldots, k - 1]$. A
+neighborhood of size $3$ in a $1$D CA ($r=1$) is a $3 \times k$ vector
+$\mathbf{u}_i = [u_{i-1}, u_{i}, u_{i+1}]$. Each $u_{ij}$ is a vector of size
+$k$ with a $1$ in position $s_i$. This is illustrated in the 1D (resp.\ 2D) case
+on the left (resp.\ right) of Figure~\ref{fig:cell}. For a CA with only two
+states, it is redundant to have a $3\times 2$ vector, but this ``one-hot'' encoding
+becomes helpful when working with more states.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.3\linewidth]{figures/repr}
+  \caption{\label{fig:cell}Cellular automaton neighborood vector representation
+    example with 2 states. A $3\times 3$ square of cells with two states can be
+    represented by a $3\times 3 \times 2$ vector. Left: 1D 3-neighbors
+    representation. Right: 2D $3\times3$ neighbors representation.}
+
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.9\linewidth]{figures/global_schema}
+  \caption{\label{fig:global_schema}How to represent any 2-states 2D CA rule
+    operating on $3\times 3$ neighborhoods as a 2 layers CNN.}
+\end{figure}
+
+
+With this representation, on can easily express the transition rule $\Phi$ as a
+simple convolutional neural network. This network would be composed of 2 layers
+which are shown on Figure~\ref{fig:global_schema}:
+
+\paragraph{The first convolutional layer}It is receptive to each possible
+neighborhood configuration. This layer is composed of $k^{2r + 1}$ filters of
+dimension $k\times (2r + 1)$ with only ones and zeros, that are each the same as
+a possible configuration of size $(2r+1)$ of the neighborhood. The product of
+each filter with an input neighborhood will be an integer between $0$ and $9$.
+By applying a ReLU non-linearity with a vector of 8s as bias, we obtain the
+input to the second layer, a vector of size $k^{2r + 1}$ for each cell with
+plays the role of an indicator of the input configuration.
+
+\paragraph{A second convolutional layer} It has $k^{2r + 1}$ filters of size $1$ that
+are either $0$ or $1$ depending on the desired output of the transition.
+
+\subsubsection{Recurrent convolutions in machine learning}
+
+Recurrent convolutional networks have been used in several areas of machine
+learning such as NLP or computer vision
+\parencite{pinheiroRecurrentConvolutionalNeural2014,
+  laiRecurrentConvolutionalNeural2015}.
+
+\subsection{Adding inputs and outputs\label{sec:adding-inputs-outp}}
+
+Figure~\ref{fig:standard_rnn} shows clearly where the ``missing'' inputs and
+outputs could be added in Game of Life or any other CA\@. We can think of many
+possible forms.
+
+\subsubsection{Inputs}
+There are many ways to add inputs to the model presented above. We divide our
+proposed methods into two classes: inputs that directly modify the hidden state
+during the CA evolution and inputs that augment the hidden state and affect the
+rule.
+
+\begin{description}
+
+\item[Hidden state augmentation and rule modulation]
+Inputs are usually added to the hidden state just before the application of the
+non-linearity in standard RNNs.
+
+In the case of cellular automata, it can also be done in the following ways:
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=.9\linewidth]{figures/encode_decode.pdf}
+  \caption{\label{fig:encode_decode} Inputs and outputs can be directly
+    encoded within the hidden state.}
+\end{figure*}
+
+\item[Vector state] A simple to add inputs to a cellular automaton is to
+consider the grid as having an additional (possibly read-only) dimension. For
+example, a 1D automaton would actually be represented by a vector with dimension
+$N\times 2$ where the first vector of size $N$ is the grid state and the other
+is the input. The update rule would be changed so as to add this new component
+into account. One can see this model as using multiple CA rules at the same
+time, with the input state conditioning the rule being chosen for a given update
+step.
+
+\item[Variable update rule] Inputs can also influence a CA's evolution by
+changing the update rule. With this configuration, the update rule $\Phi$ is now
+a function of the input $x$. We now have $\Phi_x = G(x)$, where
+
+\[G: \mathcal{X} \rightarrow \left({\{ 1, \ldots, k \}}^{2r+1} \to \{1, \ldots, k\}\right)\]
+
+
+A similar approach was used in \parencite{adamsFormalDefinitionsUnbounded2017}. It
+showed that conditioning a CA update rule on another CA's evolution could enable
+a higher diversity of behavior.
+
+\item[Concatenation] Input can be concatenated to the hidden state (\eg~on
+the grid boundaries) before applying the update rule, forming a sort of fixed
+read-only memory space. Concatenation is illustrated in Figure~\ref{fig:concat}.
+A possible disadvantage of this method is the fact that information need to
+propagate through the grid if it is to be processed far from where the read-only
+memory was positioned.
+
+This approach is more computer-like, reserving some space for different
+functionalities of the data.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.5\linewidth]{figures/concat.pdf}
+  \caption{\label{fig:concat} Input $x_t$ is projected and concatenated to
+    hidden state $h_t$, affecting the boundary conditions of the cellular
+    automaton.}
+\end{figure}
+
+\item[Hidden state manipulation]
+
+Another approach is to directly modify the hidden state to ``communicate''
+information to the system. These methods are used
+in~\parencite{mordvintsevGrowingNeuralCellular2020,
+  randazzoSelfclassifyingMNISTDigits2020} to make interactive demos and allow
+users to directly modify that hidden state. A user can interact with the
+system by drawing with its mouse. This sets parts of the internal state to a
+fixed cell state.
+
+\item[Masking] Input data can serve as a mask on top of the current grid
+state, forcing some cells into states that depend on the input values. If we
+view the state activations in the CA as some neural pattern, this approch can
+be seen as a form of \emph{neuromodulation}, which has previously been used in
+machine learning \parencite{soltoggioEvolutionaryAdvantagesNeuromodulated2008,
+  ishiguroNeuromodulatedControlBipedal2003,
+  beaulieuLearningContinuallyLearn2020}.
+
+A mask can be constructed from an input
+vector $x$ by linearly transforming $x$ and applying an activation function
+(\eg~step function). It controls which channels are activated, and where
+information can flow or not. This kind of mask can be applied with element-wise
+multiplication or addition but also more elaborate operations. It is illustrated
+in Figure~\ref{fig:mask}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.5\linewidth]{figures/mask.pdf}
+  \caption{\label{fig:mask} Input is converted into a mask for the hidden state.
+  The mask is applied through element-wise multiplication here.}
+\end{figure}
+
+\end{description}
+
+\subsubsection{Outputs}
+Similarly, inputs can be extracted from the hidden state in several different
+ways. One might read outputs from the boundaries of the grid, from a
+transformation of the grid using a neural network, etc. The output could also be
+stored within an additional dimension of the ``extended'' grid state presented
+above.
+
+\subsubsection{Computing with cellular automata}
+
+From a computational point of view, the hidden state can be seen as a working
+tape that some kind of \emph{parallel Turing machine} (the cellular automaton)
+is doing computation on. In this framework, the input is encoded as the initial
+state of the tape and decoded from the last state of the tape (as illustrated on
+Figure~\ref{fig:encode_decode}). The recurrent convolutional neural network
+(RCNN) then plays the role of a fixed computer program. This is the setting
+adopted in previous works on constructing computations with cellular automata: a
+task is chosen, and one searches for rules which can execute that task on
+input/output pairs~\parencite{mitchellComputationCellularAutomata2005}. Previous
+successes with RNNs demonstrate that this model is powerful enough to learn
+complex functions when the grid is made of continuous numbers and the
+transformation is not local thanks to optimization, for instance in language
+modelling.
+
+However, this gets more interesting when we consider the input as encoding both
+some data and a computer program, as it is the case with a Turing machine. We can
+then expect a cellular automaton (or RNN) to not only compute the result of a particular
+function, but to be equivalent to a general purpose computer capable of
+computing the result of any chosen algorithm without any need for optimization.
+
+
+\subsection{Consequences}
+
+Viewing cellular automata as a recurrent convolutional neural networks  as
+described above has several interesting consequences.
+
+\subsubsection{Turing-completeness of the system}
+
+Because we can simulate rule 110 ECA in the above system, it follows from the
+Turing-completeness of this CA rule that the above system is Turing-complete.
+
+This is a fun result, albeit not by any mean revolutionary since RNN have already
+been proven to be Turing-complete~\parencite{siegelmannComputationalPowerNeural1992}.
+
+The model is in practise relatively far from a real world CNN with a fixed
+number of layers independent from one another --- compared to a variable number
+of steps and shared layers for the automaton-RCNN\@.
+
+\subsubsection{Differentiable cellular automata}
+
+Every step of the computations involved in computing a step of a cellular
+automaton represented as a RCNN is differentiable. We can therefore
+theoretically couple this framework with backpropagation to make
+\emph{learnable} cellular automata that can adapt their rules to minimize a
+target loss function.
+
+This is the direction taken in~\cite{mordvintsevGrowingNeuralCellular2020}. The
+authors use supervised learning on a cellular automaton and train it to get a
+stable self-repairing target shape.
+
+However, because supervised cellular automata can only do as much as they have
+been trained to do, I believe it defeats the purpose of working with a model
+capable of spontaneous complex emergent behavior. Open-ended complexity increase
+could very unlikely be achieved through pure supervision.
+
+\cite{gilpinCellularAutomataConvolutional2018} takes the reverse approach, and
+tries to train RCNNs to simulate a fixed CA rule, using the training process as
+a way to help understand the structure of CA rule space.
+
+\subsection{Beyond the naive rule representation}
+
+The above representation of cellular automata rules is a one-to-one mapping.
+Each automata rule has its CNN counterpart and vice versa. However, there are
+more efficient ways to represent CA rules. For instance, we can make the first
+layer of filters receptive both to a given configuration and its inverse
+(\eg~$(1, 0, 1)$ and $(0, 1, 0)$ in a ECA) by using negative values in the
+filter (use a filter $(1, -1, 1)$ instead of $(1, 0, 1)$ and $(0, 1, 0)$
+separately).
+
+For example, game of life doesn't need more than 2 convolutional filters or
+parameters to be represented by a CNN because it is totalistic (a cell's new
+state only depends on the number of neighbors in state 1 and its current state).
+
+
 \section{Reservoir computing}
 
 \section{Measuring complexity}
+
+\subsection{Information based measures}
+
+\subsubsection{Information content}
+For an event $E$ with probability $P$, the information content of this event is
+defined as
+\begin{align*}
+  I(E) := -\log(P)
+\end{align*}
+This measure essentially quantifies how unlikely an event is and depends on how
+the probability $P$ was estimated in practice.
+
+\subsubsection{Shannon Entropy}
+It is simply the expected information content of the input.
+\begin{align*}
+  H(X) := \mathbb{E}[-\log(P(X))]
+\end{align*}
+This measure is a lower bound on the number of bits the input could be
+compressed down to. In the case of a 1D ECA, the Shannon entropy could be
+computed cell-wise over the time distribution of the states. Yielding an entropy
+per cell score that can be averaged over a entire automaton.
+
+This is for instance one of the measures used by Wolfram in
+\parencite{wolframStatisticalMechanicsCellular1983} and by Langton in
+\parencite{langtonComputationEdgeChaos1990} to study how the parameter $\lambda$ affects
+the behavior of the automaton.
+
+There are several ways to compute it when dealing with a CA, depending on what
+part of the CA is considered as the main random variable. If the CA is finite,
+the state at timestep $t$ can be seen as a random variable that can take one of
+$2^N$ possible values (with $N$ the width of the automaton state). In that case,
+the probability of a state can easily be estimated by counting its number of
+occurences during evolution.
+
+\subsubsection{Rényi Entropy}
+The Rényi entropy is a generalization of Shannon entropy that gives different
+weights to events of various probabilities. It is formally defined for an
+$\alpha \geq 0, \alpha \neq 1$ and $X$ random variable with possible outcomes
+$0, 1, ..., n$ as
+\begin{align*}
+  H_\alpha(X) = \frac{1}{1-\alpha} \log\left(\sum_{i=0}^np_i^\alpha\right)
+\end{align*}
+
+In the limit $\alpha \rightarrow 1$ it is equal to the Shannon entropy. $\alpha
+\rightarrow \infty$ yields the Min-entropy. With $\alpha \rightarrow 0$ Rényi
+entropy is the same as Max-entropy.
+
+Rényi entropy is used in \parencite{wolframStatisticalMechanicsCellular1983} to
+estimate entropy in infinite CAs.
+
+\paragraph{Mutual information}
+
+\subsection{Computation based measures}
+
+\subsubsection{Kolmogorov-Chaitin complexity {\small (algorithmic complexity)}}
+
+Introduced by Kolmogorov \parencite{kolmogorovThreeApproachesQuantitative1968} and Chaitin
+\parencite{chaitinLengthProgramsComputing1969}, this complexity measure is defined for a string $s$
+of characters and a universal description language (\eg a programming language)
+as the length of the shortest program that can generate the string $s$. Such
+number $K(s)$ is called the minimal description length of $s$.
+
+From the invariance theorem, the difference in Kolmogorov complexity of the same
+string $s$ in two different description language is bounded, although this bound
+might be very large in practice.
+
+The Kolmogorov complexity is uncomputable, and there exists strings of
+arbitrarily large complexity, which makes it hopeless using this exact measure
+in practice.
+
+One rather straightforward way of approaching the Kolmogorov complexity of an
+arbitrary string is to use a compression algorithm, and use the length of the
+decompression program plus the length of the compressed string as an upper bound
+to the Kolmogorov complexity. This is the approach adopted by Zenil in
+\parencite{zenilCompressionBasedInvestigationDynamical2010} to classify the 1D ECA. This method, which
+often makes use of the popular LZ algorithm can be seen as an independent
+complexity measure, also closely related to the Lempel-Ziv complexity, described
+in more details in~\ref{subsection:lempel-ziv}.
+
+However, it is worth noting that in the case of a grid state generated by a
+cellular automaton, the Kolmogorov complexity is easily upper bounded by a
+constant value entirely defined by the transition table of the automaton, its
+characteristics (size, boundary conditions, \etc), the initial state and number
+of steps.
+
+\subsubsection{Lempel-Ziv complexity}\label{subsection:lempel-ziv}
+The Lempel-Ziv complexity as defined in \parencite{lempelComplexityFiniteSequences1976} is the
+number of steps in the LZ algorithm, which is directly related to the number of
+repeated substrings in the input string.
+
+The main idea of this algorithm is to scan the input string while attempting to
+find some repetition of previous input in the incoming data. This builds over
+time a set of basic components called the exhaustive history of the string, from
+which the complete string can be constructed. The number of components in that
+set is the Lempel-Ziz complexity of that string.
+
+The compressed length method of measuring complexity makes use of a compression
+algorithm to reduce the size of the input. An input with regularities and
+repetitive patterns will result in a small output whereas a random input will
+rather be .
+
+\subsubsection{Computational complexity}
+
+\subsubsection{Logical Depth}
+
+\subsubsection{Thermodynamic Depth}
+
+\subsubsection{Sophistication}
+
+\subsubsection{Effective Measure complexity}

@@ -96,7 +96,7 @@ depending on the parameters of the environment. Furthermore, (ii) Using such
 functions as goals can be counterproductive because, as many examples in nature
 demonstrate, the paths to these objectives are often deceptive. They involve
 developing in unexpected directions that may initially seem against the original
-goal \cite{stanleyWhyGreatnessCannot2015}.
+goal \parencite{stanleyWhyGreatnessCannot2015}.
 
 In this thesis, the term \emph{unsupervised} refers to a form of learning with
 no predefined objective. Like natural evolution, we expect unsupervised
@@ -121,7 +121,7 @@ and diverse solutions to deceptive problems.
 \end{figure}
 
 The study of complex systems poses a range of difficult challenges in and of
-itself \cite{sanmiguelChallengesComplexSystems2012}. The complexity of a system
+itself \parencite{sanmiguelChallengesComplexSystems2012}. The complexity of a system
 is an emergent property that arises from its intricate structure, its number of
 elements, how it functions, and how it responds to different kinds of external
 influence. For many complex systems the emergent mechanisms are poorly
@@ -132,19 +132,26 @@ understood.
 
 The definition of complex systems is general, and several systems with
 interesting dynamics can be studied. For example L-Systems, Random boolean
-networks, Turing machines, and Cellular automata. In the thesis, we focused
-mostly on the latter: cellular automata. Even when limiting ourselves to the
-study of cellular automata, many variants can be considered. Cellular automata
-can have continuous or discrete states, and operate on continuous or discrete
-space. For discrete state and space cellular automata, the number of states and
-window of the update function can vary, as well as the topology of the discrete
-space.
+networks, Turing machines, and \Acfp{CA}. In the thesis, we focused mostly on
+the latter: \ac{CA}. There are multiple benefits of working with this model. It
+is very simply defined and its high parallelism makes its implementation
 
 Choosing the right complex system architecture is essential because it defines
 the search space over which interesting and useful systems can be found.
-Parametrizing that space can be challenging, because too many degrees of freedom
-make it difficult to find good systems, while too few might indicate a lack of
-expressevity.
+Correctly parametrizing that space can also be challenging, because too many
+degrees of freedom make it difficult to find good systems, while too few might
+indicate a lack of expressivity. An example parametrization of \ac{CA} with
+little expressivity is Langton's lambda parameter
+\parencite{langton_computation_1990}. On the other end of the spectrum, the \ac{CA}
+rule is a simple parametrization with many degrees of freedom, making it
+impractical.
+
+Even when limiting ourselves to the study of \ac{CA}, many variants
+can be considered. Cellular automata can have continuous or discrete states, and
+operate on continuous or discrete space. For discrete state and space cellular
+automata, the number of states and window of the update function can vary, as
+well as the topology of the discrete space.
+
 
 \subsection{Complex systems control}
 
@@ -152,7 +159,7 @@ Many complex systems are chaotic. A deterministic dynamical system is said to be
 chaotic if its evolution is highly sensitive to its initial conditions. Because
 of this property, it is often very hard to predict how a given system will
 evolve over time and therefore hard to steer its evolution towards a particular
-final state or along a chosen trajectory.
+final state or along a chosen trajectory. This is an advantage
 
 \subsection{Open-ended evolution without objectives}
 
