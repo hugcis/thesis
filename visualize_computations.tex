@@ -56,7 +56,7 @@ like the weather, in which behaviors of individual atoms in a cloud are
 irrelevant to large-scale air mass movements. Much richer behaviors can be
 observed from studying large patterns' formation and their evolution. This
 should also hold true for CAs; we further discuss this question in
-\nameref{sec:conclusion}.
+\nameref{sec:conclusion-vc}.
 
 \begin{figure}[th]
   \centering
@@ -585,10 +585,10 @@ space-time diagrams, but also as a tool to visualize large CAs. To evaluate the
 quality of our proposed coarse-graining methods, we compare complexity scores
 computed according to~\parencite{cisnerosEvolvingStructuresComplex2019} for different
 coarse-graining methods. This metric was shown to correlate well with a user
-study for interesting automata. It uses neural networks to estimate how easy it
-is to learn a compressed representation of a CA\@. We also compute the scores on
+study of interesting automata. It uses neural networks to estimate how easy it
+is to learn a compressed representation of a CA\@. We also computed the scores on
 downscaled CAs as a baseline. Local averaging is used for downscaling, with each
-block of $N$ cells being replaced by their average value rounded to the nearest
+block of $N$ cells being replaced by its average value rounded to the nearest
 integer state.
 
 Experiments begin by sampling 3600 cellular automata rules with 3 or 4 states.
@@ -597,7 +597,7 @@ We apply the complexity metric on a randomly initialized simulation on a $512
 which should correspond to rules with interesting behaviors, are then used for
 coarse-graining. We apply coarse-graining on grids of $4096 \times 4096$ cells,
 scaling the grid down by a factor of $8$, and compute the complexity metric also
-on the reduced grid. Figures reported in Table~\ref{experiments_table} are
+on the reduced grid. Figures reported in Table~\ref{experiments_table-vc} are
 percentages of rules still considered interesting (above the selection threshold
 for the first step of the process) after coarse-graining. The higher this number
 is, the more a method is able to conserve complex and interesting behaviors
@@ -613,12 +613,13 @@ after the reduction.
       19.3\%  & 40.4\% & 82.4\% & 84.2\%\\
     \bottomrule
   \end{tabular}
-  \caption{\label{experiments_table}\textbf{Experimental results --- Percentage
+  \label{experiments_table-vc}
+  \caption{\textbf{Experimental results --- Percentage
       of rules classified as interesting after reduction with our 3 proposed
       methods (K-means, Histogram, Autoencoder), compared to a local averaging baseline.}}
 \end{table}
 
-Results in Table~\ref{experiments_table} suggest that using our proposed methods
+Results in Table~\ref{experiments_table-vc} suggest that using our proposed methods
 seems largely beneficial for studying complexity in large systems.
 % when usual metrics become impractical.
 Histogram and autoencoder methods are superior to downscaling using k-means and
@@ -731,7 +732,7 @@ coarse-grained output.
 %   \end{subfigure}
 % \end{figure}
 
-\section{Conclusion\label{sec:conclusion}}
+\section{Conclusion\label{sec:conclusion-vc}}
 
 We intend to use these coarse-graining methods to find cellular automata (CA) which
 exhibit interesting behaviors at multiple scales.

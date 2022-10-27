@@ -5,7 +5,7 @@
 \section{Goal}
 
 The goal of this thesis is to develop methods for studying and using the
-computations of complex dynamical systems to construct learning algorithms that
+computations happening within complex dynamical systems to construct learning algorithms that
 use a limited amount of supervision. We break down this objective into the
 following subgoals: (i) identify complex dynamical systems with the potential to
 exhibit emergent open-ended growth of complexity and evolutionary-like
@@ -46,7 +46,7 @@ open-ended complexity growth.
 \end{figure}
 
 
-(iii) Apply the promising systems to challenging tasks where classical machine
+(iii) Apply promising systems to challenging tasks where classical machine
 learning models may fail or prove less efficient. An example application is
 illustrated in Figure~\ref{fig:ca_lm}, where a \ac{CA} is used to
 implement a language model.
@@ -64,16 +64,15 @@ implement a language model.
 
 In this work, we do not focus our attention on what the machine learning
 community commonly refers to as ``unsupervised learning'', that is, learning
-from untagged data. In machine learning, supervision refers to a label, a number
-or collection of numbers that represents the expected outcome from some input
+from untagged data. In machine learning, supervision refers to a label, a number,
+or collection of numbers that represents the expected outcome of some input
 data. Since our goal is to construct models that develop autonomously, we first
 seek systems that behave this way, and postponing the issue of learning to
 optimize a particular objective function.
 
-In this thesis we work towards attaining these goals, focusing on one particular
-complex system: the \acl{CA}. This model has been studied extensively
-because of its simple definition and surprisingly complex behavior. We provide a
-more precise definition of \aclp{CA} in Section .
+In this thesis, we work toward achieving these goals, focusing on one particular
+complex system: the \acl{CA}. This model has been extensively studied because of its simple definition and surprisingly complex behavior. We provide a
+more precise definition of \aclp{CA} in Section \ref{sec:cellular-automata-sec}.
 
 
 \section{Motivation}
@@ -82,16 +81,16 @@ Most of existing machine learning algorithms rely on the choice of an objective
 function: a clearly defined mapping from the current state and parameters of a
 model to a real value, which indicates the performance of that model. The
 function depends on the objective of the model. For a supervised learning
-problem, we may count the number of misclassified objects or a distance between
-the predictions and expected results. Even in unsupervised learning --- the family of
+problem, we may count the number of misclassified objects or the distance between
+the predictions and the expected results. Even in unsupervised learning, the family of
 algorithms learning from untagged data, objectives are still used. For
 example, the well-known K-means clustering algorithm minimizes the sum of square
-distance to cluster centers.
+distances to cluster centers.
 
 This reliance on objective functions creates two main issues: (i) the objective
 is not always clearly defined. For example, a satisfying objective function for
 a walking robot could be to ``not fall when stepping through its surrounding
-environment''. This function is impractical to define, and will vary a lot
+environment''. This function is impractical to define and will vary a lot
 depending on the parameters of the environment. Furthermore, (ii) Using such
 functions as goals can be counterproductive because, as many examples in nature
 demonstrate, the paths to these objectives are often deceptive. They involve
@@ -124,17 +123,17 @@ The study of complex systems poses a range of difficult challenges in and of
 itself \parencite{sanmiguelChallengesComplexSystems2012}. The complexity of a system
 is an emergent property that arises from its intricate structure, its number of
 elements, how it functions, and how it responds to different kinds of external
-influence. For many complex systems the emergent mechanisms are poorly
+influence. For many complex systems, emergent mechanisms are poorly
 understood.
 
 
 \subsection{Design of a complex system}
 
 The definition of complex systems is general, and several systems with
-interesting dynamics can be studied. For example L-Systems, Random boolean
-networks, Turing machines, and \Acfp{CA}. In the thesis, we focused mostly on
-the latter: \ac{CA}. There are multiple benefits of working with this model. It
-is very simply defined and its high parallelism makes its implementation
+interesting dynamics can be studied. For example, L-Systems, Random Boolean
+networks, Turing machines, and \Acfp{CA}. In the thesis, we focus mainly on
+the latter: \ac{CA}. There are multiple benefits to working with this model. It
+is very simply defined, and its high parallelism makes its implementation .
 
 Choosing the right complex system architecture is essential because it defines
 the search space over which interesting and useful systems can be found.
@@ -143,12 +142,11 @@ degrees of freedom make it difficult to find good systems, while too few might
 indicate a lack of expressivity. An example parametrization of \ac{CA} with
 little expressivity is Langton's lambda parameter
 \parencite{langton_computation_1990}. On the other end of the spectrum, the
-\ac{CA} rule is a simple parametrization with many degrees of freedom, making it
+\ac{CA} rule is a simple parametrization with many degrees of freedom, which makes it
 impractical.
 
-Even when limiting ourselves to the study of \ac{CA}, many variants
-can be considered. Cellular automata can have continuous or discrete states, and
-operate on continuous or discrete space. For discrete state and space cellular
+Even when we limit ourselves to the study of \ac{CA}, many variants
+can be considered. Cellular automata can have continuous or discrete states and operate in continuous or discrete space. For discrete state and space cellular
 automata, the number of states and window of the update function can vary, as
 well as the topology of the discrete space.
 
@@ -158,9 +156,9 @@ well as the topology of the discrete space.
 Many complex systems are chaotic. A deterministic dynamical system is said to be
 chaotic if its evolution is highly sensitive to its initial conditions. Because
 of this property, it is often very hard to predict how a given system will
-evolve over time and therefore hard to steer its evolution towards a particular
+evolve over time, and therefore hard to steer its evolution towards a particular
 final state or along a chosen trajectory. This is an advantage for creating
-open-ended systems but it can make it challenging to apply these systems to some
+open-ended systems, but it can make it challenging to apply these systems to some
 basic tasks.
 
 \subsection{Open-ended evolution without
@@ -171,30 +169,30 @@ unsupervised learning systems. Even without an objective, it is still essential
 to understand which complex systems to choose from all available options or how
 to tune them. This is why we need metrics that can help select interesting
 systems without being another replacement objective function. The goal is to
-make system with the property of evolving in an open-ended way.
+make a system with the property of evolving in an open-ended way.
 
 \subsection{Complex systems inputs and outputs}
 
 Some of the complex systems we study in this thesis are closed systems. They do
-not expect inputs or have any well-defined outputs. Some examples of this
+not expect inputs or have well-defined outputs. Some examples of this
 property are \ac{CA} and \ac{RBN}.
 
 A common challenge for such
-systems is defining inputs and outputs in a way that preserves their internal
+systems is to define the inputs and outputs in a way that preserves their internal
 dynamics. This is also connected to the control problem of Section
 \ref{sec:compl-syst-contr}, because controlling a complex system implies being
 able to send a control signal and read back its current state.
 
-Throughout this work, we use reservoir computing for that purpose.
-Reservoir computing allows harvesting the internal computations of a complex
+Throughout this work, we use reservoir computing for this purpose.
+Reservoir computing allows one to harvest the internal computations of complex
 systems, or \emph{read} information from its internal state.
 
 
 \section{Contributions}
 
-The main contributions of this thesis are
+The main contributions of this thesis are as follows,
 \begin{enumerate}
-  \item A thorough literature review making the connection between cellular
+  \item A thorough literature review that makes the connection between cellular
         automata and other complex systems literature and machine learning
         literature. Studying these two fields from a single point of view is
         relatively novel, and we consider a review necessary for placing the
@@ -203,7 +201,7 @@ The main contributions of this thesis are
   \item The development of a general complexity metric that can help identify
         complex systems with interesting behavior.
 
-  \item The development of a coarse-graining method for visualizing computations
+  \item Development of a coarse-graining method to visualize computations
         in cellular automata and other discrete systems with local interactions.
 
   \item The introduction of a metric for learning efficiency for learning
@@ -223,17 +221,17 @@ systems, cellular automata, and reservoir computing.
 Chapter \ref{cha:meas-compl-evolv} introduces a complexity metric that allows us 
 to select complex systems with interesting behavior. The metric measures the
 ``novelty'' of the temporal states of a system compared to a reference one. We
-build a dataset of interesting cellular automata to validate the quality of the
+built a dataset of interesting cellular automata to validate the quality of the
 metric.
 
 Chapter \ref{cha:visu-comp-large} addresses the question of large-scale complex
 systems and the applicability of complexity metrics at multiple scales. We
-propose three algorithms for coarse-graining of cellular automata. This allows
-reducing the size of large-scale systems while retaining the interesting parts
+propose three algorithms for the coarse-graining of cellular automata. This allows
+us to reduce the size of large-scale systems while retaining the interesting parts
 of the behavior.
 
 Chapter \ref{cha:learn-effic-compl} presents a learning efficiency metric and a
-dataset for measuring the speed of learning of various systems. We show that
+dataset to measure the speed of learning of various systems. We show that
 reservoir computing-based systems using cellular automata can be more efficient
 than usual machine learning algorithms in constrained data and computation
 settings.
@@ -241,7 +239,7 @@ settings.
 
 \section{Publications and software}
 
-The thesis has led to the following publications:
+The thesis has led to the following publications.
 
 \begin{itemize}
   \item \fullcite{cisnerosEvolvingStructuresComplex2019}
@@ -252,6 +250,6 @@ The thesis has led to the following publications:
 The code to reproduce the experiments of all three publications is available on
 GitHub.
 
-We also published a dataset which we used for our benchmark in our last
+We also published a dataset that we used for our benchmark in our last
 publication. It is available at
 \url{https://github.com/hugcis/incremental_tasks/}.
