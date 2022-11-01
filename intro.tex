@@ -5,11 +5,20 @@
 \section{Goal}
 
 The goal of this thesis is to develop methods for studying and using the
-computations happening within complex dynamical systems to construct learning algorithms that
-use a limited amount of supervision. We break down this objective into the
-following subgoals: (i) identify complex dynamical systems with the potential to
-exhibit emergent open-ended growth of complexity and evolutionary-like
-properties.
+computations happening within complex dynamical systems to construct learning
+algorithms that use a limited amount of supervision.
+
+We break down this objective into the following subgoals:
+
+\begin{itemize}
+  \item Identify complex dynamical systems with the potential to exhibit
+        emergent open-ended growth of complexity and evolutionary-like
+        properties. There are many ways to define complex systems, and as
+        illustrated in Figure \ref{fig:comparison_ca}, some may exhibit more
+        interesting and promising behaviors than others. The work presented in
+        chapter \ref{cha:meas-compl-evolv} aims at constructing a metric of
+        complexity that can help in the identification of interestingly behaving
+        complex dynamical systems.
 \begin{figure}[htbp]
   \centering
 \begin{subfigure}[b]{.4\linewidth}
@@ -25,17 +34,23 @@ properties.
   \caption{A \acl{CA} with visible emergent structures.}
   \label{fig:structured_sys}
 \end{subfigure}
-\caption{Two example complex systems with different behavior types. Some
+\caption{Two example complex systems (\aclp{CA}) with different behavior types. Some
   \aclp{CA} appear more promising than others for the design of unsupervised
-  learning systems because of their emergent complex structures (visible in \ref{fig:structured_sys}).}
+  learning systems because of their emergent complex structures (visible in
+  \ref{fig:structured_sys}), whereas the \ac{CA} in \ref{fig:disordered_sys}
+  seems to behave randomly.}
   \label{fig:comparison_ca}
 \end{figure}
 
-(ii) Measure the fraction of systems that have the most complex and rapidly
-evolving behavior. Defining these notions is also part of the goal. We believe
-those systems to be the most promising for further use since they may exhibit
-open-ended complexity growth.
-
+  \item Measure the fraction of systems that have the most complex and rapidly
+        evolving behavior. Defining these notions is also part of the goal. We
+        believe those systems to be the most promising for further use since
+        they may exhibit open-ended complexity growth. In chapter
+        \ref{cha:meas-compl-evolv} and \ref{cha:visu-comp-large}, we present
+        different methods for measuring evolving complexity and understand when
+        the complexity increases over time. In chapter \ref{cha:visu-comp-large}
+        we study the importance of multi-scale analysis for the complexity of
+        cellular automata.
 \begin{figure}[htbp]
   \centering
  \includegraphics[width=.9\linewidth]{figures/rule18_small}
@@ -45,12 +60,14 @@ open-ended complexity growth.
   \label{fig:rule_18}
 \end{figure}
 
-
-(iii) Apply promising systems to challenging tasks where classical machine
-learning models may fail or prove less efficient. An example application is
-illustrated in Figure~\ref{fig:ca_lm}, where a \ac{CA} is used to
-implement a language model.
-
+  \item Apply promising systems to challenging tasks where classical machine
+        learning models may fail or prove less efficient. The goal is to define
+        various ways to apply evolving complex dynamical systems to some
+        standard learning tasks and figure out if it improves the performance or
+        efficiency of the learning algorithm. An example application that we
+        explore in chapter \ref{cha:learn-effic-compl} is illustrated in
+        Figure~\ref{fig:ca_lm}, where a \ac{CA} is used to implement a language
+        model.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.9\linewidth]{figures/ca_lm}
@@ -62,20 +79,39 @@ implement a language model.
 \end{figure}
 
 
+\end{itemize}
+
+
 In this work, we do not focus our attention on what the machine learning
 community commonly refers to as ``unsupervised learning'', that is, learning
-from untagged data. In machine learning, supervision refers to a label, a number,
-or collection of numbers that represents the expected outcome of some input
-data. Since our goal is to construct models that develop autonomously, we first
-seek systems that behave this way, and postponing the issue of learning to
-optimize a particular objective function.
+structure from untagged data. In machine learning, supervision refers to a
+label, a number, or collection of numbers that represents the expected outcome
+of some input data. Our goal is to construct models that develop autonomously,
+so we first seek systems that behave this way, and postpone the issue of
+learning to optimize a particular objective function. We are particularly
+interested in systems that can develop on their own through internal evolution
+rules, without any input.
 
 In this thesis, we work toward achieving these goals, focusing on one particular
-complex system: the \acl{CA}. This model has been extensively studied because of its simple definition and surprisingly complex behavior. We provide a
-more precise definition of \aclp{CA} in Section \ref{sec:cellular-automata-sec}.
+complex system: the \acl{CA}. This model has been extensively studied because of
+its simple definition and surprisingly complex behavior. We provide a
+thorough description of \aclp{CA} in Section \ref{sec:cellular-automata-sec}.
 
 
 \section{Motivation}
+
+Complex dynamical systems could overcome the issues with existing learning
+algorithms, such as difficulties to generalize, robustness, or continual
+learning. Natural intelligence seems to rely on emerging properties that are
+selected through evolution. For example, biological life exhibits a pattern of
+major evolutionary transitions where lower-level autonomously replicating
+entities merge to form a single more complex corporate body. This is believed to
+have happened for the emergence of eukaryotic cells as well as for multicellular
+life \cite{hammerschmidtLifeCyclesFitness2014}.
+
+Producing emerging phenomena similar to natural ones \emph{in silico} is
+challenging. There is a long history of algorithms that attempt to apply
+evolutionary design to solve particular tasks, called evolutionary algorithms.
 
 Most of existing machine learning algorithms rely on the choice of an objective
 function: a clearly defined mapping from the current state and parameters of a
@@ -183,13 +219,14 @@ topology of the discrete space.
 
 Even if we want complex systems that evolve in unexpected directions and grow in
 an open-ended way with no supervision, it may still be useful to steer them
-locally towards specific targets. However, many complex systems are chaotic. A
-deterministic dynamical system is said to be chaotic if its evolution is highly
-sensitive to its initial conditions. Because of this property, it is often very
-hard to predict how a given system will evolve over time, and therefore hard to
-steer its evolution towards a particular final state or along a chosen
-trajectory. This is an advantage for creating open-ended systems, but it can be
-challenging to apply these systems to some basic tasks.
+locally towards specific targets. A major challenge that follows from this goal
+is that many complex systems are chaotic. A deterministic dynamical system is
+said to be chaotic if its evolution is highly sensitive to its initial
+conditions. Because of this property, it is often very hard to predict how a
+given system will evolve over time, and therefore hard to steer its evolution
+towards a particular final state or along a chosen trajectory. This is an
+advantage for creating open-ended systems, but it can be challenging to apply
+these systems to some basic tasks.
 
 \subsection{Open-ended evolution without
   objectives}\label{sec:open-ended-evolution}
@@ -197,9 +234,12 @@ challenging to apply these systems to some basic tasks.
 Another challenge is posed by the absence of a clear objective in the design of
 unsupervised learning systems. Even without an objective, it is still essential
 to understand which complex systems to choose from all available options or how
-to tune them. This is why we need metrics that can help select interesting
-systems without being another replacement objective function. The goal is to
-create a system that has the property of evolving in an open-ended way.
+to tune their parameters so that they behave in interesting ways. This is why we
+need metrics that can help select systems without being another replacement
+objective function. The goal is to create a system that has the property of
+evolving in an open-ended way. We address this challenge in
+Chapter~\ref{cha:meas-compl-evolv}, by designing a complexity metric that can
+help select interesting complex systems.
 
 \subsection{Complex systems inputs and outputs}
 
