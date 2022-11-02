@@ -174,13 +174,23 @@ Stephen Wolfram \parencite{wolframStatisticalMechanicsCellular1983}. For
 example, \ac{ECA} 150 which rule is shown on figure \ref{fig:eca_150_rule} is a
 totalistic \ac{CA}. Its rule could be summarized as ``if exactly two states are
 1 or all states are 0, the next state is 0, otherwise if one or three states are
-1, the next state is 1''. The game of life is an example of totalistic \ac{CA} in
-two dimensions.
+1, the next state is 1''. Conway's Game of Life, presented below, is an example
+of totalistic \ac{CA} in two dimensions.
 
 \paragraph{Game of Life.}
 The game of life is one of the most famous \ac{CA}. It was proposed by
-mathematician John Conway in 1970 \parencite{gardnerMathematicalGames1970}. Its
-rule can be summarized in one sentence as
+mathematician John Conway in 1970 \parencite{gardnerMathematicalGames1970}. It
+is a two dimensional binary \ac{CA}. Its two states are often called ``alive''
+and ``dead''. Its rule can be summarized in three sentences as follows.
+\begin{itemize}
+  \item Any live cell with two or three live neighbours survives.
+  \item Any dead cell with three live neighbours becomes a live cell.
+  \item Other live cells and already dead cells die in the next generation.
+This \ac{CA} has a particularly active community dedicated to finding
+interesting patterns with particular properties
+
+\end{itemize}
+
 
 \paragraph{Asynchronous cellular automata}
 A cellular automaton is said to be asynchronous when its cells are not all
