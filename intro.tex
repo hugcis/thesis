@@ -101,17 +101,28 @@ thorough description of \aclp{CA} in Section \ref{sec:cellular-automata-sec}.
 \section{Motivation}
 
 Complex dynamical systems could overcome the issues with existing learning
-algorithms, such as difficulties to generalize, robustness, or continual
-learning. Natural intelligence seems to rely on emerging properties that are
-selected through evolution. For example, biological life exhibits a pattern of
-major evolutionary transitions where lower-level autonomously replicating
-entities merge to form a single more complex corporate body. This is believed to
-have happened for the emergence of eukaryotic cells as well as for multicellular
-life \cite{hammerschmidtLifeCyclesFitness2014}.
+algorithms, such as difficulties to generalize, robustness, or ability to learn
+continually. The natural intelligence of biological systems seems to rely on
+emerging properties selected through evolution. For example, biological life
+exhibits a pattern of major evolutionary transitions where lower-level
+autonomously replicating entities merge to form a single more complex corporate
+body. This is believed to have happened for the emergence of eukaryotic cells as
+well as for multicellular life \parencite{hammerschmidtLifeCyclesFitness2014}.
+All the complex and diverse biological entities have presumably emerged from a
+single common ancestor and, even before, from inorganic components present on
+the surface of Earth.
 
-Producing emerging phenomena similar to natural ones \emph{in silico} is
-challenging. There is a long history of algorithms that attempt to apply
-evolutionary design to solve particular tasks, called evolutionary algorithms.
+So far, it is unclear what algorithmic properties could lead a process to
+display a similar trajectory in its state space. Producing emerging phenomena
+similar to natural ones \emph{in silico} is challenging. There is a long history
+of algorithms that attempt to apply evolutionary design to solve particular
+tasks, called evolutionary algorithms
+\parencite{fogelArtificialIntelligenceSimulated1966,
+  ,millerDesigningNeuralNetworks1989, backOverviewEvolutionaryAlgorithms1993}.
+But many of these methods focus on searching the space of solutions through
+several variation mechanisms such as mutations and crossovers. While effective
+to solve precise tasks, these methods obscure another crucial component of
+natural evolution by using an explicit fitness function.
 
 Most of existing machine learning algorithms rely on the choice of an objective
 function: a clearly defined mapping from the current state and parameters of a
@@ -124,14 +135,15 @@ example, the well-known K-means clustering algorithm minimizes the sum of square
 distances to cluster centers.
 
 This reliance on objective functions creates two main issues: (i) the objective
-is not always clearly defined. For example, a satisfying objective function for
-a walking robot could be to ``not fall when stepping through its surrounding
-environment''. This function is impractical to define and will vary a lot
-depending on the parameters of the environment. Furthermore, (ii) Using such
-functions as goals can be counterproductive because, as many examples in nature
-demonstrate, the paths to these objectives are often deceptive. They involve
-developing in unexpected directions that may initially seem against the original
-goal \parencite{stanleyWhyGreatnessCannot2015}.
+is not always clearly defined or can be too broad for general purpose
+applications. For example, a possible objective function for a walking robot
+could be to ``not fall when stepping through its surrounding environment''. This
+function is impractical to define and will vary a lot depending on the
+parameters of the environment. Furthermore, (ii) Using such functions as goals
+can be counterproductive because, as many examples in nature demonstrate, robust
+paths to complex objectives are often deceptive. They involve developing in
+unexpected directions that may initially seem against the original goal
+\parencite{stanleyWhyGreatnessCannot2015}.
 
 In this thesis, the term \emph{unsupervised} refers to a form of learning with
 no predefined objective. Like natural evolution, we expect unsupervised
@@ -167,16 +179,17 @@ understood.
 
 The definition of complex systems is general, and several systems with
 interesting dynamics can be studied. For example, L-Systems, Random Boolean
-networks, Turing machines, and \Acfp{CA}. In this thesis, we focus mainly on
-the latter: \ac{CA}. There are multiple benefits to working with this model. It
-is very simply defined, and its high parallelism makes its implementation straightforward.
+networks, Turing machines, and \Acfp{CA}. In this thesis, we focus mainly on the
+latter: \acl{CA}. There are multiple benefits to working with this model. It is
+very simply defined, and its high parallelism makes its implementation
+straightforward.
 
 Choosing the right complex system architecture is essential because it defines
 the search space over which interesting and useful systems can be found.
 Correctly parametrizing that space can also be challenging, because too many
-degrees of freedom make it difficult to find good systems, while too few might
-indicate a lack of expressivity. An example parametrization of \ac{CA} with
-little expressivity is Langton's lambda parameter
+degrees of freedom make it difficult to search for and find good systems, while
+too few might indicate a lack of expressivity. An example parametrization of
+\ac{CA} with little expressivity is Langton's lambda parameter
 \parencite{langton_computation_1990}. On the other end of the spectrum, the
 \ac{CA} rule is a simple parametrization with many degrees of freedom, which
 makes it impractical.

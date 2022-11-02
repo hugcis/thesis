@@ -133,7 +133,8 @@ the importance of these boundaries decreases for very large grids.
 A large number of variants of \acp{CA} have been constructed, modifying or
 constraining various part of the definition above. We list some of them here.
 
-\subsection{Elementary cellular automata \label{sec:elem-cell-autom}}
+\subsection{\Aclp{CA} variants}
+\paragraph{Elementary cellular automata.\label{sec:elem-cell-autom}}
 \Acp{ECA} are the 1 dimensional \acp{CA} with two states per cell and
 neighborhood size 3 --- the cell and its neighbors. There are 8 possible
 configurations of a neighborhood with 3 cells and 2 states per cell, which
@@ -151,21 +152,49 @@ several previous works
   hudcovaClassificationComplexSystems2020,
   hudcovaComputationalHierarchyElementary2021}.
 
-\subsection{Totalistic cellular automata}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.9\linewidth]{figures/eca_150_rule}
+  \caption{Illustration of the rule of \ac{ECA} number 150.}
+  \label{fig:eca_150_rule}
+\end{figure}
 
-\paragraph{Game of Life}
+\ac{ECA} rules are easily visualized, because there are only 8 possible
+neighborhood configurations. For example, figure \ref{fig:eca_150_rule} shows
+the transition table for \ac{ECA} rule 150. If we assign 1 to the black state
+and 0 to the white state, the possible neighborhood configurations are ordered
+in their binary order from right to left, with the leftmost bit being the most
+significant one. This is how the rule number is computed, using the output
+states (last row on figure \ref{fig:eca_150_rule}) as a binary representation.
 
-\subsection{Asynchronous cellular automata}
+\paragraph{Totalistic cellular automata.}
+Totalistic \ac{CA} are a subset of \ac{CA} which rules can be expressed as a
+function of the sum of neighboring cell values. These \ac{CA} were introduced by
+Stephen Wolfram \parencite{wolframStatisticalMechanicsCellular1983}. For
+example, \ac{ECA} 150 which rule is shown on figure \ref{fig:eca_150_rule} is a
+totalistic \ac{CA}. Its rule could be summarized as ``if exactly two states are
+1 or all states are 0, the next state is 0, otherwise if one or three states are
+1, the next state is 1''. The game of life is an example of totalistic \ac{CA} in
+two dimensions.
+
+\paragraph{Game of Life.}
+The game of life is one of the most famous \ac{CA}. It was proposed by
+mathematician John Conway in 1970 \parencite{gardnerMathematicalGames1970}. Its
+rule can be summarized in one sentence as
+
+\paragraph{Asynchronous cellular automata}
 A cellular automaton is said to be asynchronous when its cells are not all
 updated in parallel at each time step. Several cell update schemes can
 be chosen. Contrary to regular cellular automata, the grid has to be finite
 because for an update rule to exist.
 
-\subsection{Stochastic cellular automata}
+\paragraph{Stochastic cellular automata}
 In a stochastic cellular automaton, the update function $\boldsymbol{\Phi}$ is stochastic
 
-\subsection{Discrete}
-\subsection{Continuous}
+\paragraph{Discrete}
+\paragraph{Continuous}
+
+\subsection{Parametrizing \ac{CA} rules}
 
 \section{Cellular automata and RNNs}
 The purpose of this document is to show that cellular automata and recurrent
