@@ -75,12 +75,12 @@ always work with regular grids.
   \label{fig:neighborhoods}
 \end{figure}
 
-A \ac{CA} evolves in discrete time steps. An update rule $\boldsymbol{\Phi}$
-defines the new state of a cell as a function of its local neighborhood at the
-current time step. It is applied in parallel to all the cells. For a cellular
-automaton in its initial state at time step 0 --- \ie a set of cells
-$\left(c_{i}^{(0)}\right)_{i \in \mathcal{L}} \in \mathcal{S}^{|\mathcal{L}|}$, and a neighborhood function
-$\boldsymbol{N}$, we have the following update rule
+A \ac{CA} evolves in discrete time steps. An update rule
+$\boldsymbol{\Phi}: \mathcal{S}^{s} \rightarrow \mathcal{S}$ defines the new state of a cell as a
+function of its local neighborhood at the current time step. It is applied in
+parallel to all the cells. For a cellular automaton in its initial state at time
+step 0 --- \ie a set of cells $\left(c_{i}^{(0)}\right)_{i \in \mathcal{L}} \in \mathcal{S}^{|\mathcal{L}|}$, and a
+neighborhood function $\boldsymbol{N}$, we have the following update rule
 \begin{equation}
 \begin{aligned}
 \forall i \in \mathcal{L}, \quad c_{i}^{(t + 1)} = \boldsymbol{\Phi}\left(\boldsymbol{N}\left(c_{i}^{(t)}\right)\right)
@@ -130,42 +130,70 @@ state, a randomly chosen state, or mirror the cells on the inside of the grid.
 Each of these choices affects the evolution and properties of the \ac{CA}, but
 the importance of these boundaries decreases for very large grids.
 
-A large number of variants of \acp{CA} have been constructed, modifying or
-constraining various part of the definition above. We list some of them here.
-
 \subsection{\Aclp{CA} variants}
+
+A large number of variants of \acp{CA} have been proposed, modifying or
+constraining various part of the definition above. We list some common ones
+here.
+
 \paragraph{Elementary cellular automata.\label{sec:elem-cell-autom}}
 \Acp{ECA} are the 1 dimensional \acp{CA} with two states per cell and
-neighborhood size 3 --- the cell and its neighbors. There are 8 possible
-configurations of a neighborhood with 3 cells and 2 states per cell, which
-corresponds to 256 possible ways to define an \ac{ECA}. This small number of
-rules enables exhaustively exploring the rule space and mapping out the \ac{ECA}
-properties, which would not be possible for general \acp{CA}.
+neighborhood size 3 --- the cell and its two direct neighbors on the 1D grid.
+There are 8 possible configurations of a neighborhood with 3 cells and 2 states
+per cell, which corresponds to 256 possible ways to define an \ac{ECA} --- two
+possible outputs for each of these 8 possible configurations, hence
+$2^{8} = 256$ possible \ac{CA}. This relatively small number of rules enables
+exhaustively exploring the rule space and mapping out the \ac{ECA} properties,
+which would not be possible for general \acp{CA}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.95\linewidth]{figures/eca_150_rule}
+  \caption{Illustration of the rule of \ac{ECA} number 150.}
+  \label{fig:eca_150_rule}
+\end{figure}
 
 These \acp{CA} are studied extensively, and offer an interesting combination of
 trivial definition and implementation and complex and unpredictable properties.
 One fundamental problem of \ac{CA} research is to classify the 256 rules into
 well-defined behavior types and order them by complexity, which was attempted in
-several previous works
-\parencite{wolframNewKindScience2002,
+several previous works \parencite{wuenscheGlobalDynamicsCellular1992,
+  gutowitzTransientsCyclesComplexity1991,
+  wuenscheClassifyingCellularAutomata1999, wolframNewKindScience2002,
   zenilCompressionBasedInvestigationDynamical2010,
   hudcovaClassificationComplexSystems2020,
   hudcovaComputationalHierarchyElementary2021}.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.9\linewidth]{figures/eca_150_rule}
-  \caption{Illustration of the rule of \ac{ECA} number 150.}
-  \label{fig:eca_150_rule}
+\begin{subfigure}[b]{.45\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{figures/eca_150_single.pdf}
+  \caption{Single cell initialization}
+  \label{fig:eca_150_single}
+\end{subfigure}
+\begin{subfigure}[b]{.45\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{figures/eca_150_random.pdf}
+  \caption{Random initialization}
+  \label{fig:eca_150_random}
+\end{subfigure}
+\caption{Evolution of \ac{ECA} number 150 simulated on a grid of size 100 for 50
+  steps. \ref{fig:eca_150_single} shows a simulation starting from a blank grid
+  with only one cell set to 1. \ref{fig:eca_150_random} shows a simulation
+  starting from a random initialization.}
+  \label{fig:eca_150}
 \end{figure}
 
+
 \ac{ECA} rules are easily visualized, because there are only 8 possible
-neighborhood configurations. For example, figure \ref{fig:eca_150_rule} shows
-the transition table for \ac{ECA} rule 150. If we assign 1 to the black state
-and 0 to the white state, the possible neighborhood configurations are ordered
-in their binary order from right to left, with the leftmost bit being the most
-significant one. This is how the rule number is computed, using the output
-states (last row on figure \ref{fig:eca_150_rule}) as a binary representation.
+neighborhood configurations that need to be shown. For example, figure
+\ref{fig:eca_150_rule} shows the transition table for \ac{ECA} rule 150. If we
+assign 1 to the black state and 0 to the white state, the possible neighborhood
+configurations are ordered in their binary order from right to left, with the
+leftmost bit being the most significant one. This is how the rule number is
+computed, using the output states (last row on figure \ref{fig:eca_150_rule}) as
+a binary representation.
 
 \paragraph{Totalistic cellular automata.}
 Totalistic \ac{CA} are a subset of \ac{CA} which rules can be expressed as a
@@ -186,25 +214,86 @@ and ``dead''. Its rule can be summarized in three sentences as follows.
   \item Any live cell with two or three live neighbours survives.
   \item Any dead cell with three live neighbours becomes a live cell.
   \item Other live cells and already dead cells die in the next generation.
-This \ac{CA} has a particularly active community dedicated to finding
-interesting patterns with particular properties
-
 \end{itemize}
+This \ac{CA} has a particularly active community dedicated to finding
+interesting patterns with particular properties such as a period length or speed
+of movement through the grid. Some of these patterns have been used as memory
+registers and communication channels to build a Universal Computer, thereby
+proving that this \ac{CA} is Turing-complete \parencite{IgblanLifeUniversal}.
+This property is thought to be also shared by other \ac{CA}, making these models
+theoretically appealing for the design of a learning algorithm because they can
+simulate any algorithm.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{.31\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/glider.pdf}
+    \caption{Moving oscillator (\emph{glider}).}
+    \label{fig:glider}
+  \end{subfigure}
+  \begin{subfigure}[t]{.31\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/still_life.pdf}
+    \caption{Fixed pattern (\emph{still life}).}
+    \label{fig:still_life}
+  \end{subfigure}
+  \begin{subfigure}[t]{.31\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/pulsar.pdf}
+    \caption{Period 3 oscillator (\emph{pulsar}).}
+    \label{fig:pulsar}
+  \end{subfigure}
+
+  \caption{Some game of life patterns with various properties. The moving
+    oscillator \ref{fig:glider} moves 1 cell along the bottom right diagonal
+    every 4 steps. The fixed pattern \ref{fig:still_life} never changes except
+    if it interacts with others. The oscillator \ref{fig:pulsar} loops through
+    three different configurations.}
+  \label{fig:gol_patterns}
+\end{figure}
 
 
 \paragraph{Asynchronous cellular automata}
 A cellular automaton is said to be asynchronous when its cells are not all
 updated in parallel at each time step. Several cell update schemes can
 be chosen. Contrary to regular cellular automata, the grid has to be finite
-because for an update rule to exist.
+for an update rule to exist. This is because asynchronous \ac{CA} have to define
+an order of update of the cells which would not be defined on an infinite grid.
 
 \paragraph{Stochastic cellular automata}
-In a stochastic cellular automaton, the update function $\boldsymbol{\Phi}$ is stochastic
+In a stochastic cellular automaton, the update function $\boldsymbol{\Phi}$ is
+stochastic. This means that the next state of all the cells of the grid is
+sampled from a probability distribution that depends on the current neighborhood
+configuration.
+We can write
+\begin{equation}
+\begin{aligned}
+  \forall i \in \mathcal{L},\ s \in \mathcal{S} \quad p\left(c_{i}^{(t + 1)} = s \right) = \boldsymbol{\Phi} \left(\boldsymbol{N}\left(c_{i}^{(t)}\right)\right)(s).
+\end{aligned}
+\end{equation}
+These \ac{CA} have interesting applications in physics
+\parencite{vichniacSimulatingPhysicsCellular1984,
+  ottaviSimulationIsingModel1989} or biology
+\parencite{boasCellularPottsModel2018}.
 
-\paragraph{Discrete}
 \paragraph{Continuous}
+Another family of \ac{CA} uses continuous state values, often restricted to the
+range $[0, 1]$. The update function is then a real multivariate function
+\begin{equation}
+  \begin{aligned}
+  \boldsymbol{\Phi}: [0, 1]^{s} \rightarrow [0, 1].
+  \end{aligned}
+  \label{eq:phi_cont}
+\end{equation}
 
-\subsection{Parametrizing \ac{CA} rules}
+Examples of continus \ac{CA} include Lenia
+\parencite{chanLeniaBiologyArtificial2019a}, or \ac{NCA}
+\parencite{mordvintsevGrowingNeuralCellular2020}
+
+\subsection{Parametrizing and sampling \ac{CA} rules}
+
+\paragraph{Langton's lambda}
 
 \section{Cellular automata and RNNs}
 The purpose of this document is to show that cellular automata and recurrent
