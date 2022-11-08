@@ -218,9 +218,11 @@ and ``dead''. Its rule can be summarized in three sentences as follows.
 This \ac{CA} has a particularly active community dedicated to finding
 interesting patterns with particular properties such as a period length or speed
 of movement through the grid. Some of these patterns have been used as memory
-registers and communication channels to build a Universal Computer, thereby
-proving that this \ac{CA} is Turing-complete \parencite{IgblanLifeUniversal}.
-This property is thought to be also shared by other \ac{CA}, making these models
+registers and communication channels to build a Universal Computer
+\parencite{IgblanLifeUniversal}. This construction proves that the game of life
+is Turing-complete. This property is thought to be also shared by other \ac{CA}
+--- it is proven for at least \ac{ECA} rule 110
+\parencite{cookUniversalityElementaryCellular2004}. This makes \ac{CA} models
 theoretically appealing for the design of a learning algorithm because they can
 simulate any algorithm.
 
@@ -260,13 +262,25 @@ updated in parallel at each time step. Several cell update schemes can
 be chosen. Contrary to regular cellular automata, the grid has to be finite
 for an update rule to exist. This is because asynchronous \ac{CA} have to define
 an order of update of the cells which would not be defined on an infinite grid.
+This update order can be random, follow a predefined order or be decided by a
+global controller. Groups of cells can be updated simultaneously or updates can
+be done cell by cell. The many effects of the asynchronous updates can be hard
+to predict and make these type of \ac{CA}
+
+Asynchronous \ac{CA} are an appealing model when using large systems for which
+parallel update is prohibitively expensive. The rule could adapt itself and
+preferentially update cells form active or useful parts of the \ac{CA} while
+doing slower updates to the less active parts of the \ac{CA}. An asynchronous
+\ac{CA} with evolutionary properties was constructed in
+\cite{nehanivEvolutionAsynchronousCellular2003}. The authors argue that
+asynchronicity is a strong advantage for constructing systems that can evolve
+within \acp{CA}.
 
 \paragraph{Stochastic cellular automata}
 In a stochastic cellular automaton, the update function $\boldsymbol{\Phi}$ is
 stochastic. This means that the next state of all the cells of the grid is
 sampled from a probability distribution that depends on the current neighborhood
-configuration.
-We can write
+configuration. We can write
 \begin{equation}
 \begin{aligned}
   \forall i \in \mathcal{L},\ s \in \mathcal{S} \quad p\left(c_{i}^{(t + 1)} = s \right) = \boldsymbol{\Phi} \left(\boldsymbol{N}\left(c_{i}^{(t)}\right)\right)(s).
@@ -278,7 +292,7 @@ These \ac{CA} have interesting applications in physics
 \parencite{boasCellularPottsModel2018}.
 
 \paragraph{Continuous}
-Another family of \ac{CA} uses continuous state values, often restricted to the
+Another family of \ac{CA} uses real-valued states, often restricted to the
 range $[0, 1]$. The update function is then a real multivariate function
 \begin{equation}
   \begin{aligned}
@@ -287,18 +301,147 @@ range $[0, 1]$. The update function is then a real multivariate function
   \label{eq:phi_cont}
 \end{equation}
 
-Examples of continus \ac{CA} include Lenia
-\parencite{chanLeniaBiologyArtificial2019a}, or \ac{NCA}
-\parencite{mordvintsevGrowingNeuralCellular2020}
+Examples of continuous \ac{CA} include Lenia
+\parencite{chanLeniaBiologyArtificial2019a}, or \acp{NCA}
+\parencite{mordvintsevGrowingNeuralCellular2020}.
+\cite{garzonRealComputationCellular1993} explores the condition for a
+real-valued \ac{CA} to be able to compute real-valued functions.
+
+\paragraph{Higher dimensional cellular automata}
+\acp{CA} of dimension higher than 2 have been comparatively less studied for
+several reasons, including the limits that arise when simulating and visualizing
+systems in more than 2 dimensions on a computer screen. Another problem is with
+the exploding number of possible rules in higher dimensions. The number of
+neighbors per cell grows exponentially with the dimension, and the number of
+possible rules has a doubly exponential rate of growth. This makes the
+convenient representation of \acp{CA} rules as tables infeasible, since the size
+of that table quickly exceeds the available memory of most computers.
+
+Despite these limitation several works have studied higher dimensional \acp{CA},
+although mostly in 3 dimensions
+\parencite{tsalidesThreedimensionalCellularAutomata1989,
+  sudhakaranGrowing3DArtefacts2021}. There are several examples of successful
+3D \acp{CA} simulations applied to material sciences
+\parencite{gandin3DCellularAutomaton1997, arataFreeformShapeModeling1999,
+  panStudyFailureScale2009, dicaprio3DCellularAutomata2016}.
 
 \subsection{Parametrizing and sampling \ac{CA} rules}
+As explained in \ref{sec:challenges}, one of the main challenges of working with
+complex systems is the parametrization and control of the behavior of that
+system. \ac{CA} are no exception, and several parametrization schemes have been
+proposed, having their respective benefits and drawbacks.
 
 \paragraph{Langton's lambda}
 
+Christopher Langton proposed one of the first parameter that could be used to
+control the behavior of \acp{CA} to some extent
+\parencite{langtonStudyingArtificialLife1986, langtonComputationEdgeChaos1990}.
+For a \ac{CA} with $K = |\mathcal{S}|$ states, and a state arbitrarily chosen to be
+the \emph{quiescent} state (this corresponds to the ``dead'' state in the game
+of life for example), if there are $n$ transitions to the quiescent state within
+the rule table and $K^{s} - n$ remaining transitions that do not lead to the
+quiescent state, where $s$ is the number of cells in the neighborhood, we
+have
+
+\begin{equation}
+  \label{eq:langton}
+  \begin{aligned}
+    \lambda = \frac{K^{s} - n}{K^{n}}.
+  \end{aligned}
+\end{equation}
+
+For Langton, the purpose of $\lambda$ is to search the space of \ac{CA} in an ordered
+manner by varying the value of the parameter. His procedure starts with a rule
+with all transitions leading to the quiescent state. The value of $\lambda$ is
+increased in discrete steps up to $1 - 1 / K^{n}$ by randomly changing
+transitions of the rule to lead to a different state. An illustration of the
+behavior change of a \ac{CA} rule under this procedure is shown on figure
+\ref{fig:langton_lambda}. Langton collects various measures of the dynamical
+behavior of \ac{CA} and studies them as a function of $\lambda$. He observes a phase
+transition as $\lambda$ approaches its maximal value where the \acp{CA} seem to behave
+in the most complex way, with long transients and large scale propagating
+structures. He calls this phase transition ``edge of chaos'' because it
+corresponds to $lambda$ values just before the generated \acp{CA} become
+chaotic.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/langton_lambda.pdf}
+  \caption{The effect of varying $\lambda$ for a 1D binary \ac{CA} rule. A \ac{CA} rule is
+    progressively modified along a trajectory of increasing $\lambda$. The rule starts
+  with a fixed behavior, becomes periodic and complex when hitting the ``edge of
+  chaos''. When $\lambda$ increases further the rule becomes chaotic.}
+  \label{fig:langton_lambda}
+\end{figure}
+
+\paragraph{Dirichlet sampling}
+For an arbitrary number of states and neighborhood size, it can be challenging
+to sample \ac{CA} while scanning a wide range of behavior. The naive method of
+uniformly sampling each transition output is not useful in large rule spaces with
+multiple states, large neighborhoods or grid dimension higher than 1.
+
+Rules with equal proportions of transitions leading to all states tend to be the
+most chaotic. This is also what Langton observed when studying the $\lambda$
+parameter. This is explained by the fact that sampling each transition output
+uniformly is equivalent to sampling the rules from a multinomial distribution
+with the number of possible states ($K$), number of possible transitions
+($n = K^{K^{s}}$, with $s$ the number of cells in a neighborhood) and uniform
+probabilities $p_{1}= \ldots= p_{K}$ as parameters. A random variable
+$X = (X_{1}, \ldots, X_{K})$ indicates the number of times each outcome is observed.
+The probability mass function of this distribution is
+
+\begin{equation}
+  \label{eq:multinomial}
+  \begin{aligned}
+    P(X_{1}=x_{1}, \ldots , X_{K}=x_{k}) = \frac{n!}{x_{1}!\cdots x_{K}!} p_{1}^{x_{1}}\cdots p_{K}^{x_{K}}.
+  \end{aligned}
+\end{equation}
+
+This quantity gets small for large $n$ and rules with output transition skewed
+towards a specific state. For example, the binary game of life rule has 372
+transitions that lead to the state 0 and 140 that lead to the state 1. The
+probability of sampling a rule with these transition proportions is
+$8.24\mathrm{e}{-26}$, making it very unlikely to obtain such a rule with a
+uniform transition sampling method.
+
+We propose Dirichlet sampling as an alternative way to sample rules with fixed
+ratio of transitions leading to output states. For a rule with $K$ states, we
+sample a $K$-uple from a Dirichlet distribution of order $K$ with parameters
+$(\alpha_{k})_{k\in [1, K]}$ where $\alpha_{0} = \alpha_{1} = \ldots = \alpha_{K} = \alpha < 1$. The result is a
+quantile $K$-uple $(q_{1}, \ldots, q_{K})$. For $\alpha < 1$, the distribution is
+concentrated around the corners of a simplex of dimension $K$.
+
+Rules are sampled so that the number of transition to each output state matches
+the quantile generated from the Dirichlet distribution. Samples will be more
+likely to have a dominant quantile which can be associated with the quiescent
+state in Langton's $\lambda$ calculation. The resulting sampling of cellular automata
+is much better for scanning the whole space of rules and generating \ac{CA}
+rules which would be unreachable with the naive sampling method, as illustrated
+on figure \ref{fig:ca_rule_sampling}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.5\linewidth]{figures/ca_rule_sampling_hist}
+  \caption{An illustration of the difference between naive uniform rule sampling
+    and Dirichlet sampling on binary rules. 10000 2D binary CA rules were
+    sampled with each method, the plot displays an histogram of their average
+    output state. Uniform sampling leads to more rules with an average output
+    state close to 0.5, meaning approximately as many transitions towards both
+    states. Dirichlet sampling can control, through the choice of parameter $\alpha$,
+    how much rules with more skewed transitions should be sampled which is
+    visible with the spiked on the blue histogram close to 0 and 1.}
+  \label{fig:ca_rule_sampling}
+\end{figure}
+
+\paragraph{Smooth sampling with the recurrent convolutional neural network
+  analogy}
+
+
 \section{Cellular automata and RNNs}
-The purpose of this document is to show that cellular automata and recurrent
+The purpose of this section is to show that cellular automata and recurrent
 convolutional neural networks have very strong connections and to draw this
-parallel as clearly as possible.
+parallel as clearly as possible. We express the \ac{CA} update function as a set
+of convolutional operations that can be derived from any \ac{CA} rule.
 
 This connection yields interesting consequences both for the theoretical
 properties of these models and the potential applications of cellular automata
@@ -306,7 +449,7 @@ and recurrent networks. It shows for instance that emergent properties with
 increasing complexity and perhaps open-ended development are possible within the
 hidden state of a recurrent neural network.
 
-The parallel between cellular automata and a form of Recurrent/Convolutional
+The parallel between cellular automata and a form of recurrent/convolutional
 network has also been drawn by several other researchers
 \parencite{wulffLearningCellularAutomaton1993,
   gilpinCellularAutomataConvolutional2018,
@@ -316,7 +459,8 @@ network has also been drawn by several other researchers
   \centering
   \includegraphics[width=.3\linewidth]{figures/ca_cnn}
   \caption{\label{fig:ca_cnn}The CA update rule is local and can be represented
-    by convolution operations (linear transformation + non-linear function).}
+    by a convolutional neural networks: linear local uniform transformations
+    followed by the application of a non-linear function.}
 \end{figure}
 
 \subsection{RNN formalism}
@@ -342,8 +486,8 @@ notations. This parallel is illustrated on Figure~\ref{fig:standard_rnn}.
 
 The grid state at time $t$ is denoted $h_t$ and corresponds to the hidden state
 in a RNN\@. In the case of classical CAs, it is a 1 or 2D vector of discrete
-values, but~\parencite{mordvintsevGrowingNeuralCellular2020} and other CA extensions
-use continuous values, much like the usual RNNs.
+values, but~\parencite{mordvintsevGrowingNeuralCellular2020} and other CA
+extensions use continuous values, much like the usual RNNs.
 
 The transformation $\Phi$ operates on this hidden state only. It is equivalent
 to a convolutional layer as explained below in
@@ -589,9 +733,22 @@ state only depends on the number of neighbors in state 1 and its current state).
 
 \section{Reservoir computing}
 
+
+
 \section{Measuring complexity}
 
+Measuring the complexity of a system is a fundamentally difficult task. Many
+complex systems exhibit what Peter Grassberger calls \emph{self-generated
+  complexity} \parencite{grassbergerQuantitativeTheorySelfgenerated1986}. It
+means that the formulation of the problem is translationally invariant and the
+observed structure arises from a spontaneous breakdown of translational
+invariance. Unfortunately there is no universally accepted and formalized notion
+of ``complexity'', even though most intuitively agree that it exists. No clear
+observable and protocol to acquire it have been proposed that would give a
+quantitative notion of complexity.
+
 \subsection{Information based measures}
+
 
 \subsubsection{Information content}
 For an event $E$ with probability $P$, the information content of this event is

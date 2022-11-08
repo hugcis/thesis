@@ -463,6 +463,8 @@ Each model's hyperparameters are chosen to ensure they have a similar number of
 trainable parameters except for the logistic regression whose parameter count is
 solely determined by the input and output dimensions.
 
+\begin{table}[htbp]
+  \centering
   \begin{tabular}{c|cc}
 \toprule
 & \bfseries WADE $\times 10^{-2}$ (std.) $\uparrow$ & \bfseries Max test accuracy (std.) $\uparrow$ \\
@@ -475,15 +477,17 @@ Transformer & \bfseries 8.716 ${\scriptstyle \pm0.720}$ & 0.872 ${\scriptstyle \
 
     \bottomrule
   \end{tabular}
-  \captionof{table}{Comparison of our new WADE metric to assess learning speed and the standard maximum test accuracy on the IMDB
+  \caption{Comparison of our new WADE metric to assess learning speed
+    and the standard maximum test accuracy on the IMDB
     classification dataset. Results are averaged over 50 separate runs. ($\uparrow$
     indicates that higher is better).
     \label{tab:comp-sup-acc}}
+\end{table}
 
-  \begin{figure}
+\begin{figure}
 
   \centering
-  \includegraphics[width=.4\linewidth]{figures/wade_supervised_fixed.pdf}
+  \includegraphics[width=.6\linewidth]{figures/wade_supervised_fixed.pdf}
   \caption{Test accuracy curves for each model. Shaded areas are
     $\pm 1\sigma$ around the average over 50 runs.\label{fig:wade-sup}}%
   \end{figure}
@@ -531,7 +535,8 @@ sequential machine learning models for which all parameters are trained --- RNNs
 cellular automaton reservoir) for which only a fraction of the parameters are
 learned. Table~\ref{tab:methods-summary} presents all the methods we study in
 our experiments.
-\begin{table}[h]
+
+\begin{table}[htbp]
   \centering
   \begin{tabular}{lll}
     \toprule
@@ -640,23 +645,38 @@ state network (ESN) with the same internal state size for each task.
 
 \begin{table}[htbp]
   \centering
-    \begin{tabular}{lcc|ccc|c}
+    \begin{tabular}{p{7cm}ccc}
       \toprule
-      \multirow{2}{*}{\bfseries Task ID - Name} & \multicolumn{2}{c|}{Reservoir} &
-        \multicolumn{3}{c|}{Fully supervised} & \multirow{2}{*}{\bfseries \shortstack{Human \\ expert}}\\
-& \bfseries ReCA & \bfseries ESN & \bfseries RNN & \bfseries LSTM & \bfseries Transformer &  \\
+      \multirow{2}{*}{\bfseries Task ID - Name} & \multicolumn{2}{c}{Reservoir}
+      & \multirow{2}{*}{\bfseries \shortstack{Human \\ expert}} \\
+
+& \bfseries ReCA & \bfseries ESN &\\
 \midrule
 
-\bfseries 1 - Periodic & \bfseries 0.78 ${\scriptscriptstyle \pm0.05 }$ &  0.74 ${\scriptscriptstyle \pm0.05 }$ &  0.31 ${\scriptscriptstyle \pm0.06 }$ &  0.28 ${\scriptscriptstyle \pm0.07 }$  &  0.31 ${\scriptscriptstyle \pm0.04 }$& 1.00 \\
-\bfseries 2 - Incremental periodic &  0.57 ${\scriptscriptstyle \pm0.02 }$ & \bfseries 0.72 ${\scriptscriptstyle \pm0.02 }$ &  0.42 ${\scriptscriptstyle \pm0.16 }$ &  0.32 ${\scriptscriptstyle \pm0.11 }$  &  0.49 ${\scriptscriptstyle \pm0.15 }$& 1.00 \\
-\bfseries 3 - Symbol counting & \bfseries 0.06 ${\scriptscriptstyle \pm0.01 }$ &  0.04 ${\scriptscriptstyle \pm0.01 }$ &  0.05 ${\scriptscriptstyle \pm0.02 }$ &  0.04 ${\scriptscriptstyle \pm0.02 }$  &  0.03 ${\scriptscriptstyle \pm0.01 }$& 0.11 \\
-\bfseries 4 - Pattern counting &  0.12 ${\scriptscriptstyle \pm0.04 }$ & \bfseries 0.14 ${\scriptscriptstyle \pm0.03 }$ &  0.13 ${\scriptscriptstyle \pm0.04 }$ &  0.10 ${\scriptscriptstyle \pm0.05 }$  &  0.08 ${\scriptscriptstyle \pm0.03 }$& 0.09 \\
-\bfseries 5 - Basic question answering (QA) & \bfseries 0.31 ${\scriptscriptstyle \pm0.08 }$ &  0.26 ${\scriptscriptstyle \pm0.03 }$ &  0.20 ${\scriptscriptstyle \pm0.06 }$ &  0.17 ${\scriptscriptstyle \pm0.08 }$  &  0.16 ${\scriptscriptstyle \pm0.07 }$& 0.15 \\
-\bfseries 6 - Harder QA & \bfseries 0.35 ${\scriptscriptstyle \pm0.11 }$ &  0.26 ${\scriptscriptstyle \pm0.03 }$ &  0.24 ${\scriptscriptstyle \pm0.05 }$ &  0.16 ${\scriptscriptstyle \pm0.07 }$  &  0.12 ${\scriptscriptstyle \pm0.06 }$& 0.12 \\
-\bfseries 7 - QA with world def. & \bfseries 0.32 ${\scriptscriptstyle \pm0.10 }$ &  0.27 ${\scriptscriptstyle \pm0.04 }$ &  0.24 ${\scriptscriptstyle \pm0.05 }$ &  0.17 ${\scriptscriptstyle \pm0.07 }$  &  0.11 ${\scriptscriptstyle \pm0.06 }$& --- \\
-\bfseries 8 - QA with world def. \& counting &  0.09 ${\scriptscriptstyle \pm0.03 }$ & \bfseries 0.14 ${\scriptscriptstyle \pm0.06 }$ &  0.10 ${\scriptscriptstyle \pm0.05 }$ &  0.05 ${\scriptscriptstyle \pm0.02 }$  &  0.02 ${\scriptscriptstyle \pm0.01 }$& --- \\
-\bfseries 9 - Adjective QA &  0.04 ${\scriptscriptstyle \pm0.03 }$ &  0.04 ${\scriptscriptstyle \pm0.04 }$ & \bfseries 0.05 ${\scriptscriptstyle \pm0.03 }$ &  0.03 ${\scriptscriptstyle \pm0.02 }$  &  0.02 ${\scriptscriptstyle \pm0.01 }$& --- \\
-\bfseries 10 - Adjective QA \& counting &  0.04 ${\scriptscriptstyle \pm0.02 }$ & \bfseries 0.06 ${\scriptscriptstyle \pm0.02 }$ &  0.05 ${\scriptscriptstyle \pm0.02 }$ &  0.03 ${\scriptscriptstyle \pm0.02 }$  &  0.01 ${\scriptscriptstyle \pm0.01 }$& --- \\
+\bfseries 1 - Periodic & \bfseries 0.78 ${\scriptscriptstyle \pm0.05 }$ &  0.74 ${\scriptscriptstyle \pm0.05 }$  & 1.00 \\
+\bfseries 2 - Incremental periodic &  0.57 ${\scriptscriptstyle \pm0.02 }$ & \bfseries 0.72 ${\scriptscriptstyle \pm0.02 }$ & 1.00 \\
+\bfseries 3 - Symbol counting & \bfseries 0.06 ${\scriptscriptstyle \pm0.01 }$ & 0.04 ${\scriptscriptstyle \pm0.01 }$ & 0.11 \\
+\bfseries 4 - Pattern counting &  0.12 ${\scriptscriptstyle \pm0.04 }$ & \bfseries 0.14 ${\scriptscriptstyle \pm0.03 }$ & 0.09 \\
+\bfseries 5 - Basic question answering (QA) & \bfseries 0.31 ${\scriptscriptstyle \pm0.08 }$ &  0.26 ${\scriptscriptstyle \pm0.03 }$ & 0.15 \\
+\bfseries 6 - Harder QA & \bfseries 0.35 ${\scriptscriptstyle \pm0.11 }$ &  0.26 ${\scriptscriptstyle \pm0.03 }$ & 0.12 \\
+\bfseries 7 - QA with world def. & \bfseries 0.32 ${\scriptscriptstyle \pm0.10 }$ &  0.27 ${\scriptscriptstyle \pm0.04 }$ & --- \\
+\bfseries 8 - QA with world def. \& counting &  0.09 ${\scriptscriptstyle \pm0.03 }$ & \bfseries 0.14 ${\scriptscriptstyle \pm0.06 }$ & --- \\
+\bfseries 9 - Adjective QA &  0.04 ${\scriptscriptstyle \pm0.03 }$ &  0.04 ${\scriptscriptstyle \pm0.04 }$ & --- \\
+\bfseries 10 - Adjective QA \& counting &  0.04 ${\scriptscriptstyle \pm0.02 }$ & \bfseries 0.06 ${\scriptscriptstyle \pm0.02 }$ & --- \\
+\midrule
+& \multicolumn{3}{c}{Fully supervised}  \\
+& \bfseries RNN & \bfseries LSTM & \bfseries Transformer \\
+    \midrule
+     \bfseries 1 \dotfill &  0.28 ${\scriptscriptstyle \pm0.07 }$  &  0.31 ${\scriptscriptstyle \pm0.04 }$&  0.31 ${\scriptscriptstyle \pm0.06 }$\\
+      \bfseries 2 \dotfill&  0.32 ${\scriptscriptstyle \pm0.11 }$  &  0.49 ${\scriptscriptstyle \pm0.15 }$&  0.42 ${\scriptscriptstyle \pm0.16 }$ \\
+      \bfseries 3 \dotfill&  0.04 ${\scriptscriptstyle \pm0.02 }$  &  0.03 ${\scriptscriptstyle \pm0.01 }$&  0.05 ${\scriptscriptstyle \pm0.02 }$ \\
+      \bfseries 4 \dotfill&  0.10 ${\scriptscriptstyle \pm0.05 }$  &  0.08 ${\scriptscriptstyle \pm0.03 }$&  0.13 ${\scriptscriptstyle \pm0.04 }$ \\
+      \bfseries 5 \dotfill&  0.17 ${\scriptscriptstyle \pm0.08 }$  &  0.16 ${\scriptscriptstyle \pm0.07 }$&  0.20 ${\scriptscriptstyle \pm0.06 }$ \\
+      \bfseries 6 \dotfill&  0.16 ${\scriptscriptstyle \pm0.07 }$  &  0.12 ${\scriptscriptstyle \pm0.06 }$&  0.24 ${\scriptscriptstyle \pm0.05 }$ \\
+      \bfseries 7 \dotfill&  0.17 ${\scriptscriptstyle \pm0.07 }$  &  0.11 ${\scriptscriptstyle \pm0.06 }$&  0.24 ${\scriptscriptstyle \pm0.05 }$ \\
+      \bfseries 8 \dotfill&  0.10 ${\scriptscriptstyle \pm0.05 }$ &  0.05 ${\scriptscriptstyle \pm0.02 }$  & 0.02 ${\scriptscriptstyle \pm0.01 }$ \\
+      \bfseries 9 \dotfill& \bfseries 0.05 ${\scriptscriptstyle \pm0.03 }$ &  0.03 ${\scriptscriptstyle \pm0.02 }$ &  0.02 ${\scriptscriptstyle \pm0.01 }$\\
+      \bfseries 10 \dotfill&  0.05 ${\scriptscriptstyle \pm0.02 }$ &  0.03 ${\scriptscriptstyle \pm0.02 }$  &  0.01 ${\scriptscriptstyle \pm0.01 }$\\
       \bottomrule
     \end{tabular}
     \caption{Comparison of WADE scores (also shown in parentheses in the legend
@@ -669,6 +689,7 @@ state network (ESN) with the same internal state size for each task.
       difficult to complete from memory alone for the human
       expert. Accuracy scores are also reported in Table \ref{tab:accuracy_all}.}\label{tab:summary}
 \end{table}
+
 Figure \ref{fig:all_metrics} shows the learning curves for the best reservoir cellular
 automaton, as well as the echo-state network, recurrent neural network (RNNs), LSTM, and Transformer
 on all ten tasks. Interestingly, the reservoir based-models are consistently more efficient
@@ -677,32 +698,56 @@ fewer training steps. For example, for tasks 5, 6, and 7, the LSTM needs ten
 times more steps to approach the accuracy the reservoir CA model reached in less
 than 1000 training steps.
 
-Echo-state networks (ESN) and reservoir cellular automata (ReCA) appear to learn at similar
-rates, with no clear advantage for one or the other as each model outperforms
-the other on five tasks out of ten. On tasks 2, 4, 8, and 10 the ESN is visibly
-faster than the ReCA (see curves Figure \ref{fig:all_metrics}), which explains
-the ESN's higher WADE scores even though ReCA reaches higher accuracy values
-after several more training steps.
+Echo-state networks (ESN) and reservoir cellular automata (ReCA) appear to learn
+at similar rates, with no clear advantage for one or the other as each model
+outperforms the other on five tasks out of ten. On tasks 2, 4, 8, and 10 the ESN
+is visibly faster than the ReCA (see curves Figure \ref{fig:all_metrics}), which
+explains the ESN's higher WADE scores even though ReCA reaches higher accuracy
+values after several more training steps.
 
 \begin{table}[htbp]
   \centering
-    \begin{tabular}{lcc|ccc}
+    \begin{tabular}{p{7cm}cccccc}
       \toprule
-      \multirow{2}{*}{\bfseries Task ID - Name} & \multicolumn{2}{c|}{Reservoir} &
-        \multicolumn{3}{c}{Fully supervised} \\
-& \bfseries ReCA & \bfseries ESN & \bfseries RNN & \bfseries LSTM & \bfseries Transformer  \\
+      \multirow{2}{*}{\bfseries Task ID - Name} & \multicolumn{6}{c}{Reservoir} \\
+& \multicolumn{3}{c}{\bfseries ReCA}& \multicolumn{3}{c}{\bfseries ESN} \\
 \midrule
-\bfseries 1 - Periodic & 0.99 ${\scriptscriptstyle \pm 0.01}$ & \bfseries 1.00 ${\scriptscriptstyle \pm 0.01}$ & 0.79 ${\scriptscriptstyle \pm 0.08}$ & 0.68 ${\scriptscriptstyle \pm 0.04}$ & 0.69 ${\scriptscriptstyle \pm 0.04}$  \\
-\bfseries 2 - Incremental periodic & 0.88 ${\scriptscriptstyle \pm 0.01}$ & 0.87 ${\scriptscriptstyle \pm 0.03}$ & 0.87 ${\scriptscriptstyle \pm 0.00}$ & \bfseries 0.89 ${\scriptscriptstyle \pm 0.02}$ & 0.88 ${\scriptscriptstyle \pm 0.00}$  \\
-\bfseries 3 - Symbol counting & 0.80 ${\scriptscriptstyle \pm 0.02}$ & 0.30 ${\scriptscriptstyle \pm 0.02}$ & 0.33 ${\scriptscriptstyle \pm 0.03}$ & 0.36 ${\scriptscriptstyle \pm 0.03}$ & \bfseries 0.97 ${\scriptscriptstyle \pm 0.01}$  \\
-\bfseries 4 - Pattern counting & 0.56 ${\scriptscriptstyle \pm 0.01}$ & 0.59 ${\scriptscriptstyle \pm 0.02}$ & 0.61 ${\scriptscriptstyle \pm 0.05}$ & \bfseries 0.61 ${\scriptscriptstyle \pm 0.02}$ & 0.54 ${\scriptscriptstyle \pm 0.03}$  \\
-\bfseries 5 - Basic QA & 0.81 ${\scriptscriptstyle \pm 0.03}$ & 0.73 ${\scriptscriptstyle \pm 0.03}$ & 0.51 ${\scriptscriptstyle \pm 0.02}$ & 0.75 ${\scriptscriptstyle \pm 0.05}$ & \bfseries 1.00 ${\scriptscriptstyle \pm 0.00}$  \\
-\bfseries 6 - Harder QA & 0.72 ${\scriptscriptstyle \pm 0.04}$ & 0.57 ${\scriptscriptstyle \pm 0.03}$ & 0.51 ${\scriptscriptstyle \pm 0.03}$ & 0.68 ${\scriptscriptstyle \pm 0.07}$ & \bfseries 1.00 ${\scriptscriptstyle \pm 0.00}$  \\
-\bfseries 7 - QA with world def. & 0.66 ${\scriptscriptstyle \pm 0.03}$ & 0.60 ${\scriptscriptstyle \pm 0.03}$ & 0.51 ${\scriptscriptstyle \pm 0.04}$ & 0.64 ${\scriptscriptstyle \pm 0.07}$ & \bfseries 1.00 ${\scriptscriptstyle \pm 0.00}$  \\
-\bfseries 8 - QA with world def. \& counting & 0.59 ${\scriptscriptstyle \pm 0.03}$ & 0.56 ${\scriptscriptstyle \pm 0.03}$ & 0.47 ${\scriptscriptstyle \pm 0.05}$ & 0.50 ${\scriptscriptstyle \pm 0.06}$ & \bfseries 0.98 ${\scriptscriptstyle \pm 0.01}$  \\
-\bfseries 9 - Adjective QA & 0.62 ${\scriptscriptstyle \pm 0.04}$ & 0.49 ${\scriptscriptstyle \pm 0.03}$ & 0.43 ${\scriptscriptstyle \pm 0.04}$ & 0.44 ${\scriptscriptstyle \pm 0.03}$ & \bfseries 0.87 ${\scriptscriptstyle \pm 0.11}$  \\
-\bfseries 10 - Adjective QA \& counting & 0.54 ${\scriptscriptstyle \pm 0.02}$ & 0.46 ${\scriptscriptstyle \pm 0.03}$ & 0.47 ${\scriptscriptstyle \pm 0.04}$ & 0.49 ${\scriptscriptstyle \pm 0.03}$ & \bfseries 0.57 ${\scriptscriptstyle \pm 0.04}$  \\
-
+\bfseries 1 - Periodic & \multicolumn{3}{c}{0.99 ${\scriptscriptstyle \pm 0.01}$} & \multicolumn{3}{c}{\bfseries 1.00 ${\scriptscriptstyle \pm 0.01}$}  \\
+\bfseries 2 - Incremental periodic & \multicolumn{3}{c}{0.88 ${\scriptscriptstyle \pm 0.01}$} & \multicolumn{3}{c}{0.87 ${\scriptscriptstyle \pm 0.03}$}  \\
+\bfseries 3 - Symbol counting & \multicolumn{3}{c}{0.80 ${\scriptscriptstyle \pm 0.02}$} & \multicolumn{3}{c}{0.30 ${\scriptscriptstyle \pm 0.02}$}  \\
+\bfseries 4 - Pattern counting & \multicolumn{3}{c}{0.56
+                                 ${\scriptscriptstyle \pm 0.01}$} & \multicolumn{3}{c}{ 0.59 ${\scriptscriptstyle \pm 0.02}$}\\
+\bfseries 5 - Basic QA & \multicolumn{3}{c}{0.81 ${\scriptscriptstyle \pm 0.03}$} & \multicolumn{3}{c}{0.73 ${\scriptscriptstyle \pm 0.03}$} \\
+\bfseries 6 - Harder QA & \multicolumn{3}{c}{0.72 ${\scriptscriptstyle \pm 0.04}$} & \multicolumn{3}{c}{0.57 ${\scriptscriptstyle \pm 0.03}$}\\
+\bfseries 7 - QA with world def. & \multicolumn{3}{c}{0.66 ${\scriptscriptstyle \pm 0.03}$} & \multicolumn{3}{c}{0.60 ${\scriptscriptstyle \pm 0.03}$}\\
+\bfseries 8 - QA with world def. \& counting & \multicolumn{3}{c}{0.59 ${\scriptscriptstyle \pm 0.03}$} & \multicolumn{3}{c}{0.56 ${\scriptscriptstyle \pm 0.03}$}\\
+\bfseries 9 - Adjective QA & \multicolumn{3}{c}{0.62 ${\scriptscriptstyle \pm 0.04}$} & \multicolumn{3}{c}{0.49 ${\scriptscriptstyle \pm 0.03}$}\\
+\bfseries 10 - Adjective QA \& counting & \multicolumn{3}{c}{0.54 ${\scriptscriptstyle \pm 0.02}$} & \multicolumn{3}{c}{0.46 ${\scriptscriptstyle \pm 0.03}$} \\
+\midrule
+      \multirow{2}{*}{} & \multicolumn{6}{c}{Fully supervised} \\
+& \multicolumn{2}{c}{\bfseries RNN}& \multicolumn{2}{c}{\bfseries LSTM}  & \multicolumn{2}{c}{\bfseries Transformer} \\
+      \midrule
+\bfseries 1 \dotfill & \multicolumn{2}{c}{0.79 ${\scriptscriptstyle \pm 0.08}$} & \multicolumn{2}{c}{0.68 ${\scriptscriptstyle \pm 0.04}$} & \multicolumn{2}{c}{0.69 ${\scriptscriptstyle \pm 0.04}$} \\
+\bfseries 2 \dotfill & \multicolumn{2}{c}{0.87 ${\scriptscriptstyle \pm 0.00}$} & \multicolumn{2}{c}{\bfseries 0.89 ${\scriptscriptstyle \pm 0.02}$} & \multicolumn{2}{c}{0.88 ${\scriptscriptstyle \pm 0.00}$}\\
+\bfseries 3 \dotfill& \multicolumn{2}{c}{0.33 ${\scriptscriptstyle \pm 0.03}$} & \multicolumn{2}{c}{0.36 ${\scriptscriptstyle \pm 0.03}$} &
+                                                                            \multicolumn{2}{c}{\bfseries 0.97 ${\scriptscriptstyle \pm 0.01}$} \\
+ \bfseries 4  \dotfill    & \multicolumn{2}{c}{0.61 ${\scriptscriptstyle \pm 0.05}$} & \multicolumn{2}{c}{\bfseries 0.61
+                                              ${\scriptscriptstyle \pm 0.02}$} &
+                                                                              \multicolumn{2}{c}{0.54
+                                                                               ${\scriptscriptstyle \pm 0.03}$} \\
+ \bfseries 5  \dotfill    & \multicolumn{2}{c}{0.51 ${\scriptscriptstyle \pm 0.02}$} & \multicolumn{2}{c}{0.75 ${\scriptscriptstyle \pm 0.05}$} & \multicolumn{2}{c}{\bfseries 1.00 ${\scriptscriptstyle \pm 0.00}$} \\
+      \bfseries 6 \dotfill     & \multicolumn{2}{c}{0.51 ${\scriptscriptstyle \pm 0.03}$} &
+                            \multicolumn{2}{c}{0.68 ${\scriptscriptstyle \pm 0.07}$} &
+                              \multicolumn{2}{c}{\bfseries 1.00 ${\scriptscriptstyle \pm 0.00}$} \\
+   \bfseries 7  \dotfill  & \multicolumn{2}{c}{0.51 ${\scriptscriptstyle \pm 0.04}$} & \multicolumn{2}{c}{0.64 ${\scriptscriptstyle \pm 0.07}$}
+                                    & \multicolumn{2}{c}{\bfseries 1.00
+                                      ${\scriptscriptstyle \pm 0.00}$}  \\
+ \bfseries 8 \dotfill & \multicolumn{2}{c}{0.47 ${\scriptscriptstyle \pm 0.05}$} & \multicolumn{2}{c}{0.50 ${\scriptscriptstyle \pm 0.06}$} &
+                                                                             \multicolumn{2}{c}{\bfseries 0.98 ${\scriptscriptstyle \pm 0.01}$}  \\
+      \bfseries 9 \dotfill & \multicolumn{2}{c}{0.43 ${\scriptscriptstyle \pm 0.04}$} &
+                                    \multicolumn{2}{c}{0.44 ${\scriptscriptstyle \pm 0.03}$}
+                                    & \multicolumn{2}{c}{\bfseries 0.87 ${\scriptscriptstyle \pm 0.11}$}   \\
+\bfseries 10  \dotfill     & \multicolumn{2}{c}{0.47 ${\scriptscriptstyle \pm 0.04}$} & \multicolumn{2}{c}{0.49 ${\scriptscriptstyle \pm 0.03}$} & \multicolumn{2}{c}{\bfseries 0.57 ${\scriptscriptstyle \pm 0.04}$} \\
 
       \bottomrule
     \end{tabular}
@@ -713,7 +758,6 @@ after several more training steps.
       performant when we measure the accuracy, as shown here, but do not necessarily do as well when we measure  the speed of learning, as shown in table~\ref{tab:summary}.
     }\label{tab:accuracy_all}
 \end{table}
-
 
 Even if they lack slightly in accuracy, as seen for example on the curves of task 4,
 the two reservoir-based methods consistently outperform the fully supervised
@@ -737,7 +781,7 @@ learn the mapping itself, hence the slower learning.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.96\linewidth]{figures/all_metrics_new.pdf}
+  \includegraphics[width=.98\linewidth]{figures/all_metrics_new.pdf}
   \caption{Average learning curves and WADE scores (shown in parentheses in the
     legend) for each task in the benchmark. The dark blue curves represent the
     best elementary cellular automata (CA) rule and the green curves represent
@@ -819,7 +863,7 @@ first attempt will yield a WADE score of 1.
 We report all the parameters used in our experiments in table \ref{tab:appendix-params}:
 \begin{table}[htbp]
   \centering
-  \begin{tabular}{lp{.2\linewidth}p{.35\linewidth}}
+  \begin{tabular}{p{.38\linewidth}p{.2\linewidth}p{.32\linewidth}}
     \toprule
     & \bfseries Reservoir-based & \bfseries Fully trained \\
     \midrule

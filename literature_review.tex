@@ -1,4 +1,38 @@
 \chapter{Literature Review}
 \label{cha:literature-review}
 
+\section{Measuring complexity}
+
+
 \section{Computing with complex systems}
+
+The problem of computing within complex systems is closely related to the
+question of decentralized parallel computation in general, for which there exist
+an abundant literature.
+
+\subsection{Computing in cellular automata}
+
+\Acfp{CA} are decentralized parallel systems with many identical components with
+local connectivity. Because of these properties, they have the potential to
+carry out robust, efficient computations. \ac{CA}-based computing machines could
+recover from perturbations or carry out computations in stochastic environments.
+Moreover, they are also interesting for modeling the behavior of natural complex
+systems. For more details about \acp{CA}, see section
+\ref{sec:cellular-automata-sec}.
+
+\paragraph{Evolving \acp{CA} with genetic algorithms}
+A major next step from the clever but difficult hand-design of \acp{CA} rules to
+perform computations is the use of learning algorithms to automatically design
+those rules \parencite{mitchellEvolvingCellularAutomata1996}.
+
+Genetic algorithms are a type of search method inspired by biological evolution
+\parencite{bookerClassifierSystemsGenetic1989}. Candidate solutions to a problem
+are encoded as \emph{chromosomes}, that is a structured data representation that
+can be modified incrementally. In practice it is often chosen to be a string of
+bits.
+
+\paragraph{Reliable computation in cellular automata}
+The problem of carrying out reliable computations in \acp{CA} is studied by
+\cite{gacsReliableComputationCellular1986}
+
+\subsection{Amorphous computing}
