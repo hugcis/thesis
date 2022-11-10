@@ -316,9 +316,9 @@ pattern of size $n$ is chosen at random and repeated $k$ times to produce a
 sequence of length $n \times k$. Examples include:
 \begin{align*}
   \begin{split}
-  \smtt{\textbf{01}01010101010101010101010101010101} & \quad\text{Pattern with period 2}\\
-  \smtt{\textbf{0011}001100110011001100110011001100} & \quad\text{Pattern with period 4}\\
-  \smtt{\textbf{011}0110110110110110110110110110110} & \quad\text{Pattern with period 3}
+  \textbf{\texttt{01}}\texttt{01010101010101010101010101010101} & \quad\text{Pattern with period 2}\\
+  \texttt{\textbf{0011}001100110011001100110011001100} & \quad\text{Pattern with period 4}\\
+  \texttt{\textbf{011}0110110110110110110110110110110} & \quad\text{Pattern with period 3}
 \end{split}\label{eq:1}
 \end{align*}
 
@@ -344,7 +344,7 @@ one of the symbols. The goal is to predict the last token (in bold) of sequences
 of the following form:
 
 \begin{align*}
-  \underbrace{\smtt{AABBCBABAAB}}_{\text{Input symbols}}
+  \underbrace{\texttt{AABBCBABAAB}}_{\text{Input symbols}}
   & \underbrace{\texttt{x}}_{\text{QS}} \texttt{A}
     \underbrace{\textbf{\texttt{5}}}_{\text{Answer}} \\
 \end{align*}
@@ -681,13 +681,16 @@ state network (ESN) with the same internal state size for each task.
     \end{tabular}
     \caption{Comparison of WADE scores (also shown in parentheses in the legend
       in figure~\ref{fig:all_metrics}, higher is better) of the best cellular
-      automaton rules (\textbf{ReCA}, \parencite{yilmazReservoirComputingUsing2014}) for each task against an echo-state
-      network (\textbf{ESN}, \parencite{jaegerEchoStateApproach2001}), a \textbf{RNN}, a \textbf{LSTM} \cite{hochreiterLongShortTermMemory1997}, and a
+      automaton rules \parencite[\textbf{ReCA},
+      ][]{yilmazReservoirComputingUsing2014} for each task against an echo-state
+      network \parencite[\textbf{ESN},][]{jaegerEchoStateApproach2001}, a
+      \textbf{RNN}, a \textbf{LSTM} \parencite{hochreiterLongShortTermMemory1997},
+      and a
       \textbf{Transformer} \parencite{vaswaniAttentionAllYou2017} with the same number of parameters.
       %as the cellular automaton reservoir.
-      The dash ``---'' indicates that the task was too
-      difficult to complete from memory alone for the human
-      expert. Accuracy scores are also reported in Table \ref{tab:accuracy_all}.}\label{tab:summary}
+      The dash ``---'' indicates that the task was too difficult to complete from
+      memory alone for the human expert. Accuracy scores are also reported in
+      Table \ref{tab:accuracy_all}.}\label{tab:summary}
 \end{table}
 
 Figure \ref{fig:all_metrics} shows the learning curves for the best reservoir cellular

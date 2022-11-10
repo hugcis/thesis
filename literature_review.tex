@@ -3,12 +3,204 @@
 
 \section{Measuring complexity}
 
+\section{Emergence}
+
+\section{Evolutionary algorithms}
+Evolutionary algorithms are the class of algorithms inspired by natural
+biological processes, in particular evolution.
+
+\subsection{Novelty search}
+The idea behind novelty search is to drive a search algorithm by the novelty of
+produced behavior \parencite{lehmanAbandoningObjectivesEvolution2011}. The most
+surprising feature of this algorithm is that the actual objective of the task is
+not taken into account at all during the search process. Generated agents are
+evaluated solely on the novelty of their behavior. Despite this, it appears to
+be at least as efficient as other search processes that are goal focused, such
+as maze navigation and biped locomotion
+\parencite{lehmanAbandoningObjectivesEvolution2011}, swarm robotics
+\parencite{gomesEvolutionSwarmRobotics2013}, or neural network design
+\parencite{risiEvolvingPlasticNeural2010}.
+
+\section{Open-ended evolution}
+The field of Artificial Life research has worked to figure out what the
+fundamental conditions for the emergence of living systems are, and how to
+create a process that can display analogous levels of creativity and complexity
+as natural evolution \parencite{eigenHypercycle1979,
+  langtonArtificialLifeProceedings1989, dysonOriginsLife1999,
+  stanleyWhyOpenEndednessMatters2019, packardOverviewOpenEndedEvolution2019,
+  sorosOpenendednessLastGrand2017}. It build upon the data and understanding we
+collected about the process of life, but abstracts from any specific living
+process and attempts to integrate various approaches into one unified research
+to extract the first principles of life. A major assumption underpinning this
+research is that this natural evolution as a process can be implemented equally
+well in different media \parencite{dennettDarwinDangerousIdea1996}.
+
+A system that behaves like natural evolution, producing a seemingly endless
+amount of novelty and complexity starting from elementary building blocks is
+called \emph{open-ended}. The main challenge of \ac{OEE} is there is not a simple
+single test for the phenomenon, but instead there are different kinds of
+open-ended evolution. Systems can exhibit more than one kind at a time. In the
+report from a workshop on \ac{OEE} at York
+\parencite{taylorOpenEndedEvolutionPerspectives2016}, the authors summarized the
+different kinds of \ac{OEE}, which were further refined in a follow up work
+\parencite{packardOverviewOpenEndedEvolution2019}. They are as follows
+
+\begin{enumerate}
+  \item Interesting new kinds of entities and interactions
+  \item Evolution of evolvability
+  \item Major transitions
+  \item Semantic evolution
+\end{enumerate}
+
+The first category describes the ability of a system to construct new entities
+with different properties, behavior, or interactions with other entities. For
+example, the Tierra simulation sees entities emerge that exploit the computing
+power of others, acting as parasites. The second type is related to
+
+\subsection{Defining open-endedness}
+
+Several necessary conditions and requirements have been identified across the
+\ac{OEE} literature, which form an overlapping set of potential research
+directions for developing open-ended systems. We list a few of these conditions
+here. First, \cite{maleyFourStepsOpenended1999} identifies four requirements:
+
+\begin{enumerate}
+  \item An open-ended evolutionary system must demonstrate unbounded diversity
+        during its growth phase.
+  \item An open-ended evolutionary system must embody selection.
+  \item An open-ended evolutionary system must exhibit continuing new adaptive
+        activity.
+  \item An open-ended evolutionary system must have an endogenous implementation
+        of niches.
+\end{enumerate}
+Next, \cite{sorosIdentifyingNecessaryConditions2014} identified four more necessary
+conditions which are as follows
+
+\begin{enumerate}
+  \item A rule should be enforced that individuals must meet some minimal
+        criterion (MC) before they can reproduce, and that criterion must be
+        nontrivial.
+  \item The evolution of new individuals should create novel opportunities for
+        satisfying the MC.
+  \item Decisions about how and where individuals interact with the world should
+        be made by the individuals themselves.
+  \item The potential size and complexity of the individuals' phenotypes should
+        be (in principle) unbounded.
+\end{enumerate}
+Then, \cite{taylorRequirementsOpenEndedEvolution2015} also stated five
+requirements for an open-ended system:
+
+\begin{enumerate}
+  \item Robustly reproductive individuals.
+  \item A medium allowing the possible existence of a practically unlimited
+        diversity of individuals and interactions, at various levels of
+        complexity.
+  \item Individuals capable of producing more complex offspring.
+  \item An evolutionary search space that typically offers mutational pathways
+        from one viable individual to other viable (and potentially fitter )
+        individuals.
+  \item Drive for continued evolution.
+\end{enumerate}
+Taylor also states a more general condition that should be sufficient for
+creating an open-ended system as ``evolutionary dynamics in which new,
+surprising, and sometimes more complex organisms continue to appear''
+\parencite{taylorRequirementsOpenEndedEvolution2015,
+  taylorOpenEndedEvolutionPerspectives2016}.
+
+All these conditions illustrate a major challenge of \ac{OEE} research: the lack
+of clear definition or notion of what conditions make a system open-ended. We
+seem to agree about what is not open-ended, but whenever a constraint or
+requirement for \ac{OEE} is identified, subsequent evidence forces us to refine
+them later. This is related to the problem of complexity, for which no single
+definition exists \parencite{johnsonSimplyComplexityClear2009}.
+
+A common process to produce systems that behave analogously to natural evolution
+is to start from evolvable units or building blocks
+\parencite{srayApproachSynthesisLife1991, simsEvolvingVirtualCreatures1994,
+  ofriaAvidaSoftwarePlatform2004, yaegerComputationalGeneticsPhysiology1994,
+  channonImprovingStillPassing2003, spectorDivisionBlocksOpenended2007,
+  sorosIdentifyingNecessaryConditions2014}. The reason is that starting from
+higher level primitive units whose emergence would be hard to characterize may
+be easier and faster than starting from lower level components. Results obtained
+from these systems are often surprising, since they bear some key resemblance to
+natural evolutionary processes. For example we note the emergence of parasitic
+entities within the Tierra simulation \parencite{srayApproachSynthesisLife1991}.
+The process of emergence of these building blocks from simple rules and
+components has also been investigated significantly
+\parencite{bagleySpontaneousEmergenceMetabolism1991,
+  huttonEvolvableSelfReproducingCells2007, flammEvolutionMetabolicNetworks2010,
+  sayamaSeekingOpenendedEvolution2011}. It appears harder to bridge the gap and
+create high level evolutionary-like processes and behaviors from elementary
+rules and substrates.
+
+\subsection{Open-endedness in cellular automata}
+One class of system that has rich interactions between each of its components as
+well as no predefined evolvable units or assumptions about individuality is the
+\ac{CA}. One of the very first automata, Von Neumann's self-reproducing machine,
+was designed with goals that align with open-ended evolution, which is to build
+a machine with no central controller and limited local interaction that can
+self-reproduce as a whole
+\parencite{vonneumannTheorySelfreproducingAutomata1966,
+  pesaventoImplementationNeumannSelfReproducing1995}. Later, other
+self-replicating structures such as Langton's loop
+\parencite{langtonSelfreproductionCellularAutomata1984} and evoloops
+\parencite{sayamaNewStructurallyDissolvable1999,
+  salzbergComplexGeneticEvolution2004} showed that more properties of open-ended
+systems can be included in a \ac{CA}. An potential limitation of \acp{CA} is the
+absence of notion of conservation of ``matter''. For example, the game of life
+can start from a configuration with very few live cells and create many more at
+no cost during its evolution. Some authors believe that this conservation
+property is essential to the construction of an open-ended evolving system
+\parencite{taylorChapterCreativityEvolution2002}.
+
+\subsection{Artificial chemistries}
+Most of the time, \acp{AC} are not trying to accurately model chemical processes
+(as in \parencite{ostrovskyCellularAutomataPolymer2001} for example). Instead,
+they build models of the dynamics of complex molecular processes that lead to
+evolutionary behavior \parencite{dittrichArtificialChemistriesReview2001}. By
+abstracting away from the natural molecular processes, \acp{AC} tries to uncover
+fundamental conditions for the emergence of organization, self-maintenance, or
+self-construction with basic building blocks. There are various approaches for
+building these \aclp{AC}, of which we review a few here.
+
+\paragraph{Rewriting systems.}
+Rewriting systems are composed of entities or symbols that get modified
+according to a set of syntactic rules. Patterns of symbols or entities are
+replaced according to these rules.
+
+\paragraph{Cellular automata.}
+\Acfp{CA} can be see as a particular case of lattice molecular systems. For
+example the autopoietic system introduced by
+\cite{varelaAutopoiesisOrganizationLiving1991} is a 2d square grid with sites
+that be occupied by \emph{atoms} which is similar to a \ac{CA} with 4 states.
+Each of these states is analogous to a chemical component of the system: ($\emptyset$)
+empty site, (S) substrate, (K) catalyst and (L) monomer. Basic rules are applied
+asynchronously and define how neighboring atoms interact with each other.
+Remarkably, stable self-repairing cells arise spontaneously from these basic
+rules. Their membrane is composed of a chain of monomers, which is maintained by
+the substrate and catalyst reacting according to the rules. Some key components
+were investigated in other works, showing that they are crucial for autopoeisis
+to be possible \parencite{zelenySelforganizationLivingSystems1977,
+  mcmullinRediscoveringComputationalAutopoiesis1997}.
 
 \section{Computing with complex systems}
 
 The problem of computing within complex systems is closely related to the
 question of decentralized parallel computation in general, for which there exist
-an abundant literature.
+an abundant literature. Different paradigms exist for controlling and harvesting
+the computations within complex systems. Several other names have been used for
+closely related topics, such as organic computing
+\parencite{muller-schloerOrganicComputingParadigm2011} which is the study of
+systems with life-like properties such as self-organization or the ability to
+adapt to a dynamically changing environment. Agent-based computing
+\parencite{jenningsAgentBasedComputingPromise1999} focuses on computing systems
+composed of several autonomous agents. Amorphous computing
+\parencite{abelsonAmorphousComputing2000,
+  nagpalProgrammablePatternFormationScaleIndependence2008,
+  nagpalProgrammableSelfassemblyUsing2002} is about making vast quantities of
+individual computing elements work, and to ensure ``the cooperation of vast
+numbers of unreliable parts interconnected in unknown, irregular, and
+time-varying ways''.
 
 \subsection{Computing in cellular automata}
 
@@ -21,9 +213,9 @@ systems. For more details about \acp{CA}, see section
 \ref{sec:cellular-automata-sec}.
 
 \paragraph{Evolving \acp{CA} with genetic algorithms}
-A major next step from the clever but difficult hand-design of \acp{CA} rules to
-perform computations is the use of learning algorithms to automatically design
-those rules \parencite{mitchellEvolvingCellularAutomata1996}.
+A major step forward from the clever but difficult hand-design of \acp{CA} rules
+to perform computations is the use of learning algorithms to automatically
+design those rules \parencite{mitchellEvolvingCellularAutomata1996}.
 
 Genetic algorithms are a type of search method inspired by biological evolution
 \parencite{bookerClassifierSystemsGenetic1989}. Candidate solutions to a problem
@@ -33,6 +225,10 @@ bits.
 
 \paragraph{Reliable computation in cellular automata}
 The problem of carrying out reliable computations in \acp{CA} is studied by
-\cite{gacsReliableComputationCellular1986}
+\parencite{gacsReliableComputationCellular1986}
+
+\paragraph{Neural cellular automata}
+\parencite{mordvintsevGrowingNeuralCellular2020,
+  randazzoSelfclassifyingMNISTDigits2020, niklassonSelfOrganisingTextures2021}
 
 \subsection{Amorphous computing}
