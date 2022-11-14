@@ -130,6 +130,8 @@ state, a randomly chosen state, or mirror the cells on the inside of the grid.
 Each of these choices affects the evolution and properties of the \ac{CA}, but
 the importance of these boundaries decreases for very large grids.
 
+\subsection{Classification of cellular automata}
+
 \subsection{\Aclp{CA} variants}
 
 A large number of variants of \acp{CA} have been proposed, modifying or
@@ -315,7 +317,10 @@ the exploding number of possible rules in higher dimensions. The number of
 neighbors per cell grows exponentially with the dimension, and the number of
 possible rules has a doubly exponential rate of growth. This makes the
 convenient representation of \acp{CA} rules as tables infeasible, since the size
-of that table quickly exceeds the available memory of most computers.
+of that table quickly exceeds the available memory of most computers. For
+example, there are $2^{512} \approx 10^{154}$ possible 2D rules with 2 states and a
+Moore neighborhood, which is already an incomprehensibly large number, but there
+are $2^{134,217,728} \approx 10^{40,403,562}$ such rules in 3D.
 
 Despite these limitation several works have studied higher dimensional \acp{CA},
 although mostly in 3 dimensions
@@ -325,11 +330,38 @@ although mostly in 3 dimensions
 \parencite{gandin3DCellularAutomaton1997, arataFreeformShapeModeling1999,
   panStudyFailureScale2009, dicaprio3DCellularAutomata2016}.
 
+\paragraph{Hexagonal cellular automata}
+Hexagonal cellular automata are defined on grids tiled with hexagons, where each
+cell has 6 direct neighbors.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{.35\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/hexagonal_1}
+    \caption{Range 1 neighborhood}
+    \label{fig:hexagonal_1}
+  \end{subfigure}
+  \begin{subfigure}[b]{.35\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/hexagonal_2}
+    \caption{Ray neighborhood}
+    \label{fig:hexagonal_2}
+  \end{subfigure}
+  \caption{Example definition of neighborhood for hexagonal cellular automata.}
+\label{fig:hexagonal}
+\end{figure}
+
+
 \subsection{Parametrizing and sampling \ac{CA} rules}
 As explained in \ref{sec:challenges}, one of the main challenges of working with
 complex systems is the parametrization and control of the behavior of that
 system. \ac{CA} are no exception, and several parametrization schemes have been
-proposed, having their respective benefits and drawbacks.
+proposed, having their respective benefits and drawbacks. There are infinitely
+many ways to define rules for \acp{CA}, and for each of these definition a very
+large number of rules is available, making it impossible to sample a significant
+portion of the rule space. A good parametrization allows scanning a wide range
+of behavior of \ac{CA} by traversing the space in an interesting way.
 
 \paragraph{Langton's lambda}
 
@@ -378,9 +410,10 @@ chaotic.
 
 \paragraph{Dirichlet sampling}
 For an arbitrary number of states and neighborhood size, it can be challenging
-to sample \ac{CA} while scanning a wide range of behavior. The naive method of
-uniformly sampling each transition output is not useful in large rule spaces with
-multiple states, large neighborhoods or grid dimension higher than 1.
+to sample \ac{CA} while scanning a wide range of behavior. This is because the
+size of the space of \acp{CA} rules is very large. The naive method of uniformly
+sampling each transition output is not useful in large rule spaces with multiple
+states, large neighborhoods or grid dimension higher than 1.
 
 Rules with equal proportions of transitions leading to all states tend to be the
 most chaotic. This is also what Langton observed when studying the $\lambda$
@@ -439,7 +472,7 @@ on figure \ref{fig:ca_rule_sampling}.
   analogy}
 
 
-\section{Cellular automata and RNNs}
+\section{Cellular automata and RNNs}\label{sec:cell-autom-rnns}
 The purpose of this section is to show that cellular automata and recurrent
 convolutional neural networks have very strong connections and to draw this
 parallel as clearly as possible. We express the \ac{CA} update function as a set

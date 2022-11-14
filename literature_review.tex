@@ -4,10 +4,14 @@
 \section{Measuring complexity}
 
 \section{Emergence}
+The notion of emergence is central to the study of complex systems.
 
 \section{Evolutionary algorithms}
 Evolutionary algorithms are the class of algorithms inspired by natural
-biological processes, in particular evolution.
+biological processes, in particular evolution. There a many types of
+evolutionary algorithms, from genetic algorithms to quality diversity and
+novelty search \parencite{lehmanAbandoningObjectivesEvolution2011,
+  lehmanEvolvingDiversityVirtual2011}.
 
 \subsection{Novelty search}
 The idea behind novelty search is to drive a search algorithm by the novelty of
@@ -55,7 +59,11 @@ different kinds of \ac{OEE}, which were further refined in a follow up work
 The first category describes the ability of a system to construct new entities
 with different properties, behavior, or interactions with other entities. For
 example, the Tierra simulation sees entities emerge that exploit the computing
-power of others, acting as parasites. The second type is related to
+power of others, acting as parasites \parencite{srayApproachSynthesisLife1991}.
+The second type is related to how open-end evolution itself can be evolved
+through the emergence of multiple ``stepping stones'' that enable higher level
+evolutionary units to be used by individuals or through interactions
+\parencite{patteeEvolvedOpenEndednessNot2019}.
 
 \subsection{Defining open-endedness}
 
@@ -224,11 +232,187 @@ can be modified incrementally. In practice it is often chosen to be a string of
 bits.
 
 \paragraph{Reliable computation in cellular automata}
-The problem of carrying out reliable computations in \acp{CA} is studied by
-\parencite{gacsReliableComputationCellular1986}
+The problem of carrying out reliable computations in \acp{CA} is studied early
+on in its history because of the potential of that model for real hardware
+implementation. The first studies used probabilistic approaches for solving the
+error detection and correction problems of automata --- which includes other
+models than \acp{CA} \parencite{neumannProbabilisticLogicsSynthesis1956,
+  winogradReliableComputationPresence1963,
+  ,tsertsvadzeStochasticAutomataProblem1964,
+  ,haraoConsiderationCellularAutomata1973}. Other methods make use of the
+special structure of \ac{CA}, but rely on strong assumptions about the
+likelihood of errors \parencite{haraoFaultTolerantCellular1975,
+  nishioFaultTolerantCellular1975}. Peter Gács has shown how to construct a 1-d
+CA which can perform arbitrarily large reliable computations, with each cell an
+error with a positive probability
+\parencite{gacsReliableComputationCellular1986}. The fault model he describes is
+important from the point of view of ergodic theory because Gács’ result
+invalidates the ``positive probability conjecture'' in statistical physics,
+which states that all one dimensional infinite particle system with positive
+transition probabilities is ergodic. For more recent work on fault-tolerance by
+Gács, see \parencite{gacsReliableCellularAutomata2001}.
 
 \paragraph{Neural cellular automata}
-\parencite{mordvintsevGrowingNeuralCellular2020,
-  randazzoSelfclassifyingMNISTDigits2020, niklassonSelfOrganisingTextures2021}
+The principle of \ac{NCA} is based on the analogy between \acp{CA} and two types
+of neural networks: \acp{RNN} and \acp{CNN} (see Section
+\ref{sec:cell-autom-rnns} for more details about the analogy). Once this link is
+established, \ac{NCA} can be manipulated like neural networks, using automatic
+differentiation, backpropagation and optimization algorithms to make these
+models learn some target task. A first example used this neural network
+representation to learn a \ac{NCA} version of existing \ac{CA} rules from
+recorded examples of their evolution
+\parencite{gilpinCellularAutomataConvolutional2018}. The structure of the
+training process and final error of the resulting model is used by the author as
+a tool to understand the complexity and properties of the original \ac{CA}.
+
+\acp{NCA} were also used to learn to produce stable self-repairing patterns that
+resemble a target image \parencite{mordvintsevGrowingNeuralCellular2020}. The
+training process is structured in such a way that the \ac{NCA} needs to learn to
+maintain the pattern stable across time and space, but also recover form random
+perturbations that are introduced randomly. This results in an interesting demo,
+where a pattern is generated and maintained in real time by a \ac{NCA} while a
+user can directly apply
+perturbations\footnote{\url{https://distill.pub/2020/growing-ca/}}.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/nca_perturb.png}
+    \caption{Perturbed patterns}
+    \label{fig:nca_perturb}
+  \end{subfigure}
+  \begin{subfigure}[t]{.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/nca_recover.png}
+    \caption{Recovered patterns after a few hundred \ac{NCA} steps.}
+    \label{fig:nca_recover}
+  \end{subfigure}
+  \caption{Resistance of patterns to perturbations with \acp{NCA}. \ac{NCA} can
+    robustly maintain patterns, even under relatively strong perturbations
+    (~10-20\% of the pattern's size). This image was generated with an online
+    notebook based on code from Alexander Mordvintsev\footnotemark.}
+  \label{fig:nca}
+\end{figure}
+\footnotetext{\url{https://colab.research.google.com/github/google-research/self-organising-systems/blob/master/notebooks/growing_ca.ipynb}}
+
+The same authors also used \ac{NCA} to learn to classify digits from the MNIST
+database of handwritten digits
+\parencite{randazzoSelfclassifyingMNISTDigits2020}. The particularity of this
+model is its ability to perform the classification in a decentralized way, by
+having the \ac{NCA} change the color of the digits directly in the \ac{CA} grid.
+Cells can only communicate with their direct neighbors, so the model has to
+reach a consensus by propagating information across the grid. This is done in
+parallel, so multiple digits can be classified simultaneously through this
+progressive consensus
+process\footnote{\url{https://distill.pub/2020/selforg/mnist/}}.
+Another work used the same model to learn to continuously generate images with
+the same texture as a target \parencite{niklassonSelfOrganisingTextures2021}.
+Again, an advantage of this method is the ability to recover from perturbations.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/nca_hybrids.png}
+  \caption{Examples of stable hybrids obtained with \acp{NCA} trained with the
+    method of \parencite{cisnerosOpenendedCreationHybrid2021}.}
+  \label{fig:nca_hybrid}
+\end{figure}
+
+
+We used \ac{NCA} as part of our submission to the Minecraft open-endedness
+challenge 2021\footnote{\url{https://evocraft.life/}}, a competition organized
+at the Gecco 2021 conference competition
+track\footnote{\url{https://gecco-2021.sigevo.org/Competitions}}
+\parencite{cisnerosOpenendedCreationHybrid2021}. The goal was to build an
+open-ended system within the computer game Minecraft. This means building a
+systems that fullfils the following requirements:
+
+\begin{itemize}
+  \item Divergence: Open-ended algorithms are not expected to slow down or
+        converge but rather keep expanding and generating more complex outputs
+        over time.
+
+  \item Diversity: Does the algorithm produce entities with strong phenotypic
+        diversity?
+
+  \item Complexity: Can the algorithm produce complex entities or entities
+        interactions that give rise to complex systems? Are hierarchical and
+        modular structures present?
+
+  \item Ecological interactions: Do the created entities interact with each
+        other?
+
+  \item Life-Like properties: Inspiration may be taken from other attributes of
+        living systems.
+\end{itemize}
+
+In each of the examples in figure \ref{fig:nca}, a separate \ac{CA} was trained
+on a pattern starting from a single black pixel. We extend this by training a
+single \ac{NCA} on multiple patterns from different seeds. Instead of a single
+black cell, a small number of black cells are arranged into simple shapes We
+call these patterns \emph{seeds}. \ac{NCA} have a lot of parameters. This
+allowed us to learn more than one pattern (or larger patterns) without adding
+parameters in the architecture. The resulting patterns are of slightly lower
+quality but still stable under perturbations and able to grow.
+
+We turned the process of combining seed patterns into a “game” by allowing user
+interaction with the evolving CA through Minecraft. Our system is not open-ended
+by itself, but needs human interaction to play with the shapes and seed
+patterns. This is in the spirit of open-ended games like Picbreeder
+\parencite{secretanPicbreederCaseStudy2011, woolleyDeleteriousEffectsPriori2011}
+where players choose which generated patterns to mutate or evolve from. The
+algorithms can generate endless novelty but human interactions provide the
+missing step to make it open-ended.
 
 \subsection{Amorphous computing}
+The goal of amorphous computing is to study and define the problem of computing
+with multiple interconnected components that are unreliable, irregular,
+time-varying and with limited computational capacity
+\parencite{abelsonAmorphousComputing2000}. The motivation for this research is
+the development of biological substrates that can compute, function as sensors
+and actuators, and robustly self-organize to compute with little cost. Precise
+manufacturing of chemical or biological substrate with the ability to
+communicate locally through chemical or physical interactions is within reach,
+making the perspective of using them as computing vessels particularly
+attractive. We can embed millions of chips with sensors
+\parencite{abelsonAmorphousComputing2000} or program biological cells to serve
+as logic gates \parencite{weissProgrammingBiologicalCells1998,
+  weissVivoDigitalCircuits2002} while relying on cheaper, decentralized parts
+\parencite{buteraProgrammingPaintableComputer2002}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/amorphous_computing}
+  \caption{An example of amorphous computing on a surface. Multiple computing
+    particles are arranged randomly. A wave (represented by the color of the
+    cells) propagates within the medium. They can communicate with neighbors
+    within a radius $r$.}
+  \label{fig:amorphous_computing}
+\end{figure}
+
+In an amorphous computing systems, a medium is composed of ``computational
+particles'' spread on a surface or mixed in a volume. The particles have a
+limited computing power, with no knowledge of their position or orientation. The
+particles can communicate with neighbors via some specified mechanism, which may
+be analogous to biological ones. There are two main components to this research
+\begin{description}
+  \item[Synthetic biology.] The design of a substrate from chemical processes or
+        genetically engineered biological cells
+        \parencite{weissVivoDigitalCircuits2002}. It should behave correctly and
+        follow pre-defined rules.
+  \item[Computing paradigm.] How to program the individual agents to follow a
+        global predefined goal?
+        \parencite{nagpalProgrammableSelfassemblyConstructing2001}
+\end{description}
+
+
+The growing point language (GPL) is an example of programming language that
+enables programmers to specify complex patterns for computational particles,
+which are internally represented in the particles as state machines
+\parencite{cooreBotanicalComputingDevelopmental1999}.
+
+\cite{nagpalProgrammableSelfassemblyUsing2002} develops another programming
+language, inspired from biological cell differentiation
+\parencite{lawrenceMakingFlyGenetics1992,
+  wolpertPositionalInformationSpatial1969}, that can compile to individual agent
+programs to follow some global specification.
