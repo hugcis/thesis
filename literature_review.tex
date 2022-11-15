@@ -4,7 +4,25 @@
 \section{Measuring complexity}
 
 \section{Emergence}
-The notion of emergence is central to the study of complex systems.
+The notion of emergence is central to the study of complex systems. It is a very
+broad concepts that could be phrased as \emph{the properties an composite entity
+  acquires that its composing parts did not have}. Emergence is often described
+as being similar to self-organization. Although these two concepts are closely
+related, they are fundamentally different ideas
+\parencite{dewolfEmergenceSelfOrganisationDifferent2005}. Both properties can
+exist independently within a dynamical system.
+
+There seems to be qualitatively different kinds of emergence, which
+\cite{dehaanHowEmergenceArises2006} describe as Discovery, Mechanistic
+emergence, and Reflective emergence. These correspond to different levels, or
+``strengths'' of emergence, from fractal patterns to complex social systems and
+ecosystems.
+
+A subset of research on emergence has focused on complex adaptive systems. In
+such systems, emergence is explicitly used to refer to macro-level patterns
+arising from interacting agents \parencite{hollandEmergenceChaosOrder2000,
+  kauffmanHomeUniverseSearch1995, langtonStudyingArtificialLife1986}.
+
 
 \section{Evolutionary algorithms}
 Evolutionary algorithms are the class of algorithms inspired by natural
@@ -14,7 +32,7 @@ novelty search \parencite{lehmanAbandoningObjectivesEvolution2011,
   lehmanEvolvingDiversityVirtual2011}.
 
 \subsection{Novelty search}
-The idea behind novelty search is to drive a search algorithm by the novelty of
+The idea behind \ac{NS} is to drive a search algorithm by the novelty of
 produced behavior \parencite{lehmanAbandoningObjectivesEvolution2011}. The most
 surprising feature of this algorithm is that the actual objective of the task is
 not taken into account at all during the search process. Generated agents are
@@ -24,6 +42,36 @@ as maze navigation and biped locomotion
 \parencite{lehmanAbandoningObjectivesEvolution2011}, swarm robotics
 \parencite{gomesEvolutionSwarmRobotics2013}, or neural network design
 \parencite{risiEvolvingPlasticNeural2010}.
+
+This method has some limits, which are caused by a relative lack of theoretical
+understanding of the effects of the parameters of \ac{NS}. The choice of
+behavior descriptors for determining the novelty of agents is also not
+straightforward. Several empirical studies have investigated the impact of a
+range of parameters on the performance of \ac{NS}
+\parencite{gomesDevisingEffectiveNovelty2015,
+  kistemakerCriticalFactorsPerformance2011}, while other works have begun to
+shed light on the theory \parencite{doncieuxNoveltySearchTheoretical2019}. In
+practice \ac{NS} algorithms are expected to cover the exploration space well
+\parencite{cullyQualityDiversityOptimization2017,pughQualityDiversityNew2016},
+in some cases uniformly \parencite{gomesDevisingEffectiveNovelty2015}. \ac{NS}
+algorithms are related to genetic algorithm since they maintain a population,
+that is a set of individuals used to measure the novelty of current solutions.
+There is also an archive of behavior of previous individuals to ensure that the
+novelty is measured against all previously generated behaviors. There exists
+multiple strategies for maintaining this archive
+\parencite{gomesDevisingEffectiveNovelty2015}. Some use individuals whose
+novelty was above a threshold when first evaluated
+\parencite{lehmanAbandoningObjectivesEvolution2011}, the most novel individuals
+of each generation \parencite{liapisConstrainedNoveltySearch2015}, random
+individuals from the past generations
+\parencite{lehmanEfficientlyEvolvingPrograms2010}, or none at all
+\parencite{mouretEncouragingBehavioralDiversity2012}.
+
+The principle of guiding search by novelty alone is closely related to this
+thesis, especially with the challenge of parametrizing and searching the space
+of available complex systems without using any explicit goal function. The goal
+of \ac{NS} is to carry out search without a goal function, and we draw
+inspiration from this algorithm.
 
 \section{Open-ended evolution}
 The field of Artificial Life research has worked to figure out what the
@@ -220,6 +268,20 @@ Moreover, they are also interesting for modeling the behavior of natural complex
 systems. For more details about \acp{CA}, see section
 \ref{sec:cellular-automata-sec}.
 
+\paragraph{Von Neumann's self-reproducing \ac{CA}}
+
+\paragraph{Universal Computation in Cellular Automata}
+It is not difficult to see that a \ac{CA} can be capable of universal
+computation. The basic approach is to show that it can simulate a Turing
+machine, which we assume has an infinite tape. A \ac{CA} rule can be constructed
+by reproducing all the steps of a Turing machine's behavior while adding a state
+to each cell indicating wether it is active or not, and enforcing that only one
+cell is active at a time. This turns the parallel \ac{CA} into a sequential
+object that simulates a Turing machine. A similar construction was carried out
+by \parencite{smithSimpleComputationUniversalCellular1971}, making a \ac{CA}
+with one-to-one correspondence between its time steps and that of a target
+Turing machine.
+
 \paragraph{Evolving \acp{CA} with genetic algorithms}
 A major step forward from the clever but difficult hand-design of \acp{CA} rules
 to perform computations is the use of learning algorithms to automatically
@@ -288,10 +350,11 @@ perturbations\footnote{\url{https://distill.pub/2020/growing-ca/}}.
     \caption{Recovered patterns after a few hundred \ac{NCA} steps.}
     \label{fig:nca_recover}
   \end{subfigure}
-  \caption{Resistance of patterns to perturbations with \acp{NCA}. \ac{NCA} can
-    robustly maintain patterns, even under relatively strong perturbations
-    (~10-20\% of the pattern's size). This image was generated with an online
-    notebook based on code from Alexander Mordvintsev\footnotemark.}
+  \caption[Resistance of patterns]{Resistance of patterns to perturbations with
+    \acp{NCA}. \ac{NCA} can robustly maintain patterns, even under relatively
+    strong perturbations (~10-20\% of the pattern's size). This image was
+    generated with an online notebook based on code from Alexander
+    Mordvintsev\footnotemark.}
   \label{fig:nca}
 \end{figure}
 \footnotetext{\url{https://colab.research.google.com/github/google-research/self-organising-systems/blob/master/notebooks/growing_ca.ipynb}}
