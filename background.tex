@@ -3,9 +3,9 @@
 
 \section{Cellular automata}\label{sec:cellular-automata-sec}
 
-The \acf{CA} was originally proposed by Stanislaw Ulam and John Von
-Neumann in the 1940s as a model of the growth of crystals and an attempt at
-constructing a self-replicating system \parencite{von_neumann_theory_1966}.
+The \acf{CA} was originally proposed by Stanislaw Ulam and John Von Neumann in
+the 1940s as a model of the growth of crystals and an attempt at constructing a
+self-replicating system \parencite{vonneumannTheorySelfreproducingAutomata1966}.
 
 \paragraph{Definition}
 It is usually defined on a regular lattice in one or two dimension. Each of its
@@ -132,7 +132,7 @@ the importance of these boundaries decreases for very large grids.
 
 \subsection{Classification of cellular automata}
 
-\subsection{\Aclp{CA} variants}
+\subsection{Cellular automata variants}
 
 A large number of variants of \acp{CA} have been proposed, modifying or
 constraining various part of the definition above. We list some common ones
@@ -207,7 +207,7 @@ totalistic \ac{CA}. Its rule could be summarized as ``if exactly two states are
 1, the next state is 1''. Conway's Game of Life, presented below, is an example
 of totalistic \ac{CA} in two dimensions.
 
-\paragraph{Game of Life.}
+\paragraph{Game of Life.\label{sec:game-life}}
 The game of life is one of the most famous \ac{CA}. It was proposed by
 mathematician John Conway in 1970 \parencite{gardnerMathematicalGames1970}. It
 is a two dimensional binary \ac{CA}. Its two states are often called ``alive''
@@ -274,7 +274,7 @@ parallel update is prohibitively expensive. The rule could adapt itself and
 preferentially update cells form active or useful parts of the \ac{CA} while
 doing slower updates to the less active parts of the \ac{CA}. An asynchronous
 \ac{CA} with evolutionary properties was constructed in
-\cite{nehanivEvolutionAsynchronousCellular2003}. The authors argue that
+\parencite{nehanivEvolutionAsynchronousCellular2003}. The authors argue that
 asynchronicity is a strong advantage for constructing systems that can evolve
 within \acp{CA}.
 
@@ -306,7 +306,7 @@ range $[0, 1]$. The update function is then a real multivariate function
 Examples of continuous \ac{CA} include Lenia
 \parencite{chanLeniaBiologyArtificial2019a}, or \acp{NCA}
 \parencite{mordvintsevGrowingNeuralCellular2020}.
-\cite{garzonRealComputationCellular1993} explores the condition for a
+\textcite{garzonRealComputationCellular1993} explores the condition for a
 real-valued \ac{CA} to be able to compute real-valued functions.
 
 \paragraph{Higher dimensional cellular automata}
@@ -353,7 +353,7 @@ cell has 6 direct neighbors.
 \end{figure}
 
 
-\subsection{Parametrizing and sampling \ac{CA} rules}
+\subsection{Parametrizing and sampling CA rules}
 As explained in \ref{sec:challenges}, one of the main challenges of working with
 complex systems is the parametrization and control of the behavior of that
 system. \ac{CA} are no exception, and several parametrization schemes have been
@@ -738,16 +738,16 @@ theoretically couple this framework with backpropagation to make
 \emph{learnable} cellular automata that can adapt their rules to minimize a
 target loss function.
 
-This is the direction taken in~\cite{mordvintsevGrowingNeuralCellular2020}. The
-authors use supervised learning on a cellular automaton and train it to get a
-stable self-repairing target shape.
+This is the direction taken by~\textcite{mordvintsevGrowingNeuralCellular2020}.
+The authors use supervised learning on a cellular automaton and train it to get
+a stable self-repairing target shape.
 
 However, because supervised cellular automata can only do as much as they have
 been trained to do, I believe it defeats the purpose of working with a model
 capable of spontaneous complex emergent behavior. Open-ended complexity increase
 could very unlikely be achieved through pure supervision.
 
-\cite{gilpinCellularAutomataConvolutional2018} takes the reverse approach, and
+\textcite{gilpinCellularAutomataConvolutional2018} takes the reverse approach, and
 tries to train RCNNs to simulate a fixed CA rule, using the training process as
 a way to help understand the structure of CA rule space.
 

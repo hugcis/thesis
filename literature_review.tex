@@ -13,7 +13,7 @@ related, they are fundamentally different ideas
 exist independently within a dynamical system.
 
 There seems to be qualitatively different kinds of emergence, which
-\cite{dehaanHowEmergenceArises2006} describe as Discovery, Mechanistic
+\textcite{dehaanHowEmergenceArises2006} describes as Discovery, Mechanistic
 emergence, and Reflective emergence. These correspond to different levels, or
 ``strengths'' of emergence, from fractal patterns to complex social systems and
 ecosystems.
@@ -32,16 +32,34 @@ novelty search \parencite{lehmanAbandoningObjectivesEvolution2011,
   lehmanEvolvingDiversityVirtual2011}.
 
 \subsection{Novelty search}
-The idea behind \ac{NS} is to drive a search algorithm by the novelty of
+The idea behind \ac{NS} is to drive a search algorithm only by the novelty of
 produced behavior \parencite{lehmanAbandoningObjectivesEvolution2011}. The most
-surprising feature of this algorithm is that the actual objective of the task is
-not taken into account at all during the search process. Generated agents are
-evaluated solely on the novelty of their behavior. Despite this, it appears to
-be at least as efficient as other search processes that are goal focused, such
-as maze navigation and biped locomotion
+counter-intuitive feature of this algorithm is that the actual objective of the
+task is not taken into account at all during the search process. Generated
+agents are evaluated solely on the novelty of their behavior. Despite this, it
+appears to be at least as efficient as other search processes that are goal
+focused, such as maze navigation and biped locomotion
 \parencite{lehmanAbandoningObjectivesEvolution2011}, swarm robotics
 \parencite{gomesEvolutionSwarmRobotics2013}, or neural network design
 \parencite{risiEvolvingPlasticNeural2010}.
+
+The principle of guiding search by novelty alone is closely related to the goal
+this thesis, and especially with the challenge of parametrizing and searching
+the space of available complex systems without using any explicit goal function.
+The goal of \ac{NS} is to carry out search without a goal function, and we draw
+inspiration from this algorithm throughout our work.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.7\linewidth]{figures/novelty_search}
+  \caption{Illustration of the advantage of \ac{NS} on a maze environment with
+    deceptive dead-ends. Dotted trajectories illustrate the behavior of a
+    goal-based search, which will start by minimizing the distance to the goal.
+    Blue trajectories are from a novelty search algorithm exploring the space
+    more efficiently. This type of maze environment was proposed by
+    \textcite{lehmanAbandoningObjectivesEvolution2011}.}
+\label{fig:novelty_search}
+\end{figure}
 
 This method has some limits, which are caused by a relative lack of theoretical
 understanding of the effects of the parameters of \ac{NS}. The choice of
@@ -65,13 +83,31 @@ novelty was above a threshold when first evaluated
 of each generation \parencite{liapisConstrainedNoveltySearch2015}, random
 individuals from the past generations
 \parencite{lehmanEfficientlyEvolvingPrograms2010}, or none at all
-\parencite{mouretEncouragingBehavioralDiversity2012}.
+\parencite{mouretEncouragingBehavioralDiversity2012}. An alternative to
+explicitly measuring novelty in \ac{NS} is \emph{fitness sharing}. The goal of
+fitness sharing is to encourage the diversity of a population by making them
+share virtual ``resources'' \parencite{goldbergSimpleGeneticAlgorithms1987,
+  hollandAdaptationNaturalArtificial1992}. A particular implementation of
+\ac{NS} using this idea, with rewards physically spread out across the
+environment was done by \textcite{herelEmergenceNoveltyEvolutionary2022}.
 
-The principle of guiding search by novelty alone is closely related to this
-thesis, especially with the challenge of parametrizing and searching the space
-of available complex systems without using any explicit goal function. The goal
-of \ac{NS} is to carry out search without a goal function, and we draw
-inspiration from this algorithm.
+Typically, novelty search algorithms use one of a few types of maps from
+genotypes to phenotypes, that is a map from the space of encoded solution to
+agent and policy implementation
+\parencite{mouretEncouragingBehavioralDiversity2012}. Some common ones are:
+\begin{itemize}
+  \item A \ac{RNN} (of type \cite{elmanFindingStructureTime1990} or
+        \cite{jordanSerialOrderParallel1997}), for which the weights are
+        directly searched. For input size $n_{i}$ output size $n_{o}$, and
+        hidden size $n_{h}$, $n_{i}n_{h} + n_{h}n_{o} + n_{h}^{2}$ weights must
+        be evolved.
+  \item Neuro-evolution of augmenting topology (NEAT,
+        \cite{stanleyEvolvingNeuralNetworks2002}), which is an encoding of both
+        neural network weights and architectures that has a built-in mechanism
+        to sustain diversity.
+\end{itemize}
+
+\paragraph{Quality diversity}
 
 \section{Open-ended evolution}
 The field of Artificial Life research has worked to figure out what the
@@ -118,7 +154,7 @@ evolutionary units to be used by individuals or through interactions
 Several necessary conditions and requirements have been identified across the
 \ac{OEE} literature, which form an overlapping set of potential research
 directions for developing open-ended systems. We list a few of these conditions
-here. First, \cite{maleyFourStepsOpenended1999} identifies four requirements:
+here. First, \textcite{maleyFourStepsOpenended1999} identifies four requirements:
 
 \begin{enumerate}
   \item An open-ended evolutionary system must demonstrate unbounded diversity
@@ -129,7 +165,7 @@ here. First, \cite{maleyFourStepsOpenended1999} identifies four requirements:
   \item An open-ended evolutionary system must have an endogenous implementation
         of niches.
 \end{enumerate}
-Next, \cite{sorosIdentifyingNecessaryConditions2014} identified four more necessary
+Next, \textcite{sorosIdentifyingNecessaryConditions2014} identified four more necessary
 conditions which are as follows
 
 \begin{enumerate}
@@ -143,7 +179,7 @@ conditions which are as follows
   \item The potential size and complexity of the individuals' phenotypes should
         be (in principle) unbounded.
 \end{enumerate}
-Then, \cite{taylorRequirementsOpenEndedEvolution2015} also stated five
+Then, \textcite{taylorRequirementsOpenEndedEvolution2015} also stated five
 requirements for an open-ended system:
 
 \begin{enumerate}
@@ -227,7 +263,7 @@ replaced according to these rules.
 \paragraph{Cellular automata.}
 \Acfp{CA} can be see as a particular case of lattice molecular systems. For
 example the autopoietic system introduced by
-\cite{varelaAutopoiesisOrganizationLiving1991} is a 2d square grid with sites
+\textcite{varelaAutopoiesisOrganizationLiving1991} is a 2d square grid with sites
 that be occupied by \emph{atoms} which is similar to a \ac{CA} with 4 states.
 Each of these states is analogous to a chemical component of the system: ($\emptyset$)
 empty site, (S) substrate, (K) catalyst and (L) monomer. Basic rules are applied
@@ -281,6 +317,38 @@ object that simulates a Turing machine. A similar construction was carried out
 by \parencite{smithSimpleComputationUniversalCellular1971}, making a \ac{CA}
 with one-to-one correspondence between its time steps and that of a target
 Turing machine.
+
+Another approach was used to show the universality of the game of life (see
+details in section \ref{sec:game-life}). Instead of simulating a Turing machine,
+basic logical functions are built from gliders (see figure \ref{fig:glider})
+produced by a game of life structure called \emph{glider gun}. Two gliders
+that collide within the simulation will either annihilate or keep moving
+depending on the exact position in which they collide. This allows constructing
+a NOT, AND and OR gates. For example see figure \ref{fig:gol_not_gate} for a
+construction of a NOT gate.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/gol_not_gate}
+  \caption{Construction of a NOT gate in game of life. The left image represents
+    an input equal to 1, while the second shows an input equal to 0. Output
+    streams behave like a NOT gate. A glider gun and a modified half-frequency
+    glider gun are highlighted. They are necessary to the construction of the
+    gate. Images are adapted from a blog post
+    \parencite{carliniDigitalLogicGates2020}.}
+  \label{fig:gol_not_gate}
+\end{figure}
+
+Universal computation is an intriguing yet impractical property, and universal
+computers often have limited usability, but it serves as a proof of principle
+that the studied system is as powerful as any computer. In the case of the game
+of life, this was illustrated by the implementation of the OTCA metapixel which
+is a tileable square cell object that can be used to simulate another instance
+of game of life within the game. It is important to note that such embedded
+computers and Turing machines are often very slow and inefficient, and the game
+of life has brittle structures which would be destroyed by the slightest
+perturbation, making these construction unusable for anything else than
+demonstration.
 
 \paragraph{Evolving \acp{CA} with genetic algorithms}
 A major step forward from the clever but difficult hand-design of \acp{CA} rules
@@ -474,7 +542,7 @@ enables programmers to specify complex patterns for computational particles,
 which are internally represented in the particles as state machines
 \parencite{cooreBotanicalComputingDevelopmental1999}.
 
-\cite{nagpalProgrammableSelfassemblyUsing2002} develops another programming
+\textcite{nagpalProgrammableSelfassemblyUsing2002} develops another programming
 language, inspired from biological cell differentiation
 \parencite{lawrenceMakingFlyGenetics1992,
   wolpertPositionalInformationSpatial1969}, that can compile to individual agent

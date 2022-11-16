@@ -597,7 +597,7 @@ We apply the complexity metric on a randomly initialized simulation on a $512
 which should correspond to rules with interesting behaviors, are then used for
 coarse-graining. We apply coarse-graining on grids of $4096 \times 4096$ cells,
 scaling the grid down by a factor of $8$, and compute the complexity metric also
-on the reduced grid. Figures reported in Table~\ref{experiments_table-vc} are
+on the reduced grid. Figures reported in Table~\ref{experiments_table_vc} are
 percentages of rules still considered interesting (above the selection threshold
 for the first step of the process) after coarse-graining. The higher this number
 is, the more a method is able to conserve complex and interesting behaviors
@@ -613,13 +613,13 @@ after the reduction.
       19.3\%  & 40.4\% & 82.4\% & 84.2\%\\
     \bottomrule
   \end{tabular}
-  \label{experiments_table-vc}
+  \label{experiments_table_vc}
   \caption{\textbf{Experimental results --- Percentage
       of rules classified as interesting after reduction with our 3 proposed
       methods (K-means, Histogram, Autoencoder), compared to a local averaging baseline.}}
 \end{table}
 
-Results in Table~\ref{experiments_table-vc} suggest that using our proposed methods
+Results in Table~\ref{experiments_table_vc} suggest that using our proposed methods
 seems largely beneficial for studying complexity in large systems.
 % when usual metrics become impractical.
 Histogram and autoencoder methods are superior to downscaling using k-means and
