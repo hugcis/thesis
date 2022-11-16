@@ -227,16 +227,20 @@ with a KMeans clustering algorithm applied on the compressed length of the
 automata states.
 
 \begin{figure}[tbp]
-  \centering \subfloat[6 highest scoring automata. Only the first 30 timesteps
-  are shown for readability.]{
-    \includegraphics[width=.42\linewidth]{figures/complex_eca}
+  \begin{subfigure}[b]{.47\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/complex_eca}
+    \caption{6 highest scoring automata. Only the first 30 timesteps are shown
+      for readability.}
     \label{subfig:highest_6}
-  }
-  \hfil
-  \subfloat[All 256 compressed length scores]{
-    \includegraphics[width=.42\linewidth]{figures/one}
+  \end{subfigure}
+  \hspace{10pt}
+  \begin{subfigure}[b]{.47\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/one}
+    \caption{All 256 compressed length scores.}
     \label{subfig:comp_scores}
-  }
+  \end{subfigure}
   \caption{Compression-based metric on 1D ECA. \ref{subfig:highest_6} represents
     the 1D ECA evolution with each line being the state of the automaton at a
     given timestep, starting from a single cell set to 1. Cells which are in
@@ -244,6 +248,7 @@ automata states.
     white. Time increases downwards. Figure~\ref{subfig:comp_scores} represents
     the compressed length of the 256 ECA rules, with different marker and colors
     corresponding to the obtained KMeans clusters.}
+
   \label{fig:comp_eca}
 \end{figure}
 
@@ -331,7 +336,7 @@ compression gain.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.8\linewidth]{figures/joint_comp_1d}
+  \includegraphics[width=\linewidth]{figures/joint_comp_1d}
   \caption{Joint compression method illustration. If a structure persists
     through time, this will decrease the joint compressed length compared to the
     sum of compressed lengths. A persistent structure is circled in red.}
@@ -349,15 +354,19 @@ between initial and final states).
 
 \begin{figure}[htbp]
   \centering
-  \subfloat[Highest joint compression score among the 256 ECA.]{
-    \includegraphics[width=.4\linewidth]{figures/high_eca_joint}
+  \begin{subfigure}[b]{.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/high_eca_joint}
+    \caption{Highest joint compression score among the 256 ECA.}
     \label{fig:high_eca_joint}
-  }
-  \hfil
-  \subfloat[With condition on compressed length increase.]{
-    \includegraphics[width=.4\linewidth]{figures/high_eca_joint+comp}
+  \end{subfigure}
+  \begin{subfigure}[b]{.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/high_eca_joint+comp}
+    \caption{With condition on compressed length increase.}
     \label{fig:high_eca_joint+comp}
-  }
+  \end{subfigure}
+
   \caption{Comparison of the raw joint compression score and the addition of a
     complexity increase condition. The high overlap in structures is not enough
     to get interesting rules a shown in \ref{fig:high_eca_joint}, but the
@@ -460,7 +469,7 @@ is entirely determined by its neighborhood.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.7\linewidth]{figures/schema-count}
+  \includegraphics[width=.8\linewidth]{figures/schema-count}
   \caption{Count-based predictor method for a radius $r=1$. A
     frequency lookup table is computed from the global state at time $T$ by
     considering all neighborhoods with radius $r=1$ (3 consecutive cells
@@ -478,14 +487,19 @@ Figure \ref{subfig:comp_scores} for comparison purposes.
 
 \begin{figure}[htbp]
   \centering
-  \subfloat[Count-based predictor]{
-    \includegraphics[width=.405\linewidth]{figures/count}
+  \begin{subfigure}[b]{.48\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/count}
+    \caption{Count-based predictor}
       \label{subfig:cross_ent_one}
-  }\hfil
-  \subfloat[Neural network-based predictor]{
-    \includegraphics[width=.38\linewidth]{figures/nn}
+  \end{subfigure}
+  \begin{subfigure}[b]{.4503\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/nn}
+    \caption{Neural network-based predictor}
       \label{subfig:nn_ent_one}
-  }
+  \end{subfigure}
+
   \caption{Average cross entropy loss for the two predictor-based methods on all
     256 ECA. Rules are separated in several clusters. The
     count-based predictor (left plot) and neural network-based predictor (right

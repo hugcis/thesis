@@ -130,7 +130,7 @@ state, a randomly chosen state, or mirror the cells on the inside of the grid.
 Each of these choices affects the evolution and properties of the \ac{CA}, but
 the importance of these boundaries decreases for very large grids.
 
-\subsection{Classification of cellular automata}
+\subsection{Classification of cellular automata\label{sec:class-cell-autom}}
 
 Stephen Wolfram approached cellular automata as discrete, spatially extended
 dynamical systems \parencite{wolframUniversalityComplexityCellular1984}. The
@@ -141,20 +141,54 @@ Wolfram proposed a qualitative classification of CA behavior roughly analogous
 to classifications in dynamical systems theory, with four classes defined as follows:
 
 \begin{description}
-  \item[Class 1] Initial configurations relax after a transient
+  \item[Class 1] All initial configurations relax after a transient
         period to the same fixed configuration (e.g., all 1s).
-  \item[Class 2] Initial configurations relax after a transient period to some
+  \item[Class 2] All initial configurations relax after a transient period to some
         fixed point or some temporally periodic cycle of configurations, but
         which one depends on the initial configuration. (\ac{CA} defined on
         finite lattices always end up having a periodic behavior because there
         is only a finite number of grid configurations. Class 2 does not refer to
         this type of periodic behavior but rather to cycles with periods much
         shorter than the total number of possible states).
-  \item[Class 3] Initial configurations relax after a transient
-        period to chaotic behavior. (The term “chaotic” here refers to
+  \item[Class 3] All initial configurations quickly exhibit chaotic behavior
+        after a transient period. (The term “chaotic” here refers to
         apparently unpredictable space-time behavior.)
+  \item[Class 4] Some initial configurations result in complex localized
+        structures that can persist for a long time.
 \end{description}
 
+This classification being qualitative and not rigorous, there is not even a
+clear consensus on which of the \acp{ECA} rules belong to class 4 or class 3.
+Class 4 \ac{CA} rules are speculated to be capable of universal computation
+\parencite{wolframUniversalityComplexityCellular1984}. For example,
+\textcite{liStructureElementaryCellular1990} claimed that \ac{ECA} rule 110 has
+class 4 behavior, and it was eventually proven to be universal
+\parencite{cookUniversalityElementaryCellular2004}, but no other \ac{ECA} has
+been proven universal since.
+
+\textcite{zenilCompressionBasedInvestigationDynamical2010} studied the
+compression size of the space-time diagrams of all \ac{ECA} for simulation of
+fixed length. Using a simple k-means clustering technique, he obtained two
+groups roughly matching Wolfram’s classes 1 and 2 and classes 3 and 4. We
+reproduce these result on figure \ref{subfig:comp_scores}. This result offers an
+interesting confirmation of Wolfram's classification that is not qualitative.
+However, the results are very different if we modify the initial conditions as
+well as the grid size, data representation, or compression algorithm
+\parencite{hudcovaClassificationComplexSystems2020}.
+
+\textcite{wuenscheGlobalDynamicsCellular1992} study the behavior of \acp{ECA}
+when the simulations are reversed and computes the preimages of each
+configuration. They introduce the Z-parameter which is the probability that a
+partial preimage can be prolonged by one symbol for each \ac{CA}. He speculates
+that class 4 occurs at $\text{Z} \approx 0.75$. This is not a classification,
+but a class 4 membership test that can be computed from the rule directly,
+making it practical compared to alternatives. In practice Wuensche's hypothesis
+that $\text{Z} \approx 0.75$ corresponds to class 4 is rarely verified.
+
+Hudcová defined a \ac{CA} classification that is based on the form of the
+asymptotic growth of their transients, obtained through repeated simulation
+\parencite{hudcovaClassificationComplexSystems2020,
+  hudcovaClassificationDiscreteDynamical2022}.
 
 \subsection{Cellular automata variants}
 
@@ -188,7 +222,8 @@ several previous works \parencite{wuenscheGlobalDynamicsCellular1992,
   wuenscheClassifyingCellularAutomata1999, wolframNewKindScience2002,
   zenilCompressionBasedInvestigationDynamical2010,
   hudcovaClassificationComplexSystems2020,
-  hudcovaComputationalHierarchyElementary2021}.
+  hudcovaComputationalHierarchyElementary2021}. We discuss these classifications
+in more details in section \ref{sec:class-cell-autom}.
 
 \begin{figure}[htbp]
   \centering
