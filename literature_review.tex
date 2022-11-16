@@ -29,7 +29,11 @@ Evolutionary algorithms are the class of algorithms inspired by natural
 biological processes, in particular evolution. There a many types of
 evolutionary algorithms, from genetic algorithms to quality diversity and
 novelty search \parencite{lehmanAbandoningObjectivesEvolution2011,
-  lehmanEvolvingDiversityVirtual2011}.
+  lehmanEvolvingDiversityVirtual2011}. Evolutionary algorithms are used as
+search methods, in particular when the search space is hard to parametrize or
+very large. \ac{CA} rules are a good example of such search space, and genetic
+algorithms were successfully used to evolve rules to perform complex
+computations \parencite{mitchellEvolvingCellularAutomata1996}.
 
 \subsection{Novelty search}
 The idea behind \ac{NS} is to drive a search algorithm only by the novelty of
@@ -350,16 +354,70 @@ of life has brittle structures which would be destroyed by the slightest
 perturbation, making these construction unusable for anything else than
 demonstration.
 
-\paragraph{Evolving \acp{CA} with genetic algorithms}
+\paragraph{Evolving cellular automata with genetic algorithms}
 A major step forward from the clever but difficult hand-design of \acp{CA} rules
 to perform computations is the use of learning algorithms to automatically
-design those rules \parencite{mitchellEvolvingCellularAutomata1996}.
-
-Genetic algorithms are a type of search method inspired by biological evolution
+design those rules \parencite{mitchellEvolvingCellularAutomata1996}. Genetic
+algorithms are a type of search method inspired by biological evolution
 \parencite{bookerClassifierSystemsGenetic1989}. Candidate solutions to a problem
 are encoded as \emph{chromosomes}, that is a structured data representation that
 can be modified incrementally. In practice it is often chosen to be a string of
-bits.
+bits. Every generation, a population of solutions is evaluated. The best
+solutions are kept and combined to form the candidates for the next generation.
+Random mutations may also be applied to introduce randomness in the search.
+
+Some early work was done by Norman Packard and colleagues
+\parencite{packardAdaptationEdgeChaos1988,
+  richardsExtractingCellularAutomaton1990}.
+\textcite{richardsExtractingCellularAutomaton1990} use genetic algorithms to
+learn the rules of a \ac{CA} to match experimental data for the patterns created
+by the dendritic solidification of \ce{NH4Br}. In
+\parencite{packardAdaptationEdgeChaos1988}, the author evolves \acp{CA} to
+perform a specific computation, and observes that the evolution process tends to
+select \acp{CA} with a $\lambda$ parameter close to the critical value observed
+by Langton which corresponds to the edge of chaos (see section
+\ref{sec:langtons-lambda} for details about the parameter). However, other
+authors were unable to replicate it \parencite{mitchellRevisitingEdgeChaos1993}.
+\textcite{kozaEvolutionSubsumptionUsing1992} applied genetic algorithms to
+\acp{CA} to generate random numbers.
+
+The problem of density classification was thoroughly explored since it fits the
+\ac{CA} paradigm particularly well \parencite{mitchellRevisitingEdgeChaos1993,
+  mitchellEvolvingCellularAutomata1994,
+  crutchfieldEvolutionEmergentComputation1995, dasGeneticAlgorithmDiscovers1994,
+  sipperCoevolvingNonuniformCellular1996, andreDiscoveryGeneticProgramming1996}.
+The goal of this task is to have \ac{CA} decide the most abundant type of cell
+in a binary initial state in one dimension. This task is trivial for a central
+controller that can read the state of all the cells in the initial grid, but it
+is much more complex for a decentralized systems like \ac{CA} with a small
+radius of interaction with neighbors. The evolved \ac{CA} developed various
+strategies to solve the task. Some are unsophisticated, such as expanding the 1s
+or 0s, which does not work on all validation examples. We show one of the more
+sophisticated solutions discovered by the genetic algorithm on figure
+\ref{fig:particle_ca}.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{.4\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/particle_ca_full.png}
+    \caption{Density $> 0.5$}
+    \label{fig:particle_ca_full}
+  \end{subfigure}
+  \hspace{10pt}
+  \begin{subfigure}[b]{.4\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/particle_ca_empty.png}
+    \caption{Density $< 0.5$}
+    \label{fig:particle_ca_empty}
+  \end{subfigure}
+  \caption{The particule-based solution to the density classification problem
+    \parencite{mitchellEvolvingCellularAutomata1996}. When the density is above
+    0.5, the \ac{CA} quickly reaches a state with only black cells, whereas when
+  the density is lower, it goes to a state with white cells.}
+  \label{fig:particle_ca}
+\end{figure}
+
 
 \paragraph{Reliable computation in cellular automata}
 The problem of carrying out reliable computations in \acp{CA} is studied early

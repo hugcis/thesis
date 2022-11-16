@@ -132,6 +132,30 @@ the importance of these boundaries decreases for very large grids.
 
 \subsection{Classification of cellular automata}
 
+Stephen Wolfram approached cellular automata as discrete, spatially extended
+dynamical systems \parencite{wolframUniversalityComplexityCellular1984}. The
+analogy is only superficial since many concepts from dynamical systems theory,
+such as ``chaos'', ``attractors'' and ``sensitivity to initial conditions'' only
+admit a rigourous definition in the continuous state and continuous time models.
+Wolfram proposed a qualitative classification of CA behavior roughly analogous
+to classifications in dynamical systems theory, with four classes defined as follows:
+
+\begin{description}
+  \item[Class 1] Initial configurations relax after a transient
+        period to the same fixed configuration (e.g., all 1s).
+  \item[Class 2] Initial configurations relax after a transient period to some
+        fixed point or some temporally periodic cycle of configurations, but
+        which one depends on the initial configuration. (\ac{CA} defined on
+        finite lattices always end up having a periodic behavior because there
+        is only a finite number of grid configurations. Class 2 does not refer to
+        this type of periodic behavior but rather to cycles with periods much
+        shorter than the total number of possible states).
+  \item[Class 3] Initial configurations relax after a transient
+        period to chaotic behavior. (The term “chaotic” here refers to
+        apparently unpredictable space-time behavior.)
+\end{description}
+
+
 \subsection{Cellular automata variants}
 
 A large number of variants of \acp{CA} have been proposed, modifying or
@@ -363,7 +387,7 @@ large number of rules is available, making it impossible to sample a significant
 portion of the rule space. A good parametrization allows scanning a wide range
 of behavior of \ac{CA} by traversing the space in an interesting way.
 
-\paragraph{Langton's lambda}
+\paragraph{Langton's lambda\label{sec:langtons-lambda}}
 
 Christopher Langton proposed one of the first parameter that could be used to
 control the behavior of \acp{CA} to some extent
@@ -684,13 +708,14 @@ in Figure~\ref{fig:mask}.
 \end{description}
 
 \subsubsection{Outputs}
+
 Similarly, inputs can be extracted from the hidden state in several different
 ways. One might read outputs from the boundaries of the grid, from a
 transformation of the grid using a neural network, etc. The output could also be
 stored within an additional dimension of the ``extended'' grid state presented
 above.
 
-\subsubsection{Computing with cellular automata}
+\subsubsection{Cellular automata and computations}
 
 From a computational point of view, the hidden state can be seen as a working
 tape that some kind of \emph{parallel Turing machine} (the cellular automaton)
