@@ -904,46 +904,66 @@ inform us on the nature and behavior of the underlying physical systems.
         \parencite{pfeiferHowBodyShapes2007}. For example, a reservoir using a
         mass-spring network was proposed by
         \textcite{hauserTheoreticalFoundationMorphological2011}.
-  \item[Biological \ac{RC}]
+  \item[Biological \ac{RC}] There have been multiple hypotheses on whether the
+        parts of the brain behaves like a \ac{RC} system
+        \parencite{yamazakiCerebellumLiquidState2007}. For example, a \ac{RC}
+        model was proposed to understand the mechanism of context-dependent eye
+        movement \parencite{domineyComplexSensorymotorSequence1995,
+        domineyModelCorticostriatalPlasticity1995}.
 \end{description}
 
 
 \subsection{Echo-state network}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/echo_state_network}
+  \caption{Diagram of an echo-state network. The \ac{RNN} is reprensented
+    ``flattened'' in time. The circles represent the units of the hidden state
+    of the \ac{RNN}. An arrow between unit $i$ and $j$ corresponds to a non-zero
+    entry in the matrix, $\mW_{h, ij} \neq 0$. Non-linear operations are not
+    represented.}
+  \label{fig:echo_state_network}
+\end{figure}
+
+
 The echo-state network is based on the following update equation:
 \begin{equation}
   \label{eq:esn}
-  \vr_{t + 1} = (1 - \alpha) \vr_{t} +
-  \beta \tanh(\mW\: \vr_{t} + \mW_{\text{in}}\: \vx_{t + 1}),
+  \vr_{t + 1} = (1 - \alpha) \vr_{t}
+  +
+  \beta \tanh(\mW_{h}\: \vr_{t} + \mW_{\text{in}}\: \vx_{t + 1}),
 \end{equation}
-where $\vr_{t}$ is the $K$-dimensional state vector -- corresponding to the hidden neurons
---- at time $t$, $\beta$ is the leaking rate, $\mW \in \mathbb{R}^{K \times K}$ is a sparsely
-connected random hidden layer matrix, and $\mW_{\text{in}} \in \mathbb{R}^{L \times K}$ is the
-input projection matrix. The matrices $\mW$ and $\mW_{\text{in}}$ are
-initialized randomly using the recommendations of
-\parencite{jaegerLongShortTermMemory2012}: $\mW$ has an average of 10 non-zeros
-entries per row, all sampled uniformly in $[-1, 1]$, $\mW_{\text{in}}$ has its
-entries uniformly sampled in $[-1, 1]$.
+where $\vr_{t}$ is the $K$-dimensional state vector -- corresponding to the
+hidden neurons --- at time $t$, $\beta$ is the leaking rate,
+$\mW \in \mathbb{R}^{K \times K}$ is a sparsely connected random hidden layer
+matrix, and $\mW_{\text{in}} \in \mathbb{R}^{L \times K}$ is the input
+projection matrix. The matrices $\mW$ and $\mW_{\text{in}}$ are initialized
+randomly using the recommendations of \parencite{jaegerLongShortTermMemory2012}:
+$\mW$ has an average of 10 non-zeros entries per row, all sampled uniformly in
+$[-1, 1]$, $\mW_{\text{in}}$ has its entries uniformly sampled in $[-1, 1]$.
 
 The $L$-dimensional outputs are computed at times $t > 0$ as
 \begin{equation}
   \label{eq:esn-res}
 \tilde{\vx}_{t+ 1} = D(\vr_{t}),
 \end{equation}
-where $D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is a (trained) decoding function. For echo-state networks, the
-decoder is often a linear transformation
+where $D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is a (trained) decoding
+function. For echo-state networks, the decoder is often a linear transformation
 $D(\vr_{t}) = \mW_{\text{out}} \vr_{t}$ where $\mW_{\text{out}}$ is a
-$K \times L$-dimensional matrix. In our experiments, we set $\beta = 0$, which was
-empirically observed to yield the best results on our tasks. The parameter $\beta$,
-as well as the randomly sampled weight matrix, are sometimes tuned for each task
-\parencite{jaegerLongShortTermMemory2012}. We only use
-default values to get a task-independent setup with
-the least possible assumptions and to make the methods comparable.
+$K \times L$-dimensional matrix. In our experiments, we set $\beta = 0$, which
+was empirically observed to yield the best results on our tasks. The parameter
+$\beta$, as well as the randomly sampled weight matrix, are sometimes tuned for
+each task \parencite{jaegerLongShortTermMemory2012}. We only use default values
+to get a task-independent setup with the least possible assumptions and to make
+the methods comparable.
 
 \subsection{Reservoir cellular automata\label{sec:app-ca-res}}
 
-The Cellular Automaton (CA) update function $\Phi$ is applied at time $t$ on the previous state vector
-$\vs_{t - 1}$ --- also called the grid. The input vector $\vx_{t}$ at time $t$ is
-projected onto a vector $\vp_{t}$ the same size as $\vs_{t}$ using a method proposed in
+The Cellular Automaton (CA) update function $\Phi$ is applied at time $t$ on the
+previous state vector $\vs_{t - 1}$ --- also called the grid. The input vector
+$\vx_{t}$ at time $t$ is projected onto a vector $\vp_{t}$ the same size as
+$\vs_{t}$ using a method proposed in
 \parencite{yilmazReservoirComputingUsing2014}. To combine inputs with CA states,
 we XOR the two vectors together
 \parencite{gloverDynamicalLandscapeReservoir2021},
@@ -982,6 +1002,9 @@ quantitative notion of complexity.
 
 \subsection{Information based measures}
 
+We note that one of the most widely known concept of complexity of symbol
+sequences, the ``algorithmic complexity'', should rather be called a measure of
+information.
 
 \subsubsection{Information content}
 For an event $E$ with probability $P$, the information content of this event is
