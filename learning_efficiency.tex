@@ -53,18 +53,16 @@ learning speeds. In this work, we use the newly proposed \ac{WADE} metric and th
 Reservoir computing is a computational framework that aims to exploit the states
 of a complex dynamical system. The simplest example of a reservoir computer is a
 \ac{RNN} with frozen weights. This special \ac{RNN} performs random manipulation
-on its hidden state in reaction to each new input.
-Interestingly, it has been shown that with a
-specific initialization of the frozen weights, these \ac{RNN}s (called Echo
-state networks) can keep a memory of past inputs
-\parencite{jaegerEchoStateApproach2001}.
-Usually, a standard linear regression is
-added as a decoder to extract valuable representation from the hidden state for
-some downstream task. Freezing the weights of these recurrent models is useful
-when available supervision is very limited or non-existent or for reinforcement
-learning with sparse rewards since direct training would be impossible. In such
-cases a reservoir computer creates a continuously evolving pool of random
-functions that can be combined using the last trainable layer.
+on its hidden state in reaction to each new input. Interestingly, it has been
+shown that with a specific initialization of the frozen weights, these \ac{RNN}s
+(called Echo state networks) can keep a memory of past inputs
+\parencite{jaegerEchoStateApproach2001}. Usually, a standard linear regression
+is added as a decoder to extract valuable representation from the hidden state
+for some downstream task. Freezing the weights of these recurrent models is
+useful when available supervision is very limited or non-existent or for
+reinforcement learning with sparse rewards since direct training would be
+impossible. In such cases a reservoir computer creates a continuously evolving
+pool of random functions that can be combined using the last trainable layer.
 
 
 
@@ -933,66 +931,6 @@ chose the ten separate tasks/settings pairs listed above to get a broad overview
 benchmarked models on a range of task difficulties.
 \footnotetext{$h$ is chosen to match the number of parameters of the reservoir-based methods.}
 
-\section{Reservoir models\label{sec:res-models}}
-We describe in more details the two reservoir-based models used in our experiments.
-\subsection{Echo-state network}
-The echo-state network is based on the
-following update equation:
-\begin{equation}
-  \label{eq:esn}
-  \vr_{t + 1} = (1 - \alpha) \vr_{t} +
-  \beta \tanh(\mW\: \vr_{t} + \mW_{\text{in}}\: \vx_{t + 1}),
-\end{equation}
-where $\vr_{t}$ is the $K$-dimensional state vector -- corresponding to the hidden neurons
---- at time $t$, $\beta$ is the leaking rate, $\mW \in \mathbb{R}^{K \times K}$ is a sparsely
-connected random hidden layer matrix, and $\mW_{\text{in}} \in \mathbb{R}^{L \times K}$ is the
-input projection matrix. The matrices $\mW$ and $\mW_{\text{in}}$ are
-initialized randomly using the recommendations of
-\parencite{jaegerLongShortTermMemory2012}: $\mW$ has an average of 10 non-zeros
-entries per row, all sampled uniformly in $[-1, 1]$, $\mW_{\text{in}}$ has its
-entries uniformly sampled in $[-1, 1]$.
-
-The $L$-dimensional outputs are computed at times $t > 0$ as
-\begin{equation}
-  \label{eq:esn-res}
-\tilde{\vx}_{t+ 1} = D(\vr_{t}),
-\end{equation}
-where $D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is a (trained) decoding function. For echo-state networks, the
-decoder is often a linear transformation
-$D(\vr_{t}) = \mW_{\text{out}} \vr_{t}$ where $\mW_{\text{out}}$ is a
-$K \times L$-dimensional matrix. In our experiments, we set $\beta = 0$, which was
-empirically observed to yield the best results on our tasks. The parameter $\beta$,
-as well as the randomly sampled weight matrix, are sometimes tuned for each task
-\parencite{jaegerLongShortTermMemory2012}. We only use
-default values to get a task-independent setup with
-the least possible assumptions and to make the methods comparable.
-
-\subsection{Reservoir cellular automata\label{sec:app-ca-res}}
-
-The Cellular Automaton (CA) update function $\Phi$ is applied at time $t$ on the previous state vector
-$\vs_{t - 1}$ --- also called the grid. The input vector $\vx_{t}$ at time $t$ is
-projected onto a vector $\vp_{t}$ the same size as $\vs_{t}$ using a method proposed in
-\parencite{yilmazReservoirComputingUsing2014}. To combine inputs with CA states,
-we XOR the two vectors together
-\parencite{gloverDynamicalLandscapeReservoir2021},
-\begin{equation}
-  \label{eq:ca-xor}
-  \vs'_{t} = \vp_{t}\otimes \vs_{t},
-\end{equation}
-where $\vs'_{t}$ is the temporary CA state resulting from the combination of the
-CA state and input vectors at time $t$. We then compute the next CA states by
-applying the update function $\Phi$,
-\begin{equation}
-  \label{eq:ca-state}
-  \vs_{t + 1} = \Phi(\vs'_{t}).
-\end{equation}
-The final reservoir state $\vr_{t + 1}$ is obtained by concatenating $r$ consecutive CA
-states obtained from a single combined state $\vs'$ by applying $\Phi$ again. If
-the size of the state is $n$, the resulting reservoir vector $\vr$ has a dimension
-$K = r \times n$, where $r$ is defined above. As for the echo-state network (ESN), the $L$-dimensional output tokens are
-calculated at times $t > 0$ as $\tilde{\vx}_{t+ 1} = D(\vr_{t})$ where
-$D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is the (trained) decoding function. We use linear decoding functions in
-our experiments such that $D(\vr_{t}) = \mW_{\text{out}}\vr_{t}$.
 
 \section{Conclusions}
 

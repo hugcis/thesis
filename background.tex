@@ -401,6 +401,7 @@ cell has 6 direct neighbors.
     \caption{Range 1 neighborhood}
     \label{fig:hexagonal_1}
   \end{subfigure}
+  \hspace{10pt}
   \begin{subfigure}[b]{.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{figures/hexagonal_2}
@@ -826,7 +827,144 @@ parameters to be represented by a CNN because it is totalistic (a cell's new
 state only depends on the number of neighbors in state 1 and its current state).
 
 
-\section{Reservoir computing}
+\section{Reservoir computing \label{sec:res-models}}
+\Ac{RC} is a computational framework that aims to exploit the states of a
+complex dynamical system to perform some target task
+\parencite{tanakaRecentAdvancesPhysical2019}. It relies on a \emph{reservoir} of
+computations, that is a dynamical system performing operations on its internal
+state. An input signal is fed into this reservoir, that behaves as a black box
+from the point of view of the algorithm. Finally the a decoder model (usually a
+linear regression), is trained in a supervised manner to extract necessary
+information from the internal state of the dynamical systems to predict the
+right output. A general diagram describing this process is displayed on figure
+\ref{fig:reservoir_diagram}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/reservoir_schema}
+  \caption{Diagram of the general functioning of a \ac{RC} system. Input values
+    are projected in the state or evolution function of a dynamical system which
+    is run according to its internal rule. }
+  \label{fig:reservoir_diagram}
+\end{figure}
+
+In an early work, \textcite{buonomanoTemporalInformationTransformed1995} used a
+random spiking neural network with excitatory and inhibitory elements. Neuron
+connection probabilities were inspired by real rat brain data
+\parencite{masonSynapticTransmissionIndividual1991}. He observed a interval
+sensitive response of these neurons when subjected to pulses spaced by varying
+time intervals. This indicates an ability to encode temporal information. To
+measure this phenomenon he trained an output linear layer to recognize specific
+patterns in the activation of the last layer of neurons. This idea of using a
+randomly initialized neural network with fixed weights and train a simple linear
+layer to decode outputs was reinvented later under the names ``Echo-state
+networks'' \parencite{jaegerEchoStateApproach2001} and ``Liquid state machines''
+\parencite{maassRealTimeComputingStable2002}.
+
+Another advantage of reservoir computing is that, because the reservoir can be
+implemented using a variety of physical systems, substrates, and devices. These
+type of reservoirs are sometimes called ``exotic''
+\parencite{lukoseviciusReservoirComputingApproaches2009}, but physical \ac{RC}
+shows promises to develop cheap and efficient machine learning hardware and can
+inform us on the nature and behavior of the underlying physical systems.
+\textcite{tanakaRecentAdvancesPhysical2019} lists several types of \ac{RC}
+
+\begin{description}
+  \item[Dynamical systems] The \ac{RC} models based on other reservoirs than
+        random \acp{RNN}. This includes reservoir computing with \aclp{CA},
+        which we give more detail about in section \ref{sec:app-ca-res}.
+  \item[Electronic \ac{RC}] These models are implemented on electronic circuits,
+        such as artificial neural networks implemented on physical circuits or
+        other neuromorphic circuits. For example, \ac{RC} models can be build on
+        FPGAs \parencite{antonikApplicationFPGAReal2018,
+        verstraetenReservoirComputingStochastic2005,
+        alomarLowcostHardwareImplementation2014,
+        antonikFPGAImplementationReservoir2015} or memristive circuits
+        \parencite{yangInvestigationsStaircaseMemristor2016,
+        merkelMemristiveReservoirComputing2014,
+        donahueDesignAnalysisNeuromemristive2015}.
+  \item[Photonic \ac{RC}] The principle of photonic \ac{RC} is to use optical
+        reservoirs to generate the computations. A first example using
+        semiconductor optical amplifiers (SOAs) was proposed by
+        Vandoorne and colleague \parencite{vandoorneOpticalSignalProcessing2008,
+        vandoorneParallelReservoirComputing2011} and subsequently built \parencite{vandoorneExperimentalDemonstrationReservoir2014}.
+        Other works use that scattering of light in complex media
+        \parencite{dongOpticalReservoirComputing2020,
+        rafayelyanLargeScaleOpticalReservoir2020}.
+  \item[Spintronic \ac{RC}] Some \ac{RC} works used nanosacle electronics
+        involving the charge and spin of electrons called \emph{spintronics}
+        \parencite{wolfSpintronicsSpinBasedElectronics2001}. Spintronics have
+        been used in multiple ways to build \ac{RC} models, using spin torque
+        oscillators (STO)
+        \parencite{torrejonNeuromorphicComputingNanoscale2017,
+        williameChaoticDynamicsMacrospin2019}, or spin waves
+        \parencite{nakaneReservoirComputingSpin2018}.
+  \item[Mechanical \ac{RC}] Soft mechanical bodies have complex nonlinear
+        dynamics that can be beneficial to build a \ac{RC} model
+        \parencite{pfeiferHowBodyShapes2007}. For example, a reservoir using a
+        mass-spring network was proposed by
+        \textcite{hauserTheoreticalFoundationMorphological2011}.
+  \item[Biological \ac{RC}]
+\end{description}
+
+
+\subsection{Echo-state network}
+The echo-state network is based on the following update equation:
+\begin{equation}
+  \label{eq:esn}
+  \vr_{t + 1} = (1 - \alpha) \vr_{t} +
+  \beta \tanh(\mW\: \vr_{t} + \mW_{\text{in}}\: \vx_{t + 1}),
+\end{equation}
+where $\vr_{t}$ is the $K$-dimensional state vector -- corresponding to the hidden neurons
+--- at time $t$, $\beta$ is the leaking rate, $\mW \in \mathbb{R}^{K \times K}$ is a sparsely
+connected random hidden layer matrix, and $\mW_{\text{in}} \in \mathbb{R}^{L \times K}$ is the
+input projection matrix. The matrices $\mW$ and $\mW_{\text{in}}$ are
+initialized randomly using the recommendations of
+\parencite{jaegerLongShortTermMemory2012}: $\mW$ has an average of 10 non-zeros
+entries per row, all sampled uniformly in $[-1, 1]$, $\mW_{\text{in}}$ has its
+entries uniformly sampled in $[-1, 1]$.
+
+The $L$-dimensional outputs are computed at times $t > 0$ as
+\begin{equation}
+  \label{eq:esn-res}
+\tilde{\vx}_{t+ 1} = D(\vr_{t}),
+\end{equation}
+where $D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is a (trained) decoding function. For echo-state networks, the
+decoder is often a linear transformation
+$D(\vr_{t}) = \mW_{\text{out}} \vr_{t}$ where $\mW_{\text{out}}$ is a
+$K \times L$-dimensional matrix. In our experiments, we set $\beta = 0$, which was
+empirically observed to yield the best results on our tasks. The parameter $\beta$,
+as well as the randomly sampled weight matrix, are sometimes tuned for each task
+\parencite{jaegerLongShortTermMemory2012}. We only use
+default values to get a task-independent setup with
+the least possible assumptions and to make the methods comparable.
+
+\subsection{Reservoir cellular automata\label{sec:app-ca-res}}
+
+The Cellular Automaton (CA) update function $\Phi$ is applied at time $t$ on the previous state vector
+$\vs_{t - 1}$ --- also called the grid. The input vector $\vx_{t}$ at time $t$ is
+projected onto a vector $\vp_{t}$ the same size as $\vs_{t}$ using a method proposed in
+\parencite{yilmazReservoirComputingUsing2014}. To combine inputs with CA states,
+we XOR the two vectors together
+\parencite{gloverDynamicalLandscapeReservoir2021},
+\begin{equation}
+  \label{eq:ca-xor}
+  \vs'_{t} = \vp_{t}\otimes \vs_{t},
+\end{equation}
+where $\vs'_{t}$ is the temporary CA state resulting from the combination of the
+CA state and input vectors at time $t$. We then compute the next CA states by
+applying the update function $\Phi$,
+\begin{equation}
+  \label{eq:ca-state}
+  \vs_{t + 1} = \Phi(\vs'_{t}).
+\end{equation}
+The final reservoir state $\vr_{t + 1}$ is obtained by concatenating $r$ consecutive CA
+states obtained from a single combined state $\vs'$ by applying $\Phi$ again. If
+the size of the state is $n$, the resulting reservoir vector $\vr$ has a dimension
+$K = r \times n$, where $r$ is defined above. As for the echo-state network (ESN), the $L$-dimensional output tokens are
+calculated at times $t > 0$ as $\tilde{\vx}_{t+ 1} = D(\vr_{t})$ where
+$D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is the (trained) decoding function. We use linear decoding functions in
+our experiments such that $D(\vr_{t}) = \mW_{\text{out}}\vr_{t}$.
 
 
 
