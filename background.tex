@@ -71,14 +71,14 @@ always work with regular grids.
     \label{fig:von_neumann}
   \end{subfigure}
 
-  \caption{Illustration of commonly used neighborhoods for 1D and 2D cellular automata.}
+  \caption{Illustration of commonly used neighborhoods for 1D and 2D \ac{CA}.}
   \label{fig:neighborhoods}
 \end{figure}
 
 A \ac{CA} evolves in discrete time steps. An update rule
 $\boldsymbol{\Phi}: \mathcal{S}^{s} \rightarrow \mathcal{S}$ defines the new state of a cell as a
 function of its local neighborhood at the current time step. It is applied in
-parallel to all the cells. For a cellular automaton in its initial state at time
+parallel to all the cells. For a \ac{CA} in its initial state at time
 step 0 --- \ie a set of cells $\left(c_{i}^{(0)}\right)_{i \in \mathcal{L}} \in \mathcal{S}^{|\mathcal{L}|}$, and a
 neighborhood function $\boldsymbol{N}$, we have the following update rule
 \begin{equation}
@@ -132,13 +132,14 @@ the importance of these boundaries decreases for very large grids.
 
 \subsection{Classification of cellular automata\label{sec:class-cell-autom}}
 
-Stephen Wolfram approached cellular automata as discrete, spatially extended
-dynamical systems \parencite{wolframUniversalityComplexityCellular1984}. The
-analogy is only superficial since many concepts from dynamical systems theory,
-such as ``chaos'', ``attractors'' and ``sensitivity to initial conditions'' only
-admit a rigourous definition in the continuous state and continuous time models.
-Wolfram proposed a qualitative classification of CA behavior roughly analogous
-to classifications in dynamical systems theory, with four classes defined as follows:
+Stephen Wolfram approached \acp{CA} as discrete, spatially extended dynamical
+systems \parencite{wolframUniversalityComplexityCellular1984}. The analogy is
+only superficial since many concepts from dynamical systems theory, such as
+``chaos'', ``attractors'' and ``sensitivity to initial conditions'' only admit a
+rigourous definition in the continuous state and continuous time models. Wolfram
+proposed a qualitative classification of CA behavior roughly analogous to
+classifications in dynamical systems theory, with four classes defined as
+follows:
 
 \begin{description}
   \item[Class 1] All initial configurations relax after a transient
@@ -384,8 +385,8 @@ are $2^{134,217,728} \approx 10^{40,403,562}$ such rules in 3D.
 Despite these limitation several works have studied higher dimensional \acp{CA},
 although mostly in 3 dimensions
 \parencite{tsalidesThreedimensionalCellularAutomata1989,
-  sudhakaranGrowing3DArtefacts2021}. There are several examples of successful
-3D \acp{CA} simulations applied to material sciences
+  sudhakaranGrowing3DArtefacts2021}. For example, there are several examples of
+successful 3D \acp{CA} simulations applied to material sciences
 \parencite{gandin3DCellularAutomaton1997, arataFreeformShapeModeling1999,
   panStudyFailureScale2009, dicaprio3DCellularAutomata2016}.
 
@@ -544,8 +545,20 @@ and recurrent networks. It shows for instance that emergent properties with
 increasing complexity and perhaps open-ended development are possible within the
 hidden state of a recurrent neural network.
 
-The parallel between cellular automata and a form of recurrent/convolutional
-network has also been drawn by several other researchers
+The conceptual similarity between \acp{CA} and neural networks comes to no
+surprise. Fundamentally, \ac{CA} represent the paradigm of emergence, whereby
+the origins of complex behaviors are searched for in an assemblage of possibly
+very simple parts rather than viewed as a sum of complex building blocks. It is
+often argued that there is no better known example of a truly emergent
+phenomenon than that of the emergence of consciousness out of the large network
+of functionally simple (and certainly unconscious) neuronal components that make
+up the human brain. A biological neural network, like a \ac{CA}, consists of a
+large space of interconnected nodes, with a dynamical behavior that is a local
+function of other nodes to which it is connected. Artificial neural networks can
+be thought of as being a set of biologically inspired CA rules
+\parencite{ilachinskiCellularAutomataDiscrete2001}. The more precise parallel
+between cellular automata and a form of recurrent/convolutional network has also
+been drawn by several other researchers
 \parencite{wulffLearningCellularAutomaton1993,
   gilpinCellularAutomataConvolutional2018,
   mordvintsevGrowingNeuralCellular2020}.
@@ -783,13 +796,13 @@ described above has several interesting consequences.
 
 Because we can simulate rule 110 ECA in the above system, it follows from the
 Turing-completeness of this CA rule that the above system is Turing-complete.
-
-This is a fun result, albeit not by any mean revolutionary since RNN have already
-been proven to be Turing-complete~\parencite{siegelmannComputationalPowerNeural1992}.
-
-The model is in practise relatively far from a real world CNN with a fixed
-number of layers independent from one another --- compared to a variable number
-of steps and shared layers for the automaton-RCNN\@.
+This is a interesting result, albeit not very significant since RNN have already
+been proven to be
+Turing-complete~\parencite{siegelmannComputationalPowerNeural1992}, with very
+little practical implications. The model is in practice relatively far from a
+real world CNN with a fixed number of layers independent from one another ---
+compared to a variable number of steps and shared layers for the
+automaton-RCNN\@.
 
 \subsubsection{Differentiable cellular automata}
 
@@ -1029,15 +1042,18 @@ previous works and present our proposed extensions.
 
 \paragraph{Encoding\label{sec:encoding}}
 Input data is assumed to be categorical and sequential,
-\[X = [X_{1}, \ldots, X_{t}, \ldots],\quad t\in \mathbb{N}, \quad \forall t \  X_{t} \in \mathcal{X} \subset \mathbb{N}. \]
+
+\[
+  X = [X_{1}, \ldots, X_{t}, \ldots],\quad t\in \mathbb{N}, \quad \forall t \ X_{t} \in \mathcal{X} \subset \mathbb{N}.
+\]
 
 A cellular automaton is a discrete system which is not particularly designed to
 handle inputs. The purpose of the encoding step in ReCA is to convert the input
-data points to vectors in the cellular automaton state space. Such encoding
-should translate --- or embed --- the input space $\mathcal{X}$ to a new one that can be
-combined with the current state of the cellular automaton. The goal is to make a
-cellular automaton ``react'' to its input and leverage the resulting computation
-to solve a problem.
+data points to vectors that can be embedded in the cellular automaton state
+space. Such encoding should translate --- or embed --- the input space
+$\mathcal{X}$ to a new one that can be combined with the current state of the
+cellular automaton. The goal is to make a cellular automaton ``react'' to its
+input and leverage the resulting computation to solve a problem.
 
 \paragraph{Input projection}
 
@@ -1194,19 +1210,27 @@ $D(\vr_{t}) = \mW_{\text{out}}\vr_{t}$. The complete process of \ac{RC} with
 
 Measuring the complexity of a system is a fundamentally difficult task. Many
 complex systems exhibit what Peter Grassberger calls \emph{self-generated
-  complexity} \parencite{grassbergerQuantitativeTheorySelfgenerated1986}. It
+  complexity} \parencite{grassbergerQuantitativeTheorySelfgenerated1986}. This
 means that the formulation of the problem is translationally invariant and the
 observed structure arises from a spontaneous breakdown of translational
 invariance. Unfortunately there is no universally accepted and formalized notion
 of ``complexity'', even though most intuitively agree that it exists. No clear
-observable and protocol to acquire it have been proposed that would give a
-quantitative notion of complexity.
+observable and protocol have been proposed that would give a quantitative notion
+of complexity. \textcite{grassbergerProblemsQuantifyingSelfgenerated1989} argued
+that no single quantity is sufficient to measure complexity, since it depends on
+how meaning is assigned to this term. Even when meaning has been fixed by the
+definition of an observable quantity, the statistics of the measurement of this
+observable are crucial to its interpretation
+\parencite{gutowitzCellularAutomataSciences1995}.
+
 
 \subsection{Information based measures}
 
 We note that one of the most widely known concept of complexity of symbol
 sequences, the ``algorithmic complexity'', should rather be called a measure of
-information.
+information. In the literature, measures of information are commonly used as
+complexity metrics. These quantities are better measures of ``randomness'' than
+complexity, but they are nonetheless important for the study of complex systems.
 
 \subsubsection{Information content}
 For an event $E$ with probability $P$, the information content of this event is
@@ -1229,15 +1253,13 @@ per cell score that can be averaged over a entire automaton.
 
 This is for instance one of the measures used by Wolfram in
 \parencite{wolframStatisticalMechanicsCellular1983} and by Langton in
-\parencite{langtonComputationEdgeChaos1990} to study how the parameter $\lambda$ affects
-the behavior of the automaton.
-
-There are several ways to compute it when dealing with a CA, depending on what
-part of the CA is considered as the main random variable. If the CA is finite,
-the state at timestep $t$ can be seen as a random variable that can take one of
-$2^N$ possible values (with $N$ the width of the automaton state). In that case,
-the probability of a state can easily be estimated by counting its number of
-occurences during evolution.
+\parencite{langtonComputationEdgeChaos1990} to study how the parameter $\lambda$
+affects the behavior of the automaton. There are several ways to compute it when
+dealing with a CA, depending on what part of the CA is considered as the main
+random variable. If the CA is finite, the state at timestep $t$ can be seen as a
+random variable that can take one of $2^N$ possible values (with $N$ the width
+of the automaton state). In that case, the probability of a state can easily be
+estimated by counting its number of occurrences during evolution.
 
 \subsubsection{Rényi Entropy}
 The Rényi entropy is a generalization of Shannon entropy that gives different
@@ -1248,52 +1270,93 @@ $0, 1, ..., n$ as
   H_\alpha(X) = \frac{1}{1-\alpha} \log\left(\sum_{i=0}^np_i^\alpha\right)
 \end{align*}
 
-In the limit $\alpha \rightarrow 1$ it is equal to the Shannon entropy. $\alpha
-\rightarrow \infty$ yields the Min-entropy. With $\alpha \rightarrow 0$ Rényi
-entropy is the same as Max-entropy.
-
-Rényi entropy is used in \parencite{wolframStatisticalMechanicsCellular1983} to
+In the limit $\alpha \rightarrow 1$ it is equal to the Shannon entropy, where
+each events probabilities are equally important. $\alpha \rightarrow \infty$
+yields the Min-entropy, and we have $H_{\infty} (X) = \min_{i}(\log(p_{i}))$.
+With $\alpha \rightarrow 0$ Rényi entropy is the same as Max-entropy. Rényi
+entropy was used by \textcite{wolframStatisticalMechanicsCellular1983} to
 estimate entropy in infinite CAs.
 
 \paragraph{Mutual information}
+The mutual information is a measure of the dependence between two variables. Two
+independent variables will have a mutual information of zero. If the two are
+strongly dependent, for example if one is a function of another, the mutual
+information between them will be large.
 
-\subsection{Computation based measures}
+\textcite{chaitinMathematicalDefinitionLife1987} proposes to split a system into
+blocks of fixed sizes and calculate the mutual information among its components.
+He uses the maximum value of the mutual information in all possible partitions
+define "life" in a mathematical way. \textcite{shawDrippingFaucetModel1984} and
+\textcite{grassbergerQuantitativeTheorySelfgenerated1986} also use the mutual
+information measure between two semi-infinite blocks in a sequence to define
+complexity. Mutual information is also used to study the complexity of cellular
+automata as the parameter $\lambda$ is changed (for details about the $\lambda$
+in the context of \ac{CA}, see section \ref{sec:langtons-lambda})
+\parencite{gutowitzMethodsDesigningCellular1988,
+  liTransitionPhenomenaCellular1990}.
 
-\subsubsection{Kolmogorov-Chaitin complexity {\small (algorithmic complexity)}}
 
-Introduced by Kolmogorov \parencite{kolmogorovThreeApproachesQuantitative1968} and Chaitin
-\parencite{chaitinLengthProgramsComputing1969}, this complexity measure is defined for a string $s$
-of characters and a universal description language (\eg a programming language)
-as the length of the shortest program that can generate the string $s$. Such
-number $K(s)$ is called the minimal description length of $s$.
+\subsubsection{Computational complexity}
+Algorithms can be described by their space and time complexity, which
+respectively correspond to the amount of memory storage and CPU time necessary
+to run them \parencite{traubInformationUncertaintyComplexity1983,
+  packelRecentDevelopmentsInformationbased1987,
+  hopcroftIntroductionAutomataTheory2007}. Algorithms that depend on a parameter
+$N$ will be said to be NP-hard if the time needed to run it increases
+exponentially with the parameter $N$. NP-hard algorithms can be said to be
+complex as they require a supposedly irreducible amount of computation to
+compute their output. In practice this description only applies to computations
+that were generated by a hand-designed algorithm, and not the kind of
+computations self-generated by a complex system that we are interested in. The
+computational complexity of an algorithm performed by a dynamical system thus
+cannot be effectively used as a measure for the complexity of that system.
 
-From the invariance theorem, the difference in Kolmogorov complexity of the same
+\subsubsection{Solomonoff–Kolmogorov-Chaitin complexity (algorithmic
+  complexity)}
+
+Introduced by Solomonoff \parencite{solomonoffPreliminaryReportGeneral1960},
+Kolmogorov \parencite{kolmogorovThreeApproachesQuantitative1968} and Chaitin
+\parencite{chaitinLengthProgramsComputing1969,
+  chaitinAlgorithmicInformationTheory1977,
+  chaitinInformationRandomnessIncompleteness1990}, this complexity measure is
+defined for a string $s$ of characters and a universal description language (\eg
+a programming language) as the length of the shortest program that can generate
+the string $s$. Such number $K(s)$ is called the minimal description length of
+$s$. We note that Chaitin prefers to call his field "algorithmic information
+theory." His position is that "algorithmic complexity" is a measure of
+randomness rather than a measure of complexity
+\parencite{chaitinInformationRandomnessIncompleteness1990}.
+
+From the invariance theorem, the difference in algorithmic complexity of the same
 string $s$ in two different description language is bounded, although this bound
-might be very large in practice.
+might be very large in practice. The algorithmic complexity is uncomputable, and
+there exists strings of arbitrarily large complexity, which makes it hopeless
+using this exact measure in practice. Moreover, algorithmic complexity tells us
+how much information is required to encode a number, but does not tell us how
+difficult it is to recreate the number from that code
+\parencite{gell-mannSimplicityComplexityDescription1988}.
 
-The Kolmogorov complexity is uncomputable, and there exists strings of
-arbitrarily large complexity, which makes it hopeless using this exact measure
-in practice.
-
-One rather straightforward way of approaching the Kolmogorov complexity of an
+One rather straightforward way of approaching the algorithmic complexity of an
 arbitrary string is to use a compression algorithm, and use the length of the
 decompression program plus the length of the compressed string as an upper bound
-to the Kolmogorov complexity. This is the approach adopted by Zenil in
-\parencite{zenilCompressionBasedInvestigationDynamical2010} to classify the 1D ECA. This method, which
-often makes use of the popular LZ algorithm can be seen as an independent
-complexity measure, also closely related to the Lempel-Ziv complexity, described
-in more details in~\ref{subsection:lempel-ziv}.
+to the algorithmic complexity. This is the approach adopted by
+\textcite{zenilCompressionBasedInvestigationDynamical2010} to classify the 1D
+\ac{ECA}. This method, which often makes use of the popular LZ algorithm can be
+seen as an independent complexity measure, also closely related to the
+Lempel-Ziv complexity, described in more details in~\ref{subsection:lempel-ziv}.
 
-However, it is worth noting that in the case of a grid state generated by a
-cellular automaton, the Kolmogorov complexity is easily upper bounded by a
-constant value entirely defined by the transition table of the automaton, its
+However, it is worth noting that when a complex system is described by an
+algorithm (such as for a \ac{CA}), the algorithmic complexity is easily upper
+bounded by a constant value entirely defined by the algorithm that simulated the
+complex system. For example, for a \ac{CA} table of the automaton, its
 characteristics (size, boundary conditions, \etc), the initial state and number
 of steps.
 
 \subsubsection{Lempel-Ziv complexity}\label{subsection:lempel-ziv}
-The Lempel-Ziv complexity as defined in \parencite{lempelComplexityFiniteSequences1976} is the
-number of steps in the LZ algorithm, which is directly related to the number of
-repeated substrings in the input string.
+The Lempel-Ziv complexity as defined in
+\parencite{lempelComplexityFiniteSequences1976} is the number of steps in the LZ
+algorithm, which is directly related to the number of repeated substrings in the
+input string.
 
 The main idea of this algorithm is to scan the input string while attempting to
 find some repetition of previous input in the incoming data. This builds over
@@ -1306,12 +1369,39 @@ algorithm to reduce the size of the input. An input with regularities and
 repetitive patterns will result in a small output whereas a random input will
 rather be .
 
-\subsubsection{Computational complexity}
 
 \subsubsection{Logical Depth}
 
+Bennett's logical depth is a measure of complexity based on the algorithmic
+complexity \parencite{bennettDissipationInformationComputational1988,
+  bennettLogicalDepthPhysical1995}. The main difference is that it takes into
+account the computation time (or number of steps) along with the length of the
+program used to generate the sequence. It is a combination of algorithmic
+complexity and computational complexity. For a universal computer $U$, the
+logical depth of a string $x$ at a significance level $s$ is defined as
+
+\begin{equation}
+  \label{eq:2}
+  \min\{T(p): (|p| - |p^{*}| < s ) \wedge (U(p) = x) \},
+\end{equation}
+which is the least time required to compute it by a $s$-incompressible program,
+that is a program which length is within $s$ symbols from the optimal program
+$p^{*}$ of the algorithmic complexity metric.
+\textcite{gutowitzCellularAutomataSciences1995}
+
 \subsubsection{Thermodynamic Depth}
+
+The thermodynamic depth, developped by
+\textcite{lloydComplexityThermodynamicDepth1988} is another measure of
+complexity based on the intuitive notion that complex systems lie somewhere in
+the continuum between order and chaos
+\parencite{chaitinInformationRandomnessIncompleteness1990,
+  ceccattoComplexityHierarchicalSystems1988, deutschQuantumTheoryChurch1985}.
 
 \subsubsection{Sophistication}
 
+\parencite{koppelAlmostMachineindependentTheory1991a}
+
 \subsubsection{Effective Measure complexity}
+
+\parencite{grassbergerQuantitativeTheorySelfgenerated1986}
