@@ -321,7 +321,8 @@ numerical simulations, because it is also uncomputable.
 
 \subsection{Effective Measure complexity}
 
-\parencite{grassbergerQuantitativeTheorySelfgenerated1986}
+\parencite{grassbergerQuantitativeTheorySelfgenerated1986,
+  gell-mannInformationMeasuresEffective1996}
 
 \section{Emergence}
 The notion of emergence is central to the study of complex systems. It is a very
@@ -378,6 +379,21 @@ search methods, in particular when the search space is hard to parametrize or
 very large. \ac{CA} rules are a good example of such search space, and genetic
 algorithms were successfully used to evolve rules to perform complex
 computations \parencite{mitchellEvolvingCellularAutomata1996}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/evolutionary_diagram.pdf}
+  \caption{Illustration of the general principle common to many evolutionary
+    algorithms. There are three virtual spaces: ($G$) the genotype space where
+    the candidate solutions are generated through some encoding. ($P$) the
+    phenotype space, which corresponds to the decoded solution from a genotype
+    $x$. It can be the policy of an agent, the rule of a \ac{CA}, etc. ($B$) the
+    behavior space, which is the space from which candidate solutions are
+    evaluated. The small subspace $\mathcal{G}$ is the goal space, corresponding
+  to the set of behaviors that would be considered successful.}
+  \label{fig:evolutionary_diagram}
+\end{figure}
+
 
 \subsection{Novelty search}
 The idea behind \ac{NS} is to drive a search algorithm only by the novelty of

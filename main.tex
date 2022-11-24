@@ -12,7 +12,13 @@ footskip=1.5cm]{geometry}
 \usepackage[margin=0.5cm]{caption}
 \usepackage{subcaption}
 \usepackage{graphicx}
-\usepackage[style=authoryear-comp]{biblatex}
+\usepackage[style=authoryear-comp,backref=true]{biblatex}
+
+\DefineBibliographyStrings{english}{%
+  backrefpage = {page},% originally "cited on page"
+  backrefpages = {pages},% originally "cited on pages"
+}
+
 \usepackage{setspace}
 
 \doublespacing
@@ -78,6 +84,7 @@ footskip=1.5cm]{geometry}
 \newacro{NS}{novelty search}
 \newacro{RC}{reservoir computing}
 
+\AtBeginEnvironment{thebibliography}{\linespread{1}\selectfont}
 
 \urldef\projecturl\url{https://hugocisneros.com/ALIFE-Paper-2020/}
 
@@ -113,6 +120,8 @@ footskip=1.5cm]{geometry}
 \include{learning_efficiency}
 \include{conclusion}
 
+\setstretch{1.5}
+\setlength\bibitemsep{0.5\baselineskip}
 \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
 
