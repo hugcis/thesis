@@ -1234,24 +1234,31 @@ complexity, but they are nonetheless important for the study of complex systems.
 
 \subsubsection{Information content}
 For an event $E$ with probability $P$, the information content of this event is
-defined as
-\begin{align*}
-  I(E) := -\log(P)
-\end{align*}
-This measure essentially quantifies how unlikely an event is and depends on how
-the probability $P$ was estimated in practice.
+defined as the negative logarithm of its probability, that is
+
+\begin{equation}
+  I(E) :=  -\log(P).
+\end{equation}
+
+This metric quantifies how unlikely an event is and depends on how the
+probability $P$ was estimated in practice. This notion is at the foundation of
+information theory.
 
 \subsubsection{Shannon Entropy}
-It is simply the expected information content of the input.
-\begin{align*}
-  H(X) := \mathbb{E}[-\log(P(X))]
-\end{align*}
-This measure is a lower bound on the number of bits the input could be
-compressed down to. In the case of a 1D ECA, the Shannon entropy could be
-computed cell-wise over the time distribution of the states. Yielding an entropy
-per cell score that can be averaged over a entire automaton.
+Shannon entropy is defined as the expected information content of the input
+\parencite{shannonMathematicalTheoryCommunication1975}. We have
 
-This is for instance one of the measures used by Wolfram in
+\begin{align*}
+  H(X) := \mathbb{E}[-\log(P(X))].
+\end{align*}
+
+This measure is a lower bound on the number of bits the input could be
+compressed down to.
+
+In the case of a 1D \ac{ECA}, the Shannon entropy could be computed cell-wise
+over the time distribution of the states. Yielding an entropy per cell score
+that can be averaged over a entire automaton. This measure is for instance one
+of the measures used by Wolfram in
 \parencite{wolframStatisticalMechanicsCellular1983} and by Langton in
 \parencite{langtonComputationEdgeChaos1990} to study how the parameter $\lambda$
 affects the behavior of the automaton. There are several ways to compute it when
@@ -1343,7 +1350,8 @@ to the algorithmic complexity. This is the approach adopted by
 \textcite{zenilCompressionBasedInvestigationDynamical2010} to classify the 1D
 \ac{ECA}. This method, which often makes use of the popular LZ algorithm can be
 seen as an independent complexity measure, also closely related to the
-Lempel-Ziv complexity, described in more details in~\ref{subsection:lempel-ziv}.
+Lempel-Ziv complexity, described in more details in the next section
+~\ref{subsection:lempel-ziv}.
 
 However, it is worth noting that when a complex system is described by an
 algorithm (such as for a \ac{CA}), the algorithmic complexity is easily upper
@@ -1356,13 +1364,11 @@ of steps.
 The Lempel-Ziv complexity as defined in
 \parencite{lempelComplexityFiniteSequences1976} is the number of steps in the LZ
 algorithm, which is directly related to the number of repeated substrings in the
-input string.
-
-The main idea of this algorithm is to scan the input string while attempting to
-find some repetition of previous input in the incoming data. This builds over
-time a set of basic components called the exhaustive history of the string, from
-which the complete string can be constructed. The number of components in that
-set is the Lempel-Ziz complexity of that string.
+input string. The main idea of this algorithm is to scan the input string while
+attempting to find some repetition of previous input in the incoming data. This
+builds over time a set of basic components called the exhaustive history of the
+string, from which the complete string can be constructed. The number of
+components in that set is the Lempel-Ziz complexity of that string.
 
 The compressed length method of measuring complexity makes use of a compression
 algorithm to reduce the size of the input. An input with regularities and
@@ -1389,6 +1395,10 @@ that is a program which length is within $s$ symbols from the optimal program
 $p^{*}$ of the algorithmic complexity metric.
 \textcite{gutowitzCellularAutomataSciences1995}
 
+\textcite{antunesComputationalDepthConcept2006} considered logical depth to be
+one instance of a more general concept: \emph{computational depth}; and proposed
+several other variants.
+
 \subsubsection{Thermodynamic Depth}
 
 The thermodynamic depth, developped by
@@ -1397,10 +1407,83 @@ complexity based on the intuitive notion that complex systems lie somewhere in
 the continuum between order and chaos
 \parencite{chaitinInformationRandomnessIncompleteness1990,
   ceccattoComplexityHierarchicalSystems1988, deutschQuantumTheoryChurch1985}.
+Similar to computational complexity and logical depth, this metric is designed
+to be a measure on how the system came to be in its final state. The complexity
+corresponds to how hard it is to put the system together in that state.
+
+By definition of thermodynamic depth, the average complexity of a state must be
+proportional to the Shannon entropy
+\parencite{shannonMathematicalTheoryCommunication1975} of the set of
+trajectories that experiment determines can lead to that state,
+
+\begin{equation}
+  \label{eq:3}
+  S = -\left(\sum_{i} p_{i} \log p_{i}\right).
+\end{equation}
+
+The measure of complexity of a macroscopic state $s$ of a system that has
+arrived at that state by the i-th possible trajectory is $-k(\log p_{i})$, where
+$p_{i}$ is the probability that the system has arrived at $s$ by the i-th
+trajectory and $k$ is an arbitrary positive constant. The thermodynamic depth of
+the state $s$ is defined as
+
+\begin{equation}
+  \label{eq:4}
+  \mathcal{D}(s) = -k(\log p_{i}).
+\end{equation}
+
+The quantity $\mathcal{D}$ can be thought of as the amount of information
+required to specify the trajectory that the system has followed to its present
+state. The thermodynamic depth of the whole system is then
+
+\begin{equation}
+  \label{eq:5}
+  \mathcal{D} = \sum_{s}\mathbb{P}(s)D(s),
+\end{equation}
+where $\mathbb{P}(s)$ is the probability that the system followed the
+trajectory $s$.
+
+\textcite{crutchfieldThermodynamicDepthCausal1999} argued that the thermodynamic
+depth is a fundamentally flawed structural complexity measure because its
+interesting rely on a set of chosen macroscopic states for the system.
+\textcite{lloydComplexityThermodynamicDepth1988} do not mention how these states
+are supposed to be chosen, nor do any follow-up works, making this complexity
+metric hard to use in practice.
+
+\subsubsection{$\epsilon$-machines}
+
+\parencite{crutchfieldInferringStatisticalComplexity1989,
+  crutchfieldCalculiEmergenceComputation1994,
+  feldmanMeasuresStatisticalComplexity1998}
 
 \subsubsection{Sophistication}
 
-\parencite{koppelAlmostMachineindependentTheory1991a}
+\textcite{motaSophisticationRandomnessDeficiency2013} defines
+\emph{sophistication} based on the original definition by
+\textcite{koppelStructure1988, koppelAlmostMachineindependentTheory1991a}
+measures the amount of structural information contained in a string. It also
+uses a follow-up result by \parencite{vitanyiMeaningfulInformation2006} that
+showed that Koppel's definition is equivalent to measuring the complexity of a
+good model for a string, up to low order terms. The definition uses an
+interemediate quantity called \emph{discrepancy} which measures how far a set
+$S$ is from being a good model of a string $x$.
+
+Formally this is defined for a string $x$ and a set $S$ containing $x$ as
+\begin{equation}
+  \label{eq:6}
+  \Delta(x|S) := \log |S| - K(x) + K(S).
+\end{equation}
+
+The sophistication of x is the complexity of
+the simplest model of x with limited discrepancy:
+\begin{equation}
+  \label{eq:7}
+  \text{soph}_{c}(x) = \min_{S}\left\{ K(S): \Delta(x|S) \leq c \right\}
+\end{equation}
+
+\parencite{koppelStructure1988, koppelAlmostMachineindependentTheory1991a,
+  antunesSophisticationRevisited2009,
+  motaSophisticationRandomnessDeficiency2013}
 
 \subsubsection{Effective Measure complexity}
 
