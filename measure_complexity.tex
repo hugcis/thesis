@@ -70,7 +70,7 @@ are also being studied, e.g. in
 artificial life, enabling the emergence of complex behavior from simple
 organisms. However, they still work within constrained simulated environments
 and usually consider organisms composed of elementary building blocks, while
-they don't work outside of this usually very constrained framework. Divergent
+they do not work outside of this usually very constrained framework. Divergent
 and creative evolutionary process could be happening at a much lower conceptual
 level with fewer assumptions. For this reason, we consider cellular automata in
 the rest of the paper because they rely on a very few assumptions while offering
@@ -412,7 +412,7 @@ arithmetic coding --- that encodes data which contains the least information
 can also be related to the texture synthesis method described in
 \parencite{efrosTextureSynthesisNonparametric1999}, where the authors learn a non parametric model to
 predict the next pixel of a texture given a previously synthesized neighborhood.
-Additionally, because we don't need the operation to be reversible as in regular
+Additionally, because we do not need the operation to be reversible as in regular
 compression, it is not necessary to limit the prediction model to making
 prediction with predecessors only.
 
@@ -525,7 +525,7 @@ rules are at the bottom. This indicates coherence between the two metrics.
 
 The frequency based predictor described above still has limitations:
 \begin{itemize}
-\item It doesn't take into account any redundancy in the input which may lead to
+\item It does not take into account any redundancy in the input which may lead to
   suboptimal predictions (in a CA, very similar positions might have similar
   center cell state distribution, e.g. a glider in Game of Life should be
   recognized by the model no matter the rest of the neighborhood).
@@ -764,7 +764,7 @@ three 2D rules that were selected manually upon visual inspection among the 20
 highest scoring for metric $\mu_{50}$ (defined in eq.~\eqref{eq:main_metric}) of
 a sample of 1700 randomly generated 2-states 3 by 3 neighborhood rules. For
 comparison, Conway's Game of Life rule (GoL) ranks in the top 1\% of the 2500
-rules mentioned above for runs that don't end in a static global state. We
+rules mentioned above for runs that do not end in a static global state. We
 observe that spontaneous glider formation events appear to be captured by our
 metric. Although gliders in cellular automata are a simple process that can
 manually be created, detection of their spontaneous emergence within a random

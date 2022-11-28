@@ -1,13 +1,22 @@
 \chapter{Background}
 \label{cha:background}
 
+In this chapter, we provide some background on some of the topics we study in
+the thesis. We begin by describing the \acf{CA} model, which is the complex
+system we focus on in the thesis (section \ref{sec:cellular-automata-sec}).
+Next, we describe the connection between \acp{CA} and \acfp{RNN}, which is
+useful to understand the characteristics and applications these two models share
+(section \ref{sec:cell-autom-rnns}). Finally, we describe the \acf{RC} model,
+which enables harvesting the computations of complex systems for solving
+problems, and which we apply in chapter \ref{cha:learn-effic-compl}.
+
 \section{Cellular automata}\label{sec:cellular-automata-sec}
 
 The \acf{CA} was originally proposed by Stanislaw Ulam and John Von Neumann in
 the 1940s as a model of the growth of crystals and an attempt at constructing a
 self-replicating system \parencite{vonneumannTheorySelfreproducingAutomata1966}.
 
-\paragraph{Definition}
+\subsection{Definition}
 It is usually defined on a regular lattice in one or two dimension. Each of its
 components is called a cell, and can be in a state $k \in \mathcal{S}$. $\mathcal{S}$ is the space of
 available states for the cells, usually chosen to be $\{0, 1\}$ for binary
@@ -835,7 +844,7 @@ layer of filters receptive both to a given configuration and its inverse
 filter (use a filter $(1, -1, 1)$ instead of $(1, 0, 1)$ and $(0, 1, 0)$
 separately).
 
-For example, game of life doesn't need more than 2 convolutional filters or
+For example, game of life does not need more than 2 convolutional filters or
 parameters to be represented by a CNN because it is totalistic (a cell's new
 state only depends on the number of neighbors in state 1 and its current state).
 

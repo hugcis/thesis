@@ -1,7 +1,16 @@
 \chapter{Literature Review}
 \label{cha:literature-review}
 
-\section{Measuring complexity}
+In this chapter, we begin by reviewing related work on complexity measures for
+dynamical and complex systems (section \ref{sec:measuring-complexity}). We also
+review works on defining and understanding emergence (section
+\ref{sec:emergence}), evolutionary methods for searching solutions in complex
+spaces (section \ref{sec:evol-algor}), methods for constructing open-ended
+evolving systems (section \ref{sec:open-ended-evolution-1}), and method for
+extracting and using the computations happening within complex systems (section
+\ref{sec:comp-with-compl}).
+
+\section{Measuring complexity\label{sec:measuring-complexity}}
 
 Measuring the complexity of a system is a fundamentally difficult task. Many
 complex systems exhibit what Peter Grassberger calls \emph{self-generated
@@ -9,22 +18,96 @@ complex systems exhibit what Peter Grassberger calls \emph{self-generated
 means that the formulation of the problem is translationally invariant and the
 observed structure arises from a spontaneous breakdown of translational
 invariance. Unfortunately there is no universally accepted and formalized notion
-of ``complexity'', even though most intuitively agree that it exists. No clear
-observable and protocol have been proposed that would give a quantitative notion
-of complexity. \textcite{grassbergerProblemsQuantifyingSelfgenerated1989} argued
-that no single quantity is sufficient to measure complexity, since it depends on
-how meaning is assigned to this term. Even when meaning has been fixed by the
+of ``complexity'', even though most intuitively agree that it exists.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{.31\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/three_simple_eca.png}
+    \caption{}
+   \label{fig:simple}
+  \end{subfigure}
+  \begin{subfigure}[b]{.31\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/three_complex_eca.png}
+    \caption{}
+   \label{fig:complex}
+  \end{subfigure}
+  \begin{subfigure}[b]{.31\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/three_random_eca.png}
+    \caption{}
+   \label{fig:random}
+  \end{subfigure}
+  \caption{Three 1D \aclp{CA} with qualitatively different behavior. The left
+    (\ref{fig:simple}) and right (\ref{fig:random}) \acp{CA} are usually not
+    defined as ``complex'', whereas the middle \ac{CA} (\ref{fig:complex})
+    appears to be complex.}
+  \label{fig:three_eca_complex}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \scalebox{1}{
+\begin{tikzpicture}
+% define normal distribution function 'normaltwo'
+\def\normaltwo{\x,{2*1/exp(((\x-3)^2)/2)}}
+
+% input y parameter
+\def\ya{4.9}
+\def\fya{2*1/exp(((\ya-3)^2)/2)}
+
+\def\yb{1.4}
+\def\fyb{2*1/exp(((\yb-3)^2)/2)}
+
+\def\yc{3}
+\def\fyc{2*1/exp(((\yc-3)^2)/2)}
+
+% Draw and label normal distribution function
+\draw[color=blue,domain=0:6,smooth,samples=50, line width=0.25mm] plot (\normaltwo) node[right] {};
+
+% Add dashed line dropping down from normal.
+\draw[dashed] ({\ya},{\fya}) -- ({\ya},0) node[below] {\ref{fig:random}};
+\draw[dashed] ({\yb},{\fyb}) -- ({\yb},0) node[below] {\ref{fig:simple}};
+\draw[dashed] ({\yc},{\fyc}) -- ({\yc},0) node[below] {\ref{fig:complex}};
+
+
+% Add axis labels
+\draw (-.2,1.5) node[left] {Complexity};
+\draw (3,-.5) node[below] {Randomness};
+
+% Add axes
+\draw[->,line width=0.1mm] (0,0) -- (6.2,0) node[right] {};
+\draw[->,line width=0.1mm] (0,0) -- (0,2) node[above] {};
+
+\end{tikzpicture}}
+\caption{\emph{Ideal} ``complexity'' curve as a function of the ``randomness''
+  of a system. The three \ac{CA} from figure \ref{fig:three_eca_complex} are
+  displayed on the curve on their approximate expected location on that curve.
+  This curve is just for illustrative purposes and does not reflect any true
+  function linking randomness and complexity.}
+\label{fig:complexity}
+\end{figure}
+
+No clear observable and protocol have been proposed that would give a
+quantitative notion of complexity.
+\textcite{grassbergerProblemsQuantifyingSelfgenerated1989} argued that no single
+quantity is sufficient to measure complexity, since it depends on exactly how
+meaning is assigned to this term. Even when some meaning has been fixed by the
 definition of an observable quantity, the statistics of the measurement of this
-observable are crucial to its interpretation
+observable are also crucial to its interpretation
 \parencite{gutowitzCellularAutomataSciences1995}.
 
 We note that one of the most widely known concept of complexity of symbol
-sequences, the ``algorithmic complexity'', may also be called a measure of
-information. In the literature, measures of information are commonly used as
-complexity metrics. These quantities are better measures of ``randomness'' than
-complexity, but they are nonetheless important for the study of complex systems.
-In this section, we list several ``complexity'' measures that have influenced
-our research.
+sequences, the ``algorithmic complexity'', should also be called a measure of
+information. This is the position held by one of its co-creators
+\parencite{chaitinInformationRandomnessIncompleteness1990}. In the literature,
+measures of information are often used as complexity metrics. These quantities
+are better measures of ``randomness'' than complexity, but they are nonetheless
+important for the study of complex systems. In this section, we list several
+complexity measures, including information measures that have influenced our
+research.
 
 \subsection{Information content}
 For an event $E$ with probability $P$, the information content of this event is
@@ -324,7 +407,7 @@ numerical simulations, because it is also uncomputable.
 \parencite{grassbergerQuantitativeTheorySelfgenerated1986,
   gell-mannInformationMeasuresEffective1996}
 
-\section{Emergence}
+\section{Emergence}\label{sec:emergence}
 The notion of emergence is central to the study of complex systems. It is a very
 broad concepts that could be phrased as \emph{the properties an composite entity
   acquires that its composing parts did not possess}. Emergence is often described
@@ -332,21 +415,8 @@ as being similar to self-organization. Although these two concepts are closely
 related, they are fundamentally different ideas
 \parencite{dewolfEmergenceSelfOrganisationDifferent2005}. Both properties can
 exist independently within a dynamical system.
-
-There seems to be qualitatively different kinds of emergence, which
-\textcite{dehaanHowEmergenceArises2006} describes as Discovery, Mechanistic
-emergence, and Reflective emergence. These correspond to different levels, or
-``strengths'' of emergence, from fractal patterns to complex social systems and
-ecosystems.
-
-A subset of research on emergence has focused on complex adaptive systems. In
-such systems, emergence is explicitly used to refer to macro-level patterns
-arising from interacting agents \parencite{hollandEmergenceChaosOrder2000,
-  kauffmanHomeUniverseSearch1995, langtonStudyingArtificialLife1986}.
-
 Some examples of emergent behavior include:
-- Other examples of emergence include (i) the characteristic  [tyson76], (ii)  [hass88a], and,
-more recently, (iii) A of figure which depicts
+
 \begin{itemize}
   \item The spontaneous formation of clusters of randomly distributed objects -
         a behavior common in ant colonies forming bridges out of individual
@@ -365,35 +435,63 @@ more recently, (iii) A of figure which depicts
         \parencite{hasslacherDiscreteFluids1987}.
 \end{itemize}
 
+There seems to be qualitatively different kinds of emergence, which
+\textcite{dehaanHowEmergenceArises2006} describes as Discovery, Mechanistic
+emergence, and Reflective emergence. These correspond to different levels, or
+``strengths'' of emergence, from fractal patterns to complex social systems and
+ecosystems.
+
+A subset of research on emergence has focused on complex adaptive systems. In
+such systems, emergence is explicitly used to refer to macro-level patterns
+arising from interacting agents \parencite{hollandEmergenceChaosOrder2000,
+  kauffmanHomeUniverseSearch1995, langtonStudyingArtificialLife1986}.
 
 
-
-
-\section{Evolutionary algorithms}
+\section{Evolutionary algorithms}\label{sec:evol-algor}
 Evolutionary algorithms are the class of algorithms inspired by natural
 biological processes, in particular evolution. There a many types of
 evolutionary algorithms, from genetic algorithms to quality diversity and
 novelty search \parencite{lehmanAbandoningObjectivesEvolution2011,
   lehmanEvolvingDiversityVirtual2011}. Evolutionary algorithms are used as
 search methods, in particular when the search space is hard to parametrize or
-very large. \ac{CA} rules are a good example of such search space, and genetic
-algorithms were successfully used to evolve rules to perform complex
-computations \parencite{mitchellEvolvingCellularAutomata1996}.
+very large \parencite{poliRelationsSearchEvolutionary1996}. \ac{CA} rules are a
+good example of such search space, and genetic algorithms were successfully used
+to evolve rules to perform complex computations
+\parencite{mitchellEvolvingCellularAutomata1996}.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.8\linewidth]{figures/evolutionary_diagram.pdf}
-  \caption{Illustration of the general principle common to many evolutionary
+  \caption{Illustration of the general principle common to several evolutionary
     algorithms. There are three virtual spaces: ($G$) the genotype space where
-    the candidate solutions are generated through some encoding. ($P$) the
-    phenotype space, which corresponds to the decoded solution from a genotype
-    $x$. It can be the policy of an agent, the rule of a \ac{CA}, etc. ($B$) the
-    behavior space, which is the space from which candidate solutions are
-    evaluated. The small subspace $\mathcal{G}$ is the goal space, corresponding
-  to the set of behaviors that would be considered successful.}
+    the candidate solutions are generated through some encoding. This is the
+    space where the search process is happening. ($P$) the phenotype space,
+    which corresponds to the decoded solution from a genotype $x$. It can be the
+    policy of an agent, the rule of a \ac{CA}, etc. ($B$) the behavior space,
+    which is the space from which candidate solutions are evaluated. The smaller
+    subspace $\mathcal{G}$ is the goal space, corresponding to the set of
+    behaviors that would be considered successful. A small perturbation in the
+    genotype will have potentially large consequences on the behavior of the
+    candidate solution.}
   \label{fig:evolutionary_diagram}
 \end{figure}
 
+\subsection{Genetic programming}
+Many of the problems that machine learning, artificial intelligence are
+attempting to solve require the discovery of a computer program that produces
+some desired mapping between inputs and outputs. Solving the problems therefore
+amounts to searching the space of computer programs in order to find a suitable
+individual with high enough fitness
+\parencite{langdonFoundationsGeneticProgramming2002,
+  kozaGeneticProgrammingMeans1994, banzhafGeneticProgrammingIntroduction1998,
+  ,bookerClassifierSystemsGenetic1989}.
+
+In genetic programming, candidate solutions to a problem are encoded as
+\emph{chromosomes}, that is a structured data representation that can be
+modified incrementally. In practice it is often chosen to be a string of bits.
+Every generation, a population of solutions is evaluated. The best solutions are
+kept and combined to form the candidates for the next generation. Random
+mutations may also be applied to introduce randomness in the search.
 
 \subsection{Novelty search}
 The idea behind \ac{NS} is to drive a search algorithm only by the novelty of
@@ -474,7 +572,7 @@ agent and policy implementation
 \paragraph{Quality diversity}
 The quality diversity method is a special type of novelty search.
 
-\section{Open-ended evolution}
+\section{Open-ended evolution\label{sec:open-ended-evolution-1}}
 The field of Artificial Life research has worked to figure out what the
 fundamental conditions for the emergence of living systems are, and how to
 create a process that can display analogous levels of creativity and complexity
@@ -640,7 +738,7 @@ were investigated in other works, showing that they are crucial for autopoeisis
 to be possible \parencite{zelenySelforganizationLivingSystems1977,
   mcmullinRediscoveringComputationalAutopoiesis1997}.
 
-\section{Computing with complex systems}
+\section{Computing with complex systems}\label{sec:comp-with-compl}
 
 The problem of computing within complex systems is closely related to the
 question of decentralized parallel computation in general, for which there exist
@@ -659,7 +757,7 @@ individual computing elements work, and to ensure ``the cooperation of vast
 numbers of unreliable parts interconnected in unknown, irregular, and
 time-varying ways''.
 
-\subsection{Computing in cellular automata}
+\subsection{Computing in cellular automata}\label{sec:comp-cell-autom}
 
 \Acfp{CA} are decentralized parallel systems with many identical components with
 local connectivity. Because of these properties, they have the potential to
@@ -670,6 +768,7 @@ systems. For more details about \acp{CA}, see section
 \ref{sec:cellular-automata-sec}.
 
 \paragraph{Von Neumann's self-reproducing \ac{CA}}
+
 
 \paragraph{Universal Computation in Cellular Automata}
 It is not difficult to see that a \ac{CA} can be capable of universal
@@ -720,12 +819,7 @@ A major step forward from the clever but difficult hand-design of \acp{CA} rules
 to perform computations is the use of learning algorithms to automatically
 design those rules \parencite{mitchellEvolvingCellularAutomata1996}. Genetic
 algorithms are a type of search method inspired by biological evolution
-\parencite{bookerClassifierSystemsGenetic1989}. Candidate solutions to a problem
-are encoded as \emph{chromosomes}, that is a structured data representation that
-can be modified incrementally. In practice it is often chosen to be a string of
-bits. Every generation, a population of solutions is evaluated. The best
-solutions are kept and combined to form the candidates for the next generation.
-Random mutations may also be applied to introduce randomness in the search.
+\parencite{bookerClassifierSystemsGenetic1989}. See section
 
 Some early work was done by Norman Packard and colleagues
 \parencite{packardAdaptationEdgeChaos1988,

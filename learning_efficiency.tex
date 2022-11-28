@@ -65,8 +65,6 @@ impossible. In such cases a reservoir computer creates a continuously evolving
 pool of random functions that can be combined using the last trainable layer.
 
 
-
-
 When evolving in response to input stimuli, complex recurrent systems such as
 \acp{RNN} are building dynamically changing representations of data within their
 internal state \parencite{boccaraModelingComplexSystems2010}. We know that these
@@ -931,52 +929,129 @@ chose the ten separate tasks/settings pairs listed above to get a broad overview
 benchmarked models on a range of task difficulties.
 \footnotetext{$h$ is chosen to match the number of parameters of the reservoir-based methods.}
 
+\section{Reservoir \ac{CA} results}
+We present some results from our experiments with reservoir cellular automata.
+First, general statistics about \ac{ECA} performance on the the five first tasks
+(tasks with ID 1 to 5).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.6\linewidth]{figures/aggregate_results.pdf}
+  \caption{Average test accuracies across rules, hyperparameters and runs for
+    each task. The best solution for each task are shown in
+    red.}\label{fig:aggregate-results}
+\end{figure}
+
+Fig.~\ref{fig:aggregate-results} shows a summary of the accuracy scores for each
+task. Score distributions vary a lot from task to task because of the different
+output spaces (binary for Periodic, Inc-per and QA and multi-modal for the
+others).
+
+\subsection{Binary sequences}
+
+The binary sequence task should be the simplest to solve. Since it requires some
+memory we expect some CA rules with very chaotic behavior --- like ECA rule 30 ---
+to fail at it.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.6\linewidth]{figures/periodic_top.pdf}
+  \caption{Top performing rules and hyperparameters for the binary periodic
+    sequence task. All of the best rules seem to make use of a lateral
+    translation, which is an effective memory mechanism. Rule 2, 130 and 194
+    only differ by 1 transition in their rule
+    function.}\label{fig:top-binary-seq}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{p{4cm}ccccc}
+      \toprule
+      & \multicolumn{5}{c}{\bfseries Top 10 rules}\\
+      \midrule
+      \bfseries Rule & 38 & 24 & 231 & 152 & 66 \\
+      \bfseries Average accuracy & 0.969 & 0.97 & 0.97 & 0.97 & 0.97 \\
+      \midrule
+      \hrulefill & 189 & 194 & 52 & 130 & 2 \\
+      \hrulefill & 0.97 & 0.97 & 0.97 & 0.971 & 0.971\\
+      \bottomrule
+    \end{tabular}
+  \caption{Top 10 rules for the periodic binary sequence task (ordered left to
+    right) --- best hyper-parameter combination. Many rules get close to the best
+    possible accuracy.}\label{tab:top_periodic_rules}
+\end{table}
+
+\subsection{Symbol counting}
+
+The easy version of this task yielded the most surprising results: some CA rules
+unexpectedly reach very good scores. These top rules are reliably found to have
+the best accuracy scores, even when using powerful decoders. The best performing
+rule out of all the possible \acp{ECA} is rule 37.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/rules-sym-ct.pdf}
+  \caption{The two best performing rules for the easy symbol counting task (.82
+    average accuracy)}\label{fig:best_sym_ct}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{p{4cm}ccccc}
+      \toprule
+      & \multicolumn{5}{c}{\bfseries Top 10 rules}\\
+      \midrule
+      \bfseries Rule & 28 & 92 & 220 & 70 & 198\\
+      \bfseries Average accuracy & 0.571 & 0.572 & 0.573 & 0.574 & 0.582 \\
+      \midrule
+      \hrulefill & 156 & 78 & 123 & 91 & 37\\
+      \hrulefill & 0.594 & 0.598 & 0.643 & 0.721 & 0.807\\
+      \bottomrule
+    \end{tabular}
+  \caption{Top 10 rules for the easy symbol counting task (ordered left to
+    right) --- best hyper-parameter combination. Notice the three best rules are
+    largely better than most of the others.}\label{tab:top_sym_ct_rules}
+\end{table}
+
 
 \section{Conclusions}
 
 Learning speed and data efficiency are essential components of any learning
 system. Our learning speed metric can offer a novel perspective on several
-machine learning models.
-%old and new machine learning models.
-Instead of focusing on pure performance, measuring and comparing the data
-efficiency of different models will hopefully lead to better systems for online
-and continual learning.
+machine learning models. Instead of focusing on pure performance, measuring and
+comparing the data efficiency of different models will hopefully lead to better
+systems for online and continual learning.
 
-%that can be used in online and continual learning contexts.
 
 Even with the right metric, it is difficult to thoroughly evaluate a model's
 ability to learn efficiently. Our benchmark evaluates a range of problem
 difficulties which would be challenging to construct by combining or
-manipulating existing datasets.
-%by using multiple other existing datasets or manipulating a single dataset.
-However, the tasks remain easy to understand and use. Since the tasks are
-language-based, they can be further mixed or chained to create continual
-learning problems and may also be easily extended in a follow-up work.
+manipulating existing datasets. However, the tasks remain easy to understand and
+use. Since the tasks are language-based, they can be further mixed or chained to
+create continual learning problems and may also be easily extended in a
+follow-up work.
 
-%Take-home message
 We study lesser-known machine learning models based on evolving states of
-complex systems that can learn through self-organization.
-A complex dynamical system comprises many interacting agents and evolves over
-time according to a fixed update rule. These agents can be hidden neurons of a
-\ac{RNN} or nodes in a graph. Such systems often exhibit emergent global
-dynamics resulting from the actions of its parts rather than the decisions of a
-central controller. These dynamics lead to surprisingly complex behavior, which
-can be random, chaotic, or may lead to unbounded growth of complexity
-\parencite{boccaraModelingComplexSystems2010}.
-Due to these properties, %this class of systems
+complex systems that can learn through self-organization. A complex dynamical
+system comprises many interacting agents and evolves over time according to a
+fixed update rule. These agents can be hidden neurons of a \ac{RNN} or nodes in
+a graph. Such systems often exhibit emergent global dynamics resulting from the
+actions of its parts rather than the decisions of a central controller. These
+dynamics lead to surprisingly complex behavior, which can be random, chaotic, or
+may lead to unbounded growth of complexity
+\parencite{boccaraModelingComplexSystems2010}. Due to these
+properties,
 systems based on reservoir computing may be a promising alternative addressing
 the shortcomings of standard supervised models.
 
-Surprisingly, %complex systems-based models
-such models achieve remarkable learning efficiency compared to the more standard
-sequential supervised models trained with stochastic gradient-based learning.
-%stochastic gradient methods.
-The complex systems-based models consistently outperform sequential supervised
-methods and even achieve better learning efficiency than humans on some tasks.
-They demonstrate more efficient learning on our benchmark at a fraction of the
-computational and data cost of the conventional models. We believe that more
-advanced models of this type could lead to more robust and data efficient
-machine learning in the future, especially in low-data applications or problems
-where supervision is limited. Complex systems are underexplored and seem worth
-investigating further for building the next generation of learning
-algorithms. % that learn.
+Surprisingly, such models achieve remarkable learning efficiency compared to the
+more standard sequential supervised models trained with stochastic
+gradient-based learning. The complex systems-based models consistently
+outperform sequential supervised methods and even achieve better learning
+efficiency than humans on some tasks. They demonstrate more efficient learning
+on our benchmark at a fraction of the computational and data cost of the
+conventional models. We believe that more advanced models of this type could
+lead to more robust and data efficient machine learning in the future,
+especially in low-data applications or problems where supervision is limited.
+Complex systems are underexplored and seem worth investigating further for
+building the next generation of learning algorithms.
