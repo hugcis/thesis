@@ -443,13 +443,13 @@ of behavior of \ac{CA} by traversing the space in an interesting way.
 \paragraph{Langton's lambda\label{sec:langtons-lambda}}
 
 Christopher Langton proposed one of the first parameter that could be used to
-control the behavior of \acp{CA} to some extent
+control the behavior of \acp{CA} to a certain extent
 \parencite{langtonStudyingArtificialLife1986, langtonComputationEdgeChaos1990}.
-For a \ac{CA} with $K = |\mathcal{S}|$ states, and a state arbitrarily chosen to be
-the \emph{quiescent} state (this corresponds to the ``dead'' state in the game
-of life for example), if there are $n$ transitions to the quiescent state within
-the rule table and $K^{s} - n$ remaining transitions that do not lead to the
-quiescent state, where $s$ is the number of cells in the neighborhood, we
+For a \ac{CA} with $K = |\mathcal{S}|$ states, and a state arbitrarily chosen to
+be the \emph{quiescent} state (this corresponds to the ``dead'' state in the
+game of life for example), if there are $n$ transitions to the quiescent state
+within the rule table and $K^{s} - n$ remaining transitions that do not lead to
+the quiescent state, where $s$ is the number of cells in the neighborhood, we
 have
 
 \begin{equation}
@@ -922,9 +922,9 @@ type of reservoirs are sometimes called ``exotic''
 shows promises to develop cheap and efficient machine learning hardware and can
 inform us on the nature and behavior of the underlying physical systems.
 \textcite{tanakaRecentAdvancesPhysical2019} identifies four characteristics that
-make a reservoir suitable to solve computational task.
+make a reservoir suitable to solve computational task:
 
-\begin{itemize}
+\begin{enumerate}
   \item The inputs need to be mapped to a high-dimensional space, which
         corresponds to the internal state of the reservoir. This
         high-dimensionality ensures the inputs are separated with high
@@ -953,7 +953,7 @@ make a reservoir suitable to solve computational task.
         obtained at the transition between chaotic and non-chaotic regimes
         \parencite{bertschingerRealtimeComputationEdge2004,
         legensteinEdgeChaosPrediction2007}.
-\end{itemize}
+\end{enumerate}
 
 We list common types of \ac{RC} below:
 
@@ -987,7 +987,13 @@ We list common types of \ac{RC} below:
         semiconductor optical amplifiers (SOAs) was proposed by
         Vandoorne and colleague \parencite{vandoorneOpticalSignalProcessing2008,
         vandoorneParallelReservoirComputing2011} and subsequently built \parencite{vandoorneExperimentalDemonstrationReservoir2014}.
-        Other works use that scattering of light in complex media
+        The photonic implementation of reservoir computing is based on the idea that
+        photonic accelerators \parencite{kitayamaNovelFrontierPhotonics2019} can
+        realize fast information processing with low
+        learning costs \parencite{paquotOptoelectronicReservoirComputing2012,
+        martinenghiPhotonicNonlinearTransient2012,
+        suganoReservoirComputingUsing2020, antonikHumanActionRecognition2019}.
+        Some of the implementations use the scattering of light in complex media
         \parencite{dongOpticalReservoirComputing2020,
         rafayelyanLargeScaleOpticalReservoir2020}.
   \item[Spintronic \ac{RC}] Some \ac{RC} works used nanosacle electronics
@@ -1002,7 +1008,18 @@ We list common types of \ac{RC} below:
 
 \subsection{Reservoir computing applications}
 
-\ac{RC} has had several successful applications in various fields.
+\ac{RC} has had successful applications in various fields. It has been applied
+for pattern classification; in audio with spoken digit recognition
+\parencite{verstraetenIsolatedWordRecognition2005} and waveform classification
+\parencite{paquotOptoelectronicReservoirComputing2012}; in computer vision with
+written digits recognition \parencite{jalalvandRealTimeReservoirComputing2015},
+and human motion classification \parencite{sohIterativeTemporalLearning2012,
+  antonikHumanActionRecognition2019}. Another popular application of \ac{RC} is
+time-series forecasting \parencite{jaegerEchoStateApproach2001,
+  jaegerAdaptiveNonlinearSystem2002, wyffelsComparativeStudyReservoir2010}.
+\ac{RC} has also been used in reinforcement learning to control agents in
+artificial environments \parencite{kannoPhotonicReinforcementLearning2022} or
+learn radio spectrum access \parencite{changDistributiveDynamicSpectrum2019}.
 
 \subsection{Echo-state network}
 
@@ -1103,9 +1120,10 @@ various tasks \autocite{yilmazReservoirComputingUsing2014,
   nicheleDeepLearningCellular2017, nicheleDeepReservoirComputing2017,
   nicheleReservoirComputingUsing2017, margemReservoirComputingBased2018,
   kleykoCellularAutomataCan2020, babsonReservoirComputingComplex2019,
-  ,mcdonaldReservoirComputingExtreme2017a}. In this section we lay out a general
-description of reservoir computing with cellular automata based on these
-previous works and present our proposed extensions.
+  ,mcdonaldReservoirComputingExtreme2017a, moranReservoirComputingHardware2018}.
+In this section we lay out a general description of reservoir computing with
+cellular automata based on these previous works and present our proposed
+extensions.
 
 \paragraph{Encoding\label{sec:encoding}}
 Input data is assumed to be categorical and sequential,

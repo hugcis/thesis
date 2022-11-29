@@ -428,6 +428,27 @@
   file = {/Users/hugo/Zotero/storage/4VNSX6XR/Details.html}
 }
 
+@article{antonikHumanActionRecognition2019,
+  title = {Human Action Recognition with a Large-Scale Brain-Inspired Photonic Computer},
+  author = {Antonik, Piotr and Marsal, Nicolas and Brunner, Daniel and Rontani, Damien},
+  date = {2019-11},
+  journaltitle = {Nature Machine Intelligence},
+  shortjournal = {Nat Mach Intell},
+  volume = {1},
+  number = {11},
+  pages = {530--537},
+  publisher = {{Nature Publishing Group}},
+  issn = {2522-5839},
+  doi = {10.1038/s42256-019-0110-8},
+  url = {https://www.nature.com/articles/s42256-019-0110-8},
+  urldate = {2022-11-29},
+  abstract = {The recognition of human actions in video streams is a challenging task in computer vision, with cardinal applications in brain–computer interfaces and surveillance, for example. Recently, deep learning has produced remarkable results, but it can be hard to use in practice, as its training requires large datasets and special-purpose and energy-consuming hardware. In this work, we propose a photonic hardware approach. Our experimental set-up comprises off-the-shelf components and implements an easy-to-train recurrent neural network with 16,384 nodes, scalable to hundreds of thousands of nodes. The system, based on the reservoir computing paradigm, is trained to recognize six human actions from the KTH video database using either raw frames as inputs or a set of features extracted with the histograms of an oriented gradients algorithm. We report a classification accuracy of 91.3\%, comparable to state-of-the-art digital implementations, while promising a higher processing speed in comparison to the existing hardware approaches. Because of the massively parallel processing capabilities offered by photonic architectures, we anticipate that this work will pave the way towards simply reconfigurable and energy-efficient solutions for real-time video processing.},
+  issue = {11},
+  langid = {english},
+  keywords = {Applied optics,Computer science,Other photonics},
+  file = {/Users/hugo/Papers/pdf/antonikHumanActionRecognition2019.pdf;/Users/hugo/Zotero/storage/2PS7D7NE/s42256-019-0110-8.html}
+}
+
 @article{antunesComputationalDepthConcept2006,
   title = {Computational Depth: {{Concept}} and Applications},
   shorttitle = {Computational Depth},
@@ -2149,6 +2170,23 @@
   abstract = {Standard algorithms for template-based information extraction (IE) require predefined template schemas, and often labeled data, to learn to extract their slot fillers (e.g., an embassy is the Target of a Bombing template). This paper describes an approach to template-based IE that removes this requirement and performs extraction without knowing the template structure in advance. Our algorithm instead learns the template structure automatically from raw text, inducing template schemas as sets of linked events (e.g., bombings include detonate, set off, and destroy events) associated with semantic roles. We also solve the standard IE task, using the induced syntactic patterns to extract role fillers from specific documents. We evaluate on the MUC-4 terrorism dataset and show that we induce template structure very similar to handcreated gold structure, and we extract role fillers with an F1 score of .40, approaching the performance of algorithms that require full knowledge of the templates.},
   langid = {english},
   file = {/Users/hugo/Papers/pdf/chambersTemplateBasedInformationExtraction22.pdf}
+}
+
+@article{changDistributiveDynamicSpectrum2019,
+  title = {Distributive {{Dynamic Spectrum Access Through Deep Reinforcement Learning}}: {{A Reservoir Computing-Based Approach}}},
+  shorttitle = {Distributive {{Dynamic Spectrum Access Through Deep Reinforcement Learning}}},
+  author = {Chang, Hao-Hsuan and Song, Hao and Yi, Yang and Zhang, Jianzhong and He, Haibo and Liu, Lingjia},
+  date = {2019-04},
+  journaltitle = {IEEE Internet of Things Journal},
+  volume = {6},
+  number = {2},
+  pages = {1938--1948},
+  issn = {2327-4662},
+  doi = {10.1109/JIOT.2018.2872441},
+  abstract = {Dynamic spectrum access (DSA) is regarded as an effective and efficient technology to share radio spectrum among different networks. As a secondary user (SU), a DSA device will face two critical problems: 1) avoiding causing harmful interference to primary users (PUs) and 2) conducting effective interference coordination with other SUs. These two problems become even more challenging for a distributed DSA network where there is no centralized controllers for SUs. In this paper, we investigate communication strategies of a distributive DSA network under the presence of spectrum sensing errors. To be specific, we apply the powerful machine learning tool, deep reinforcement learning (DRL), for SUs to learn “appropriate” spectrum access strategies in a distributed fashion assuming NO knowledge of the underlying system statistics. Furthermore, a special type of recurrent neural network, called the reservoir computing (RC), is utilized to realize DRL by taking advantage of the underlying temporal correlation of the DSA network. Using the introduced machine learning-based strategy, SUs could make spectrum access decisions distributedly relying only on their own current and past spectrum sensing outcomes. Through extensive experiments, our results suggest that the RC-based spectrum access strategy can help the SU to significantly reduce the chances of collision with PUs and other SUs. We also show that our scheme outperforms the myopic method which assumes the knowledge of system statistics, and converges faster than the Q-learning method when the number of channels is large.},
+  eventtitle = {{{IEEE Internet}} of {{Things Journal}}},
+  keywords = {Deep Q-network (DQN),deep reinforcement learning (DRL),Dynamic spectrum access,dynamic spectrum access (DSA),echo state network (ESN),Interference,Machine learning,Recurrent neural networks,reservoir computing (RC),Reservoirs,resource allocation,Sensors,Training},
+  file = {/Users/hugo/Papers/pdf/changDistributiveDynamicSpectrum2019.pdf;/Users/hugo/Zotero/storage/7E7I775H/8474348.html}
 }
 
 @unpublished{changNeuralNetworkQuine2018,
@@ -6211,6 +6249,18 @@
   file = {/Users/hugo/Papers/pdf/jacksonEpiphenomenalQualia1982.pdf}
 }
 
+@inproceedings{jaegerAdaptiveNonlinearSystem2002,
+  title = {Adaptive Nonlinear System Identification with {{Echo}} State Networks},
+  booktitle = {Proceedings of the 15th {{International Conference}} on {{Neural Information Processing Systems}}},
+  author = {Jaeger, Herbert},
+  date = {2002-01-01},
+  series = {{{NIPS}}'02},
+  pages = {609--616},
+  publisher = {{MIT Press}},
+  location = {{Cambridge, MA, USA}},
+  abstract = {Echo state networks (ESN) are a novel approach to recurrent neural network training. An ESN consists of a large, fixed, recurrent "reservoir" network, from which the desired output is obtained by training suitable output connection weights. Determination of optimal output weights becomes a linear, uniquely solvable task of MSE minimization. This article reviews the basic ideas and describes an online adaptation scheme based on the RLS algorithm known from adaptive linear systems. As an example, a 10-th order NARMA system is adaptively identified. The known benefits of the RLS algorithms carry over from linear systems to nonlinear ones; specifically, the convergence rate and misadjustment can be determined at design time.}
+}
+
 @article{jaegerEchoStateApproach2001,
   title = {The “Echo State” Approach to Analysing and Training Recurrent Neural Networks-with an Erratum Note},
   author = {Jaeger, Herbert},
@@ -6289,6 +6339,19 @@
   publisher = {{JMLR.org}},
   url = {http://proceedings.mlr.press/v28/jaggi13.html},
   urldate = {2022-08-30}
+}
+
+@inproceedings{jalalvandRealTimeReservoirComputing2015,
+  title = {Real-{{Time Reservoir Computing Network-Based Systems}} for {{Detection Tasks}} on {{Visual Contents}}},
+  booktitle = {2015 7th {{International Conference}} on {{Computational Intelligence}}, {{Communication Systems}} and {{Networks}}},
+  author = {Jalalvand, Azarakhsh and Van Wallendael, Glenn and Van De Walle, Rik},
+  date = {2015-06},
+  pages = {146--151},
+  doi = {10.1109/CICSyN.2015.35},
+  abstract = {Among the various types of artificial neural networks used for event detection in visual contents, those with the ability of processing temporal information, such as recurrent neural networks, have been proved to be more effective. However, training of such networks is often difficult and time consuming. In this work, we show how Reservoir Computing Networks (RCNs) can be used for detecting purposes on raw images. The applicability of RCNs is illustrated using two example challenges, namely isolated digit handwriting recognition on the MNIST dataset as well as detection of the status of a door using self-developed moving pictures from a surveillance camera. Achieving an error rate of 0.92 percent on MNIST, we show that RCN can be a serious competitor to the state-of-the-art. Moreover, we show how RCNs with their simple and yet robust training procedure can be practically used for real surveillance tasks using very low resolution camera sensors.},
+  eventtitle = {2015 7th {{International Conference}} on {{Computational Intelligence}}, {{Communication Systems}} and {{Networks}}},
+  keywords = {Cameras,Error analysis,Handwriting recognition,image processing,Neurons,Reservoir computing networks,Reservoirs,robust video processing,Robustness,surveillance camera,Training},
+  file = {/Users/hugo/Zotero/storage/6CQNPBHU/7311148.html}
 }
 
 @misc{jannerOfflineReinforcementLearning2021,
@@ -6571,6 +6634,27 @@
   pages = {512},
   publisher = {{American Psychological Association}},
   file = {/Users/hugo/Papers/pdf/kanazawaGeneralIntelligenceDomainspecific2004.pdf;/Users/hugo/Zotero/storage/S7FXKD8B/2004-12248-010.html}
+}
+
+@article{kannoPhotonicReinforcementLearning2022,
+  title = {Photonic Reinforcement Learning Based on Optoelectronic Reservoir Computing},
+  author = {Kanno, Kazutaka and Uchida, Atsushi},
+  date = {2022-03-08},
+  journaltitle = {Scientific Reports},
+  shortjournal = {Sci Rep},
+  volume = {12},
+  number = {1},
+  pages = {3720},
+  publisher = {{Nature Publishing Group}},
+  issn = {2045-2322},
+  doi = {10.1038/s41598-022-07404-z},
+  url = {https://www.nature.com/articles/s41598-022-07404-z},
+  urldate = {2022-11-29},
+  abstract = {Reinforcement learning has been intensively investigated and developed in artificial intelligence in the absence of training data, such as autonomous driving vehicles, robot control, internet advertising, and elastic optical networks. However, the computational cost of reinforcement learning with deep neural networks is extremely high and reducing the learning cost is a challenging issue. We propose a photonic on-line implementation of reinforcement learning using optoelectronic delay-based reservoir computing, both experimentally and numerically. In the proposed scheme, we accelerate reinforcement learning at a rate of several megahertz because there is no required learning process for the internal connection weights in reservoir computing. We perform two benchmark tasks, CartPole-v0 and MountanCar-v0 tasks, to evaluate the proposed scheme. Our results represent the first hardware implementation of reinforcement learning based on photonic reservoir computing and pave the way for fast and efficient reinforcement learning as a novel photonic accelerator.},
+  issue = {1},
+  langid = {english},
+  keywords = {Applied optics,Information technology,Statistical physics,thermodynamics and nonlinear dynamics},
+  file = {/Users/hugo/Papers/pdf/kannoPhotonicReinforcementLearning2022.pdf;/Users/hugo/Zotero/storage/8YVDFFF5/s41598-022-07404-z.html}
 }
 
 @article{kanoAdaptiveOnedimensionalCrawling2020,
@@ -6903,6 +6987,22 @@
   urldate = {2018-11-22},
   langid = {english},
   file = {/Users/hugo/Papers/pdf/kitagawaConvergenceNewtonAlgorithm22.pdf;/Users/hugo/Zotero/storage/IL937Q5T/1603.html}
+}
+
+@article{kitayamaNovelFrontierPhotonics2019,
+  title = {Novel Frontier of Photonics for Data Processing—{{Photonic}}           Accelerator},
+  author = {Kitayama, Ken-ichi and Notomi, Masaya and Naruse, Makoto and Inoue, Koji and Kawakami, Satoshi and Uchida, Atsushi},
+  date = {2019-09-09},
+  journaltitle = {APL Photonics},
+  volume = {4},
+  number = {9},
+  pages = {090901},
+  publisher = {{American Institute of Physics}},
+  doi = {10.1063/1.5108912},
+  url = {https://aip.scitation.org/doi/10.1063/1.5108912},
+  urldate = {2022-11-29},
+  abstract = {In the emerging Internet of things cyber-physical system-embedded society, big data analytics needs huge computing capability with better energy efficiency. Coming to the end of Moore’s law of the electronic integrated circuit and facing the throughput limitation in parallel processing governed by Amdahl’s law, there is a strong motivation behind exploring a novel frontier of data processing in post-Moore era. Optical fiber transmissions have been making a remarkable advance over the last three decades. A record aggregated transmission capacity of the wavelength division multiplexing system per a single-mode fiber has reached 115 Tbit/s over 240 km. It is time to turn our attention to data processing by photons from the data transport by photons. A photonic accelerator (PAXEL) is a special class of processor placed at the front end of a digital computer, which is optimized to perform a specific function but does so faster with less power consumption than an electronic general-purpose processor. It can process images or time-serial data either in an analog or digital fashion on a real-time basis. Having had maturing manufacturing technology of optoelectronic devices and a diverse array of computing architectures at hand, prototyping PAXEL becomes feasible by leveraging on, e.g., cutting-edge miniature and power-efficient nanostructured silicon photonic devices. In this article, first the bottleneck and the paradigm shift of digital computing are reviewed. Next, we review an array of PAXEL architectures and applications, including artificial neural networks, reservoir computing, pass-gate logic, decision making, and compressed sensing. We assess the potential advantages and challenges for each of these PAXEL approaches to highlight the scope for future work toward practical implementation.},
+  file = {/Users/hugo/Papers/pdf/kitayamaNovelFrontierPhotonics2019.pdf}
 }
 
 @unpublished{kleykoCellularAutomataCan2020,
@@ -8511,6 +8611,23 @@
   pages = {30},
   langid = {english},
   file = {/Users/hugo/Papers/pdf/marshallQuantifyingPathwaysLife2019.pdf}
+}
+
+@article{martinenghiPhotonicNonlinearTransient2012,
+  title = {Photonic {{Nonlinear Transient Computing}} with {{Multiple-Delay Wavelength Dynamics}}},
+  author = {Martinenghi, Romain and Rybalko, Sergei and Jacquot, Maxime and Chembo, Yanne K. and Larger, Laurent},
+  date = {2012-06-15},
+  journaltitle = {Physical Review Letters},
+  shortjournal = {Phys. Rev. Lett.},
+  volume = {108},
+  number = {24},
+  pages = {244101},
+  publisher = {{American Physical Society}},
+  doi = {10.1103/PhysRevLett.108.244101},
+  url = {https://link.aps.org/doi/10.1103/PhysRevLett.108.244101},
+  urldate = {2022-11-29},
+  abstract = {We report on the experimental demonstration of a hybrid optoelectronic neuromorphic computer based on a complex nonlinear wavelength dynamics including multiple delayed feedbacks with randomly defined weights. This neuromorphic approach is based on a new paradigm of a brain-inspired computational unit, intrinsically differing from Turing machines. This recent paradigm consists in expanding the input information to be processed into a higher dimensional phase space, through the nonlinear transient response of a complex dynamics excited by the input information. The computed output is then extracted via a linear separation of the transient trajectory in the complex phase space. The hyperplane separation is derived from a learning phase consisting of the resolution of a regression problem. The processing capability originates from the nonlinear transient, resulting in nonlinear transient computing. The computational performance is successfully evaluated on a standard benchmark test, namely, a spoken digit recognition task.},
+  file = {/Users/hugo/Papers/pdf/martinenghiPhotonicNonlinearTransient2012.pdf;/Users/hugo/Zotero/storage/B5T2WXMQ/PhysRevLett.108.html}
 }
 
 @article{martinezCompleteCharacterizationStructure2014,
@@ -10163,6 +10280,27 @@
   date = {2002},
   pages = {311--318},
   file = {/Users/hugo/Papers/pdf/papineniBleuMethodAutomatic2002.pdf}
+}
+
+@article{paquotOptoelectronicReservoirComputing2012,
+  title = {Optoelectronic {{Reservoir Computing}}},
+  author = {Paquot, Y. and Duport, F. and Smerieri, A. and Dambre, J. and Schrauwen, B. and Haelterman, M. and Massar, S.},
+  date = {2012-02-27},
+  journaltitle = {Scientific Reports},
+  shortjournal = {Sci Rep},
+  volume = {2},
+  number = {1},
+  pages = {287},
+  publisher = {{Nature Publishing Group}},
+  issn = {2045-2322},
+  doi = {10.1038/srep00287},
+  url = {https://www.nature.com/articles/srep00287},
+  urldate = {2022-11-29},
+  abstract = {Reservoir computing is a recently introduced, highly efficient bio-inspired approach for processing time dependent data. The basic scheme of reservoir computing consists of a non linear recurrent dynamical system coupled to a single input layer and a single output layer. Within these constraints many implementations are possible. Here we report an optoelectronic implementation of reservoir computing based on a recently proposed architecture consisting of a single non linear node and a delay line. Our implementation is sufficiently fast for real time information processing. We illustrate its performance on tasks of practical importance such as nonlinear channel equalization and speech recognition and obtain results comparable to state of the art digital implementations.},
+  issue = {1},
+  langid = {english},
+  keywords = {Applied physics,Information theory and computation,Nonlinear optics,Optical physics},
+  file = {/Users/hugo/Papers/pdf/paquotOptoelectronicReservoirComputing2012.pdf;/Users/hugo/Zotero/storage/8ZBMSM8M/srep00287.html}
 }
 
 @article{parisiContinualLifelongLearning2019,
@@ -12166,6 +12304,20 @@
   file = {/Users/hugo/Papers/pdf/socherReasoningNeuralTensor22.pdf}
 }
 
+@inproceedings{sohIterativeTemporalLearning2012,
+  title = {Iterative Temporal Learning and Prediction with the Sparse Online Echo State Gaussian Process},
+  booktitle = {The 2012 {{International Joint Conference}} on {{Neural Networks}} ({{IJCNN}})},
+  author = {Soh, Harold and Demiris, Yiannis},
+  date = {2012-06},
+  pages = {1--8},
+  issn = {2161-4407},
+  doi = {10.1109/IJCNN.2012.6252504},
+  abstract = {In this work, we contribute the online echo state gaussian process (OESGP), a novel Bayesian-based online method that is capable of iteratively learning complex temporal dynamics and producing predictive distributions (instead of point predictions). Our method can be seen as a combination of the echo state network with a sparse approximation of Gaussian processes (GPs). Extensive experiments on the one-step prediction task on well-known benchmark problems show that OESGP produced statistically superior results to current online ESNs and state-of-the-art regression methods. In addition, we characterise the benefits (and drawbacks) associated with the considered online methods, specifically with regards to the trade-off between computational cost and accuracy. For a high-dimensional action recognition task, we demonstrate that OESGP produces high accuracies comparable to a recently published graphical model, while being fast enough for real-time interactive scenarios.},
+  eventtitle = {The 2012 {{International Joint Conference}} on {{Neural Networks}} ({{IJCNN}})},
+  keywords = {Approximation methods,Benchmark testing,Gaussian processes,Kernel,Reservoirs,Training,Vectors},
+  file = {/Users/hugo/Papers/pdf/sohIterativeTemporalLearning2012.pdf;/Users/hugo/Zotero/storage/HZSR77YT/6252504.html}
+}
+
 @misc{sohl-dicksteinDeepUnsupervisedLearning2015,
   title = {Deep {{Unsupervised Learning}} Using {{Nonequilibrium Thermodynamics}}},
   author = {Sohl-Dickstein, Jascha and Weiss, Eric A. and Maheswaranathan, Niru and Ganguli, Surya},
@@ -12664,6 +12816,22 @@
   langid = {english},
   keywords = {Computer Science - Machine Learning},
   file = {/Users/hugo/Papers/pdf/sudhakaranGrowing3DArtefacts2021.pdf}
+}
+
+@article{suganoReservoirComputingUsing2020,
+  title = {Reservoir {{Computing Using Multiple Lasers With Feedback}} on a {{Photonic Integrated Circuit}}},
+  author = {Sugano, Chihiro and Kanno, Kazutaka and Uchida, Atsushi},
+  date = {2020-01},
+  journaltitle = {IEEE Journal of Selected Topics in Quantum Electronics},
+  volume = {26},
+  number = {1},
+  pages = {1--9},
+  issn = {1558-4542},
+  doi = {10.1109/JSTQE.2019.2929179},
+  abstract = {We propose a scheme for reservoir computing using multiple semiconductor lasers with optical feedback arranged in parallel on a photonic integrated circuit, and we investigate the performance of reservoir computing numerically. The virtual nodes are obtained from the temporal waveforms of the outputs of the parallel reservoir lasers. We test the chaotic time-series prediction task, memory capacity, and nonlinear channel equalization task to investigate the performance of reservoir computing. We found that our scheme using multiple lasers outperforms that using a single laser with multiple delay times. Large memory capacity can also be obtained for the multiple lasers. Finally, we investigate the effect of parameter mismatch of the multiple lasers on reservoir computing performance.},
+  eventtitle = {{{IEEE Journal}} of {{Selected Topics}} in {{Quantum Electronics}}},
+  keywords = {chaos,Delays,information processing,Laser feedback,Laser modes,Optical feedback,photonic integrated circuit,Reservoir computing,Reservoirs,semiconductor lasers,Semiconductor lasers},
+  file = {/Users/hugo/Zotero/storage/W8VJ3GWX/8765366.html}
 }
 
 @unpublished{sukhbaatarAdaptiveAttentionSpan2019,
@@ -13387,6 +13555,27 @@
   langid = {english},
   keywords = {AI capitalism,Artificial Intelligence (AI),Commodification,Commons,Extraction,Political economy},
   file = {/Users/hugo/Papers/pdf/verdegemDismantlingAICapitalism2022.pdf}
+}
+
+@article{verstraetenIsolatedWordRecognition2005,
+  title = {Isolated Word Recognition with the {{Liquid State Machine}}: A Case Study},
+  shorttitle = {Isolated Word Recognition with the {{Liquid State Machine}}},
+  author = {Verstraeten, D. and Schrauwen, B. and Stroobandt, D. and Van Campenhout, J.},
+  date = {2005-09-30},
+  journaltitle = {Information Processing Letters},
+  shortjournal = {Information Processing Letters},
+  series = {Applications of {{Spiking Neural Networks}}},
+  volume = {95},
+  number = {6},
+  pages = {521--528},
+  issn = {0020-0190},
+  doi = {10.1016/j.ipl.2005.05.019},
+  url = {https://www.sciencedirect.com/science/article/pii/S0020019005001523},
+  urldate = {2022-11-29},
+  abstract = {The Liquid State Machine (LSM) is a recently developed computational model with interesting properties. It can be used for pattern classification, function approximation and other complex tasks. Contrary to most common computational models, the LSM does not require information to be stored in some stable state of the system: the inherent dynamics of the system are used by a memoryless readout function to compute the output. In this paper we present a case study of the performance of the Liquid State Machine based on a recurrent spiking neural network by applying it to a well known and well studied problem: speech recognition of isolated digits. We evaluate different ways of coding the speech into spike trains. In its optimal configuration, the performance of the LSM approximates that of a state-of-the-art recognition system. Another interesting conclusion is the fact that the biologically most realistic encoding performs far better than more conventional methods.},
+  langid = {english},
+  keywords = {Liquid State Machine,Parallel processing,Speech recognition,Spiking neural networks},
+  file = {/Users/hugo/Zotero/storage/HC79FFPY/S0020019005001523.html}
 }
 
 @article{verstraetenReservoirComputingStochastic2005,
@@ -14135,6 +14324,26 @@
   archiveprefix = {arXiv},
   keywords = {Computer Science - Artificial Intelligence,Computer Science - Computation and Language,Computer Science - Machine Learning},
   file = {/Users/hugo/Papers/pdf/wuMemorizingTransformers2022.pdf;/Users/hugo/Zotero/storage/5L9ZCSVU/2203.html}
+}
+
+@article{wyffelsComparativeStudyReservoir2010,
+  title = {A Comparative Study of {{Reservoir Computing}} Strategies for Monthly Time Series Prediction},
+  author = {Wyffels, F. and Schrauwen, B.},
+  date = {2010-06-01},
+  journaltitle = {Neurocomputing},
+  shortjournal = {Neurocomputing},
+  series = {Subspace {{Learning}} / {{Selected}} Papers from the {{European Symposium}} on {{Time Series Prediction}}},
+  volume = {73},
+  number = {10},
+  pages = {1958--1964},
+  issn = {0925-2312},
+  doi = {10.1016/j.neucom.2010.01.016},
+  url = {https://www.sciencedirect.com/science/article/pii/S0925231210000962},
+  urldate = {2022-11-29},
+  abstract = {A good prediction of the future enables companies and governments to plan their investments, production and other needs. The demand for good forecasting techniques motivates many researchers coming from a wide variety of fields to develop methods for time series prediction. Many of these techniques are very complex to apply and demand lots of computational effort to execute. As an answer to this, we propose the use of Reservoir Computing, a recently developed technique for efficient training of recurrent neural networks, for monthly time series prediction. We will explain how Reservoir Computing in its basic form can be applied to time series prediction. Additionally we will extend this approach with different Reservoir Computing strategies such as seasonal adjustment or a Reservoir Computing based voting collective approach. We will investigate the performance of all the proposed strategies and compare its prediction accuracy with the linear forecasting procedure build in the Census Bureau's X-12-ARIMA program and a Nonlinear Autoregressive model using Least-Squares Support Vector Machines.},
+  langid = {english},
+  keywords = {Forecasting,Monthly time series,Reservoir Computing},
+  file = {/Users/hugo/Papers/pdf/wyffelsComparativeStudyReservoir2010.pdf;/Users/hugo/Zotero/storage/M2BUNS6S/S0925231210000962.html}
 }
 
 @book{wyszeckiColorScienceConcepts2000,
