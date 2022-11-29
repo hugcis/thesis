@@ -6,9 +6,10 @@ the thesis. We begin by describing the \acf{CA} model, which is the complex
 system we focus on in the thesis (section \ref{sec:cellular-automata-sec}).
 Next, we describe the connection between \acp{CA} and \acfp{RNN}, which is
 useful to understand the characteristics and applications these two models share
-(section \ref{sec:cell-autom-rnns}). Finally, we describe the \acf{RC} model,
-which enables harvesting the computations of complex systems for solving
-problems, and which we apply in chapter \ref{cha:learn-effic-compl}.
+(section \ref{sec:cell-autom-rnns}). Finally, we describe the \acf{RC} model
+(section \ref{sec:res-models}), which enables harvesting the computations of
+complex systems for solving problems, and which we apply in chapter
+\ref{cha:learn-effic-compl}.
 
 \section{Cellular automata}\label{sec:cellular-automata-sec}
 
@@ -24,23 +25,26 @@ available states for the cells, usually chosen to be $\{0, 1\}$ for binary
 
 A neighborhood function $\boldsymbol{N}$ is defined which associates each cell
 with its neighbors on the lattice. In general, a \ac{CA} can be constructed on
-any space $\mathcal{L}$ where such a function can be defined. The space $\mathcal{L}$ specifies an
-indexing and the relation between the cells. In practice, regular finite or
-infinite grids are chosen, $\mathcal{L} \subset \mathbb{Z}$ or $\mathcal{L} \subset \mathbb{Z}^{2}$. For example, the grid could
-be a 1-dimensional torus with 10 cells, that is
-$\mathcal{L}_{{T_{10}}} = \{1, 2, \ldots, 10 \}$. The neighborhood function has the form
+any space $\mathcal{L}$ where such a function can be defined. The space
+$\mathcal{L}$ specifies an indexing and the relation between the cells. In
+practice, regular finite or infinite grids are chosen,
+$\mathcal{L} \subset \mathbb{Z}$ or $\mathcal{L} \subset \mathbb{Z}^{2}$. For
+example, the grid could be a 1-dimensional torus with 10 cells, that is
+$\mathcal{L}_{{T_{10}}} = \{1, 2, \ldots, 10 \}$. The neighborhood function has
+the form
 \begin{equation}
   \begin{aligned}
 \boldsymbol{N}_{\mathcal{L}} :\quad & \mathcal{S} \rightarrow \mathcal{S}^{s}\\
 &c_{i} \mapsto [c_{j}]_{j\in \mathcal{N}_{c_{i}}}
   \end{aligned}
 \end{equation}
-where $\mathcal{N}_{c_{i}}$ is the neighborhood of cell $c_{i}$, $s$ is the number of
-cells in the neighborhood and the returned value is a finite set of cells, the
-neighbors of cell $c_{i}$. For the torus $\mathcal{L}_{T_{10}}$ above, we can define the
-neighbors to be the cell itself and the two immediately adjacent cells. This
-type of 1D neighborhood is illustrated on Figure \ref{fig:1d_neigh}. It
-corresponds to the following neighborhood function:
+where $\mathcal{N}_{c_{i}}$ is the neighborhood of cell $c_{i}$, $s$ is the
+number of cells in the neighborhood and the returned value is a finite set of
+cells, the neighbors of cell $c_{i}$. For the torus $\mathcal{L}_{T_{10}}$
+above, we can define the neighbors to be the cell itself and the two immediately
+adjacent cells. This type of 1D neighborhood is usually associated with a
+\emph{radius} parameter $r = 1$. The $r=1$ neighborhood is illustrated on Figure
+\ref{fig:1d_neigh}. It corresponds to the following neighborhood function:
 \begin{equation}
   \begin{aligned}
 \boldsymbol{N}_{\mathcal{L}_{T_{10}}} :\quad & \mathcal{S} \rightarrow \mathcal{S}^{3} \\
@@ -53,11 +57,14 @@ corresponds to the following neighborhood function:
   \label{eq:torus_index}
 \end{equation}
 
-On two dimensional grids, there are multiple ways to define the neighborhood.
-Some common examples are the Moore neighborhood (see Figure \ref{fig:moore}) and
-the Von Neumann neighborhood (see Figure \ref{fig:von_neumann}). In the rest we
-omit the subscript on the neighborhood function $\boldsymbol{N}$ as we almost
-always work with regular grids.
+A larger radius $r$ would correspond to including more cells in the
+neighborhood, going in each direction from the initial cell. On two dimensional
+grids, there are multiple ways to define the neighborhood. Some common examples
+are the Moore neighborhood (see Figure \ref{fig:moore}) and the Von Neumann
+neighborhood (see Figure \ref{fig:von_neumann}). In the rest we omit the
+subscript on the neighborhood function $\boldsymbol{N}$ as we almost always work
+with regular grids on a torus, for which it is simpler to just mention the size
+and dimension.
 
 \begin{figure}[htbp]
   \centering
@@ -539,7 +546,17 @@ on figure \ref{fig:ca_rule_sampling}.
 \end{figure}
 
 \paragraph{Smooth sampling with the recurrent convolutional neural network
-  analogy}
+  analogy.}
+
+The recurrent convolutional network analogy of \acp{CA} (see section
+\ref{sec:cell-autom-rnns} for details) formulates a \ac{CA} as a neural network.
+In this paradigm, the rule of a \ac{CA} is entirely determined by the parameters
+of that neural network of a \ac{CA} is entirely determined by the parameters of
+that neural network. This allows modifying the \ac{CA} rules like we change the
+weights of a neural network. For example, as long as all the simulation steps
+are differentiable, the backpropagation algorithm can be applied and used to
+update a \ac{CA} rule by updating the weights of the neural network with
+gradient descent.
 
 
 \section{Cellular automata and RNNs}\label{sec:cell-autom-rnns}
@@ -616,45 +633,50 @@ Section~\ref{sec:adding-inputs-outp}.
 
 \subsection{Transition rule as a set of convolutions\label{sec:transition-rule-as}}
 
-Each cell $c_i$ from the above definition is represented as a vector of size $k$
-the number of states. Cell $c_i$ is in state $s_i \in [0, \ldots, k - 1]$. A
-neighborhood of size $3$ in a $1$D CA ($r=1$) is a $3 \times k$ vector
-$\mathbf{u}_i = [u_{i-1}, u_{i}, u_{i+1}]$. Each $u_{ij}$ is a vector of size
-$k$ with a $1$ in position $s_i$. This is illustrated in the 1D (resp.\ 2D) case
-on the left (resp.\ right) of Figure~\ref{fig:cell}. For a CA with only two
-states, it is redundant to have a $3\times 2$ vector, but this ``one-hot'' encoding
-becomes helpful when working with more states.
+Each cell $c_i$ from the \ac{CA} definition can be in one of $k$ states. We
+represent the cells as vectors of size $k$ the number of states, with only
+zeroes expect for a one in the $k$-th position. A neighborhood of size $3$ in a
+1D CA can be represented as a $3 \times k$ vector
+$\mathbf{u}_i = [u_{i-1}, u_{i}, u_{i+1}]$. Each $u_{i}$ is a vector of size $k$
+with a $1$ in position $s_i$. This is illustrated in the 1D (resp.\ 2D) case on
+the left (resp.\ right) of Figure~\ref{fig:cell}. For a CA with only two states,
+it is redundant to have a $3 \times 2$ vector, but the ``one-hot'' encoding
+becomes useful when working with more states.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.3\linewidth]{figures/repr}
-  \caption{\label{fig:cell}Cellular automaton neighborood vector representation
-    example with 2 states. A $3\times 3$ square of cells with two states can be
+  \includegraphics[width=.4\linewidth]{figures/repr}
+  \caption{\label{fig:cell}A \ac{CA} neighborood vector representation example
+    with 2 states. A $3\times 3$ square of cells with two states can be
     represented by a $3\times 3 \times 2$ vector. Left: 1D 3-neighbors
-    representation. Right: 2D $3\times3$ neighbors representation.}
+    representation. Right: 2D $3\times3$ neighbors representation. The last
+    dimension of the vector encodes a ``one-hot'' representation of the state of
+    the cell.}
 
 \end{figure}
+
+With this representation, on can express the transition rule $\Phi$ as a simple
+convolutional neural network. This network would be composed of 2 layers which
+are shown on Figure~\ref{fig:global_schema}:
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.9\linewidth]{figures/global_schema}
-  \caption{\label{fig:global_schema}How to represent any 2-states 2D CA rule
-    operating on $3\times 3$ neighborhoods as a 2 layers CNN.}
+  \caption{\label{fig:global_schema}A simple representation of any 2-states 2D
+    CA rule operating on $3\times 3$ neighborhoods as a 2 layers CNN.}
 \end{figure}
 
 
-With this representation, on can easily express the transition rule $\Phi$ as a
-simple convolutional neural network. This network would be composed of 2 layers
-which are shown on Figure~\ref{fig:global_schema}:
-
-\paragraph{The first convolutional layer}It is receptive to each possible
-neighborhood configuration. This layer is composed of $k^{2r + 1}$ filters of
-dimension $k\times (2r + 1)$ with only ones and zeros, that are each the same as
-a possible configuration of size $(2r+1)$ of the neighborhood. The product of
-each filter with an input neighborhood will be an integer between $0$ and $9$.
-By applying a ReLU non-linearity with a vector of 8s as bias, we obtain the
-input to the second layer, a vector of size $k^{2r + 1}$ for each cell with
-plays the role of an indicator of the input configuration.
+\paragraph{The first convolutional layer.} It is receptive to each possible
+neighborhood configuration. In the 1D case with neighborhood size 3, this is all
+eight configurations $000, 001, 010, \ldots, 111$. For a radius $r$, this layer
+is composed of $k^{2r + 1}$ filters of dimension $k\times (2r + 1)$ with only
+ones and zeros, that are each the same as a possible configuration of size
+$(2r+1)$ of the neighborhood. The product of each filter with an input
+neighborhood will be an integer between $0$ and $9$. By applying a ReLU
+non-linearity with a vector of 8s as bias, we obtain the input to the second
+layer, a vector of size $k^{2r + 1}$ for each cell with plays the role of an
+indicator of the input configuration.
 
 \paragraph{A second convolutional layer} It has $k^{2r + 1}$ filters of size $1$ that
 are either $0$ or $1$ depending on the desired output of the transition.
@@ -899,7 +921,41 @@ type of reservoirs are sometimes called ``exotic''
 \parencite{lukoseviciusReservoirComputingApproaches2009}, but physical \ac{RC}
 shows promises to develop cheap and efficient machine learning hardware and can
 inform us on the nature and behavior of the underlying physical systems.
-\textcite{tanakaRecentAdvancesPhysical2019} lists several types of \ac{RC}
+\textcite{tanakaRecentAdvancesPhysical2019} identifies four characteristics that
+make a reservoir suitable to solve computational task.
+
+\begin{itemize}
+  \item The inputs need to be mapped to a high-dimensional space, which
+        corresponds to the internal state of the reservoir. This
+        high-dimensionality ensures the inputs are separated with high
+        probability.
+
+  \item The reservoir should be non-linear. This will allow inputs that are not
+        linearly separable to be separated as they are projected within the
+        reservoir.
+
+  \item The reservoir should have the echo-state property
+        \parencite{jaegerEchoStateApproach2001, yildizRevisitingEchoState2012},
+        or fading memory \parencite{boydFadingMemoryProblem1985,
+        maassRealTimeComputingStable2002, maassFadingMemoryKernel2004}. This
+        property relates asymptotic properties of the excited reservoir dynamics
+        to the driving signal. A reservoir with the echo-state property will
+        asymptotically forget all input values. This make some reservoir unable
+        to solve tasks where unbounded memory is possibly required, such as
+        context-free grammar parsing
+        \parencite{schmidhuberTrainingRecurrentNetworks2007}. Later, reservoir
+        models that address this issue were developed
+        \parencite{pascanuNeurodynamicalModelWorking2011}.
+
+  \item A reservoir should separate responses from different signals into
+        different parts of the space, while being insensitive to small
+        perturbations of the input. For a given system, this trade-off is often
+        obtained at the transition between chaotic and non-chaotic regimes
+        \parencite{bertschingerRealtimeComputationEdge2004,
+        legensteinEdgeChaosPrediction2007}.
+\end{itemize}
+
+We list common types of \ac{RC} below:
 
 \begin{description}
   \item[Dynamical systems] The \ac{RC} models based on other reservoirs than
@@ -915,6 +971,17 @@ inform us on the nature and behavior of the underlying physical systems.
         \parencite{yangInvestigationsStaircaseMemristor2016,
         merkelMemristiveReservoirComputing2014,
         donahueDesignAnalysisNeuromemristive2015}.
+  \item[Mechanical \ac{RC}] Soft mechanical bodies have complex nonlinear
+        dynamics that can be beneficial to build a \ac{RC} model
+        \parencite{pfeiferHowBodyShapes2007}. For example, a reservoir using a
+        mass-spring network was proposed by
+        \textcite{hauserTheoreticalFoundationMorphological2011}.
+  \item[Biological \ac{RC}] There have been multiple hypotheses on whether the
+        parts of the brain behaves like a \ac{RC} system
+        \parencite{yamazakiCerebellumLiquidState2007}. For example, a \ac{RC}
+        model was proposed to understand the mechanism of context-dependent eye
+        movement \parencite{domineyComplexSensorymotorSequence1995,
+        domineyModelCorticostriatalPlasticity1995}.
   \item[Photonic \ac{RC}] The principle of photonic \ac{RC} is to use optical
         reservoirs to generate the computations. A first example using
         semiconductor optical amplifiers (SOAs) was proposed by
@@ -931,20 +998,11 @@ inform us on the nature and behavior of the underlying physical systems.
         \parencite{torrejonNeuromorphicComputingNanoscale2017,
         williameChaoticDynamicsMacrospin2019}, or spin waves
         \parencite{nakaneReservoirComputingSpin2018}.
-  \item[Mechanical \ac{RC}] Soft mechanical bodies have complex nonlinear
-        dynamics that can be beneficial to build a \ac{RC} model
-        \parencite{pfeiferHowBodyShapes2007}. For example, a reservoir using a
-        mass-spring network was proposed by
-        \textcite{hauserTheoreticalFoundationMorphological2011}.
-  \item[Biological \ac{RC}] There have been multiple hypotheses on whether the
-        parts of the brain behaves like a \ac{RC} system
-        \parencite{yamazakiCerebellumLiquidState2007}. For example, a \ac{RC}
-        model was proposed to understand the mechanism of context-dependent eye
-        movement \parencite{domineyComplexSensorymotorSequence1995,
-        domineyModelCorticostriatalPlasticity1995}.
 \end{description}
 
 \subsection{Reservoir computing applications}
+
+\ac{RC} has had several successful applications in various fields.
 
 \subsection{Echo-state network}
 
