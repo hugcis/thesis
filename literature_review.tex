@@ -2,14 +2,15 @@
 \label{cha:literature-review}
 
 In this chapter, we review several fields associated with learning and complex
-systems which served as a theoretical foundation, influenced, and inspired this
-thesis. We begin by reviewing related work on complexity measures for dynamical
-and complex systems (section \ref{sec:measuring-complexity}). We also review
-works on defining and understanding emergence (section \ref{sec:emergence}),
-evolutionary methods for searching solutions in complex spaces (section
-\ref{sec:evol-algor}), methods for constructing open-ended evolving systems
-(section \ref{sec:open-ended-evolution-1}), and method for extracting and using
-the computations happening within complex systems (section
+systems which served as a theoretical foundation for our work. The literature we
+present also influenced and inspired this thesis. We begin by reviewing related
+work on complexity measures for dynamical and complex systems (section
+\ref{sec:measuring-complexity}). We also review works on defining and
+understanding emergence (section \ref{sec:emergence}), evolutionary methods for
+searching solutions in complex spaces (section \ref{sec:evol-algor}), methods
+for constructing open-ended evolving systems (section
+\ref{sec:open-ended-evolution-1}), and method for extracting and using the
+computations happening within complex systems (section
 \ref{sec:comp-with-compl}).
 
 \section{Measuring complexity\label{sec:measuring-complexity}}
@@ -90,9 +91,9 @@ complexity, the last picture could perhaps be labeled as complex.
 \end{tikzpicture}}
 \caption{\emph{Ideal} ``complexity'' curve as a function of the ``randomness''
   of a system. The three \ac{CA} from figure \ref{fig:three_eca_complex} are
-  displayed on the curve on their approximate expected location on that curve.
-  This curve is just for illustrative purposes and does not reflect any true
-  function linking randomness and complexity.}
+  displayed at their approximate expected location on that curve. This curve is
+  just for illustrative purposes and does not correspond to any true function
+  linking randomness and complexity.}
 \label{fig:complexity_curve}
 \end{figure}
 
@@ -103,12 +104,15 @@ quantity is sufficient to measure complexity, since it depends on exactly how
 meaning is assigned to this term. Even when some meaning has been fixed by the
 definition of an observable quantity, the statistics of the measurement of this
 observable are also crucial to its interpretation
-\parencite{gutowitzCellularAutomataSciences1995}. Despite these drawbacks, we
-seek a measure of complexity that matches intuition as well as possible. Such a
-measure would assign low complexity to both simple objects and random object,
-and high complexity to objects in between. For illustration, we draw this ideal
-complexity curve on figure \ref{fig:complexity_curve} and place the \acp{ECA}
-from figure \ref{fig:three_eca_complex} on it.
+\parencite{gutowitzCellularAutomataSciences1995}.
+
+Despite these drawbacks, we seek a measure of complexity that matches intuition
+as well as possible. Such a measure would assign low complexity to both simple
+objects and random object, and high complexity to objects in between. For
+illustration, we place the \acp{ECA} from figure \ref{fig:three_eca_complex} on
+this ideal complexity curve, shown on figure \ref{fig:complexity_curve}. In
+chapter \ref{cha:meas-compl-evolv}, we develop a complexity metric that matches
+human intuition of complexity on a dataset of cellular automata.
 
 We note that one of the most widely known concept of complexity of symbol
 sequences, the ``algorithmic complexity'', should also be called a measure of
@@ -355,11 +359,41 @@ interesting rely on a set of chosen macroscopic states for the system.
 are supposed to be chosen, nor do any follow-up works, making this complexity
 metric hard to use in practice.
 
-\subsubsection{$\epsilon$-machines}
+\subsection{$\epsilon$-machines}
 
+The $\epsilon$-machine is an approach to complexity that seeks to construct a
+metric more suitable for physical systems that also addresses some issues of
+other existing complexity metrics \parencite{crutchfieldOrderChaos2012}. It is
+the result of a field computational mechanics, an extension of statistical
+mechanics that describes not only the statistical properties of a systems but
+also how it stores information and how it computes
 \parencite{crutchfieldInferringStatisticalComplexity1989,
   crutchfieldCalculiEmergenceComputation1994,
-  feldmanMeasuresStatisticalComplexity1998}
+  feldmanMeasuresStatisticalComplexity1998, crutchfieldOrderChaos2012}.
+Computational mechanics algorithms take as input the time series being analyzed,
+and outputs a minimal, optimized model, that can reproduce a time series that is
+statistically equivalent to the input time series. The size of the model
+produces a metric known as statistical complexity The models are known as
+$\epsilon$-machines. Three optimality theorems say that $\epsilon$-machines
+capture all of the properties of a process
+\parencite{crutchfieldInferringStatisticalComplexity1989,
+  crutchfieldThermodynamicDepthCausal1999,
+  shaliziComputationalMechanicsPattern2001}: prediction: the $\epsilon$-machine
+is its optimal predictor; minimality: compared with all other optimal
+predictors, the $\epsilon$-machine of a process is its minimal representation;
+uniqueness: any minimal optimal predictor is equivalent to the
+$\epsilon$-machine.
+
+This model has many attractive properties and was successfully applied to study
+the symbolic dynamics of chaotic systems
+\parencite{crutchfieldCalculiEmergenceComputation1994}, molecular dynamics
+\parencite{ryabovComputationalMechanicsMolecular2011}, single-molecule
+microscopy \parencite{kellyNewMethodInferring2012}, and the spatio-temporal
+complexity of \acp{CA} \parencite{crutchfieldTurbulentPatternBases1993,
+  hansonComputationalMechanicsCellular1997,
+  shaliziQuantifyingSelfOrganizationOptimal2004}. The main drawback is the
+construction of the $\epsilon$-machine itself, for which there is no
+general-purpose approach.
 
 \subsection{Sophistication}
 
@@ -411,22 +445,23 @@ which is also equivalent to
 
 Like algorithmic complexity, sophistication is a useful theoretical notions to
 model ideas of entropy and complexity, but it cannot be directly applied in
-numerical simulations, because it is also uncomputable.
+numerical simulations and can only be approximated because it is also
+uncomputable.
 
-\subsection{Effective Measure complexity}
+% \subsection{Effective Measure complexity}
 
-\parencite{grassbergerQuantitativeTheorySelfgenerated1986,
-  gell-mannInformationMeasuresEffective1996}
+% \parencite{grassbergerQuantitativeTheorySelfgenerated1986,
+%   gell-mannInformationMeasuresEffective1996}
 
 \section{Emergence}\label{sec:emergence}
 The notion of emergence is central to the study of complex systems. It is a very
-broad concepts that could be phrased as \emph{the properties an composite entity
-  acquires that its composing parts did not possess}. Emergence is often described
-as being similar to self-organization. Although these two concepts are closely
-related, they are fundamentally different ideas
+broad concepts that could be phrased as \emph{the properties a composite entity
+  acquires that its composing parts did not possess}. Emergence is often
+described as being similar to self-organization. Although these two concepts are
+closely related, they are fundamentally different ideas
 \parencite{dewolfEmergenceSelfOrganisationDifferent2005}. Both properties can
-exist independently within a dynamical system.
-Some examples of emergent behavior include:
+exist independently within a dynamical system. Some examples of emergent
+behavior include:
 
 \begin{itemize}
   \item The spontaneous formation of clusters of randomly distributed objects -
@@ -580,8 +615,6 @@ agent and policy implementation
         to sustain diversity.
 \end{itemize}
 
-\paragraph{Quality diversity}
-The quality diversity method is a special type of novelty search.
 
 \section{Open-ended evolution\label{sec:open-ended-evolution-1}}
 The field of Artificial Life research has worked to figure out what the
