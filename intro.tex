@@ -4,10 +4,9 @@
 
 \section{Goal}
 
-The goal of this thesis is to develop methods for studying and using the
-computations happening within complex dynamical systems to construct learning
-algorithms that use a limited amount of supervision.
-
+The aim of this thesis is to develop methods that study and use 
+computations that take place in complex dynamical systems to create 
+learning algorithms that require limited to no supervision. 
 We break down this objective into the following subgoals:
 
 \begin{enumerate}
@@ -45,9 +44,9 @@ We break down this objective into the following subgoals:
   \item Measure the fraction of systems that have the most complex and rapidly
         evolving behavior. Defining these notions is also part of the goal. We
         believe those systems to be the most promising for further use since
-        they may exhibit open-ended complexity growth. In chapter
+        they may exhibit open-ended complexity growth. In chapters
         \ref{cha:meas-compl-evolv} and \ref{cha:visu-comp-large}, we present
-        different methods for measuring evolving complexity and understand when
+        different methods to measure evolving complexity and understand when
         the complexity increases over time. In chapter \ref{cha:visu-comp-large}
         we study the importance of multi-scale analysis for the complexity of
         cellular automata.
@@ -63,7 +62,7 @@ We break down this objective into the following subgoals:
   \item Apply promising systems to challenging tasks where classical machine
         learning models may fail or prove less efficient. The goal is to define
         various ways to apply evolving complex dynamical systems to some
-        standard learning tasks and figure out if it improves the performance or
+        standard learning tasks and to figure out if it improves the performance or
         efficiency of the learning algorithm. An example application that we
         explore in chapter \ref{cha:learn-effic-compl} is illustrated in
         Figure~\ref{fig:ca_lm}, where a \ac{CA} is used to implement a language
@@ -83,46 +82,46 @@ We break down this objective into the following subgoals:
 In this work, we do not focus our attention on what the machine learning
 community commonly refers to as ``unsupervised learning'', that is, learning
 structure from untagged data. In machine learning, supervision refers to a
-label, a number, or collection of numbers that represents the expected outcome
+label, a number, or a collection of numbers that represents the expected outcome
 of some input data. Our goal is to construct models that develop autonomously,
-so we first seek systems that behave this way, and postpone the issue of
+so we first seek systems that behave this way and postpone the issue of
 learning to optimize a particular objective function. We are particularly
 interested in systems that can develop on their own through internal evolution
 rules, without any input.
 
 In this thesis, we work toward achieving these goals, focusing on one particular
-complex system: the \acl{CA}. This model has been extensively studied because of
+complex system: the \acl{CA}. This model has been extensively studied due to
 its simple definition and surprisingly complex behavior. We provide a
-thorough description of \aclp{CA} in Section \ref{sec:cellular-automata-sec}.
+detailed description of \aclp{CA} in Section \ref{sec:cellular-automata-sec}.
 
 
 \section{Motivation}
 
-Complex dynamical systems could overcome the issues with existing learning
-algorithms, such as difficulties to generalize, robustness, or ability to learn
-continually. The natural intelligence of biological systems seems to rely on
+Complex dynamical systems could overcome the problems with existing learning
+algorithms, such as difficulties in generalization, robustness, or the ability to learn
+continuously. The natural intelligence of biological systems seems to rely on
 emerging properties selected through evolution. For example, biological life
 exhibits a pattern of major evolutionary transitions where lower-level
 autonomously replicating entities merge to form a single more complex corporate
 body \parencite{lorenzEmergenceModularityBiological2011}. This is believed to
-have happened for the emergence of eukaryotic cells as well as for multicellular
-life \parencite{hammerschmidtLifeCyclesFitness2014}. All the complex and diverse
+have occurred for the emergence of eukaryotic cells, as well as for multicellular
+life \parencite{hammerschmidtLifeCyclesFitness2014}. All complex and diverse
 biological entities have presumably emerged from a single common ancestor and,
-even before, from inorganic components present on the surface of Earth.
+even before, from inorganic components present on the surface of the Earth.
 
 So far, it is unclear what algorithmic properties could lead a process to
 display a similar trajectory in its state space. Producing emerging phenomena
-similar to natural ones \emph{in silico} is challenging. There is a long history
+similar to those of nature \emph{in silico} is challenging. There is a long history
 of algorithms that attempt to apply evolutionary design to solve particular
 tasks, called evolutionary algorithms
 \parencite{fogelArtificialIntelligenceSimulated1966,
   ,millerDesigningNeuralNetworks1989, backOverviewEvolutionaryAlgorithms1993}.
-But many of these methods focus on searching the space of solutions through
-several variation mechanisms such as mutations and crossovers. While effective
-to solve precise tasks, these methods obscure another crucial component of
+However, many of these methods focus on searching the space of solutions through
+several variation mechanisms, such as mutations and crossovers. Although effective
+in solving precise tasks, these methods obscure another crucial component of
 natural evolution by using an explicit fitness function.
 
-Most of existing machine learning algorithms rely on the choice of an objective
+Most existing machine learning algorithms rely on the choice of an objective
 function: a clearly defined mapping from the current state and parameters of a
 model to a real value, which indicates the performance of that model. The
 function depends on the objective of the model. For a supervised learning
@@ -133,10 +132,10 @@ example, the well-known K-means clustering algorithm minimizes the sum of square
 distances to cluster centers.
 
 This reliance on objective functions creates two main issues: (i) the objective
-is not always clearly defined or can be too broad for general purpose
+is not always clearly defined or can be too broad for general-purpose
 applications. For example, a possible objective function for a walking robot
 could be to ``not fall when stepping through its surrounding environment''. This
-function is impractical to define and will vary a lot depending on the
+function is impractical to define and will vary greatly depending on the
 parameters of the environment. Furthermore, (ii) Using such functions as goals
 can be counterproductive because, as many examples in nature demonstrate, robust
 paths to complex objectives are often deceptive. They involve developing in
@@ -189,11 +188,11 @@ straightforward.
 
 Choosing the right complex system architecture is essential because it defines
 the search space over which interesting and useful systems can be found.
-Correctly parametrizing that space can also be challenging, because too many
+Correctly parameterizing that space can also be challenging, because too many
 degrees of freedom make it difficult to search for and find good systems, while
-too few might indicate a lack of expressivity. An example parametrization of
+too few might indicate a lack of expressivity. An example parameterization of
 \ac{CA} with little expressivity is Langton's lambda parameter
-\parencite{langtonComputationEdgeChaos1990}. On the other end of the spectrum, the
+\parencite{langtonComputationEdgeChaos1990}. At the other end of the spectrum, the
 \ac{CA} rule is a simple parametrization with many degrees of freedom, which
 makes it impractical.
 
@@ -234,7 +233,7 @@ topology of the discrete space.
 
 
 Even if we want complex systems that evolve in unexpected directions and grow in
-an open-ended way with no supervision, it may still be useful to steer them
+an open-ended way without supervision, it may still be useful to steer them
 locally towards specific targets. A major challenge that follows from this goal
 is that many complex systems are chaotic. A deterministic dynamical system is
 said to be chaotic if its evolution is highly sensitive to its initial
@@ -260,7 +259,7 @@ help select interesting complex systems.
 \subsection{Complex systems inputs and outputs}
 
 Some of the complex systems we study in this thesis are closed systems. They do
-not expect inputs or have well-defined outputs. For example \ac{CA} and \ac{RBN}
+not expect inputs or have well-defined outputs. For example, \ac{CA} and \ac{RBN}
 do not have a notion of inputs and outputs built into the model.
 
 A common challenge for such systems is to define the inputs and outputs in a way
@@ -272,7 +271,8 @@ state.
 Throughout this work, we use reservoir computing for this purpose.
 Reservoir computing allows one to harvest the internal computations of complex
 systems, or \emph{read} information from its internal state by learning a linear
-regression that maps .
+regression that maps that internal state to desired outputs (see 
+Section \ref{sec:res-models}).
 
 
 \section{Contributions}
