@@ -930,9 +930,9 @@ benchmarked models on a range of task difficulties.
 \footnotetext{$h$ is chosen to match the number of parameters of the reservoir-based methods.}
 
 \section{Reservoir \ac{CA} results}
-We present some results from our experiments with reservoir cellular automata.
-First, general statistics about \ac{ECA} performance on the the five first tasks
-(tasks with ID 1 to 5).
+We present some detailed results from our experiments with reservoir cellular
+automata. First, general statistics about \ac{ECA} performance on the five first
+tasks (tasks with ID 1 to 5).
 
 \begin{figure}[htbp]
   \centering
@@ -947,11 +947,15 @@ task. Score distributions vary a lot from task to task because of the different
 output spaces (binary for Periodic, Inc-per and QA and multi-modal for the
 others).
 
+Next, we give a more in depth analysis of the best performing \acp{ECA} on the
+first two tasks.
+
 \subsection{Binary sequences}
 
 The binary sequence task should be the simplest to solve. Since it requires some
-memory we expect some CA rules with very chaotic behavior --- like ECA rule 30 ---
-to fail at it.
+memory we expect some CA rules with very chaotic behavior --- like ECA rule 30
+--- to fail at it. We observed that the best rules are consistently from the
+periodic and ordered type.
 
 \begin{figure}[htbp]
   \centering
@@ -962,6 +966,12 @@ to fail at it.
     only differ by 1 transition in their rule
     function.}\label{fig:top-binary-seq}
 \end{figure}
+
+The four best rules displayed in figure \ref{fig:top-binary-seq} all implement a
+similar mechanism, using translations of cells from one column to the next at
+every step. This translation is a memory mechanism, because it shifts any cell
+that was turned on in reaction to an input before could be overwritten by a
+subsequent input.
 
 \begin{table}[htbp]
   \centering
@@ -992,8 +1002,19 @@ rule out of all the possible \acp{ECA} is rule 37.
   \centering
   \includegraphics[width=\linewidth]{figures/rules-sym-ct.pdf}
   \caption{The two best performing rules for the easy symbol counting task (.82
-    average accuracy)}\label{fig:best_sym_ct}
+    average accuracy).}\label{fig:best_sym_ct}
 \end{figure}
+
+As shown in figure \ref{fig:best_sym_ct}, the two best rules seem to employ a
+similar ``computing mechanism'' to solve the task. They seem to grow tree-like
+structures that sometimes become wider. One hypothesis for the success of these
+two rules is that they encode some information about the number of observed
+symbols in the width of these tree structures. \ac{RC} is useful for this kind
+of analyses because it has some level of interpretability. The weights of the
+output decoding layer can inform us on which of the components of the \acp{CA}
+internal state are the most important for the task being solved. However, even
+with this tool, it can still be hard to disentangle the effect of each
+components and their interactions.
 
 \begin{table}[htbp]
   \centering
