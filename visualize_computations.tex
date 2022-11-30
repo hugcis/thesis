@@ -1,19 +1,19 @@
 \chapter{Visualization of computation in large-scale complex systems}
 \label{cha:visu-comp-large}
 
-  Emergent processes in complex systems such as cellular automata can perform
-  computations of increasing complexity, and could possibly lead to artificial
-  evolution. Such a feat would require scaling up current simulation sizes to
-  allow for enough computational capacity. Understanding complex computations
-  happening in cellular automata and other systems capable of emergence poses
-  many challenges, especially in large-scale systems. We propose methods for
-  coarse-graining cellular automata based on frequency analysis of cell states,
-  clustering and autoencoders. These innovative techniques facilitate the
-  discovery of large-scale structure formation and complexity analysis in those
-  systems. They emphasize interesting behaviors in elementary cellular automata
-  while filtering out background patterns. Moreover, our methods reduce large 2D
-  automata to smaller sizes and enable identifying systems that behave
-  interestingly at multiple scales.
+Emergent processes in complex systems such as cellular automata can perform
+computations of increasing complexity, and could possibly lead to artificial
+evolution. Such a feat would require scaling up current simulation sizes to
+allow for enough computational capacity. Understanding complex computations
+happening in cellular automata and other systems capable of emergence poses many
+challenges, especially in large-scale systems. We propose methods for
+coarse-graining cellular automata based on frequency analysis of cell states,
+clustering and autoencoders. These innovative techniques facilitate the
+discovery of large-scale structure formation and complexity analysis in those
+systems. They emphasize interesting behaviors in elementary cellular automata
+while filtering out background patterns. Moreover, our methods reduce large 2D
+automata to smaller sizes and enable identifying systems that behave
+interestingly at multiple scales.
 
 \section{Introduction}
 Cellular automata (CA) have been extensively studied since the 1960s. Originally
@@ -22,8 +22,8 @@ designed and studied to create artificial evolution from self-replication
   langtonSelfreproductionCellularAutomata1984}, previously studied cellular
 automata simulations were often of relatively modest sizes. Only specific rules
 with repetitive or predictable dynamics such as John Conway's Game of Life
-\parencite{gardnerMathematicalGames1970} have been scaled up to larger grid sizes
-($10^4 \times 10^4$ or more cells).
+\parencite{gardnerMathematicalGames1970} have been scaled up to larger grid
+sizes ($10^4 \times 10^4$ or more cells).
 
 For complex phenomena such as artificial evolution to exist and be open-ended
 within those simulated worlds, there needs to be sufficient ``capacity'' --- a
@@ -61,11 +61,11 @@ should also hold true for CAs; we further discuss this question in
 \begin{figure}[th]
   \centering
   \includegraphics[width=.93\linewidth]{figures/rule18_small.pdf}
-  \caption{\label{fig:rule18_small} \textbf{Hidden structures in rule 18 are
-      uncovered by filtering the space-time diagram with our frequency
-      histogram-based method}. \textbf{(a)} shows 300 timesteps of a randomly
-    initialized rule 18 simulation. Notice the complex structures made visible
-    in \textbf{(b)} with our method.}
+  \caption{\label{fig:rule18_small} Hidden structures in rule 18 are uncovered
+    by filtering the space-time diagram with our frequency histogram-based
+    method. \textbf{(a)} shows 300 timesteps of a randomly initialized rule 18
+    simulation. Notice the complex structures made visible in \textbf{(b)} with
+    our method.}
 \end{figure}
 
 In this paper, we investigate techniques which can help us visualize large
@@ -97,6 +97,7 @@ representation, which we argue are necessary to study complexity in large
 cellular automata.
 
 \subsection{Coarse-graining in cellular automata}
+
 Coarse-graining is an approximation procedure used to speed up computations in
 systems made of many components. It originated
 in~\parencite{levittComputerSimulationProtein1975} and is now widely used in physics
@@ -144,6 +145,7 @@ complex behaviors. However, the first method requires repeated perturbations and
 simulations of the system to study its sensitivity.
 
 \subsection{Scaling-up cellular automata}
+
 Hashlife \parencite{gosperExploitingRegularitiesLarge1984} and other Game of
 Life-specific optimizations enable simulating a large number of cells for
 numerous timesteps. Nonetheless, these algorithms essentially exploit input
@@ -169,6 +171,7 @@ while keeping primary dynamics in the background. The resulting diagram would
 ideally be an irreducible system.
 
 \section{Proposed coarse-graining of cellular automata}
+
 For reasons stated above, we introduce coarse-graining methods for cellular
 automata that are not reversible --- information is discarded in the process.
 This process does not attempt to find shortcuts for the computations of a
@@ -273,14 +276,14 @@ partitioning (Floyd–Steinberg's algorithm was used
     \caption{\label{subfig:dithering}with dithering}
   \end{subfigure}
 
-  \caption{\label{fig:close-up}\textbf{Close-up view of coarse-graining effects
-      on a 4-states CA rule} (1 shade of blue per state). Both coarse-graining
-    methods conserve many of the interesting structures. Dithering introduces
-    additional artifacts on regular backgrounds. Fig.~\ref{subfig:normal} shows
-    actual states in the CA simulation on a $128 \times 128$ grid.
+  \caption{\label{fig:close-up} Close-up view of coarse-graining effects on a
+    4-states CA rule (1 shade of blue per state). Both coarse-graining methods
+    conserve many of the interesting structures. Dithering introduces additional
+    artifacts on regular backgrounds. Fig.~\ref{subfig:normal} shows actual
+    states in the CA simulation on a $128 \times 128$ grid.
     Fig.~\ref{subfig:no-dithering} is a coarse-grained version
-    of~\ref{subfig:normal} with histogram coarse-graining, the grid is $64
-    \times 64$ cells.\ref{subfig:dithering} is obtained with histogram
+    of~\ref{subfig:normal} with histogram coarse-graining, the grid is
+    $64 \times 64$ cells.\ref{subfig:dithering} is obtained with histogram
     coarse-graining and dithering (see \nameref{sec:dithering}).}
 \end{figure}
 
@@ -314,11 +317,11 @@ which is helpful when dealing with large grids\footnote{Several figures in this
     \caption{\label{subfig:gol_cg}Coarse-grained}
   \end{subfigure}
 
-  \caption{\label{fig:gol_comparison}\textbf{Side-to-side comparison of a CA
-      simulation and its coarse-grained version}. The first simulation is $256
-    \times 256$ cells and the second has been coarse-grained to $64\times 64$.
-    Notice the interesting patterns on Figure~\ref{subfig:gol} are hardly
-    distinguishable. They are highlighted by histogram-based coarse-graining in
+  \caption{\label{fig:gol_comparison} Side-to-side comparison of a CA simulation
+    and its coarse-grained version. The first simulation is $256 \times 256$
+    cells and the second has been coarse-grained to $64\times 64$. Notice the
+    interesting patterns on Figure~\ref{subfig:gol} are hardly distinguishable.
+    They are highlighted by histogram-based coarse-graining in
     Figure~\ref{subfig:gol_cg}.}
 \end{figure}
 
@@ -386,11 +389,10 @@ E$ is applied.
 \begin{figure}[th]
   \centering
   \includegraphics[width=\linewidth]{figures/autoencoder.pdf}
-  \caption{\label{fig:autoencoder} \textbf{Diagram of the autoencoder
-      architecture used for coarse-graining}. A block of $6\times 6$ cells is
-    encoded in a vector of fixed dimension. There are 3 components in the
-    example. They can either represent a RGB color or a 3 states smaller
-    automaton.}
+  \caption{\label{fig:autoencoder} Diagram of the autoencoder architecture used
+    for coarse-graining. A block of $6\times 6$ cells is encoded in a vector of
+    fixed dimension. There are 3 components in the example. They can either
+    represent a RGB color or a 3 states smaller automaton.}
 \end{figure}
 
 Figure~\ref{fig:autoencoder} illustrates the autoencoder layout for
@@ -456,10 +458,10 @@ space-time diagrams.
 \begin{figure}[th]
   \centering
   \includegraphics[width=\linewidth]{figures/rule18.pdf}
-  \caption{\label{fig:rule18} \textbf{Space-time diagrams for rule 18 in
-      elementary cellular automata.} \textbf{(a)} Standard rule 18 space-time
-    diagram, starting from a random position. \textbf{(b)} Filtered domain with
-    our frequency coarse-graining (even). \textbf{(c)} Our domain boundaries
+  \caption{\label{fig:rule18} Space-time diagrams for rule 18 in elementary
+    cellular automata. \textbf{(a)} Standard rule 18 space-time diagram,
+    starting from a random position. \textbf{(b)} Filtered domain with our
+    frequency coarse-graining (even). \textbf{(c)} Our domain boundaries
     extracted from the filtered domains in \textbf{(b)}. \textbf{(d)} Domain
     boundaries computed according to
     \parencite{hansonAttractorbasinPortraitCellular1992}. Note that \textbf{(a)}
@@ -523,28 +525,27 @@ of particles in rule 110.
 \begin{figure}[th]
   \centering
   \includegraphics[width=\linewidth]{figures/rule54.pdf}
-  \caption{\label{fig:rule54} \textbf{Space-time diagrams for rule 54}.
-    \textbf{(a)} Space-time diagram of standard rule 54, starting from a random
-    position. \textbf{(b)} Filtered domain with our frequency coarse-graining
-    (even). \textbf{(c)} Particles filtered from the domains in \textbf{(b)
-      using our method}. \textbf{(d)} Domain boundaries computed using
-    computational mechanics \parencite{hansonComputationalMechanicsCellular1997}.
-    Please note that particles are detected equally well using computational
-    mechanics (d) and our (simpler) frequency-based method (c). Some close-by
-    particle trails are merged using our method.}
+  \caption{\label{fig:rule54} Space-time diagrams for rule 54. \textbf{(a)}
+    Space-time diagram of standard rule 54, starting from a random position.
+    \textbf{(b)} Filtered domain with our frequency coarse-graining (even).
+    \textbf{(c)} Particles filtered from the domains in \textbf{(b) using our
+      method}. \textbf{(d)} Domain boundaries computed using computational
+    mechanics \parencite{hansonComputationalMechanicsCellular1997}. Please note
+    that particles are detected equally well using computational mechanics (d)
+    and our (simpler) frequency-based method (c). Some close-by particle trails
+    are merged using our method.}
 \end{figure}
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/rule110.pdf}
-  \caption{\label{fig:rule110} \textbf{Spate-time diagram of rule 110 (\textbf{a})
-      and filtered particles using our histogram-based coarse-graining
-      (\textbf{b})}. Structures propagating in time (vertical axis) and space
-    (horizontal axis) become clearly visible in \textbf{(b)} as vertical and
-    diagonal lines.
+  \caption{\label{fig:rule110} Spate-time diagram of rule 110 (\textbf{a}) and
+    filtered particles using our histogram-based coarse-graining (\textbf{b}).
+    Structures propagating in time (vertical axis) and space (horizontal axis)
+    become clearly visible in \textbf{(b)} as vertical and diagonal lines.
     %\textbf{(b)} shows the same structures with the regular
     %background domain filtered out with our method.
-    }
+  }
 \end{figure}
 \subsection{Complexity metrics and coarse-graining}
 
@@ -572,12 +573,12 @@ of particles in rule 110.
     {figures/13220943837485080965/19rule_autoencoder_13220943837485080965-20.png}}
     \caption{\label{subfig:autoencoder3}Autoencoder}
   \end{subfigure}
-  \caption{\label{fig:qualitative}\textbf{Qualitative comparison of
-      coarse-graining methods}. Simulations are on grids of $4096 \times 4096$
-    cells coarse-grained to $512 \times 512$. Lines are barely visible with
-    downscaling~\ref{subfig:downscale3}, but are visible
+  \caption{ Qualitative comparison of coarse-graining methods Simulations are on
+    grids of $4096 \times 4096$ cells coarse-grained to $512 \times 512$. Most lines
+    are barely visible with downscaling~\ref{subfig:downscale3}, but are visible
     in~\ref{subfig:histogram3}-\ref{subfig:autoencoder3}. Coarse-graining helps
-    visualize linear structures that would be hard to see otherwise.}
+    visualize linear structures that would be hard to see
+    otherwise.\label{fig:qualitative}}
 \end{figure}
 
 Coarse-graining is not only useful for detecting gliders and domains in
@@ -613,11 +614,10 @@ after the reduction.
       19.3\%  & 40.4\% & 82.4\% & 84.2\%\\
     \bottomrule
   \end{tabular}
-  \caption{\textbf{Experimental results --- Percentage
-      of rules classified as interesting after reduction with our 3 proposed
-
-      methods (K-means, Histogram, Autoencoder), compared to a local averaging baseline.}}
- \label{tab:experiments_table_vc}
+  \caption{Experimental results --- Percentage of rules classified as
+      interesting after reduction with our 3 proposed
+      methods (K-means, Histogram, Autoencoder), compared to a local averaging
+      baseline.}\label{tab:experiments_table_vc}
 \end{table}
 
 Results in Table~\ref{tab:experiments_table_vc} suggest that using our proposed methods
@@ -692,10 +692,10 @@ coarse-grained output.
       \includegraphics[width=\linewidth]{figures/viz5413567812493154659/waves_c.png}}
     \caption{\label{subfig:waves_c} $4096 \times 4096$ cells coarse-grained to $256 \times 256$.}
   \end{subfigure}
-  \caption{\label{fig:dynamics_levels} \textbf{Changing CA dynamics at multiple
-      scales}. (a) shows a single glider, oscillating between 3 positions. Such
-    gliders emerge spontaneously from a random initialization of a small grid as
-    shown in (b). When scaling the grid up, trails of gliders begin to appear,
+  \caption{\label{fig:dynamics_levels} Changing CA dynamics at multiple scales.
+    (a) shows a single glider, oscillating between 3 positions. Such gliders
+    emerge spontaneously from a random initialization of a small grid as shown
+    in (b). When scaling the grid up, trails of gliders begin to appear,
     creating moving straight and diagonal lines as shown in (c). Scaling-up even
     more, individual gliders are not visible anymore, as shown in (d). In an
     even larger grid, shown in (e), many more triangular-shaped waves travel and
@@ -704,34 +704,42 @@ coarse-grained output.
 \end{figure}
 
 
-% \begin{figure}[th]
-% \begin{subfigure}{.48\linewidth}
-%   \centering
-%   \includegraphics[width=\linewidth]
-%   {figures/3904718678772130032_autoencoder/3904718678772130032_autoencoder-20.png}
-%   \caption{\label{fig:autoencoder1}Autoencoder}
-% \end{subfigure}
-% \begin{subfigure}{.48\linewidth}
-%   \centering
-%   \includegraphics[width=\linewidth]{figures/3904718678772130032_coarsed/3904718678772130032_coarsed-20.png}
-%   \caption{\label{fig:histogram1}Histogram}
-% \end{subfigure}
-% \end{figure}
+\begin{figure}[th]
+\begin{subfigure}{.48\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]
+  {figures/3904718678772130032_autoencoder/3904718678772130032_autoencoder-20.png}
+  \caption{\label{fig:autoencoder_cg1}Autoencoder}
+\end{subfigure}
+\begin{subfigure}{.48\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{figures/3904718678772130032_coarsed/3904718678772130032_coarsed-20.png}
+  \caption{\label{fig:histogram_cg1}Histogram}
+\end{subfigure}
+\caption{\label{fig:coarse_graining_1} A \ac{CA} with $4096 \times 4096$ cells
+  coarse-grained to $256 \times 256$. Comparison of the histogram
+  (\ref{fig:histogram_cg1}) and autoencoder (\ref{fig:autoencoder_cg1})
+  methods.}
+\end{figure}
 
-% \begin{figure}[th]
-%   \begin{subfigure}{.48\linewidth}
-%     \centering
-%     \includegraphics[width=\linewidth]
-%     {figures/18072167875025464602_autoencoder/18072167875025464602_autoencoder-20.png}
-%     \caption{\label{fig:autoencoder2}Autoencoder}
-%   \end{subfigure}
-%   \begin{subfigure}{.48\linewidth}
-%     \centering
-%     \includegraphics[width=\linewidth]
-%     {figures/18072167875025464602_coarsed/18072167875025464602_coarsed-20.png}
-%     \caption{\label{fig:histogram2} Histogram}
-%   \end{subfigure}
-% \end{figure}
+\begin{figure}[th]
+  \begin{subfigure}{.48\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]
+    {figures/18072167875025464602_autoencoder/18072167875025464602_autoencoder-20.png}
+    \caption{\label{fig:autoencoder_cg2}Autoencoder}
+  \end{subfigure}
+  \begin{subfigure}{.48\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]
+    {figures/18072167875025464602_coarsed/18072167875025464602_coarsed-20.png}
+    \caption{\label{fig:histogram_cg2} Histogram}
+  \end{subfigure}
+  \caption{\label{fig:coarse_graining_2} A \ac{CA} with $4096 \times 4096$ cells
+    coarse-grained to $256 \times 256$. Comparison of the histogram
+    (\ref{fig:histogram_cg2}) and autoencoder (\ref{fig:autoencoder_cg2})
+    methods.}
+\end{figure}
 
 \section{Conclusion\label{sec:conclusion-vc}}
 
