@@ -929,7 +929,7 @@ chose the ten separate tasks/settings pairs listed above to get a broad overview
 benchmarked models on a range of task difficulties.
 \footnotetext{$h$ is chosen to match the number of parameters of the reservoir-based methods.}
 
-\section{Reservoir \ac{CA} results}
+\section{Reservoir cellular automata (ReCA) results}
 We present some detailed results from our experiments with reservoir cellular
 automata. First, general statistics about \ac{ECA} performance on the five first
 tasks (tasks with ID 1 to 5).
@@ -970,8 +970,8 @@ periodic and ordered type.
 The four best rules displayed in figure \ref{fig:top-binary-seq} all implement a
 similar mechanism, using translations of cells from one column to the next at
 every step. This translation is a memory mechanism, because it shifts any cell
-that was turned on in reaction to an input before could be overwritten by a
-subsequent input.
+that was turned on in reaction to an input before it can be overwritten by a
+subsequent input that would be mapped to the same grid position.
 
 \begin{table}[htbp]
   \centering

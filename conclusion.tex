@@ -1,5 +1,7 @@
 \chapter{Conclusion}
 
+In this chapter, we summarize our contributions in the thesis and present some
+future extensions.
 % - Recall contributions with more details assuming someone has read it
 %
 % - Future work (chapter by chapter)
@@ -7,14 +9,51 @@
 
 In this thesis, we have developed some tools to better understand and make use
 of the computations happening within complex systems.
+We summarize our contributions below.
+
+\begin{itemize}
+  \item In Chapter \ref{cha:background}, we gave an overview of the \acf{CA}
+        model and the specific challenges it poses. We review the deep
+        connection between \acp{CA} and \acfp{RNN} and how this leads to using
+        \acp{CA} in \acf{RC}. Next, in chapter \ref{cha:literature-review}, we
+        place our work within the large body of literature on complex systems,
+        complexity, emergence and learning.
+
+  \item In Chapter \ref{cha:meas-compl-evolv}, we define a novel metric of
+        complexity for complex systems. The metric is inspired by principles of
+        compression, and algorithmic complexity. It uses the ability of small
+        neural networks to learn a model of the local structures in a system,
+        and the evolution of the predictive power of that model as the system
+        evolves over time. We evaluate the quality of this metric by measuring
+        its correlation with the perception of complexity of humans. We find a
+        higher correlation with human annotations than alternative methods on a
+        dataset of \acp{CA} rules labeled as complex or not. We use the metric
+        to discover new \acp{CA} rules with surprisingly complex beahvior
+        semi-automatically.
+
+  \item In Chapter \ref{cha:visu-comp-large}, we built on the work of Chapter
+        \ref{cha:meas-compl-evolv} to tackle the challenges posed by working
+        with large-scale systems.
+
+  \item In Chapter \ref{cha:learn-effic-compl}
+\end{itemize}
 
 \section{Future Work}
 
-\subsection{Practical complexity}
+\subsection{Evolving cellular automata for complexity}
+
+
 
 \subsection{Feedback reservoir computing}
 
-In Chapter \ref{cha:learn-effic-compl}, we explored the application
+In Chapter \ref{cha:learn-effic-compl}, we explored the applications of the
+\ac{RC} paradigm to \acp{CA}. In general, \ac{RC} assumes a purely forward
+model, meaning that inputs are fed to the reservoir and outputs are decoded from
+it. The trainable decoder layer is trained offline on a training dataset and
+tested next. We illustrate the \ac{RC} principle in figure
+\ref{fig:classical_reservoir}. This structure is often sufficient for supervised
+tasks when a sufficiently large training dataset is available.
+
 \begin{figure}[htbp]
   \centering
   \begin{subfigure}[t]{.5\linewidth}
