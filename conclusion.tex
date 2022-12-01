@@ -28,15 +28,31 @@ We summarize our contributions below.
         its correlation with the perception of complexity of humans. We find a
         higher correlation with human annotations than alternative methods on a
         dataset of \acp{CA} rules labeled as complex or not. We use the metric
-        to discover new \acp{CA} rules with surprisingly complex beahvior
+        to discover new \acp{CA} rules with surprisingly complex behavior
         semi-automatically.
 
   \item In Chapter \ref{cha:visu-comp-large}, we built on the work of Chapter
-        \ref{cha:meas-compl-evolv} to tackle the challenges posed by working
-        with large-scale systems.
+        \ref{cha:meas-compl-evolv} to work on the specific challenges posed by
+        working with large-scale systems such as cellular automata. In these
+        systems, qualitatively different behavior may emerge at various scales.
+        To allow dealing with these large systems and apply complexity measures
+        and classification methods on a range of scales, we developed three
+        coarse-graining methods based on simple statistical analysis, clustering
+        algorithms and autoencoder neural networks, that can reduce the size of
+        a system while retaining useful information.
 
-  \item In Chapter \ref{cha:learn-effic-compl}, we tackle the issue of using
-        complex systems for general purpose task solving, using \ac{RC}
+  \item In Chapter \ref{cha:learn-effic-compl}, we tackled the issue of using
+        complex systems for general purpose task solving, using the \ac{RC}
+        paradigm. We also developed a metric for the speed of learning of
+        machine learning systems. Using that metric, we looked at the data
+        efficiency of some well know algorithms rather than their task-based
+        performance only. Surprisingly, \ac{RC} models using random frozen
+        \acp{RNN} or \acp{CA} are significantly more efficient that other
+        alternatives on a range of tasks. We evaluated this on some standard
+        language datasets and introduced our own dataset of progressively more
+        complex tasks. Efficiency is a crucial property in low data and compute
+        settings, and our work showed that some overlooked methods may actually
+        be competitive in these situations.
 \end{itemize}
 
 \section{Future Work}
