@@ -494,7 +494,7 @@ behavior of \ac{CA} and studied them as a function of $\lambda$. He observes a p
 transition as $\lambda$ approaches its maximal value, where the \acp{CA} seem to behave
 in the most complex way, with long transients and large-scale propagating
 structures. He calls this phase transition ``edge of chaos'' because it
-corresponds to $lambda$ values just before the generated \acp{CA} become
+corresponds to $\lambda$ values just before the generated \acp{CA} become
 chaotic.
 
 \begin{figure}[htbp]
@@ -510,11 +510,12 @@ chaotic.
 \end{figure}
 
 \paragraph{Dirichlet sampling}
-For an arbitrary number of states and neighborhood size, it can be challenging
-to sample \ac{CA} while scanning a wide range of behavior. This is because the
-size of the space of \acp{CA} rules is very large. The naive method of uniformly
-sampling each transition output is not useful in large rule spaces with multiple
-states, large neighborhoods or grid dimension higher than 1.
+For an arbitrary number of states and arbitrary neighborhood size, it can be
+challenging to sample \acp{CA} while scanning the wide range of behavior these
+models are capable of simulating. This is because the size of the space of
+\acp{CA} rules is very large. The naive method of uniformly sampling each
+transition output is not useful in large rule spaces with multiple states, large
+neighborhoods or grid dimension higher than 1.
 
 Rules with equal proportions of transitions leading to all states tend to be the
 most chaotic. This is also what Langton observed when studying the $\lambda$
@@ -533,19 +534,23 @@ The probability mass function of this distribution is
   \end{aligned}
 \end{equation}
 
-This quantity becomes small for large $n$ and rules with an output transition skewed
+This quantity becomes vanishingly small for large $n$ (that is rules with many
+states or large neighborhoods) and rules with an output transition skewed
 towards a specific state. For example, the binary game of life rule has 372
-transitions that lead to state 0 and 140 that lead to state 1. The
-probability of sampling a rule with these transition proportions is
-$8.24\mathrm{e}{-26}$, making it very unlikely that a rule of this type is obtained with a
-uniform transition sampling method.
+transitions that lead to state 0 and 140 that lead to state 1. The probability
+of sampling a rule with these transition proportions is $8.24\mathrm{e}{-26}$
+(compared to a $17\%$ chance of sampling a rule with between 254 and 257
+transition to 0). It is therefore very unlikely that a rule of the type of game
+of life, let alone the rule itself, would be obtained with a uniform transition
+sampling method.
 
-We propose Dirichlet sampling as an alternative way to sample rules with fixed
-ratio of transitions leading to output states. For a rule with $K$ states, we
-sample a $K$-uple from a Dirichlet distribution of order $K$ with parameters
-$(\alpha_{k})_{k\in [1, K]}$ where $\alpha_{0} = \alpha_{1} = \ldots = \alpha_{K} = \alpha < 1$. The result is a
-quantile $K$-uple $(q_{1}, \ldots, q_{K})$. For $\alpha < 1$, the distribution is
-concentrated around the corners of a simplex of dimension $K$.
+We propose a Dirichlet sampling method as an alternative way to sample rules
+with fixed ratios of transitions leading to each output states. For a rule with
+$K$ states, we sample a $K$-uple from a Dirichlet distribution of order $K$ with
+parameters $(\alpha_{k})_{k\in [1, K]}$ where $\alpha_{0} = \alpha_{1} = \ldots = \alpha_{K} = \alpha < 1$. The
+result is a quantile $K$-uple $(q_{1}, \ldots, q_{K})$. For $\alpha < 1$, the distribution
+is concentrated around the corners of a simplex of dimension $K$, which means
+that it preferably samples tuple with one of their values dominating the others.
 
 Rules are sampled so that the number of transition to each output state matches
 the quantile generated from the Dirichlet distribution. Samples will be more
@@ -575,25 +580,28 @@ on figure \ref{fig:ca_rule_sampling}.
 The recurrent convolutional network analogy of \acp{CA} (see Section
 \ref{sec:cell-autom-rnns} for details) formulates a \ac{CA} as a neural network.
 In this paradigm, the rule of a \ac{CA} is entirely determined by the parameters
-of that neural network of a \ac{CA} is entirely determined by the parameters of
-that neural network. This allows modifying the \ac{CA} rules like we change the
-weights of a neural network. For example, as long as all simulation steps
-are differentiable, the backpropagation algorithm can be applied and used to
-update a \ac{CA} rule by updating the weights of the neural network with
-gradient descent.
+of that neural network. This allows modifying the \ac{CA} rules like we would
+change the weights of a neural network. For example, as long as all simulation
+steps are differentiable, the backpropagation algorithm can be applied and used
+to update a \ac{CA} rule by updating the weights of the neural network with
+gradient descent. Dimensionality reduction methods applied to the parameter
+space of the neural network can help understand the structure of that space and
+the \acp{CA} behaviors that different sets of parameters produce.
 
 
 \section{Cellular automata and RNNs}\label{sec:cell-autom-rnns}
+
 The purpose of this section is to show that cellular automata and recurrent
 convolutional neural networks have very strong connections and to draw this
 parallel as clearly as possible. We express the \ac{CA} update function as a set
 of convolutional operations that can be derived from any \ac{CA} rule.
 
 This connection yields interesting consequences both for the theoretical
-properties of these models and the potential applications of cellular automata
-and recurrent networks. It shows for instance that emergent properties with
-increasing complexity and perhaps open-ended development are possible within the
-hidden state of a recurrent neural network.
+properties of these models and the potential applications of \acp{CA} and
+recurrent networks. It shows for instance that emergent properties with
+increasing complexity and perhaps open-ended development that we expect from
+complex systems such as \acp{CA} are possible within the hidden state of a
+recurrent neural network.
 
 The conceptual similarity between \acp{CA} and neural networks is not surprising. 
 Fundamentally, \ac{CA} represent the paradigm of emergence, in which
@@ -613,17 +621,13 @@ been drawn by several other researchers
   gilpinCellularAutomataConvolutional2018,
   mordvintsevGrowingNeuralCellular2020}.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=.3\linewidth]{figures/ca_cnn}
-  \caption{\label{fig:ca_cnn}The CA update rule is local and can be represented
-    by a convolutional neural networks: linear local uniform transformations
-    followed by the application of a non-linear function.}
-\end{figure}
+In this section we formally describe the relation between \acp{CA} and \acp{RNN}
+and discuss the extensions this implies for the \ac{CA} model as well as some of
+the consequences of that relation.
 
 \subsection{RNN formalism}
 
-\begin{figure*}[!ht]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figures/rnn_and_gol.pdf}
   \caption{\label{fig:standard_rnn} Standard RNN architecture (left) and Game of
@@ -636,24 +640,31 @@ been drawn by several other researchers
       neural network unfold} by
     \href{https://commons.wikimedia.org/wiki/User:Ixnay}{fdeloche}, licensed
     under \href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY 4.0}.}
-\end{figure*}
+\end{figure}
 
 
-We write the definition of a cellular automaton with RNN-inspired formalism and
-notation. This parallel is illustrated in Figure~\ref{fig:standard_rnn}.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.3\linewidth]{figures/ca_cnn}
+  \caption{\label{fig:ca_cnn}The CA update rule is local and can be represented
+    by a convolutional neural networks: linear local uniform transformations
+    followed by the application of a non-linear function.}
+\end{figure}
 
-The grid state at time $t$ is denoted $h_t$ and corresponds to the hidden state
-in a RNN\@. In the case of classical CAs, it is a 1 or 2D vector of discrete
-values, but~\parencite{mordvintsevGrowingNeuralCellular2020} and other CA
-extensions use continuous values, much like the usual RNNs.
+We write the definition of a \ac{CA} with \ac{RNN}-inspired formalism and
+notation. This parallel is illustrated in figures \ref{fig:ca_cnn} and
+\ref{fig:standard_rnn}. The grid state at time $t$ is denoted $h_t$ and
+corresponds to the hidden state in a RNN\@. In the case of classical \acp{CA},
+it is a 1 or 2D vector of discrete values (see Section \ref{sec:definition}),
+but~\parencite{mordvintsevGrowingNeuralCellular2020} and other \acp{CA}
+extensions use continuous values, much like the usual \acp{RNN}.
 
-The transformation $\Phi$ operates only on this hidden state. It is equivalent
-to a convolutional layer, as explained below in
-Section~\ref{sec:transition-rule-as}.
-
-Inputs and outputs $(\mathbf{x}, \mathbf{o})$ are not included in the classical
-definition of CAs but are an easily implementable extension as discussed in
-Section~\ref{sec:adding-inputs-outp}.
+The transformation $\Phi$ operates only on the hidden state. Because it is local,
+it can be shown to be equivalent to a convolutional layer, as explained below in
+Section~\ref{sec:transition-rule-as}. Inputs and outputs
+$(\mathbf{x}, \mathbf{o})$ from figure \ref{fig:standard_rnn} are not included
+in the classical definition of CAs but are an easy to implement extension as
+discussed in Section~\ref{sec:adding-inputs-outp}.
 
 \subsection{Transition rule as a set of convolutions\label{sec:transition-rule-as}}
 
@@ -670,63 +681,87 @@ becomes useful when working with more states.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.4\linewidth]{figures/repr}
-  \caption{\label{fig:cell}A \ac{CA} neighborood vector representation example
-    with 2 states. A $3\times 3$ square of cells with two states can be
-    represented by a $3\times 3 \times 2$ vector. Left: 1D 3-neighbors
-    representation. Right: 2D $3\times3$ neighbors representation. The last
-    dimension of the vector encodes a ``one-hot'' representation of the state of
-    the cell.}
+  \caption{\label{fig:cell}A \ac{CA} neighborhood vector representation example
+    with 2 states. A $3\times 3$ square of cells with two states can be represented
+    by a $3\times 3 \times 2$ vector. Left: 1D 3-neighbors representation. Right: 2D $3\times3$
+    neighbors representation. The last dimension of the vector encodes a
+    ``one-hot'' representation of the state of the cell.}
 
 \end{figure}
 
 With this representation, we can express the transition rule $\Phi$ as a simple
 convolutional neural network. This network would be made up of 2 layers, which
-are shown in Figure~\ref{fig:global_schema}:
+are shown in Figure~\ref{fig:ca_cnn_2dims} for the 2D case:
 
 \begin{figure}[htbp]
   \centering
+  \begin{subfigure}[b]{\linewidth}
+    \centering
   \includegraphics[width=.9\linewidth]{figures/global_schema}
-  \caption{\label{fig:global_schema}A simple representation of any 2-states 2D
-    CA rule operating on $3\times 3$ neighborhoods as a 2 layers CNN.}
+  \caption{\label{fig:global_schema}A representation of any 2-states 2D CA rule
+    operating on $3\times 3$ neighborhoods as a 2 layers CNN. There are 512 filters
+    receptive to each $3\times 3$ neighborhood states in the first layer. The second
+    layer determines the output value for each neighborhood state.}
+  \end{subfigure}
+  \begin{subfigure}[b]{\linewidth}
+    \centering
+  \includegraphics[width=.9\linewidth]{figures/one_d_global_schema}
+  \caption{\label{fig:one_d_global_schema}A representation of any 2-states 1D CA
+    rule operating on neighborhoods of size 3 as a 2 layers CNN. There are 8
+    filters of size 3 in the first convolutional layer, and 8 filters of size 1
+    in the second one.}
+  \end{subfigure}
+  \caption{Two examples of \acp{CA} rules represented as a simple CNN. Padding
+    ensures the grid obtained after the CNN step is of the same size as the
+    original grid.}\label{fig:ca_cnn_2dims}
 \end{figure}
 
 
 \paragraph{The first convolutional layer.} It is receptive to each possible
 neighborhood configuration. In the 1D case with neighborhood size 3, this is all
-eight configurations $000, 001, 010, \ldots, 111$. For a radius $r$, this layer
-is composed of $k^{2r + 1}$ filters of dimension $k\times (2r + 1)$ with only
-ones and zeros, which are each the same as a possible configuration of size
-$(2r+1)$ of the neighborhood. The product of each filter with an input
-neighborhood will be an integer between $0$ and $9$. By applying a ReLU
-nonlinearity with a vector of 8s as bias, we obtain the input to the second
-layer, a vector of size $k^{2r + 1}$ for each cell with plays the role of an
-indicator of the input configuration.
+eight configurations $000, 001, 010, \ldots, 111$. For a radius $r$ in 1D, this layer
+is composed of $k^{2r + 1}$ filters of dimension $k \times (2r + 1)$ with only ones
+and zeros, which are the mirror of a possible configuration of size $(2r+1)$ of
+the neighborhood.
 
-\paragraph{A second convolutional layer} It has $k^{2r + 1}$ filters of size $1$ that
-are $0$ or $1$ depending on the desired output of the transition.
+The product of each filter with an input neighborhood on the grid will be an
+integer between $0$ and $2r + 1$. By applying a ReLU nonlinearity preceded by a
+constant vector of value $2r$ as bias, we obtain the input to the second layer,
+a vector of size $k^{2r + 1}$ for each cell containing all zeroes except for a
+one corresponding to the detected neighborhood. This vector plays the role of an
+indicator of the current input configuration.
+
+\paragraph{A second convolutional layer} It has $k^{2r + 1}$ filters of size $1$
+that are $0$s or $1$s depending on the desired output value of that transition.
+When applied on the indicator vector above, the obtained output will be the
+output value of the rule corresponding to the detected neighborhood state.
+
+With some circular padding that wraps around the edges of the grid or applies
+constant values outside of the main grid, the size of the output is the same as
+the input. This means the CNN step can be applied multiple times, simulating a
+single \ac{CA} step every time.
 
 \subsubsection{Recurrent convolutions in machine learning}
 
-Recurrent convolutional networks have been used in several areas of machine
+Recurrent convolutional networks have been used in some areas of machine
 learning such as NLP or computer vision
 \parencite{pinheiroRecurrentConvolutionalNeural2014,
   laiRecurrentConvolutionalNeural2015}.
 
 \subsection{Adding inputs and outputs\label{sec:adding-inputs-outp}}
 
-Figure~\ref{fig:standard_rnn} shows clearly where the ``missing'' inputs and
-outputs could be added to the Game of Life or any other \ac{CA}. We can think of many
-possible forms.
+Figure~\ref{fig:standard_rnn} shows clearly where the inputs and outputs could
+be added to the Game of Life or any other \ac{CA}. We list many possible forms
+the input and outputs can take, and how it can interact with the \ac{CA} rule.
 
 \subsubsection{Inputs}
-There are many ways to add inputs to the model presented above. We divide our
-proposed methods into two classes: inputs that directly modify the hidden state
-during the CA evolution and inputs that augment the hidden state and affect the
-rule.
+There are many ways to add inputs to the recurrent \ac{CNN} model presented
+above. We divide our proposed methods into two classes: inputs that directly
+modify the hidden state during the CA evolution and inputs that augment the
+hidden state without changing it directly and affect the rule.
 
-\begin{description}
 
-\item[Hidden-state augmentation and rule modulation]
+\paragraph{Hidden-state augmentation and rule modulation.}
 Inputs are usually added to the hidden state just before the application of the
 nonlinearity in standard RNNs.
 
@@ -739,77 +774,82 @@ In the case of cellular automata, it can also be done in the following ways:
     encoded within the hidden state.}
 \end{figure*}
 
-\item[Vector state] It is simple to add inputs to a \ac{CA} is to
-consider the grid as having an additional (possibly read-only) dimension. For
-example, a 1D automaton would actually be represented by a vector of dimension
-$N\times 2$ where the first vector of size $N$ is the state of the grid and the other
-is the input. The update rule would be changed to add this new component
-into account. One can see this model as using multiple CA rules at the same
-time, with the input state conditioning the rule being chosen for a given update
-step.
+\begin{itemize}
+  \item \textbf{Vector state.} A naive way to add inputs to a \ac{CA} is to
+        consider the grid as having an additional (possibly read-only)
+        dimension. For example, a 1D automaton would actually be represented by
+        a vector of dimension $N\times 2$ where the first vector of size $N$ is the
+        state of the grid and the other is the input. The update rule would be
+        changed to add this new component into account. One can see this model
+        as using multiple CA rules at the same time, with the input state
+        conditioning the rule being chosen for a given update step.
 
-\item[Variable update rule] Inputs can also influence a CA's evolution by
-changing the update rule. With this configuration, the update rule $\Phi$ is now
-a function of the input $x$. We now have $\Phi_x = G(x)$, where
+  \item \textbf{Variable update rule.} Inputs can also influence a CA's evolution by
+        changing the update rule. With this configuration, the update rule $\Phi$
+        is now a function of the input $x$. We now have $\Phi_x = G(x)$, where
 
-\[G: \mathcal{X} \rightarrow \left({\{ 1, \ldots, k \}}^{2r+1} \to \{1, \ldots, k\}\right)\]
+        \[G: \mathcal{X} \rightarrow \left({\{ 1, \ldots, k \}}^{2r+1} \to \{1, \ldots, k\}\right)\]
 
 
-A similar approach was used in \parencite{adamsFormalDefinitionsUnbounded2017}. It
-showed that conditioning a CA update rule on another CA's evolution could enable
-a higher diversity of behavior.
+        A similar approach was used in
+        \parencite{adamsFormalDefinitionsUnbounded2017}. It showed that
+        conditioning a CA update rule on another CA's evolution could enable a
+        higher diversity of behavior.
 
-\item[Concatenation] Input can be concatenated to the hidden state (\eg~on
-the grid boundaries) before applying the update rule, forming a sort of fixed
-read-only memory space. The concatenation is illustrated in Figure~\ref{fig:concat}.
-A possible disadvantage of this method is the fact that information needs to
-propagate through the grid if it is to be processed far from where the read-only
-memory was positioned.
+  \item \textbf{Concatenation.} Input can be concatenated to the hidden state (\eg~on
+        the grid boundaries) before applying the update rule, forming a sort of
+        fixed read-only memory space. The concatenation is illustrated in
+        Figure~\ref{fig:concat}. A possible disadvantage of this method is the
+        fact that information needs to propagate through the grid if it is to be
+        processed far from where the read-only memory was positioned.
 
-This approach is more computer-like, reserving some space for different
-functionalities of the data.
+        This approach is more computer-like, reserving some space for different
+        functionalities of the data.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=.5\linewidth]{figures/concat.pdf}
+  \centering \includegraphics[width=.5\linewidth]{figures/concat.pdf}
   \caption{\label{fig:concat} Input $x_t$ is projected and concatenated to
-    hidden state $h_t$, affecting the boundary conditions of the cellular
-    automaton.}
+    hidden state $h_t$, affecting the boundary conditions of the 
+    \ac{CA}. For the \ac{CA}, this vector is just like another part of the
+    hidden state except that it is not writable}
 \end{figure}
+\end{itemize}
 
-\item[Hidden-state manipulation]
 
+\paragraph{Hidden-state manipulation.}
 Another approach is to directly modify the hidden state to ``communicate''
 information to the system. These methods are used
 in~\parencite{mordvintsevGrowingNeuralCellular2020,
   randazzoSelfclassifyingMNISTDigits2020} to make interactive demos and allow
-users to directly modify that hidden state. A user can interact with the
-system by drawing with its mouse. This sets parts of the internal state to a
-fixed cell state.
+users to directly modify that hidden state. A user can interact with the system
+by drawing with its mouse. This sets parts of the internal state to a fixed cell
+state.
 
-\item[Masking] Input data can serve as a mask on top of the current grid
-state, forcing some cells into states that depend on the input values. If we
-view the state activations in the CA as some neural pattern, this approch can
-be seen as a form of \emph{neuromodulation}, which has previously been used in
-machine learning \parencite{soltoggioEvolutionaryAdvantagesNeuromodulated2008,
-  ishiguroNeuromodulatedControlBipedal2003,
-  beaulieuLearningContinuallyLearn2020}.
+\begin{itemize}
+  \item \textbf{Masking.} Input data can serve as a mask on top of the current
+        grid state, forcing some cells into states that depend on the input
+        values. If we view the state activations in the CA as some neural
+        pattern, this approch can be seen as a form of \emph{neuromodulation},
+        which has previously been used in machine learning
+        \parencite{soltoggioEvolutionaryAdvantagesNeuromodulated2008,
+        ishiguroNeuromodulatedControlBipedal2003,
+        beaulieuLearningContinuallyLearn2020}.
 
-A mask can be constructed from an input
-vector $x$ by linearly transforming $x$ and applying an activation function
-(\eg~step function). It controls which channels are activated, and where
-information can flow or not. This kind of mask can be applied with element-wise
-multiplication or addition but also more elaborate operations. It is illustrated
-in Figure~\ref{fig:mask}.
+        A mask can be constructed from an input vector $x$ by linearly
+        transforming $x$ and applying an activation function (\eg~step
+        function). It controls which channels are activated, and where
+        information can flow or not. This kind of mask can be applied with
+        element-wise multiplication or addition but also more elaborate
+        operations. It is illustrated in Figure~\ref{fig:mask}.
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=.5\linewidth]{figures/mask.pdf}
-  \caption{\label{fig:mask} Input is converted into a mask for the hidden state.
-  The mask is applied through element-wise multiplication here.}
+  \caption{\label{fig:mask} Input is converted into a binary mask for the hidden
+    state. The mask is applied through element-wise multiplication here.}
 \end{figure}
 
-\end{description}
+\end{itemize}
 
 \subsubsection{Outputs}
 
@@ -823,41 +863,47 @@ above.
 
 From a computational point of view, the hidden state can be seen as a working
 tape that some kind of \emph{parallel Turing machine} (the cellular automaton)
-is doing computation on. In this framework, the input is encoded as the initial
-state of the tape and decoded from the last state of the tape (as illustrated on
-Figure~\ref{fig:encode_decode}). The recurrent convolutional neural network
-(RCNN) then plays the role of a fixed computer program. This is the setting
-adopted in previous works on constructing computations with cellular automata: a
-task is chosen, and one searches for rules which can execute that task on
-input/output pairs~\parencite{mitchellComputationCellularAutomata2005}. Previous
-successes with RNNs demonstrate that this model is powerful enough to learn
-complex functions when the grid is made of continuous numbers and the
-transformation is not local thanks to optimization, for instance in language
-modelling.
+is performing computations on. In this framework, the input is encoded as the
+initial state of the tape and decoded from the last state of the tape (as
+illustrated on Figure~\ref{fig:encode_decode}). The recurrent convolutional
+neural network (RCNN), or \ac{CA}, then plays the role of a fixed computer
+program which is executed. This is the setting adopted in previous works on
+constructing computations with cellular automata: a task is chosen, and one
+searches for rules which can execute that task on input/output
+pairs~\parencite{mitchellComputationCellularAutomata2005}. Previous successes
+with \acp{RNN} demonstrate that this model is powerful enough to learn complex
+functions when the grid is made of continuous numbers and the transformation is
+not local thanks to optimization, for instance in language modeling.
 
-However, this becomes more interesting when we consider the input as encoding both
-some data and a computer program, as is the case with a Turing machine. We can
-then expect a \ac{CA} (or \ac{RNN}) not only to compute the result of a particular
-function but to be equivalent to a general-purpose computer capable of
-computing the result of any chosen algorithm without any need for optimization.
-
+However, another interesting point of view can be taken when we consider the
+hidden state (or tape) as encoding both some data and a computer program, as is
+the case with a Turing machine. We can then expect a \ac{CA} (or \ac{RNN}) not
+only to compute the result of a particular function but to be equivalent to a
+general-purpose computer capable of computing the result of any chosen algorithm
+without any need for optimization. Making a universal \ac{CA} compute some
+program amounts to encoding the program into the right language and
+communicating it by embedding it within the hidden state. In practice, figuring
+out the right encoding is often the biggest challenge. This is also the reason
+that the few Turing complete \ac{CA} are not so useful in practice, since we do
+not know of any efficient encoding for programming them.
 
 \subsection{Consequences}
 
-Viewing cellular automata as recurrent convolutional neural networks as
-described above has several interesting consequences.
+Viewing cellular automata as recurrent convolutional neural networks, like
+described above has several interesting consequences, of which we list a few
+here.
 
 \subsubsection{Turing-completeness of the system}
 
-Because we can simulate rule 110 ECA in the above system, it follows from the
-Turing completeness of this CA rule that the above system is Turing complete.
-This is an interesting result, although not very significant since RNN has already
-been proven to be
-Turing-complete~\parencite{siegelmannComputationalPowerNeural1992}, with very
-little practical implications. The model is in practice relatively far from a
-real-world CNN with a fixed number of layers independent from one another ---
-compared to a variable number of steps and shared layers for the
-automaton-RCNN.
+Because we can simulate rule 110 ECA in the above RCNN system, it follows from
+the Turing completeness of this CA rule that the RCNN is Turing complete. This
+is an interesting result, although not very significant since \acp{RNN} have
+already been proven to be Turing
+complete~\parencite{siegelmannComputationalPowerNeural1992}, with very little
+practical implications. Our model is relatively far from a real-world CNN with a
+fixed number of layers independent from one another --- compared to a variable
+number of steps and shared layers for the automaton-RCNN. Thus this property
+does not bear any consequence on \acp{CNN}.
 
 \subsubsection{Differentiable cellular automata}
 
@@ -869,15 +915,16 @@ target loss function.
 
 This is the direction taken by~\textcite{mordvintsevGrowingNeuralCellular2020}.
 The authors use supervised learning on a cellular automaton and train it to get
-a stable self-repairing target shape.
-However, because supervised cellular automata can only do as much as they have
-been trained to do, it may defeat the purpose of working with a model
-capable of spontaneous complex emergent behavior. An open-ended complexity increase
-could very unlikely be achieved through pure supervision.
+a stable self-repairing target shape. However, because supervised cellular
+automata can only do as much as they have been trained to do, it may defeat the
+purpose of working with a model capable of spontaneous complex emergent
+behavior. An open-ended complexity increase could very unlikely be achieved
+through pure supervision.
 
-\textcite{gilpinCellularAutomataConvolutional2018} takes the reverse approach and
-tries to train RCNNs to simulate a fixed CA rule, using the training process as
-a way to help understand the structure of CA rule space.
+\textcite{gilpinCellularAutomataConvolutional2018} takes the reverse approach
+and tries to train RCNNs to simulate a fixed CA rule, using the statistics of
+that training process as a way to help understand the structure of CA rule
+space.
 
 \subsection{Beyond the naive rule representation}
 
