@@ -1,25 +1,26 @@
 \chapter{Background}
 \label{cha:background}
 
-In this chapter, we provide some background on some of the topics we study in
-the thesis. We begin by describing the \acf{CA} model, which is the complex
-system we focus on in the thesis (Section \ref{sec:cellular-automata-sec}).
+In this chapter, we provide background on some of the topics we study in the
+thesis. We begin by describing the \acf{CA} model, which is the complex system
+we focus on in most of the thesis (Section \ref{sec:cellular-automata-sec}).
 Next, we describe the similarities between \acp{CA} and \acfp{RNN}, which is
 useful for understanding the characteristics and applications these two models
 share (Section \ref{sec:cell-autom-rnns}). \acp{CA} can be reformulated
-completely as a special case of \acp{RNN}. From this reformulation, the use of
-\acp{CA} in places where \acp{RNN} are successful becomes natural. We describe
-the \acf{RC} model (Section \ref{sec:res-models}), which enables harvesting the
-computations of complex systems to solve problems and which we apply in chapter
-\ref{cha:learn-effic-compl}. This model was developed with \acp{RNN} but we
-describe how \acp{CA} can be a suitable replacement and the benefits of this
-approach.
+completely as a special case of \acp{RNN}. With this reformulation, using
+\acp{CA} as a replacement of \acp{RNN} becomes natural. We describe the \acf{RC}
+model (Section \ref{sec:res-models}), which enables sending inputs to, and
+harvesting the computations of complex systems to solve problems and which we
+apply in Chapter~\ref{cha:learn-effic-compl}. This model was developed with
+\acp{RNN} but we describe how \acp{CA} can be a suitable replacement and the
+benefits of this approach.
 
 \section{Cellular automata}\label{sec:cellular-automata-sec}
 
-The \acf{CA} was originally proposed by Stanislaw Ulam and John Von Neumann in
-the 1940s as a model of the growth of crystals and an attempt at constructing a
-self-replicating system \parencite{vonneumannTheorySelfreproducingAutomata1966}.
+The \acf{CA} model was simultaneously proposed by Stanislaw Ulam and John Von
+Neumann in the 1940s as a model of the growth of crystals and an attempt at
+constructing a self-replicating system
+\parencite{vonneumannTheorySelfreproducingAutomata1966}.
 
 \subsection{Definition}
 It is usually defined on a regular lattice in one or two dimensions. Each of its
