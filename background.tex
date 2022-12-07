@@ -914,31 +914,32 @@ theoretically couple this framework with backpropagation to create
 target loss function.
 
 This is the direction taken by~\textcite{mordvintsevGrowingNeuralCellular2020}.
-The authors use supervised learning on a cellular automaton and train it to get
-a stable self-repairing target shape. However, because supervised cellular
-automata can only do as much as they have been trained to do, it may defeat the
-purpose of working with a model capable of spontaneous complex emergent
-behavior. An open-ended complexity increase could very unlikely be achieved
-through pure supervision.
+The authors use supervised learning on a \ac{CA} and train it to get a stable
+self-repairing target shape. However, because supervised \ac{CA} can only do as
+much as they have been trained to do, it may defeat the purpose of working with
+a model capable of spontaneous complex emergent behavior. An open-ended
+complexity increase could very unlikely be achieved through pure supervision.
 
 \textcite{gilpinCellularAutomataConvolutional2018} takes the reverse approach
-and tries to train RCNNs to simulate a fixed CA rule, using the statistics of
-that training process as a way to help understand the structure of CA rule
-space.
+and tries to train RCNNs to simulate a fixed \ac{CA} rule, using the statistics
+of that training process as a way to help understand the structure of the
+\ac{CA} rule space.
 
 \subsection{Beyond the naive rule representation}
 
-The above representation of cellular automata rules is a one-to-one mapping.
-Each automata rule has its CNN counterpart and vice versa. However, there are
-more efficient ways to represent CA rules. For instance, we can make the first
-layer of filters receptive both to a given configuration and its inverse
-(\eg~$(1, 0, 1)$ and $(0, 1, 0)$ in a ECA) by using negative values in the
-filter (use a filter $(1, -1, 1)$ instead of $(1, 0, 1)$ and $(0, 1, 0)$
-separately).
+The representation of \ac{CA} rules we built in Section
+\ref{sec:transition-rule-as} is a one-to-one mapping. Each rule has its
+R\ac{CNN} counterpart and vice versa. However, there are several ways to make
+that representation of \ac{CA} rules more efficient, using neural network with
+less parameters. For instance, we can make the first layer of filters receptive
+to both a given configuration and its inverse (\eg~$(1, 0, 1)$ and $(0, 1, 0)$
+in a ECA) by using negative values in the filter (use a filter $(1, -1, 1)$
+instead of $(1, 0, 1)$ and $(0, 1, 0)$ separately).
 
-For example, game of life does not need more than 2 convolutional filters or
-parameters to be represented by a CNN because it is totalistic (a cell's new
-state only depends on the number of neighbors in state 1 and its current state).
+For example, the game of life rule does not need more than 2 convolutional
+filters on the first layer to be represented by a \ac{CNN} because it is
+totalistic. The new state of a cell only depends on its number of neighbors in
+the alive state and the current state of the cell.
 
 
 \section{Reservoir computing \label{sec:res-models}}
