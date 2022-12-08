@@ -103,16 +103,17 @@ quantitative notion of complexity.
 quantity is sufficient to measure complexity, since it depends on exactly how
 meaning is assigned to this term. Even when some meaning has been fixed by the
 definition of an observable quantity, the statistics of the measurement of this
-observable are also crucial to its interpretation
-\parencite{gutowitzCellularAutomataSciences1995}.
+observable are also crucial to its
+interpretation~\parencite{gutowitzCellularAutomataSciences1995}.
 
 Despite these drawbacks, we seek a measure of complexity that matches intuition
 as well as possible. Such a measure would assign low complexity to both simple
 objects and random object, and high complexity to objects in between. For
-illustration, we place the \acp{ECA} from figure \ref{fig:three_eca_complex} on
-this ideal complexity curve, shown on figure \ref{fig:complexity_curve}. In
-chapter \ref{cha:meas-compl-evolv}, we develop a complexity metric that matches
-human intuition of complexity on a dataset of cellular automata.
+illustration, we place the three \acp{ECA} from figure
+\ref{fig:three_eca_complex} on this ideal complexity curve, shown on figure
+\ref{fig:complexity_curve}. For example, in chapter \ref{cha:meas-compl-evolv},
+we develop a complexity metric that matches human intuition of complexity on a
+dataset of cellular automata.
 
 We note that one of the most widely known concept of complexity of symbol
 sequences, the ``algorithmic complexity'', should also be called a measure of
@@ -134,7 +135,8 @@ defined as the negative logarithm of its probability, that is
 
 This metric quantifies how unlikely an event is and depends on how the
 probability $P$ was estimated in practice. This notion is at the foundation of
-information theory.
+information theory. The information content of a finite set of $N$ equally probable
+events is maximal, with $I(E) = \log(N)$.
 
 \subsection{Shannon Entropy}
 Shannon entropy is defined as the expected information content of the input
@@ -148,7 +150,7 @@ This measure is a lower bound on the number of bits the input could be
 compressed down to.
 
 In the case of a 1D \ac{ECA}, the Shannon entropy could be computed cell-wise
-over the time distribution of the states. Yielding an entropy per cell score
+over the time distribution of the states, yielding an entropy per cell score
 that can be averaged over a entire automaton. This measure is for instance one
 of the measures used by Wolfram in
 \parencite{wolframStatisticalMechanicsCellular1983} and by Langton in
@@ -158,39 +160,42 @@ dealing with a CA, depending on what part of the CA is considered as the main
 random variable. If the CA is finite, the state at timestep $t$ can be seen as a
 random variable that can take one of $2^N$ possible values (with $N$ the width
 of the automaton state). In that case, the probability of a state can easily be
-estimated by counting its number of occurrences during evolution.
+estimated by counting its number of occurrences during evolution. For too large
+state spaces, this becomes challenging as it is very unlikely a given state will
+be seen again.
 
 \subsection{Rényi Entropy}
 The Rényi entropy is a generalization of Shannon entropy that gives different
-weights to events of various probabilities. It is formally defined for an
-$\alpha \geq 0, \alpha \neq 1$ and $X$ random variable with possible outcomes
-$0, 1, ..., n$ as
+weights to events of various probabilities
+\parencite{renyiMeasuresEntropyInformation1961}. It is formally defined for an
+$\alpha \geq 0, \alpha \neq 1$ and $X$ random variable with possible outcomes $0, 1, ..., n$ as
 \begin{align*}
   H_\alpha(X) = \frac{1}{1-\alpha} \log\left(\sum_{i=0}^np_i^\alpha\right)
 \end{align*}
 
-In the limit $\alpha \rightarrow 1$ it is equal to the Shannon entropy, where
-each events probabilities are equally important. $\alpha \rightarrow \infty$
-yields the Min-entropy, and we have $H_{\infty} (X) = \min_{i}(\log(p_{i}))$.
-With $\alpha \rightarrow 0$ Rényi entropy is the same as Max-entropy. Rényi
-entropy was used by \textcite{wolframStatisticalMechanicsCellular1983} to
-estimate entropy in infinite CAs.
+In the limit $\alpha \rightarrow 1$ it is equal to the Shannon entropy, where each events
+probabilities are equally important. $\alpha \rightarrow \infty$ yields the Min-entropy, and we have
+$H_{\infty} (X) = \min_{i}(\log(p_{i}))$. With $\alpha \rightarrow 0$ Rényi entropy is the same as
+Max-entropy, or topological entropy. Rényi entropy was used by
+\textcite{wolframStatisticalMechanicsCellular1983} and
+\textcite{lindgrenComplexityMeasuresCellular1988} to estimate complexity in
+infinite \acp{CA}.
 
 \subsection{Mutual information}
 The mutual information is a measure of the dependence between two variables. Two
 independent variables will have a mutual information of zero. If the two are
 strongly dependent, for example if one is a function of another, the mutual
-information between them will be large.
+information between them will be larger.
 
 \textcite{chaitinMathematicalDefinitionLife1987} proposes to split a system into
 blocks of fixed sizes and calculate the mutual information among its components.
 He uses the maximum value of the mutual information in all possible partitions
-define "life" in a mathematical way. \textcite{shawDrippingFaucetModel1984} and
-\textcite{grassbergerQuantitativeTheorySelfgenerated1986} also use the mutual
-information measure between two semi-infinite blocks in a sequence to define
-complexity. Mutual information is also used to study the complexity of cellular
-automata as the parameter $\lambda$ is changed (for details about the $\lambda$
-in the context of \ac{CA}, see section \ref{sec:langtons-lambda})
+to define "life" in a mathematical way. \textcite{shawDrippingFaucetModel1984}
+and \textcite{grassbergerQuantitativeTheorySelfgenerated1986} also use the
+mutual information measure between two semi-infinite blocks in a sequence to
+define complexity. Mutual information has been used as well to study the
+complexity of \ac{CA} as the parameter $\lambda$ is changed (for details
+about the $\lambda$ in the context of \ac{CA}, see section \ref{sec:langtons-lambda})
 \parencite{gutowitzMethodsDesigningCellular1988,
   liTransitionPhenomenaCellular1990}.
 
@@ -206,7 +211,10 @@ exponentially with the parameter $N$. NP-hard algorithms can be said to be
 complex as they require a supposedly irreducible amount of computation to
 compute their output. In practice this description only applies to computations
 that were generated by a hand-designed algorithm, and not the kind of
-computations self-generated by a complex system that we are interested in. The
+computations self-generated by a complex system that we are interested in. For
+example, the computations generated by one \ac{CA} cannot be said to be
+computationally more complex than another \ac{CA}, because the algorithm that
+implements them is fundamentally the same and computationally simple. The
 computational complexity of an algorithm performed by a dynamical system thus
 cannot be effectively used as a measure for the complexity of that system.
 
@@ -263,11 +271,13 @@ measure, also closely related to the Lempel-Ziv complexity, described in more
 details in the next section ~\ref{subsection:lempel-ziv}.
 
 However, it is worth noting that when a complex system is described by an
-algorithm (such as for a \ac{CA}), the algorithmic complexity is easily upper
-bounded by a constant value entirely defined by the algorithm that simulated the
-complex system. For example, for a \ac{CA} table of the automaton, its
-characteristics (size, boundary conditions, \etc), the initial state and number
-of steps.
+algorithm (such as for a \ac{CA}), the algorithmic complexity is also easily
+upper bounded by a constant value entirely defined by the algorithm that
+simulated the complex system. For example, for a \ac{CA}, the algorithmic
+complexity is lower than the size of the table of the automaton, its
+characteristics (size, boundary conditions, \etc), its initial state and number
+of simulation steps. This approximation does not inform us on the difference in
+complexity between two \acp{CA}.
 
 \subsection{Lempel-Ziv complexity}\label{subsection:lempel-ziv}
 The Lempel-Ziv complexity as defined in
@@ -302,7 +312,7 @@ logical depth of a string $x$ at a significance level $s$ is defined as
 which is the least time required to compute it by a $s$-incompressible program,
 that is a program which length is within $s$ symbols from the optimal program
 $p^{*}$ of the algorithmic complexity metric.
-\textcite{gutowitzCellularAutomataSciences1995}
+% \textcite{gutowitzCellularAutomataSciences1995}
 
 \textcite{antunesComputationalDepthConcept2006} considered logical depth to be
 one instance of a more general concept: \emph{computational depth}; and proposed
@@ -353,18 +363,19 @@ where $\mathbb{P}(s)$ is the probability that the system followed the
 trajectory $s$.
 
 \textcite{crutchfieldThermodynamicDepthCausal1999} argued that the thermodynamic
-depth is a fundamentally flawed structural complexity measure because its
-interesting rely on a set of chosen macroscopic states for the system.
+depth is a fundamentally flawed structural complexity measure because it relies
+on a set of chosen macroscopic states for the system which are difficult to
+chose and need to be defined separately for each system.
 \textcite{lloydComplexityThermodynamicDepth1988} do not mention how these states
 are supposed to be chosen, nor do any follow-up works, making this complexity
 metric hard to use in practice.
 
 \subsection{$\epsilon$-machines}
 
-The $\epsilon$-machine is an approach to complexity that seeks to construct a
-metric more suitable for physical systems that also addresses some issues of
-other existing complexity metrics \parencite{crutchfieldOrderChaos2012}. It is
-the result of a field computational mechanics, an extension of statistical
+The $\epsilon$-machine is an approach to complexity that seeks to construct a metric
+more suitable for physical systems that also addresses some issues of other
+existing complexity metrics \parencite{crutchfieldOrderChaos2012}. It is the
+result of the field of computational mechanics, an extension of statistical
 mechanics that describes not only the statistical properties of a systems but
 also how it stores information and how it computes
 \parencite{crutchfieldInferringStatisticalComplexity1989,
@@ -373,16 +384,15 @@ also how it stores information and how it computes
 Computational mechanics algorithms take as input the time series being analyzed,
 and outputs a minimal, optimized model, that can reproduce a time series that is
 statistically equivalent to the input time series. The size of the model
-produces a metric known as statistical complexity The models are known as
-$\epsilon$-machines. Three optimality theorems say that $\epsilon$-machines
-capture all of the properties of a process
+produces a metric known as statistical complexity. The models are known as
+$\epsilon$-machines. Three optimality theorems say that $\epsilon$-machines capture all of the
+properties of a process
 \parencite{crutchfieldInferringStatisticalComplexity1989,
   crutchfieldThermodynamicDepthCausal1999,
-  shaliziComputationalMechanicsPattern2001}: prediction: the $\epsilon$-machine
-is its optimal predictor; minimality: compared with all other optimal
-predictors, the $\epsilon$-machine of a process is its minimal representation;
-uniqueness: any minimal optimal predictor is equivalent to the
-$\epsilon$-machine.
+  shaliziComputationalMechanicsPattern2001}: prediction: the $\epsilon$-machine is its
+optimal predictor; minimality: compared with all other optimal predictors, the
+$\epsilon$-machine of a process is its minimal representation; uniqueness: any minimal
+optimal predictor is equivalent to the $\epsilon$-machine.
 
 This model has many attractive properties and was successfully applied to study
 the symbolic dynamics of chaotic systems
@@ -495,14 +505,18 @@ arising from interacting agents \parencite{hollandEmergenceChaosOrder2000,
 
 \section{Evolutionary algorithms}\label{sec:evol-algor}
 Evolutionary algorithms are the class of algorithms inspired by natural
-biological processes, in particular evolution. There a many types of
+biological processes, in particular evolution. There are many types of
 evolutionary algorithms, from genetic algorithms to quality diversity and
 novelty search \parencite{lehmanAbandoningObjectivesEvolution2011,
   lehmanEvolvingDiversityVirtual2011}. Evolutionary algorithms are used as
 search methods, in particular when the search space is hard to parametrize or
-very large \parencite{poliRelationsSearchEvolutionary1996}. \ac{CA} rules are a
-good example of such search space, and genetic algorithms were successfully used
-to evolve rules to perform complex computations
+very large \parencite{poliRelationsSearchEvolutionary1996}. Evolutionary
+algorithms facilitate the search over the complex space by using intermediate
+representations, as illustrated in Figure \ref{fig:evolutionary_diagram}.
+\ac{CA} rules are a good example of such search space. The \ac{CA} rule space is
+very large and it is difficult the predict how perturbations of the rule
+translate to changes in the behavior of a \ac{CA}. Genetic algorithms were
+successfully used to evolve rules to perform complex computations
 \parencite{mitchellEvolvingCellularAutomata1996}.
 
 \begin{figure}[htbp]
