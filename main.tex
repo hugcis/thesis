@@ -1,22 +1,36 @@
-\documentclass[a4paper,12pt]{report}
+% \documentclass[a4paper,12pt]{book}
+\documentclass[11pt, twoside, openright]{thesis}
+
+\usepackage{psl-cover}
+\usepackage{lmodern}
+\definecolor{maincolor}{RGB}{36, 56, 141}
+\colorlet{secondarycolor}{violet}
 
 \input{math_commands.tex}
 
-\usepackage[
+% \usepackage[
+% includehead,
+% nomarginpar,
+% includefoot,
+% textheight=24cm,
+% footskip=1.5cm]{geometry}
+\geometry{
 includehead,
 nomarginpar,
 includefoot,
 textheight=24cm,
-footskip=1.5cm]{geometry}
+footskip=1.5cm}
 \usepackage[utf8]{inputenc}
 \usepackage[margin=0.5cm,labelfont=bf]{caption}
 \usepackage{subcaption}
 \usepackage{graphicx}
-\usepackage[style=authoryear-comp,backref=true]{biblatex}
+\usepackage[style=authoryear-comp,
+backref=true
+]{biblatex}
 
 \DefineBibliographyStrings{english}{%
-  backrefpage = {page},% originally "cited on page"
-  backrefpages = {pages},% originally "cited on pages"
+  backrefpage = {Cited on page},% originally "cited on page"
+  backrefpages = {Cited on pages},% originally "cited on pages"
 }
 
 \usepackage{setspace}
@@ -89,30 +103,97 @@ footskip=1.5cm]{geometry}
 
 \urldef\projecturl\url{https://hugocisneros.com/ALIFE-Paper-2020/}
 
-\title{
-{Unsupervised Learning in Complex Systems}\\
-{\large École normale supérieure}\\
-% {\includegraphics{uni.jpg}}
-}
+\title{Unsupervised Learning in Complex Systems}
+\institute{L'École normale supérieure de Paris}
+\doctoralschool{Sciences Mathématiques de\\ Paris Centre}{386}
+\specialty{Informatique}
 \author{Hugo Cisneros}
 \date{2022}
 
+\jurymember{1}{Name 1}{Université 1}{Rapporteur}
+\jurymember{2}{Name 2}{Université 2}{Rapporteur}
+\jurymember{3}{Name 3}{Université 3}{Examinatrice}
+\jurymember{4}{Name 4}{Université 4}{Directeur de thèse}
+
+\frabstract{
+%Résumé
+}
+\enabstract{
+%Abstract
+\vfill
+}
+\frkeywords{Apprentissage automatique {\Large\color{maincolor}$\star$}
+  Systèmes complexes {\Large\color{maincolor}$\star$} Complexité}
+\enkeywords{ Machine learning {\Large\color{maincolor}$\star$} Complex
+  systems {\Large\color{maincolor}$\star$} Complexity}
+
 \addbibresource{main.bib}
 
+\printversiontrue
 
+\ifprintversion
+\else
+\geometry{
+left=1.25in,
+right=1.25in,
+}
+\fi
+
+% \begin{document}
+% \maketitle
 \begin{document}
+\frontmatter
+\hypersetup{pageanchor=false}
 \maketitle
+\hypersetup{pageanchor=true}
+% \dominitoc
 
+% \begin{dedication}
+%   Dedication...
+% \end{dedication}
+% \tableofcontents
+
+\ifprintversion
+    \setboolean{@twoside}{true}
+    \pagestyle{fancy}
+    \fancyhead{} % clear all header fields
+    \fancyhead[ER,OL]{\footnotesize \rightmark} \fancyhead[EL,OR]{\thepage}
+    \fancyfoot{} % clear all footer fields
+    \fancyfoot[C]{---\quad \textbf{H. Cisneros: Unsupervised Learning in
+        Complex Systems}\quad ---}
+\else
+    \setboolean{@twoside}{false}
+    \pagestyle{fancy}
+    \fancyhead{} % clear all header fields
+    \fancyhead[R]{\footnotesize \rightmark} \fancyhead[L]{\thepage}
+    \fancyfoot{} % clear all footer fields
+    \fancyfoot[C]{---\quad \textbf{H. Cisneros: Unsupervised Learning in
+        Complex Systems}\quad ---}
+\fi
+
+\cleardoublepage
+\chapter*{Résumé}
+\addstarredchapter{Résumé}
+\thefrabstract{}
+\vfill
+\thefrkeywords{}
+\cleardoublepage
+\chapter*{Abstract}
+\addstarredchapter{Abstract}
+\theenabstract{}
+\vfill
+\theenkeywords{}
+
+\cleardoublepage
+\chapter*{Acknowledgments}
+\addstarredchapter{Acknowledgments}
+% Acknowledgments
+
+\cleardoublepage
+\hypertarget{contents}{}
 \tableofcontents
 
-\pagestyle{fancy}
-%... then configure it.
-\fancyhead{} % clear all header fields
-\fancyhead[R]{\footnotesize \rightmark} \fancyhead[L]{\thepage}
-\fancyfoot{} % clear all footer fields
-\fancyfoot[C]{---\quad \textbf{H. Cisneros: Unsupervised Learning in
-    Complex Systems}\quad ---}
-
+\mainmatter
 \include{intro}
 \include{background}
 \include{literature_review}
