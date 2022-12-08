@@ -647,13 +647,13 @@ well in different media \parencite{dennettDarwinDangerousIdea1996}.
 
 A system that behaves like natural evolution, producing a seemingly endless
 amount of novelty and complexity starting from elementary building blocks is
-called \emph{open-ended}. The main challenge of \ac{OEE} is there is not a simple
-single test for the phenomenon, but instead there are different kinds of
-open-ended evolution. Systems can exhibit more than one kind at a time. In the
-report from a workshop on \ac{OEE} at York
+called \emph{open-ended}. The main challenge of \ac{OEE} research is there is
+not a simple single test for the phenomenon, but instead different kinds of
+open-ended evolution exist. Systems can exhibit more than one kind at a time. In
+the report from a workshop on \ac{OEE} at York
 \parencite{taylorOpenEndedEvolutionPerspectives2016}, the authors summarized the
 different kinds of \ac{OEE}, which were further refined in a follow up work
-\parencite{packardOverviewOpenEndedEvolution2019}. They are as follows
+\parencite{packardOverviewOpenEndedEvolution2019}. They are as follows:
 
 \begin{enumerate}
   \item Interesting new kinds of entities and interactions
@@ -722,8 +722,8 @@ surprising, and sometimes more complex organisms continue to appear''
   taylorOpenEndedEvolutionPerspectives2016}.
 
 All these conditions illustrate a major challenge of \ac{OEE} research: the lack
-of clear definition or notion of what conditions make a system open-ended. We
-seem to agree about what is not open-ended, but whenever a constraint or
+of clear definition or notion of what exact conditions make a system open-ended.
+We seem to agree about what is not open-ended, but whenever a constraint or
 requirement for \ac{OEE} is identified, subsequent evidence forces us to refine
 them later. This is related to the problem of complexity, for which no single
 definition exists \parencite{johnsonSimplyComplexityClear2009}.
@@ -736,12 +736,12 @@ is to start from evolvable units or building blocks
   sorosIdentifyingNecessaryConditions2014}. The reason is that starting from
 higher level primitive units whose emergence would be hard to characterize may
 be easier and faster than starting from lower level components. Results obtained
-from these systems are often surprising, since they bear some key resemblance to
-natural evolutionary processes. For example we note the emergence of parasitic
-entities within the Tierra simulation \parencite{srayApproachSynthesisLife1991}.
-The process of emergence of these building blocks from simple rules and
-components has also been investigated significantly
-\parencite{bagleySpontaneousEmergenceMetabolism1991,
+from these systems are often surprising, since they bear some key resemblances
+to natural evolutionary processes. For example we note the emergence of
+parasitic entities within the Tierra simulation
+\parencite{srayApproachSynthesisLife1991}. The process of emergence of these
+building blocks from simple rules and components has also been investigated
+significantly \parencite{bagleySpontaneousEmergenceMetabolism1991,
   huttonEvolvableSelfReproducingCells2007, flammEvolutionMetabolicNetworks2010,
   sayamaSeekingOpenendedEvolution2011}. It appears harder to bridge the gap and
 create high level evolutionary-like processes and behaviors from elementary
@@ -760,7 +760,7 @@ self-replicating structures such as Langton's loop
 \parencite{langtonSelfreproductionCellularAutomata1984} and evoloops
 \parencite{sayamaNewStructurallyDissolvable1999,
   salzbergComplexGeneticEvolution2004} showed that more properties of open-ended
-systems can be included in a \ac{CA}. An potential limitation of \acp{CA} is the
+systems can be included in a \ac{CA}. A potential limitation of \acp{CA} is the
 absence of notion of conservation of ``matter''. For example, the game of life
 can start from a configuration with very few live cells and create many more at
 no cost during its evolution. Some authors believe that this conservation
@@ -785,16 +785,17 @@ replaced according to these rules.
 \paragraph{Cellular automata.}
 \Acfp{CA} can be see as a particular case of lattice molecular systems. For
 example the autopoietic system introduced by
-\textcite{varelaAutopoiesisOrganizationLiving1991} is a 2d square grid with sites
-that be occupied by \emph{atoms} which is similar to a \ac{CA} with 4 states.
-Each of these states is analogous to a chemical component of the system: ($\emptyset$)
-empty site, (S) substrate, (K) catalyst and (L) monomer. Basic rules are applied
-asynchronously and define how neighboring atoms interact with each other.
-Remarkably, stable self-repairing cells arise spontaneously from these basic
-rules. Their membrane is composed of a chain of monomers, which is maintained by
-the substrate and catalyst reacting according to the rules. Some key components
-were investigated in other works, showing that they are crucial for autopoeisis
-to be possible \parencite{zelenySelforganizationLivingSystems1977,
+\textcite{varelaAutopoiesisOrganizationLiving1991} is a 2d square grid with
+sites that be occupied by \emph{atoms} which is similar to a \ac{CA} with 4
+states. Each of these states is analogous to a chemical component of the system:
+($\emptyset$) empty site, (S) substrate, (K) catalyst and (L) monomer. Basic rules are
+applied asynchronously and define how neighboring atoms interact with each
+other. Remarkably, stable self-repairing cells arise spontaneously from these
+basic rules. Their membrane is composed of a chain of monomers, which is
+maintained by the substrate and catalyst reacting according to the rules. Some
+key components of that model were investigated in other works, showing that they
+are crucial for autopoeisis to be possible
+\parencite{zelenySelforganizationLivingSystems1977,
   mcmullinRediscoveringComputationalAutopoiesis1997}.
 
 \section{Computing with complex systems}\label{sec:comp-with-compl}
@@ -808,7 +809,7 @@ closely related topics, such as organic computing
 systems with life-like properties such as self-organization or the ability to
 adapt to a dynamically changing environment. Agent-based computing
 \parencite{jenningsAgentBasedComputingPromise1999} focuses on computing systems
-composed of several autonomous agents. Amorphous computing
+composed of several relatively simple autonomous agents. Amorphous computing
 \parencite{abelsonAmorphousComputing2000,
   nagpalProgrammablePatternFormationScaleIndependence2008,
   nagpalProgrammableSelfassemblyUsing2002} is about making vast quantities of
@@ -827,7 +828,16 @@ systems. For more details about \acp{CA}, see section
 \ref{sec:cellular-automata-sec}.
 
 \paragraph{Von Neumann's self-reproducing \ac{CA}}
-
+The early developments of \acp{CA} were guided by Von Neumann's question ``What
+kind of logical organization is sufficient for an automaton to be able to
+reproduce itself?''. Additional constraints were added so that the problem does
+not admit trivial solutions. For example, Von Neumann required that the
+automaton in question be equivalent in power to a universal Turing machine while
+having minimal complexity
+\parencite{vonneumannTheorySelfreproducingAutomata1966}. The final model was an
+intricate \ac{CA} composed of a tape containing the instructions to construct
+the next automaton, and a construction unit which would progressively build that
+new automaton cell by cell.
 
 \paragraph{Universal Computation in Cellular Automata}
 It is not difficult to see that a \ac{CA} can be capable of universal
@@ -844,11 +854,11 @@ Turing machine.
 Another approach was used to show the universality of the game of life (see
 details in section \ref{sec:game-life}). Instead of simulating a Turing machine,
 basic logical functions are built from gliders (see figure \ref{fig:glider})
-produced by a game of life structure called \emph{glider gun}. Two gliders
-that collide within the simulation will either annihilate or keep moving
-depending on the exact position in which they collide. This allows constructing
-a NOT, AND and OR gates. For example see figure \ref{fig:gol_not_gate} for a
-construction of a NOT gate.
+produced by a game of life structure called \emph{glider gun}. Two gliders that
+collide within the simulation will either annihilate or keep moving depending on
+the exact position in which they collide. This allows constructing NOT, AND and
+OR gates. For example see figure \ref{fig:gol_not_gate} for a construction of a
+NOT gate.
 
 \begin{figure}[htbp]
   \centering
@@ -862,16 +872,16 @@ construction of a NOT gate.
   \label{fig:gol_not_gate}
 \end{figure}
 
-Universal computation is an intriguing yet impractical property, and universal
-computers often have limited usability, but it serves as a proof of principle
-that the studied system is as powerful as any computer. In the case of the game
-of life, this was illustrated by the implementation of the OTCA metapixel which
-is a tileable square cell object that can be used to simulate another instance
-of game of life within the game. It is important to note that such embedded
-computers and Turing machines are often very slow and inefficient, and the game
-of life has brittle structures which would be destroyed by the slightest
-perturbation, making these construction unusable for anything else than
-demonstration.
+Universal computation is an intriguing yet impractical property, and proving
+that a system is a universal computers often has limited usability, but it
+serves as a proof of principle that the studied system is theoretically as
+powerful as any computer. In the case of the game of life, this was illustrated
+by the implementation of the OTCA metapixel which is a tileable square cell
+object that can be used to simulate another instance of game of life within the
+game. It is important to note that such embedded computers and Turing machines
+are often very slow and inefficient, and the game of life has brittle structures
+which would be destroyed by the slightest perturbation, making these
+construction unusable for anything else than demonstration.
 
 \paragraph{Evolving cellular automata with genetic algorithms}
 A major step forward from the clever but difficult hand-design of \acp{CA} rules
