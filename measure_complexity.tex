@@ -2,18 +2,18 @@
 \label{cha:meas-compl-evolv}
 
 In this chapter we propose an approach for measuring growth of complexity of
-emerging patterns in complex systems such as \acfp{CA}. We discuss
-several ways how a metric for measuring the complexity growth can be defined.
-This includes approaches based on compression algorithms and artificial neural
-networks. We believe such a metric can be useful for designing systems that
-could exhibit open-ended evolution, which itself might be a prerequisite for
-development of general artificial intelligence. We conduct experiments on 1D and
-2D grid worlds and demonstrate that using the proposed metric we can
-automatically construct computational models with emerging properties similar to
-those found in the Conway's Game of Life, as well as many other emergent
-phenomena. Interestingly, some of the patterns we observe resemble forms of
-artificial life. Our metric of structural complexity growth can be applied to a
-wide range of complex systems, as it is not limited to cellular automata.
+emerging patterns in complex systems such as \acfp{CA}. We discuss several ways
+how a metric for measuring the complexity growth can be defined. This includes
+approaches based on compression algorithms and artificial neural networks. We
+believe such a metric can be useful for designing systems that could exhibit
+open-ended evolution, which itself might be a prerequisite for development of
+general artificial intelligence. We conduct experiments on 1D and 2D grid worlds
+and demonstrate that using the proposed metric we can automatically construct
+computational models with emerging properties similar to those found in the
+Conway's Game of Life, as well as many other emergent phenomena. Interestingly,
+some of the patterns we observe resemble forms of artificial life. We test our
+metric of structural complexity growth on cellular automata, but it can also be
+applied to a wide range of complex systems.
 
 \section{Introduction}
 Recent advances in machine learning and deep learning have had successes at
@@ -33,7 +33,7 @@ open-ended evolution appears to be a requirement in order to enable emergence of
 arbitrarily complex adaptive systems.
 
 Although a rigorous attempt at defining intelligence or life is beyond the scope
-of this paper, we assume that a system we might identify as evolving, with the
+of this work, we assume that a system we might identify as evolving, with the
 potential of developing intelligence, should have the property of
 self-preservation and the ability to grow in complexity over time. These
 properties can be observed in living organisms
@@ -44,7 +44,7 @@ To recognize self-preservation and growth in complexity, one should be able to
 detect emerging macro-structures composed of smaller elementary components. For
 the purpose of obtaining computational models that grow in complexity over time,
 one should also be able to determine the amount of complexity these systems
-contain. We propose and discuss in this paper several ways of estimating the
+contain. We propose and discuss in this chapter several ways of estimating the
 complexity and detecting the presence of emerging and stable patterns in complex
 systems such as cellular automata. We show that such metrics are useful when
 searching the space of cellular automata with the objective of finding those
@@ -73,10 +73,10 @@ and usually consider organisms composed of elementary building blocks, while
 they do not work outside of this usually very constrained framework. Divergent
 and creative evolutionary process could be happening at a much lower conceptual
 level with fewer assumptions. For this reason, we consider cellular automata in
-the rest of the paper because they rely on a very few assumptions while offering
-a very large expressive power and a potentially wide range of behaviors that can
-be discovered. However, the metrics defined in this paper have the potential to
-be applied to other types of complex systems as discussed in
+the rest of the chapter because they rely on a very few assumptions while
+offering a very large expressive power and a potentially wide range of behaviors
+that can be discovered. However, the metrics defined in this work have the
+potential to be applied to other types of complex systems as discussed in
 Section~\ref{sec:conclusion}.
 
 \subsection{Cellular automata}
@@ -183,7 +183,7 @@ cell itself and $r$ neighboring cells in both directions.
 Simulating a CA amounts to the recursive application of this mapping $\phi$ to
 an initial state $S^{(0)} = \{c_1^{(0)}, ..., c_n^{(0)}\}$.
 
-In the rest of the paper, we consider cyclic boundary conditions for the
+In the rest of the chapter, we consider cyclic boundary conditions for the
 automata, meaning that the indices $i-r, ..., i+r$ above are taken modulo $n$
 the size of the automaton in 1D. Boundary conditions can have some effect on a
 CA's evolution, but cyclic boundaries have been empirically observed to have
@@ -205,7 +205,6 @@ to appreciate the performance of a metric and compare it with others.
 
 We define the compressed length $C$ of a 1D cellular automaton at time $t$ as
 \begin{align}
-  \textstyle
   C(S^{T}) = \text{length}\left(\texttt{comp}(c_1\ ||\ c_2\ ||\ ...\ c_n)\right)
 \end{align}
 
@@ -220,11 +219,11 @@ Similarly to \parencite{kowaliwMeasuresComplexityArtificial2008,
 implementation of DEFLATE to compress the final state of the automaton. If we
 apply the above metric to the 256 ECA run for 512 timesteps and initialized with
 one activated cell in the middle, we obtain the plot of
-Figure~\ref{subfig:comp_scores}. This example is re-used in the paper as a way
-to easily visualize and check that the defined complexity measures are coherent
-with one another. The colors on Figure~\ref{subfig:comp_scores} were obtained
-with a KMeans clustering algorithm applied on the compressed length of the
-automata states.
+Figure~\ref{subfig:comp_scores}. This example is re-used in the rest of the
+chapter as a way to easily visualize and check that the defined complexity
+measures are coherent with one another. The colors on
+Figure~\ref{subfig:comp_scores} were obtained with a KMeans clustering algorithm
+applied on the compressed length of the automata states.
 
 \begin{figure}[tbp]
   \begin{subfigure}[b]{.47\linewidth}
@@ -303,7 +302,7 @@ As a way to both measure the complexity and the amount of overlap between two
 automata states apart in time, we define a joint compressed length metric for a
 delay $\tau$ as
 \begin{align}
-  \textstyle C'\left(S^{(T + \tau)}, S^{(T)}\right) =
+  C'\left(S^{(T + \tau)}, S^{(T)}\right) =
   C\left(S^{(T)}\ ||\ S^{(T + \tau)}\right)
 \end{align}
 where $||$ represents the concatenation operator. This quantity is simply the
@@ -319,7 +318,7 @@ the ratio of this joint compressed length with the sum of the two compressed
 lengths $C(S^t)$ and $C(S^{t-\tau})$, thereby forming the joint compression
 score
 \begin{align}
-  \textstyle \mu = \dfrac{C\left( S^t \right) +
+  \mu = \dfrac{C\left( S^t \right) +
   C\left( S^{t - \tau} \right)}{C'\left( S^t, S^{t - \tau} \right)}
 \end{align}
 defined for an automaton $S$, time $t$ and delay $\tau$.
@@ -425,7 +424,7 @@ Assuming cell states given their neighborhood can be modeled by mutually
 independent random variables, the log-probability of global state $S^{(T)}$ is
 written
 \begin{align}
-  \textstyle \log p(S^{(T)}) = \log \prod_{i=1}^N p(c_i | n_{r,i})  =
+  \log p(S^{(T)}) = \log \prod_{i=1}^N p(c_i | n_{r,i})  =
   \sum_{i=1}^N \log  p(c_i | n_{r,i})
 \end{align}
 
@@ -446,7 +445,7 @@ set of probabilities $p$ over the possible states $\{s_1, ..., s_n\}$, and $p$
 can be written $[p_{s_1}, p_{s_2}, ... , p_{s_n}]$. $\Lambda$ is defined by
 \begin{equation}
   \begin{aligned}
-    \textstyle \Lambda :&& \{s_1, ..., s_n\}^{2r} &\to&& \Delta_n\\
+    \Lambda :&& \{s_1, ..., s_n\}^{2r} &\to&& \Delta_n\\
     && n_{r,i} &\mapsto&& p
   \end{aligned}
 \end{equation}
@@ -456,7 +455,6 @@ To measure the uncertainty of that predictor, we can compute the cross-entropy
 loss between the data distribution it was trained on and its output. We compute
 the log probability of the observed data given the model, or the quantity
 \begin{align}
-  \textstyle
   L = - \frac{1}{N}\sum_{i=1}^N \sum_{k=1}^n \mathds{1}_{\{ s_k \}}(c_i)
   \log\Lambda(n_{r,i})_{s_k}
   \label{eq:loss_count}
@@ -569,7 +567,7 @@ for the tested examples. It must be well defined and stay the same to allow for
 comparison of the results across several rules. Score at timestep $T$ for a
 delay $\tau$ is computed with the following formula
 \begin{align}
-  \textstyle \mu_\tau = \dfrac{L^{(T)}}{L^{(T + \tau)}}
+  \mu_\tau = \dfrac{L^{(T)}}{L^{(T + \tau)}}
   \label{eq:main_metric}
 \end{align}
 where $L^{(T + \tau)}$ is the log probability of the automaton state at timestep
@@ -662,10 +660,8 @@ the neural network gives the best score.
 
 \begin{table}[t!]
   \renewcommand{\arraystretch}{1.2}
-  \caption{Experimental results - Accuracy}
-  \label{experiments_table2}
   \centering
-  \begin{tabular}{lm{.1\linewidth}m{.16\linewidth}m{.1\linewidth}m{.11\linewidth}}
+  \begin{tabular}{lm{.1\linewidth}m{.19\linewidth}m{.1\linewidth}m{.11\linewidth}}
     \toprule
     \bfseries  Metric & Baseline & Compressed length
     \parencite{zenilCompressionBasedInvestigationDynamical2010} &
@@ -673,10 +669,11 @@ the neural network gives the best score.
     \bfseries Accuracy & 0.90 & 0.913 & 0.926 & \bfseries 0.953 \\ \bottomrule
   \end{tabular}
   \\[+8pt]
-  \begin{flushleft}{\footnotesize Accuracy of each metric of complexity when
-      used to classify which automatons do evolve interestingly, compared
-      against the trivial all-negative baseline and the compressed length
-      metric~\parencite{zenilCompressionBasedInvestigationDynamical2010}.}\end{flushleft}
+  \caption{Experimental results - Accuracy of each metric of complexity when
+    used to classify which automatons do evolve interestingly, compared against
+    the trivial all-negative baseline and the compressed length
+    metric~\parencite{zenilCompressionBasedInvestigationDynamical2010}.}
+  \label{experiments_table2}
 \end{table}
 
 Above experiments demonstrate the capability of our proposed metric to match a
@@ -687,7 +684,7 @@ rules labeled as interesting.
 
 \section{Discussion}
 
-In this section, we discuss the results obtained by using the metric of equation
+In this section, we discuss the results obtained by using the metric of
 \eqref{eq:main_metric} and the way they can be interpreted.
 
 \paragraph{One dimensional cellular automata}
@@ -759,18 +756,18 @@ proportions of our experimental dataset show.
 
 Using the neural network-based complexity metric, we were able to find rules
 with interesting behavior among a very large set through random sampling. Some
-of these rules are shown in the paper. Figure~\ref{fig:automat_glider} displays
-three 2D rules that were selected manually upon visual inspection among the 20
-highest scoring for metric $\mu_{50}$ (defined in eq.~\eqref{eq:main_metric}) of
-a sample of 1700 randomly generated 2-states 3 by 3 neighborhood rules. For
-comparison, Conway's Game of Life rule (GoL) ranks in the top 1\% of the 2500
-rules mentioned above for runs that do not end in a static global state. We
-observe that spontaneous glider formation events appear to be captured by our
-metric. Although gliders in cellular automata are a simple process that can
-manually be created, detection of their spontaneous emergence within a random
-search setting is a first step towards finding more complex macro structures
-that can emerge out of simple components. Rules with low scores are
-overwhelmingly of the disordered kind.
+of these rules are shown here. Figure~\ref{fig:automat_glider} displays three 2D
+rules that were selected manually upon visual inspection among the 20 highest
+scoring for metric $\mu_{50}$ (defined in eq.~\eqref{eq:main_metric}) of a sample
+of 1700 randomly generated 2-states 3 by 3 neighborhood rules. For comparison,
+Conway's Game of Life rule (GoL) ranks in the top 1\% of the 2500 rules
+mentioned above for runs that do not end in a static global state. We observe
+that spontaneous glider formation events appear to be captured by our metric.
+Although gliders in cellular automata are a simple process that can manually be
+created, detection of their spontaneous emergence within a random search setting
+is a first step towards finding more complex macro structures that can emerge
+out of simple components. Rules with low scores are overwhelmingly of the
+disordered kind.
 
 Figures~\ref{fig:gliders}, \ref{fig:micro} and \ref{fig:odd} show some three
 states rules that were selected through random sampling on the simplex with the
@@ -788,8 +785,8 @@ are relatively stable and interact with each other. These elementary components
 could be a basis for the spontaneous construction of more complex and bigger
 components. Figure~\ref{fig:odd} shows some other rules from this set of high
 ranking automata. They highlight the wide range of behaviors that can be
-obtained with these systems. Interesting rules from this paper can be found,
-along with other examples, in the form of animated
+obtained with these systems. Interesting rules from our search process can be
+found, along with other examples, in the form of animated
 GIFs\footnote{\url{https://bit.ly/interesting_automata}}.
 
 \begin{figure}[t]
@@ -832,22 +829,22 @@ very large grids might therefore make it easier generating very complex patterns
 
 \section{Conclusion}\label{sec:conclusion}
 
-In this paper, we have proposed compression-inspired metrics for measuring a
+In this chapter, we have proposed compression-inspired metrics for measuring a
 form of complexity occurring in complex systems. We demonstrated its usefulness
 for selecting CA rules that generate interesting emergent structures from very
 large sets of possible rules. In higher dimensions where linear compression ---
 as in gzip --- is not sufficient to find complex patterns, our metric is also
 useful.
 
-We study 2 and 3 states automata in the paper and we plan to investigate the
-effects of additional states or larger neighborhoods on the ability to evolve
-more structures and obtain more interesting behaviors.
+We study 2 and 3 states automata here and we plan to investigate the effects of
+additional states or larger neighborhoods on the ability to evolve more
+structures and obtain more interesting behaviors.
 
-In the future, we will publish the dataset and code to enable reproducibility
-and improvement on the results reported
-here\footnote{\url{https://github.com/hugcis/evolving-structures-in-complex-systems}}.
-The metrics we introduce in this paper could be used to design organized systems
-of artificial developing organisms that grow in complexity through an
+The dataset and code to reproduce our experiments and improvement on the results
+reported are published on
+GitHub\footnote{\url{https://github.com/hugcis/evolving-structures-in-complex-systems}}.
+The metrics we introduce in this chapter could be used to design organized
+systems of artificial developing organisms that grow in complexity through an
 evolutionary mechanism. A possible path toward such systems could start by
 creating an environment where computational resource allocation favors the
 fraction of subsystems that perform the best according to our measure of

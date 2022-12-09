@@ -536,7 +536,7 @@ successfully used to evolve rules to perform complex computations
   \label{fig:evolutionary_diagram}
 \end{figure}
 
-\subsection{Genetic programming}
+\subsection{Genetic pr\label{sec:genetic-programming}ogramming}
 Many of the problems that machine learning, artificial intelligence are
 attempting to solve require the discovery of a computer program that produces
 some desired mapping between inputs and outputs. Solving the problems therefore
@@ -858,7 +858,7 @@ produced by a game of life structure called \emph{glider gun}. Two gliders that
 collide within the simulation will either annihilate or keep moving depending on
 the exact position in which they collide. This allows constructing NOT, AND and
 OR gates. For example see figure \ref{fig:gol_not_gate} for a construction of a
-NOT gate.
+NOT gate in the game of life.
 
 \begin{figure}[htbp]
   \centering
@@ -889,19 +889,21 @@ to perform computations is the use of learning algorithms to automatically
 design those rules \parencite{mitchellEvolvingCellularAutomata1996}. Genetic
 algorithms are a type of search method inspired by biological evolution
 \parencite{bookerClassifierSystemsGenetic1989}. See section
+\ref{sec:genetic-programming} for more details about genetic algorithms.
 
-Some early work was done by Norman Packard and colleagues
+Some early work in evolving \acp{CA} was done by Norman Packard and colleagues
 \parencite{packardAdaptationEdgeChaos1988,
   richardsExtractingCellularAutomaton1990}.
-\textcite{richardsExtractingCellularAutomaton1990} use genetic algorithms to
+\textcite{richardsExtractingCellularAutomaton1990} used genetic algorithms to
 learn the rules of a \ac{CA} to match experimental data for the patterns created
 by the dendritic solidification of \ce{NH4Br}. In
 \parencite{packardAdaptationEdgeChaos1988}, the author evolves \acp{CA} to
 perform a specific computation, and observes that the evolution process tends to
-select \acp{CA} with a $\lambda$ parameter close to the critical value observed
-by Langton which corresponds to the edge of chaos (see section
+select \acp{CA} with a $\lambda$ parameter close to the critical value observed by
+Langton which corresponds to the edge of chaos (see section
 \ref{sec:langtons-lambda} for details about the parameter). However, other
-authors were unable to replicate it \parencite{mitchellRevisitingEdgeChaos1993}.
+authors were unable to replicate this experiment later
+\parencite{mitchellRevisitingEdgeChaos1993}.
 \textcite{kozaEvolutionSubsumptionUsing1992} applied genetic algorithms to
 \acp{CA} to generate random numbers.
 
@@ -910,15 +912,18 @@ The problem of density classification was thoroughly explored since it fits the
   mitchellEvolvingCellularAutomata1994,
   crutchfieldEvolutionEmergentComputation1995, dasGeneticAlgorithmDiscovers1994,
   sipperCoevolvingNonuniformCellular1996, andreDiscoveryGeneticProgramming1996}.
-The goal of this task is to have \ac{CA} decide the most abundant type of cell
-in a binary initial state in one dimension. This task is trivial for a central
-controller that can read the state of all the cells in the initial grid, but it
-is much more complex for a decentralized systems like \ac{CA} with a small
-radius of interaction with neighbors. The evolved \ac{CA} developed various
-strategies to solve the task. Some are unsophisticated, such as expanding the 1s
-or 0s, which does not work on all validation examples. We show one of the more
-sophisticated solutions discovered by the genetic algorithm on figure
-\ref{fig:particle_ca}.
+The goal of this task is to have \ac{CA} figure out what the most abundant cell
+state in a binary initial configuration in one dimension. This task is trivial
+for a central controller that can read the state of all the cells in the initial
+grid, but it is much more complex for a decentralized systems like a \ac{CA}
+which has a small radius of interaction with neighbors. The evolved \ac{CA}
+developed various strategies to solve the task. Some are unsophisticated, such
+as expanding the 1s or 0s, which does not work on all validation examples. We
+show one of the more sophisticated solutions discovered during some runs of the
+genetic algorithm in figure \ref{fig:particle_ca}. That solution uses the
+propagation of structures within the \ac{CA} state space to communicate the
+local state to the rest of the grid, which usually ends with the right answer
+from the \ac{CA}.
 
 \begin{figure}[htbp]
   \centering
@@ -954,25 +959,27 @@ models than \acp{CA} \parencite{neumannProbabilisticLogicsSynthesis1956,
   ,haraoConsiderationCellularAutomata1973}. Other methods make use of the
 special structure of \ac{CA}, but rely on strong assumptions about the
 likelihood of errors \parencite{haraoFaultTolerantCellular1975,
-  nishioFaultTolerantCellular1975}. Peter Gács has shown how to construct a 1-d
-CA which can perform arbitrarily large reliable computations, with each cell an
-error with a positive probability
+  nishioFaultTolerantCellular1975}. Peter Gács has shown how to construct a 1D
+CA which can perform arbitrarily large reliable computations, assuming that each
+cell gets an error with a positive probability
 \parencite{gacsReliableComputationCellular1986}. The fault model he describes is
 important from the point of view of ergodic theory because Gács’ result
 invalidates the ``positive probability conjecture'' in statistical physics,
 which states that all one dimensional infinite particle system with positive
-transition probabilities is ergodic. For more recent work on fault-tolerance by
-Gács, see \parencite{gacsReliableCellularAutomata2001}.
+transition probabilities is ergodic, which means that it will visit all parts of
+its state space eventually. For more recent work on fault-tolerance by Gács, see
+\parencite{gacsReliableCellularAutomata2001}.
 
 \paragraph{Neural cellular automata\label{sec:neur-cell-autom}}
 The principle of \ac{NCA} is based on the analogy between \acp{CA} and two types
 of neural networks: \acp{RNN} and \acp{CNN} (see Section
-\ref{sec:cell-autom-rnns} for more details about the analogy). Once this link is
-established, \ac{NCA} can be manipulated like neural networks, using automatic
-differentiation, backpropagation and optimization algorithms to make these
-models learn some target task. A first example used this neural network
-representation to learn a \ac{NCA} version of existing \ac{CA} rules from
-recorded examples of their evolution
+\ref{sec:cell-autom-rnns} for more details about the analogy). Following this
+analogy, \acp{CA} can be formulated as a continuous recurrent and convolutional
+neural network system called a \ac{NCA}. \acp{NCA} can be manipulated like
+neural networks, using automatic differentiation, backpropagation and
+optimization algorithms to make these models learn some target task. A first
+example used this neural network representation to learn a \ac{NCA} version of
+existing \ac{CA} rules from recorded examples of their evolution
 \parencite{gilpinCellularAutomataConvolutional2018}. The structure of the
 training process and final error of the resulting model is used by the author as
 a tool to understand the complexity and properties of the original \ac{CA}.
@@ -981,9 +988,9 @@ a tool to understand the complexity and properties of the original \ac{CA}.
 resemble a target image \parencite{mordvintsevGrowingNeuralCellular2020}. The
 training process is structured in such a way that the \ac{NCA} needs to learn to
 maintain the pattern stable across time and space, but also recover form random
-perturbations that are introduced randomly. This results in an interesting demo,
-where a pattern is generated and maintained in real time by a \ac{NCA} while a
-user can directly apply
+perturbations that are introduced at arbitrary points in time. This results in
+an interesting demo, where a pattern is generated and maintained in real time by
+a \ac{NCA} while a user can directly apply
 perturbations\footnote{\url{https://distill.pub/2020/growing-ca/}}.
 
 \begin{figure}[htbp]
@@ -1060,33 +1067,37 @@ systems that fullfils the following requirements:
 \end{itemize}
 
 In each of the examples in figure \ref{fig:nca}, a separate \ac{CA} was trained
-on a pattern starting from a single black pixel. We extend this by training a
-single \ac{NCA} on multiple patterns from different seeds. Instead of a single
-black cell, a small number of black cells are arranged into simple shapes We
-call these patterns \emph{seeds}. \ac{NCA} have a lot of parameters. This
-allowed us to learn more than one pattern (or larger patterns) without adding
-parameters in the architecture. The resulting patterns are of slightly lower
-quality but still stable under perturbations and able to grow.
+on a pattern starting from a single black pixel. We extend this setup by
+training a single \ac{NCA} on multiple patterns from different seeds. Instead of
+a single black cell, a small number of black cells are arranged into simple
+shapes. We call these patterns \emph{seeds}. \ac{NCA} are neural network with a
+lot of redundant parameters. This allowed us to learn (and encode) more than one
+pattern (or larger patterns) without adding parameters in the architecture. The
+resulting patterns are of slightly lower quality but still stable under
+perturbations and able to grow from their corresponding seed pattern.
 
 We turned the process of combining seed patterns into a “game” by allowing user
-interaction with the evolving CA through Minecraft. Our system is not open-ended
-by itself, but needs human interaction to play with the shapes and seed
-patterns. This is in the spirit of open-ended games like Picbreeder
-\parencite{secretanPicbreederCaseStudy2011, woolleyDeleteriousEffectsPriori2011}
-where players choose which generated patterns to mutate or evolve from. The
-algorithms can generate endless novelty with the help of human interactions that
-provide the missing step to make the system potentially open-ended.
+interaction with the evolving CA through the video-game Minecraft, using an API
+to communicate between the program and the game. Our system is not open-ended by
+itself, but serves as an exploration space and uses human interactions to play
+with the shapes and seed patterns. This is in the spirit of open-ended game-like
+systems like Picbreeder \parencite{secretanPicbreederCaseStudy2011,
+  woolleyDeleteriousEffectsPriori2011} where players choose which generated
+image to mutate or evolve from, collectively constructing surprisingly complex
+images. The algorithms can generate endless novelty with the help of human
+interactions that provide the missing step for making the system potentially
+open-ended.
 
 \subsection{Amorphous computing}
 The goal of amorphous computing is to study and define the problem of computing
 with multiple interconnected components that are unreliable, irregular,
 time-varying and with limited computational capacity
-\parencite{abelsonAmorphousComputing2000}. The motivation for this research is
-the development of biological substrates that can compute, function as sensors
-and actuators, and robustly self-organize to compute with little cost. Precise
-manufacturing of chemical or biological substrate with the ability to
-communicate locally through chemical or physical interactions is within reach,
-making the perspective of using them as computing vessels particularly
+\parencite{abelsonAmorphousComputing2000}. The motivation for this area of
+research is the development of biological substrates that can compute, function
+as sensors and actuators, and robustly self-organize to compute with little
+cost. Precise manufacturing of chemical or biological substrate with the ability
+to communicate locally through chemical or physical interactions is within
+reach, making the perspective of using them as computing vessels particularly
 attractive. We can embed millions of chips with sensors
 \parencite{abelsonAmorphousComputing2000} or program biological cells to serve
 as logic gates \parencite{weissProgrammingBiologicalCells1998,
@@ -1124,8 +1135,8 @@ enables programmers to specify complex patterns for computational particles,
 which are internally represented in the particles as state machines
 \parencite{cooreBotanicalComputingDevelopmental1999}.
 
-\textcite{nagpalProgrammableSelfassemblyUsing2002} develops another programming
-language, inspired from biological cell differentiation
+\textcite{nagpalProgrammableSelfassemblyUsing2002} developped another
+programming language, inspired from biological cell differentiation
 \parencite{lawrenceMakingFlyGenetics1992,
-  wolpertPositionalInformationSpatial1969}, that can compile to individual agent
+  wolpertPositionalInformationSpatial1969} that can compile to individual agent
 programs to follow some global specification.

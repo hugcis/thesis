@@ -1,24 +1,24 @@
 \chapter{Learning efficiency of complex systems for reservoir computing}
 \label{cha:learn-effic-compl}
 
-  It is common to evaluate the performance of a machine learning model by
-  measuring its predictive power on a test dataset. This approach favors
-  complicated models that can smoothly fit complex functions and generalize well
-  from training data points. Although essential components of intelligence,
-  speed and data efficiency of this learning process are rarely reported or
-  compared between different candidate models. In this paper, we introduce a
-  benchmark of increasingly difficult tasks together with a data efficiency
-  metric to measure how quickly machine learning models learn from training
-  data. We compare the learning speed of some established sequential supervised
-  models, such as RNNs, LSTMs, or Transformers, with relatively less known
-  alternative models based on reservoir computing. The proposed tasks require a
-  wide range of computational primitives, such as memory or the ability to
-  compute Boolean functions, to be effectively solved. Surprisingly, we observe
-  that reservoir computing systems that rely on dynamically evolving feature
-  maps learn faster than fully supervised methods trained with stochastic
-  gradient optimization while achieving comparable accuracy scores. The code,
-  benchmark, trained models, and results to reproduce our experiments are
-  available at {\small\url{https://github.com/hugcis/benchmark_learning_efficiency/}}.
+It is common to evaluate the performance of a machine learning model by
+measuring its predictive power on a test dataset. This approach favors
+complicated models that can smoothly fit complex functions and generalize well
+from training data points. Although essential components of intelligence, speed
+and data efficiency of this learning process are rarely reported or compared
+between different candidate models. In this chapter, we introduce a benchmark of
+increasingly difficult tasks together with a data efficiency metric to measure
+how quickly machine learning models learn from training data. We compare the
+learning speed of some established sequential supervised models, such as RNNs,
+LSTMs, or Transformers, with relatively less known alternative models based on
+reservoir computing. The proposed tasks require a wide range of computational
+primitives, such as memory or the ability to compute Boolean functions, to be
+effectively solved. Surprisingly, we observe that reservoir computing systems
+that rely on dynamically evolving feature maps learn faster than fully
+supervised methods trained with stochastic gradient optimization while achieving
+comparable accuracy scores. The code, benchmark, trained models, and results to
+reproduce our experiments described in this chapter are available at
+{\small\url{https://github.com/hugcis/benchmark_learning_efficiency/}}.
 
 
 \section{Introduction}
@@ -43,12 +43,16 @@ string and end with elaborate question answering tasks that require counting
 occurrences of patterns and long-term memory.
 
 Established sequential supervised models such as recurrent neural networks
-\parencite[RNNs; ][]{elmanFindingStructureTime1990}, long short-term memory networks
-\parencite[LSTMs;][]{hochreiterLongShortTermMemory1997} or Transformers
-\parencite{vaswaniAttentionAllYou2017} lack essential properties such as learning
-beyond the training phase or the ability to adapt over time after being trained. These models can also be expensive to train, requiring a large number
+\parencite[RNNs; ][]{elmanFindingStructureTime1990}, long short-term memory
+networks \parencite[LSTMs;][]{hochreiterLongShortTermMemory1997} or Transformers
+\parencite{vaswaniAttentionAllYou2017} lack essential properties such as
+learning beyond the training phase or the ability to adapt over time after being
+trained. These models can also be expensive to train, requiring a large number
 of labeled training examples to reach reasonable performance, leading to poor
-learning speeds. In this work, we use the newly proposed \ac{WADE} metric and the benchmark dataset to experimentally compare the learning speed of these well-established models, such as RNNs, LSTMs and Transformers, with less explored {\em reservoir computing models}.
+learning speeds. In this work, we use the newly proposed \ac{WADE} metric and
+the benchmark dataset to experimentally compare the learning speed of these
+well-established models, such as RNNs, LSTMs and Transformers, with less
+explored {\em reservoir computing models}.
 
 Reservoir computing is a computational framework that aims to exploit the states
 of a complex dynamical system. The simplest example of a reservoir computer is a
@@ -73,19 +77,22 @@ self-organize and exhibit increasingly complex behaviors
 \parencite{koppelAlmostMachineindependentTheory1991,
   bennettLogicalDepthPhysical1995, allenEvolutionEmergenceLearning2003,
   goldsteinEmergenceComplexSystems2011, cisnerosEvolvingStructuresComplex2019}.
-In this paper we wish to investigate whether complex dynamical systems --- in
+We wish to investigate whether complex dynamical systems --- in
 particular RNNs with frozen weights (echo-state networks)
 \parencite{jaegerEchoStateApproach2001} and reservoir cellular automata
 \parencite{yilmazReservoirComputingUsing2014} --- create representations that
 allow them to learn faster as measured by our metric.
 
-\paragraph{Contributions.} In this paper, we make the following main contributions: First, we introduce the
-\acf{WADE} metric to measure the learning speed of various learning systems and use it to benchmark a few standard models on the IMDB text
-classification task \parencite{maasLearningWordVectors2011}.
+\paragraph{Contributions.} In this chapter, we make the following main
+contributions: First, we introduce the \acf{WADE} metric to measure the learning
+speed of various learning systems and use it to benchmark a few standard models
+on the IMDB text classification task \parencite{maasLearningWordVectors2011}.
 Second, we present a benchmark of language-based tasks of increasing difficulty
-to evaluate the learning speed in different conditions. The proposed tasks require a wide range of computational primitives, such as memory or the ability to compute Boolean functions, to be effectively solved.  Third, we study the
-learning speed of reservoir computing learning models
-and compare them with more standard supervised solutions.
+to evaluate the learning speed in different conditions. The proposed tasks
+require a wide range of computational primitives, such as memory or the ability
+to compute Boolean functions, to be effectively solved. Third, we study the
+learning speed of reservoir computing learning models and compare them with more
+standard supervised solutions.
 
 \section{Related work}
 The \ac{WADE} metric is a generalization of the \emph{Time-to-threshold} metric
@@ -210,13 +217,14 @@ reaching a target accuracy on a validation set.
   \caption{General description of all the tasks in the benchmark.}
   \label{tab:all-tasks}
 \end{table}
-Standard benchmarks and metrics such as those introduced in this paper have
+Standard benchmarks and metrics such as those introduced in this chapter have
 always been essential in advancing various aspects of machine learning. For
 example, the LSTM network demonstrated a superior memory capacity on a set of
 synthetic tasks designed to challenge the memory of sequential learning systems
-\parencite{hochreiterLongShortTermMemory1997}. Our goal with this benchmark is to
-emphasize measuring learning speed across tasks of varying difficulties with a
-range of computational requirements rather than focusing on performance only. We describe the performance metric and the benchmark next.
+\parencite{hochreiterLongShortTermMemory1997}. Our goal with this benchmark is
+to emphasize measuring learning speed across tasks of varying difficulties with
+a range of computational requirements rather than focusing on performance only.
+We describe the performance metric and the benchmark next.
 
 
 
@@ -754,10 +762,11 @@ values after several more training steps.
     \end{tabular}
     \caption{Comparison of accuracy scores (higher is better) of the
       \textbf{ReCA}, \textbf{ESN}, \textbf{RNN}, \textbf{LSTM}, and
-      \textbf{Transformer} models with a similar number of parameters. In contrast to the
-      results of table~\ref{tab:summary}, the fully-supervised models are more
-      performant when we measure the accuracy, as shown here, but do not necessarily do as well when we measure  the speed of learning, as shown in table~\ref{tab:summary}.
-    }\label{tab:accuracy_all}
+      \textbf{Transformer} models with a similar number of parameters. In
+      contrast to the results of table~\ref{tab:summary}, the fully-supervised
+      models are more performant when we measure the accuracy, as shown here,
+      but do not necessarily do as well when we measure the speed of learning,
+      as shown in table~\ref{tab:summary}. }\label{tab:accuracy_all}
 \end{table}
 
 Even if they lack slightly in accuracy, as seen for example on the curves of task 4,
@@ -815,11 +824,11 @@ once.
 
 \section{Human performance evaluation}
 \label{sec:human}
-The proposed benchmark is relatively simple to understand and hence one may ask what would be the human performance and what WADE values this would correspond to. In
-particular, the language tasks appear to be readily solvable just from one's
-understanding of the English language. However, similar to how words are encoded
-as vectors before being processed by a neural network, we need to remove any
-language-based prior to make the comparison with human performance fair. This
+The proposed benchmark is relatively simple to understand and hence one may ask
+what would be the human performance and what WADE values this would correspond
+to. In particular, the language tasks appear to be readily solvable just from
+one's understanding of the English language. However, similar to how words are
+encoded as vectors before being processed by a neural network, we need This
 could be achieved in a number of ways. For example, if we map all the available
 tokens to random letters of the alphabet the apparently trivial task
 {\small \begin{align*}
@@ -852,12 +861,13 @@ We apply the following procedure in our human evaluation experiments:
 We add the requirement that no external device such as pen and paper or
 note-taking program should be used during the experiment so the user relies
 solely on their memory. The accuracy is computed by counting the number of right
-answers in a row. For example, three right answers in a row would correspond to an
-accuracy of 30\%, while ten right answers in a row is 100\% which also
-corresponds to a switch of a task. This accuracy score is attributed to the first
-correct answer of the series of correct answers. This means that a series of five correct answers starting from question 6 until question 11 will correspond to reaching the accuracy of 50\% on question 6.
-This ensures that ten correct answers on the
-first attempt will yield a WADE score of 1.
+answers in a row. For example, three right answers in a row would correspond to
+an accuracy of 30\%, while ten right answers in a row is 100\% which also
+corresponds to a switch of a task. This accuracy score is attributed to the
+first correct answer of the series of correct answers. This means that a series
+of five correct answers starting from question 6 until question 11 will
+correspond to reaching the accuracy of 50\% on question 6. This ensures that ten
+correct answers on the first attempt will yield a WADE score of 1.
 
 \section{Experimental parameters}
 \label{sec:parameters}
