@@ -57,6 +57,13 @@ We summarize our contributions below.
 
 \section{Future Work}
 
+This thesis has explored the connections between learning, complex systems, and
+open-ended evolution. These fields are not young but many open problems still
+remain, some of them poorly understood, making this research exploratory in
+nature. We hope our work can advance our understanding of learning and
+adaptation in natural and artificial systems, leading to the development of more
+effective and efficient learning algorithms in the future.
+
 \subsection{Evolving cellular automata for complexity}
 
 The metric of complexity developed in Chapter \ref{cha:meas-compl-evolv} and the
@@ -67,8 +74,14 @@ a particular task, it seems appealing to use the complexity as a fitness
 function for a genetic algorithm. Such an algorithm would generate new rules
 that are progressively more complex (according to the complexity metric).
 
-It is hard to apply this principle in practice,
-
+It is hard to apply this principle in practice. Because complexity metrics are
+often approximating some uncomputable ideal metric, results get less satisfying
+as we maximizing a particular metric. This could be accounted for in future
+works using multiple complementary complexity metrics, or using other surrogate
+metrics, such as the ability to learn to solve auxiliary tasks and generalize.
+This approach motivated our work from Chapter \ref{cha:learn-effic-compl}, where
+we design a benchmark of progressively more complex tasks that could be used to
+evaluate the ability of a system to perform complex computations.
 
 \subsection{Feedback reservoir computing}
 
@@ -97,3 +110,14 @@ tasks when a sufficiently large training dataset is available.
   \caption{Comparison of regular reservoir computing with feedback reservoir computing}
   \label{"waiting for reftex-label call..."}
 \end{figure}
+
+A straightforward extension that could make \ac{RC} systems fully autonomous
+would be to feed back and error signal within the reservoir state at each
+output. This extension is illustrated in figure \ref{fig:feedback_reservoir}
+alongside the standard \ac{RC} model \ref{fig:classical_reservoir}. An ideal
+system would adapt to this error signal to adjust future outputs through some
+internal learning algorithm, progressively improving itself. The only mechanism
+that should be built into this system would be an incentive to minimize received
+error signals through adaptation. The main limitation to this idea is the design
+of such a system with built-in adaptation is not easy. We do not know of a
+mechanism that can enable adaptation and improvement.
