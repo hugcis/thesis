@@ -39,6 +39,7 @@ backref=true
 
 \usepackage{bold-extra}
 \usepackage{amsmath}
+\usepackage{csquotes}
 \usepackage{amssymb}
 \usepackage{dsfont}
 \usepackage{array}
@@ -110,22 +111,48 @@ backref=true
 \author{Hugo Cisneros}
 \date{2022}
 
-\jurymember{1}{Name 1}{Université 1}{Rapporteur}
-\jurymember{2}{Name 2}{Université 2}{Rapporteur}
-\jurymember{3}{Name 3}{Université 3}{Examinatrice}
-\jurymember{4}{Name 4}{Université 4}{Directeur de thèse}
+\jurymember{1}{Name 1}{Université 1}{Président du jury}
+\jurymember{2}{Name 1}{Université 1}{Rapporteur}
+\jurymember{3}{Name 2}{Université 2}{Rapporteur}
+\jurymember{4}{Name 3}{Université 3}{Examinatrice}
+\jurymember{5}{Josef Sivic}{École Normale Supérieure, Inria\\CIIRC, Czech Technical University}{Directeur de thèse}
+\jurymember{6}{Tomas Mikolov}{CIIRC, Czech Technical University}{Directeur de thèse}
 
 \frabstract{
 %Résumé
+
 }
+
 \enabstract{
 %Abstract
-\vfill
-}
-\frkeywords{Apprentissage automatique {\Large\color{maincolor}$\star$}
-  Systèmes complexes {\Large\color{maincolor}$\star$} Complexité}
-\enkeywords{ Machine learning {\Large\color{maincolor}$\star$} Complex
-  systems {\Large\color{maincolor}$\star$} Complexity}
+  The goal of this thesis is to develop systems that can learn without
+  supervision and develop autonomously while becoming more complex over time.
+  Complex systems are a framework for studying learning and adaptation in
+  natural systems. They have the potential to exhibit growth of complexity. In
+  this thesis, we propose using complex systems as a framework for studying
+  these phenomena and develop methods to study the computations that take place
+  in these systems. Our ultimate goal is to create learning algorithms that
+  require limited to no supervision, allowing for greater flexibility and
+  adaptability in a wide range of applications. By understanding the fundamental
+  principles of learning in complex systems, we hope to advance our ability to
+  design and implement effective learning algorithms in the future. The thesis
+  makes the following key contributions: the development of a general complexity
+  metric that we apply to search for complex systems that exhibit growth of
+  complexity, the introduction of a coarse-graining method to study computations
+  in large-scale complex systems, and the development of a metric for learning
+  efficiency as well benchmark dataset for evaluating the speed of learning
+  algorithms. Our approach offers a promising new direction for research in this
+  area and has the potential to advance our understanding of learning and
+  adaptation in natural and artificial systems, leading to the development of
+  more effective and efficient learning algorithms in the future. }
+
+\frkeywords{Apprentissage automatique {\Large\color{maincolor}$\star$} Intelligence
+  artificielle {\Large\color{maincolor}$\star$} Systèmes complexes
+  {\Large\color{maincolor}$\star$} Complexité}
+
+\enkeywords{ Machine learning {\Large\color{maincolor}$\star$} Artificial
+  Intelligence {\Large\color{maincolor}$\star$} Complex systems
+  {\Large\color{maincolor}$\star$} Complexity}
 
 \addbibresource{main.bib}
 
