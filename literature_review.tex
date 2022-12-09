@@ -669,7 +669,22 @@ power of others, acting as parasites \parencite{srayApproachSynthesisLife1991}.
 The second type is related to how open-end evolution itself can be evolved
 through the emergence of multiple ``stepping stones'' that enable higher level
 evolutionary units to be used by individuals or through interactions
-\parencite{patteeEvolvedOpenEndednessNot2019}.
+\parencite{patteeEvolvedOpenEndednessNot2019}. ``Major transitions'' refers to
+the emergence of new levels of hierarchy in evolving populations. These
+transitions are characterized by groups of reproducing entities that come to
+interact tightly and form a new population of higher-level reproducing entities.
+The process can repeat, with certain groups in the new population forming even
+higher-level entities. This process of emergence of major transitions was
+explored in \parencite{sayamaCardinalityLeapOpenEnded2019,
+  morenoOpenEndedFraternalTransitions2019} for example. Lastly, the semantic
+evolution is related to the work of
+\textcite{ikegamiOpenEndedEvolutionMechanism2019}, who propose a new category of
+open-ended evolution called semantic evolution, which refers to the evolution of
+semantic relationships within a system. This can be observed in the evolution of
+web services, where the meaning of tags changes as new combinations of tags are
+created. It non-biological in nature and also present in the analysis of
+technological evolution \parencite{bedauOpenEndedTechnologicalInnovation2019},
+where the meaning and importance of keywords shift over time.
 
 \subsection{Defining open-endedness}
 
@@ -722,11 +737,11 @@ surprising, and sometimes more complex organisms continue to appear''
   taylorOpenEndedEvolutionPerspectives2016}.
 
 All these conditions illustrate a major challenge of \ac{OEE} research: the lack
-of clear definition or notion of what exact conditions make a system open-ended.
-We seem to agree about what is not open-ended, but whenever a constraint or
-requirement for \ac{OEE} is identified, subsequent evidence forces us to refine
-them later. This is related to the problem of complexity, for which no single
-definition exists \parencite{johnsonSimplyComplexityClear2009}.
+of a clear definition or notion of what exact conditions make a system
+open-ended. We seem to agree about what is not open-ended, but whenever a
+constraint or requirement for \ac{OEE} is identified, subsequent evidence forces
+us to refine them later. This is related to the problem of complexity, for which
+no single definition exists \parencite{johnsonSimplyComplexityClear2009}.
 
 A common process to produce systems that behave analogously to natural evolution
 is to start from evolvable units or building blocks
@@ -768,19 +783,42 @@ property is essential to the construction of an open-ended evolving system
 \parencite{taylorChapterCreativityEvolution2002}.
 
 \subsection{Artificial chemistries}
-Most of the time, \acp{AC} are not trying to accurately model chemical processes
-(as in \parencite{ostrovskyCellularAutomataPolymer2001} for example). Instead,
-they build models of the dynamics of complex molecular processes that lead to
-evolutionary behavior \parencite{dittrichArtificialChemistriesReview2001}. By
-abstracting away from the natural molecular processes, \acp{AC} tries to uncover
-fundamental conditions for the emergence of organization, self-maintenance, or
+Artificial chemistries, are computational models that aim to simulate the
+behavior of chemical systems which are typically used to study the emergence of
+complex behavior from simple interactions between individual molecules. Most of
+the time, \acp{AC} are not trying to accurately model chemical processes (as in
+\parencite{ostrovskyCellularAutomataPolymer2001,
+  buligaChemlambdaUniversalitySelfmultiplication2014,
+  bedauLessAbstractArtificial2000 ,sayamaSeekingOpenendedEvolution2011} for
+example). Instead, they build models of the dynamics of complex molecular
+processes that lead to evolutionary behavior
+\parencite{dittrichArtificialChemistriesReview2001}. By abstracting away from
+the natural molecular processes, \acp{AC} tries to uncover fundamental
+conditions for the emergence of organization, self-maintenance, or
 self-construction with basic building blocks. There are various approaches for
 building these \aclp{AC}, of which we review a few here.
 
 \paragraph{Rewriting systems.}
-Rewriting systems are composed of entities or symbols that get modified
-according to a set of syntactic rules. Patterns of symbols or entities are
-replaced according to these rules.
+Rewriting systems are a class of computational models that use a set of
+rewriting rules to transform and manipulate strings of symbols. They are
+composed of entities or symbols that get modified according to their set of
+syntactic rules. Patterns of symbols or entities are replaced according to these
+rules. In AlChemy \parencite{fontanaWhatWouldBe1994}, molecules are represented
+as expressions in the $\lambda$-calculus. The $\lambda$-calculus is a mathematical formalism
+that, like Turing machines, is capable of describing any computable function. In
+AlChemy, pairs of randomly selected expressions are joined using function
+application, evaluated, and the resulting value is added back to the population
+of molecules. This process is repeated to simulate the behavior of a chemical
+system. \textcite{kruszewskiEmergenceSelfReproducingMetabolisms2022}
+hypothesized that self-reproducing metabolisms emerge as a subset of
+autocatalyzed reactions within a Turing-complete set. They introduced
+\emph{combinatory chemistry}, an artificial chemistry designed to capture the
+core computational properties of living systems that is based on the rewriting
+rules of \emph{combinatory logic} \parencite{curryCombinatoryLogic1958,
+  schoenfinkelUeberBausteineMathematischen1924}. The generated structures
+exhibit behaviors that are similar to natural metabolisms. The system is able to
+represent patterns of arbitrary complexity, and it is able to produce diverse
+self-reproducing patterns.
 
 \paragraph{Cellular automata.}
 \Acfp{CA} can be see as a particular case of lattice molecular systems. For
@@ -794,7 +832,7 @@ other. Remarkably, stable self-repairing cells arise spontaneously from these
 basic rules. Their membrane is composed of a chain of monomers, which is
 maintained by the substrate and catalyst reacting according to the rules. Some
 key components of that model were investigated in other works, showing that they
-are crucial for autopoeisis to be possible
+are crucial for this emergence autopoeisis to be possible
 \parencite{zelenySelforganizationLivingSystems1977,
   mcmullinRediscoveringComputationalAutopoiesis1997}.
 
@@ -830,14 +868,16 @@ systems. For more details about \acp{CA}, see section
 \paragraph{Von Neumann's self-reproducing \ac{CA}}
 The early developments of \acp{CA} were guided by Von Neumann's question ``What
 kind of logical organization is sufficient for an automaton to be able to
-reproduce itself?''. Additional constraints were added so that the problem does
-not admit trivial solutions. For example, Von Neumann required that the
-automaton in question be equivalent in power to a universal Turing machine while
-having minimal complexity
-\parencite{vonneumannTheorySelfreproducingAutomata1966}. The final model was an
-intricate \ac{CA} composed of a tape containing the instructions to construct
-the next automaton, and a construction unit which would progressively build that
-new automaton cell by cell.
+reproduce itself?'' Since this question may admit very simple solutions,
+additional constraints were added so that the problem does not admit trivial
+solutions. For example, Von Neumann required that the automaton in question be
+equivalent in power to a universal Turing machine while having minimal
+complexity \parencite{vonneumannTheorySelfreproducingAutomata1966}. The final
+model he proposed was an intricate \ac{CA} composed of a tape containing the
+instructions to construct the next automaton, and a construction unit which
+would progressively build that new automaton cell by cell. This was an early
+example of complex computations being carried out by a relatively simple
+decentralized system such as a \ac{CA}.
 
 \paragraph{Universal Computation in Cellular Automata}
 It is not difficult to see that a \ac{CA} can be capable of universal
