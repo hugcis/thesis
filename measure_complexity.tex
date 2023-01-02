@@ -1,35 +1,34 @@
 \chapter{Measuring complexity in evolving complex systems}
 \label{cha:meas-compl-evolv}
 
-In this chapter we propose an approach for measuring growth of complexity of
+In this chapter, we propose an approach for measuring growth of complexity of
 emerging patterns in complex systems such as \acfp{CA}. We discuss several ways
-how a metric for measuring the complexity growth can be defined. This includes
+in which a metric to measure complexity growth can be defined. This includes
 approaches based on compression algorithms and artificial neural networks. We
-believe such a metric can be useful for designing systems that could exhibit
-open-ended evolution, which itself might be a prerequisite for development of
+believe that such a metric can be useful for designing systems that could exhibit
+open-ended evolution, which itself might be a prerequisite for the development of
 general artificial intelligence. We conduct experiments on 1D and 2D grid worlds
 and demonstrate that using the proposed metric we can automatically construct
-computational models with emerging properties similar to those found in the
+computational models with emerging properties similar to those found in
 Conway's Game of Life, as well as many other emergent phenomena. Interestingly,
 some of the patterns we observe resemble forms of artificial life. We test our
 metric of structural complexity growth on cellular automata, but it can also be
 applied to a wide range of complex systems.
 
 \section{Introduction}
-Recent advances in machine learning and deep learning have had successes at
+Recent advances in machine learning and deep learning have had success in
 reproducing some very complex feats traditionally thought to be only achievable
 by living beings. However, making these systems adaptable and capable of
-developing and evolving on their own remains a challenge that might be crucial
-for eventually developing AI with general learning capabilities (for example as
+developing and evolving on their own remains a challenge that could be crucial to eventually developing AI with general learning capabilities (for example, as
 is further discussed in \parencite{mikolovRoadmapMachineIntelligence2018}).
 Building systems that mimic some key aspects of the behavior of existing
 intelligent organisms (such as the ability to evolve, improve, adapt, etc.)
-might represent a promising path. Intelligent organisms --- e.g., human beings but
+might represent a promising path. Intelligent organisms --- for example, human beings but
 also most living organisms if we consider a broad definition of intelligence ---
 are a form of spontaneously occurring, ever evolving complex systems that
 exhibit these kinds of properties
 \parencite{bookerPerspectivesAdaptationNatural2004}. The ability to sustain
-open-ended evolution appears to be a requirement in order to enable emergence of
+open-ended evolution appears to be a requirement in order to enable the emergence of
 arbitrarily complex adaptive systems.
 
 Although a rigorous attempt at defining intelligence or life is beyond the scope
@@ -37,46 +36,45 @@ of this work, we assume that a system we might identify as evolving, with the
 potential of developing intelligence, should have the property of
 self-preservation and the ability to grow in complexity over time. These
 properties can be observed in living organisms
-\parencite{bookerPerspectivesAdaptationNatural2004} and should also be a part of
+\parencite{bookerPerspectivesAdaptationNatural2004} and should also be part of
 computational models that aim to mimic them.
 
 To recognize self-preservation and growth in complexity, one should be able to
 detect emerging macro-structures composed of smaller elementary components. For
 the purpose of obtaining computational models that grow in complexity over time,
 one should also be able to determine the amount of complexity these systems
-contain. We propose and discuss in this chapter several ways of estimating the
+contain. In this chapter, we propose and discuss several ways of estimating the
 complexity and detecting the presence of emerging and stable patterns in complex
 systems such as cellular automata. We show that such metrics are useful when
 searching the space of cellular automata with the objective of finding those
-that seem to evolve in time.
+that seem to evolve over time.
 
 \section{Related work}
 
 \subsection{Artificial life and open-ended evolution}
 
 Several works have attempted to artificially create open-ended evolution. A
-non-exhaustive list of some well known systems include Tierra
+nonexhaustive list of some well-known systems include Tierra
 \parencite{srayApproachSynthesisLife1991}, Sims
 \parencite{simsEvolvingVirtualCreatures1994}, Avida
 \parencite{ofriaAvidaSoftwarePlatform2004}, Polyworld
 \parencite{yaegerComputationalGeneticsPhysiology1994}, Geb
 \parencite{channonImprovingStillPassing2003}, Division Blocks
 \parencite{spectorDivisionBlocksOpenended2007} and Chromaria
-\parencite{sorosIdentifyingNecessaryConditions2014}. Designs focusing on an
-objective, and making use of reinforcement learning methods to drive evolution
+\parencite{sorosIdentifyingNecessaryConditions2014}. Designs that focus on an objective and make use of reinforcement learning methods to drive evolution
 are also being studied, e.g. in
 \parencite{pathakLearningControlSelfAssembling2019}. Most of these simulated
 ``worlds'' have had some success in reproducing key aspects of evolving
 artificial life, enabling the emergence of complex behavior from simple
 organisms. However, they still work within constrained simulated environments
 and usually consider organisms composed of elementary building blocks, while
-they do not work outside of this usually very constrained framework. Divergent
+they do not work outside of this usually very constrained framework. The divergent
 and creative evolutionary process could be happening at a much lower conceptual
 level with fewer assumptions. For this reason, we consider cellular automata in
-the rest of the chapter because they rely on a very few assumptions while
+the rest of the chapter because they rely on very few assumptions while
 offering a very large expressive power and a potentially wide range of behaviors
 that can be discovered. However, the metrics defined in this work have the
-potential to be applied to other types of complex systems as discussed in
+potential to be applied to other types of complex systems, as discussed in
 Section~\ref{sec:conclusion}.
 
 \subsection{Cellular automata}
@@ -87,20 +85,20 @@ updated in discrete time steps using a transition table that defines the next
 state of a cell given the states of its neighbors. They were originally proposed
 by Stanislaw Ulam and studied by Von Neumann
 \parencite{vonneumannTheorySelfreproducingAutomata1966}, who was interested in
-designing a computational system that can self-reproduce itself in a non-trivial
-way. The trivial self-reproducing patterns were then those that do not have
+designing a computational system that can self-reproduce itself in a nontrivial
+way. The trivial self-reproducing patterns were then those that do not have the
 potential to evolve, for example the growth of crystals.
 
-Stephen Wolfram later took a more bottom up approach, beginning with the study
-of the simple 1D binary cellular automata (CA), and identifying four qualitative
+Stephen Wolfram later took a more bottom-up approach, beginning with the study
+of simple 1D binary cellular automata (CA), and identifying four qualitative
 classes of cellular automaton behavior
 \parencite{wolframUniversalityComplexityCellular1984}:
 
 \begin{description}
-\item[Class 1]  evolves to a homogeneous state.
-\item[Class 2]  evolves to simple periodic patterns.
-\item[Class 3]  yields aperiodic disordered patterns.
-\item[Class 4]  yields complex aperiodic and localized structures, including
+\item[Class 1] evolves to a homogeneous state.
+\item[Class 2] evolves to simple periodic patterns.
+\item[Class 3] yields aperiodic disordered patterns.
+\item[Class 4] produces complex aperiodic and localized structures, including
   propagating structures.
 \end{description}
 
@@ -113,10 +111,10 @@ Christopher Langton and colleagues also studied CA dynamics
 \parencite{liTransitionPhenomenaCellular1990} --- e.g. using the $\lambda$ parameter
 \parencite{langtonComputationEdgeChaos1990} --- and designed a self-replicating
 pattern much simpler than Von Neumann's
-\parencite{langtonSelfreproductionCellularAutomata1984}, now known as Langton's
+\parencite{langtonSelfreproductionCellularAutomata1984}, now known as Langton
 loops. The main issues with his system and Von Neumann's universal replicator is
 the fact that they are very fragile and based on a large amount of human design.
-As a consequence, although they do self-replicate, they cannot increase in
+As a consequence, although they self-replicate, they cannot increase in
 complexity and are not robust to perturbations or unexpected interactions with
 the environment.
 
@@ -134,11 +132,11 @@ algorithm is capable of taking advantage of duplicate patterns in the input to
 reduce its size. The DEFLATE algorithm that we use in the following section
 combines LZ with Huffman coding for efficient representation of the symbols
 obtained after the first step. It is one of the most widespread compression
-algorithms and is for instance used in gzip and PNG file compression standards.
+algorithms and is, for instance, used in gzip and PNG file compression standards.
 
 The PAQ compression algorithm series \parencite{mahoneyFastTextCompression2000}
 is an ensemble of compression algorithms initially developed by Matt Mahoney
-with state of the art compression ratio on several compression benchmarks.
+with state-of-the-art compression ratio on several compression benchmarks.
 Better compression of an input means a better approximation of the minimum
 description length and implicit understanding of more of the underlying patterns
 in input data. The usefulness of a better compressor is that it can detect much
@@ -149,9 +147,9 @@ In \parencite{zenilCompressionBasedInvestigationDynamical2010}, H. Zenil
 investigates the effects of a compression-based metric to classify cellular
 automata and observes that it results in a partitioning of the space of 1D CA
 into several clusters that match Wolfram's classes of automata. He also used
-this approach on the output of simple Turing machines and some 1D automata with
+this approach in the output of simple Turing machines and some 1D automata with
 more than two states and larger neighborhoods. Extensions of this work include
-asymptotic sensitivity analysis of the compressed length for input
+asymptotic sensitivity analysis of compressed length for input
 configurations of growing complexity, as introduced in
 \parencite{zenilAsymptoticBehaviorRatios2013,
   zenilWhatNatureLikeComputation2014}.
@@ -173,11 +171,11 @@ review of several measures of complexity and their applications, see
 A cellular automaton of size $n$ in 1D can be represented at time $t$ by its
 grid-state $S^{(t)} = \{c_1^{(t)}, ..., c_n^{(t)}\}$ where each $c_i$ (also
 called a cell) can take one of $k$ possible values (representing the possible
-states), and a transition rule $\phi$. The transition rule is defined with
+states) and a transition rule $\phi$. The transition rule is defined with
 respect to a neighborhood radius $r$ with the mapping $\phi(c^{(t)}_{i-r}, ...,
 c^{(t)}_i ..., c^{(t)}_{i+r} ) = c^{(t+1)}_i$ that maps $\{1, ..., k\}^{2r+1}$
 to $\{1, ..., k\}$. The quantity $2r + 1$ corresponds to the number of
-cells taken into account for computing the next state of a cell, namely that
+cells taken into account to calculate the next state of a cell, namely the
 cell itself and $r$ neighboring cells in both directions.
 
 Simulating a CA amounts to the recursive application of this mapping $\phi$ to
