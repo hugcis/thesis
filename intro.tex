@@ -121,7 +121,7 @@ robustness, or the ability to learn continuously
 \parencite{parisiContinualLifelongLearning2019}. The natural intelligence of
 biological systems seems to rely on emerging properties selected through
 evolution. For example, biological life exhibits a pattern of major evolutionary
-transitions where lower-level autonomously replicating entities merge to form a
+transitions where lower-level autonomously replicating entities merged to form a
 single more complex corporate body
 \parencite{lorenzEmergenceModularityBiological2011}. This is believed to have
 occurred for the emergence of eukaryotic cells, as well as for multicellular
@@ -132,7 +132,7 @@ even before, from inorganic components present on the surface of the Earth.
 So far, it is unclear what algorithmic properties could lead an artificial
 system to display a similar trajectory in its state space. Producing emerging
 phenomena similar to those of nature \emph{in silico} is a long-standing
-challenge. There is a history of algorithms that attempt to apply evolutionary
+challenge. There is are plenty of algorithms that attempt to apply evolutionary
 design to solve particular tasks, called evolutionary algorithms
 \parencite{fogelArtificialIntelligenceSimulated1966,
   ,millerDesigningNeuralNetworks1989, backOverviewEvolutionaryAlgorithms1993}.
@@ -145,25 +145,27 @@ Most existing machine learning algorithms rely on the choice of an objective
 function: a clearly defined mapping from the current state and parameters of a
 model to a real value, which indicates the performance of that model. The
 function depends on the objective of the model. For a supervised learning
-problem, we may count the number of misclassified objects or the distance between
-the predictions and the expected results. Even in unsupervised learning, the family of
-algorithms learning from untagged data, objectives are still used. For
-example, the well-known K-means clustering algorithm minimizes the sum of square
-distances to cluster centers.
+problem, we may count the number of misclassified objects or the distance
+between the predictions and the expected results. Even in unsupervised learning,
+the family of algorithms used for learning from untagged data, objectives are
+still central. For example, the well-known K-means clustering algorithm minimizes
+the sum of square distances to cluster centers.
 
 This reliance on objective functions creates two main issues: (i) the objective
 is not always clearly defined or can be too broad for general-purpose
 applications. For example, a possible objective function for a walking robot
 could be to ``not fall when stepping through its surrounding environment''. This
 function is impractical to define and will vary greatly depending on the
-parameters of the environment. Furthermore, (ii) using such functions as goals
-can be counterproductive because, as many examples in nature demonstrate, robust
-paths to complex objectives are often deceptive. They involve developing in
-unexpected directions that may initially seem against the original goal
+parameters of the environment. This problem is also present if the goal is to
+design a general purpose, autonomously developing learning algorithm.
+Furthermore, (ii) using such functions as goals can be counterproductive
+because, as many examples in nature demonstrate, robust paths to complex
+objectives are often deceptive. They involve developing in unexpected directions
+that may initially seem to be against the original goal
 \parencite{stanleyWhyGreatnessCannot2015}.
 
 In this thesis, the term \emph{unsupervised} refers to a form of learning with
-no predefined objective. Like in natural evolution, we expect unsupervised
+no predefined objective. Like in natural evolution, we expect true unsupervised
 algorithms to develop new features autonomously and become progressively more
 complex over time. Such algorithms would regularly learn to solve problems on
 their own without the need to explicitly guide them, thereby discovering robust
@@ -200,17 +202,18 @@ complex system (section \ref{sec:design-compl-syst}), which will in turn define
 their potential for supporting a form open-ended evolution (section
 \ref{sec:open-ended-evolution}) and how we can expect to build an interface to
 communicate with it (section \ref{sec:compl-syst-inputs}), which is essential to
-achieve some for of control of that system (section \ref{sec:compl-syst-contr}).
+achieve some form of control of that system (section \ref{sec:compl-syst-contr}).
 
 \subsection{Design of a complex system\label{sec:design-compl-syst}}
 
-The definition of complex systems is broad, and several systems with interesting
-dynamics have been studied. For example, L-Systems, Random Boolean networks,
-Turing machines, and \Acfp{CA}. In this thesis, we focus mainly on the latter:
-\acl{CA}. There are multiple benefits to working with this model. It is very
-simply defined, and its high parallelism makes its implementation
-straightforward. Moreover, \acp{CA} have demonstrated an ability to simulate a
-wide range of complex behaviors \parencite{wolframNewKindScience2002}.
+The definition of a complex system is broad, and several systems with
+interesting dynamics have been studied under that name. For example, L-Systems,
+Random Boolean networks, Turing machines, and \Acfp{CA}. In this thesis, we
+focus mainly on the last element listed: the \acl{CA}. There are multiple
+benefits to working with this model. It is very simply defined, and its high
+parallelism makes its implementation straightforward. Moreover, \acp{CA} have
+demonstrated an ability to simulate a wide range of complex behaviors
+\parencite{wolframNewKindScience2002}.
 
 Choosing the right complex system architecture is essential because it defines
 the search space over which interesting and useful systems can be found.
