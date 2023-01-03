@@ -82,16 +82,17 @@ develop a more comprehensive understanding of the underlying mechanisms of
 learning without having to focus on a particular dynamical system.
 
 This form of learning occurs dynamically as a system is simulated or run. Rather
-than using traditional parameter updates, it takes place in the system's
-state or ``activations'', resulting in what we refer to as \emph{learning in
-  dynamical systems}. This process is analogous to an inner loop or ``thinking phase'', during which the system can self-organize by manipulating its current
-state without external changes to its parameters. This type of learning is
-already present in various machine learning systems, including some \acfp{RNN},
-which use short-term dynamical learning to solve language-based tasks (see
-Section \ref{sec:dynam-learn-acprnn}). It is also present in some form in the
-\ac{RC} framework and in the update rule of gradient-based learning algorithms.
-Although effective, this form of learning is often not studied or optimized to the
-same extent as more conventional methods of parameter optimization.
+than using traditional parameter updates, it takes place in the system's state
+or ``activations'', resulting in what we refer to as \emph{learning in dynamical
+  systems}. This process is analogous to an inner loop or ``thinking phase'',
+during which the system can self-organize by manipulating its current state
+without external changes to its parameters. This type of learning is already
+present in various machine learning systems, including some \acfp{RNN}, which
+use short-term dynamical learning to solve language-based tasks (see Section
+\ref{sec:dynam-learn-acprnn}). It is also present in some form in the \ac{RC}
+framework and in the update rule of gradient-based learning algorithms. Although
+effective, this form of learning is often not studied or optimized to the same
+extent as more conventional methods of parameter optimization.
 
 \paragraph{Generic model}\label{sec:generic-model}
 We give a general description of a model of learning in dynamical systems. A
@@ -143,15 +144,15 @@ More advanced question answering requires reasoning and advanced processing of
 the prompt. In the above example, it would suffice to remember words from the
 prompt.
 
-We consider a trained \ac{RNN} evaluated on a set of question answering tests. If
-the data set was designed correctly, the network should not have prior
-information about a sentence/question pair before reading it. The
-relevant piece of information of the prompt has to be stored within the values of the hidden
+We consider a trained \ac{RNN} evaluated on a set of question answering tests.
+If the data set was designed correctly, the network should not have prior
+information about a sentence/question pair before reading it. The relevant piece
+of information of the prompt has to be stored within the values of the hidden
 state of the \ac{RNN} and not in the neural network weights since they are not
 being changed during this phase. This transient learning that enables the
 \ac{RNN} to memorize the beginning of the prompt is exactly the type of
-dynamical learning that we describe above. \acp{RNN} are trained offline to achieve this,
-but once they are trained, learning happens dynamically.
+dynamical learning that we describe above. \acp{RNN} are trained offline to
+achieve this, but once they are trained, learning happens dynamically.
 
 Modern \acp{RNN} are not designed to take full advantage of this memory
 property and will progressively overwrite memory if ran for more timesteps.
@@ -169,9 +170,9 @@ between the network output and the label is written $\mathcal{L}$.
 
 Using the notation from Section \ref{sec:generic-model}, we define
 $S_{t} = \left(W_{1}^{(t)}, W_{2}^{(t)}\right) \in \mathbb{R}^{n \times d} \times \mathbb{R}^{d \times o}$
-containing the neural network parameters at step $t$ of the training. We assume that
-the training pairs $(X_{k}, y_{k})$ are numbered according to their selection
-order for the stochastic gradient descent algorithm.
+containing the neural network parameters at step $t$ of the training. We assume
+that the training pairs $(X_{k}, y_{k})$ are numbered according to their
+selection order for the stochastic gradient descent algorithm.
 
 The stochastic gradient update function for the state $S_{t}$ is:
 \begin{equation}
