@@ -13,16 +13,16 @@ learning algorithms that require limited to no supervision. This objective is
 broken down into the following subgoals:
 
 \begin{enumerate}
-  \item Identify complex dynamical systems with the potential to exhibit
+  \item The first sub-goal is to identify complex dynamical systems with the potential to exhibit
         emergent open-ended growth of complexity and evolutionary-like
         properties. There are many ways to define complex systems, and as
         illustrated in Figure \ref{fig:comparison_ca}, some may exhibit more
         interesting and promising behaviors than others. Interesting systems,
         such as the cellular automaton (CA) in Figure \ref{fig:structured_sys}
-        may not have the same likelihood of being found depending on how the
+        may be hard to find depending on how the
         search space is defined. The work presented in Chapter
-        \ref{cha:meas-compl-evolv} aims at constructing a metric of complexity
-        that can help in the identification of interestingly behaving complex
+        \ref{cha:meas-compl-evolv} aims to construct a metric of complexity
+        that can help to identify interestingly behaving complex
         dynamical systems.
 \begin{figure}[htbp]
   \centering
@@ -40,16 +40,20 @@ broken down into the following subgoals:
   \label{fig:structured_sys}
 \end{subfigure}
 \caption{Two examples of complex systems (\acf{CA}) with different behavior
-  types. Some \acp{CA} appear more promising than others for the design of
+  types. \ref{fig:structured_sys} and \ref{fig:disordered_sys} show a single state 
+  of a randomly initialized 2D \ac{CA} simulated for a fixed number of steps. Some \acp{CA} 
+  appear more promising than others for the design of
   unsupervised learning systems because of their emergent complex structures
   (visible in \ref{fig:structured_sys}), whereas the \ac{CA} in
   \ref{fig:disordered_sys} seems to behave randomly.}
   \label{fig:comparison_ca}
 \end{figure}
 
-  \item Measure the fraction of systems that have the most complex and rapidly
-        evolving behavior. Defining these notions is also part of the goal. We
-        believe those systems to be the most promising for further use since
+  \item The second sub-goal is to measure the fraction of systems that have the most complex and rapidly
+        evolving behavior. Defining these notions is also part of the goal.
+        This differs from the first sub-goal which is about system design in general, whereas this one is about defining ways to measure complexity growth.
+        We believe that systems with the most complex and rapidly
+        evolving behavior are promising for further use since
         they may exhibit open-ended complexity growth. In Chapters
         \ref{cha:meas-compl-evolv} and \ref{cha:visu-comp-large}, we present
         different methods to measure evolving complexity and understand when the
@@ -62,7 +66,9 @@ broken down into the following subgoals:
  \includegraphics[width=.9\linewidth]{figures/rule18_small}
  \caption{Filtering the behavior of elementary \acl{CA} rule 18. This
    uncovers a highly structured behavior with the propagation of area boundaries
-   within the apparent randomness.}
+   within the apparent randomness. (a) shows 300 timesteps
+of a randomly initialized rule 18 simulation. Notice the complex structures made
+visible in (b) with a filtering method. This Figure is discussed in more details in Chapter \ref{cha:visu-comp-large}.}
   \label{fig:rule_18}
 \end{figure}
 
@@ -75,8 +81,7 @@ broken down into the following subgoals:
         Figure~\ref{fig:ca_lm}, where a \ac{CA} is used to implement a language
         model, a probabilistic model that is used to generate text to complete
         sentences. In Chapter \ref{cha:background}, we explore the similarities
-        between \acp{CA} and a special type of neural networks, which highlights
-        the numerous potential applications of the former.
+        between \acp{CA} networks and highlight the numerous potential applications of CAs.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figures/ca_lm}
@@ -95,11 +100,11 @@ structure from untagged data
 \parencite{hintonUnsupervisedLearningFoundations1999}. In machine learning,
 supervision refers to a label, a number, or a collection of numbers that
 represents an expected outcome associated with some input data. Our goal is to
-construct models that can develop autonomously, not needing any external data or
-interactions. Therefore, we first seek systems that behave in that way on their
+construct models that can develop autonomously without needing any external data or
+interactions. Therefore, we first seek systems that behave that way on their
 own and postpone the issue of learning to optimize a particular objective
 function. We are particularly interested in systems that can develop through
-internal evolution rules, without any input, which is the case for many complex
+internal evolution rules without any input, which is the case for many complex
 systems.
 
 Throughout the thesis, we work toward achieving these goals, focusing on one
