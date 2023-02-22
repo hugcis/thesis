@@ -88,7 +88,8 @@ visible in (b) with a filtering method. This Figure is discussed in more details
   \caption{An example of using a \acl{CA} and reservoir computing to implement a
     language model. Tokens are encoded within the \acl{CA} internal state. The
     \acl{CA} update rule is then applied and an output value is decoded from the
-    final state.}
+    final state. Each vertical bar represents two consecutive internal \ac{CA} states, which 
+    are enriched with the encoded input.}
   \label{fig:ca_lm}
 \end{figure}
 
@@ -96,19 +97,20 @@ visible in (b) with a filtering method. This Figure is discussed in more details
 
 In this thesis, we do not focus our attention on what the machine learning
 community commonly refers to as ``unsupervised learning'', that is, learning
-structure from untagged data
+structure from unlabeled data
 \parencite{hintonUnsupervisedLearningFoundations1999}. In machine learning,
 supervision refers to a label, a number, or a collection of numbers that
 represents an expected outcome associated with some input data. Our goal is to
-construct models that can develop autonomously without needing any external data or
+construct models that can develop autonomously without necessarily needing any external data or
 interactions. Therefore, we first seek systems that behave that way on their
 own and postpone the issue of learning to optimize a particular objective
-function. We are particularly interested in systems that can develop through
+function to the end of the thesis (Chapter \ref{cha:learn-effic-compl}). 
+We are particularly interested in systems that can develop through
 internal evolution rules without any input, which is the case for many complex
 systems.
 
 Throughout the thesis, we work toward achieving these goals, focusing on one
-particular complex system: the \acl{CA}. This model has been extensively studied
+particular complex system: the \acl{CA} \parencite{vonneumannTheorySelfreproducingAutomata1966}. This model has been extensively studied
 due to its simple definition and ability to simulate a wide range of complex
 behaviors. We provide a detailed description of cellular automata in Section
 \ref{sec:cellular-automata-sec}. This thesis provides new insights into the role
