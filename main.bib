@@ -662,6 +662,24 @@
   abstract = {Networks of catalysed reactions with nonlinear feedback have been proposed to play an important role in the origin of life. We investigate this possibility in a polymer chemistry with catalysed cleavage and condensation reactions, studying the properties of a well-stirred reactor driven away from equilibrium by the flow of mass. Near equilibrium the distribution of material is uninteresting; it favours short polymers but is otherwise homogenous. However, under appropriate non-equilibrium conditions, the situation changes radically: The nonlinear feedback of the reaction network focuses the material of the system into a few specific polymer species, whose concentrations can be orders of magnitude about the background. Like a metabolism, the network of catalytic reactions "digests" the material of its environment, incorporating it into its own form. For this reason we call it an autocatalytic metabolism. We vary the diet of an autocatalytic metabolism, and demonstrate that under some variations it persists almost unchanged, while in other cases it dies. We argue that the dynamical stability of autocatalytic metabolisms gives them regenerative properties that allow them to repair themselves and to propagate through time.}
 }
 
+@misc{baLayerNormalization2016,
+  title = {Layer {{Normalization}}},
+  author = {Ba, Jimmy Lei and Kiros, Jamie Ryan and Hinton, Geoffrey E.},
+  date = {2016-07-21},
+  number = {arXiv:1607.06450},
+  eprint = {1607.06450},
+  eprinttype = {arxiv},
+  primaryclass = {cs, stat},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.1607.06450},
+  url = {http://arxiv.org/abs/1607.06450},
+  urldate = {2023-02-20},
+  abstract = {Training state-of-the-art, deep neural networks is computationally expensive. One way to reduce the training time is to normalize the activities of the neurons. A recently introduced technique called batch normalization uses the distribution of the summed input to a neuron over a mini-batch of training cases to compute a mean and variance which are then used to normalize the summed input to that neuron on each training case. This significantly reduces the training time in feed-forward neural networks. However, the effect of batch normalization is dependent on the mini-batch size and it is not obvious how to apply it to recurrent neural networks. In this paper, we transpose batch normalization into layer normalization by computing the mean and variance used for normalization from all of the summed inputs to the neurons in a layer on a single training case. Like batch normalization, we also give each neuron its own adaptive bias and gain which are applied after the normalization but before the non-linearity. Unlike batch normalization, layer normalization performs exactly the same computation at training and test times. It is also straightforward to apply to recurrent neural networks by computing the normalization statistics separately at each time step. Layer normalization is very effective at stabilizing the hidden state dynamics in recurrent networks. Empirically, we show that layer normalization can substantially reduce the training time compared with previously published techniques.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/Users/hugo/Papers/pdf/baLayerNormalization2016.pdf;/Users/hugo/Zotero/storage/PDGBIL2E/1607.html}
+}
+
 @article{balcanLifelongLearningCostly2020,
   title = {Lifelong Learning in Costly Feature Spaces},
   author = {Balcan, Maria-Florina and Blum, Avrim and Nagarajan, Vaishnavh},
@@ -4746,6 +4764,24 @@
   file = {/Users/hugo/Papers/pdf/gilpinCellularAutomataConvolutional22.pdf}
 }
 
+@misc{glaeseImprovingAlignmentDialogue2022,
+  title = {Improving Alignment of Dialogue Agents via Targeted Human Judgements},
+  author = {Glaese, Amelia and McAleese, Nat and Trębacz, Maja and Aslanides, John and Firoiu, Vlad and Ewalds, Timo and Rauh, Maribeth and Weidinger, Laura and Chadwick, Martin and Thacker, Phoebe and Campbell-Gillingham, Lucy and Uesato, Jonathan and Huang, Po-Sen and Comanescu, Ramona and Yang, Fan and See, Abigail and Dathathri, Sumanth and Greig, Rory and Chen, Charlie and Fritz, Doug and Elias, Jaume Sanchez and Green, Richard and Mokrá, Soňa and Fernando, Nicholas and Wu, Boxi and Foley, Rachel and Young, Susannah and Gabriel, Iason and Isaac, William and Mellor, John and Hassabis, Demis and Kavukcuoglu, Koray and Hendricks, Lisa Anne and Irving, Geoffrey},
+  date = {2022-09-28},
+  number = {arXiv:2209.14375},
+  eprint = {2209.14375},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.2209.14375},
+  url = {http://arxiv.org/abs/2209.14375},
+  urldate = {2023-02-13},
+  abstract = {We present Sparrow, an information-seeking dialogue agent trained to be more helpful, correct, and harmless compared to prompted language model baselines. We use reinforcement learning from human feedback to train our models with two new additions to help human raters judge agent behaviour. First, to make our agent more helpful and harmless, we break down the requirements for good dialogue into natural language rules the agent should follow, and ask raters about each rule separately. We demonstrate that this breakdown enables us to collect more targeted human judgements of agent behaviour and allows for more efficient rule-conditional reward models. Second, our agent provides evidence from sources supporting factual claims when collecting preference judgements over model statements. For factual questions, evidence provided by Sparrow supports the sampled response 78\% of the time. Sparrow is preferred more often than baselines while being more resilient to adversarial probing by humans, violating our rules only 8\% of the time when probed. Finally, we conduct extensive analyses showing that though our model learns to follow our rules it can exhibit distributional biases.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Computation and Language,Computer Science - Machine Learning},
+  file = {/Users/hugo/Papers/pdf/glaeseImprovingAlignmentDialogue2022.pdf;/Users/hugo/Zotero/storage/8YNPR334/2209.html}
+}
+
 @inproceedings{gloverDynamicalLandscapeReservoir2021,
   title = {The {{Dynamical Landscape}} of {{Reservoir Computing}} with {{Elementary Cellular Automata}}},
   booktitle = {{{ALIFE}} 2021: {{The}} 2021 {{Conference}} on {{Artificial Life}}},
@@ -8596,6 +8632,14 @@
   file = {/Users/hugo/Papers/pdf/lorenzEmergenceModularityBiological2011.pdf}
 }
 
+@article{lossDrunkenBishopAnalysis,
+  title = {The Drunken Bishop: {{An}} Analysis of the {{OpenSSH}} Fingerprint Visualization Algorithm},
+  author = {Loss, Dirk and Limmer, Tobias},
+  abstract = {OpenSSH 5.1 introduced an ASCII-based visualization method for the remote servers’ public key fingerprints. We explain the algorithm used to visualize the fingerprints and present some initial findings about its properties. Based on a Markov model and some brute-force attacks we were only able to produce some basic results. But we hope that our analysis will spur further research on this topic, so that eventually it will be found out whether the (heuristically designed) algorithm is secure enough for this purpose.},
+  langid = {english},
+  file = {/Users/hugo/Zotero/storage/9Z4U8NK4/Loss and Limmer - The drunken bishop An analysis of the OpenSSH ﬁng.pdf}
+}
+
 @article{lukoseviciusReservoirComputingApproaches2009,
   title = {Reservoir Computing Approaches to Recurrent Neural Network Training},
   author = {Lukoševičius, Mantas and Jaeger, Herbert},
@@ -10953,6 +10997,23 @@
   file = {/Users/hugo/Papers/pdf/pivatoSpectralDomainBoundaries2007.pdf;/Users/hugo/Zotero/storage/I99TDGCG/0507091.html}
 }
 
+@article{pizaCCTVSurveillanceCrime2019,
+  title = {{{CCTV}} Surveillance for Crime Prevention: {{A}} 40‐year Systematic Review with Meta‐analysis},
+  shorttitle = {{{CCTV}} Surveillance for Crime Prevention},
+  author = {Piza, Eric L. and Welsh, Brandon C. and Farrington, David P. and Thomas, Amanda L.},
+  date = {2019-02},
+  journaltitle = {Criminology \& Public Policy},
+  shortjournal = {Criminology \& Public Policy},
+  volume = {18},
+  number = {1},
+  pages = {135--159},
+  issn = {1538-6473, 1745-9133},
+  doi = {10.1111/1745-9133.12419},
+  url = {https://onlinelibrary.wiley.com/doi/10.1111/1745-9133.12419},
+  urldate = {2023-02-21},
+  langid = {english}
+}
+
 @article{plattProbabilisticOutputsSupport1999,
   title = {Probabilistic Outputs for Support Vector Machines and Comparisons to Regularized Likelihood Methods},
   author = {Platt, J},
@@ -12588,6 +12649,25 @@
   file = {/Users/hugo/Papers/pdf/shorLempelZivNotes.pdf}
 }
 
+@misc{shusterBlenderBotDeployedConversational2022,
+  title = {{{BlenderBot}} 3: A Deployed Conversational Agent That Continually Learns to Responsibly Engage},
+  shorttitle = {{{BlenderBot}} 3},
+  author = {Shuster, Kurt and Xu, Jing and Komeili, Mojtaba and Ju, Da and Smith, Eric Michael and Roller, Stephen and Ung, Megan and Chen, Moya and Arora, Kushal and Lane, Joshua and Behrooz, Morteza and Ngan, William and Poff, Spencer and Goyal, Naman and Szlam, Arthur and Boureau, Y.-Lan and Kambadur, Melanie and Weston, Jason},
+  date = {2022-08-10},
+  number = {arXiv:2208.03188},
+  eprint = {2208.03188},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.2208.03188},
+  url = {http://arxiv.org/abs/2208.03188},
+  urldate = {2023-02-13},
+  abstract = {We present BlenderBot 3, a 175B parameter dialogue model capable of open-domain conversation with access to the internet and a long-term memory, and having been trained on a large number of user defined tasks. We release both the model weights and code, and have also deployed the model on a public web page to interact with organic users. This technical report describes how the model was built (architecture, model and training scheme), and details of its deployment, including safety mechanisms. Human evaluations show its superiority to existing open-domain dialogue agents, including its predecessors (Roller et al., 2021; Komeili et al., 2022). Finally, we detail our plan for continual learning using the data collected from deployment, which will also be publicly released. The goal of this research program is thus to enable the community to study ever-improving responsible agents that learn through interaction.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Computation and Language},
+  file = {/Users/hugo/Papers/pdf/shusterBlenderBotDeployedConversational2022.pdf;/Users/hugo/Zotero/storage/MZAQZIJ3/2208.html}
+}
+
 @misc{shusterLanguageModelsThat2022,
   title = {Language {{Models}} That {{Seek}} for {{Knowledge}}: {{Modular Search}} \& {{Generation}} for {{Dialogue}} and {{Prompt Completion}}},
   shorttitle = {Language {{Models}} That {{Seek}} for {{Knowledge}}},
@@ -12689,6 +12769,19 @@
   langid = {english},
   keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Electrical Engineering and Systems Science - Image and Video Processing},
   file = {/Users/hugo/Papers/pdf/sitzmannImplicitNeuralRepresentations2020.pdf}
+}
+
+@book{smithOriginsLifeBirth2000,
+  title = {The {{Origins}} of {{Life}}: {{From}} the {{Birth}} of {{Life}} to the {{Origin}} of {{Language}}},
+  shorttitle = {The {{Origins}} of {{Life}}},
+  author = {Smith, John Maynard and Szathmary, Eors},
+  date = {2000-03-16},
+  publisher = {{OUP Oxford}},
+  abstract = {In this fascinating book, John Maynard Smith and Eors Szathmary present an original picture of evolution. They propose that during evolution there have been a number of major transitions in the way in which information is passed between generations. These transitions include the appearance of the first replicating molecules, the emergence of co-operative animal societies, and the unique language ability of humans. Containing many new ideas, this book is contemporary biology on the grandest scale, from the birth of life to the origin of language.},
+  isbn = {978-0-19-164732-1},
+  langid = {english},
+  pagetotal = {191},
+  keywords = {Science / General,Science / Life Sciences / Developmental Biology,Science / Life Sciences / Evolution,Science / Life Sciences / Taxonomy}
 }
 
 @article{smithSimpleComputationUniversalCellular1971,
@@ -14545,6 +14638,22 @@
   pages = {520--540},
   publisher = {{ACM New York, NY, USA}},
   file = {/Users/hugo/Papers/pdf/wittenArithmeticCodingData1987.pdf;/Users/hugo/Zotero/storage/ZTD8T673/214762.html}
+}
+
+@article{woeseUniversalAncestor1998,
+  title = {The Universal Ancestor},
+  author = {Woese, Carl},
+  date = {1998-06-09},
+  journaltitle = {Proceedings of the National Academy of Sciences},
+  volume = {95},
+  number = {12},
+  pages = {6854--6859},
+  publisher = {{Proceedings of the National Academy of Sciences}},
+  doi = {10.1073/pnas.95.12.6854},
+  url = {https://www.pnas.org/doi/10.1073/pnas.95.12.6854},
+  urldate = {2023-02-22},
+  abstract = {A genetic annealing model for the universal ancestor of all extant life is presented; the name of the model derives from its resemblance to physical annealing. The scenario pictured starts when “genetic temperatures” were very high, cellular entities (progenotes) were very simple, and information processing systems were inaccurate. Initially, both mutation rate and lateral gene transfer levels were elevated. The latter was pandemic and pervasive to the extent that it, not vertical inheritance, defined the evolutionary dynamic. As increasingly complex and precise biological structures and processes evolved, both the mutation rate and the scope and level of lateral gene transfer, i.e., evolutionary temperature, dropped, and the evolutionary dynamic gradually became that characteristic of modern cells. The various subsystems of the cell “crystallized,” i.e., became refractory to lateral gene transfer, at different stages of “cooling,” with the translation apparatus probably crystallizing first. Organismal lineages, and so organisms as we know them, did not exist at these early stages. The universal phylogenetic tree, therefore, is not an organismal tree at its base but gradually becomes one as its peripheral branchings emerge. The universal ancestor is not a discrete entity. It is, rather, a diverse community of cells that survives and evolves as a biological unit. This communal ancestor has a physical history but not a genealogical one. Over time, this ancestor refined into a smaller number of increasingly complex cell types with the ancestors of the three primary groupings of organisms arising as a result.},
+  file = {/Users/hugo/Papers/pdf/woeseUniversalAncestor1998.pdf}
 }
 
 @article{wolanskySemiDiscreteApproximationOptimal2015,
