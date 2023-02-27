@@ -1,25 +1,23 @@
 \chapter{Background}
 \label{cha:background}
 
-In this chapter, we provide background on some of the topics we study in the
+In this chapter, we provide background on some of the topics that we study in the
 thesis. We begin by describing the \acf{CA} model, which is the complex system
 we focus on in most of the thesis (Section \ref{sec:cellular-automata-sec}).
 Next, we describe the similarities between \acp{CA} and \acfp{RNN}, which is
 useful for understanding the characteristics and applications these two models
-share (Section \ref{sec:cell-autom-rnns}). \acp{CA} can be reformulated
-completely as a special case of \acp{RNN}. With this reformulation, using
+share (Section \ref{sec:cell-autom-rnns}). \acp{CA} can be completely reformulated as a special case of \acp{RNN}. With this reformulation, using
 \acp{CA} as a replacement of \acp{RNN} becomes natural for several use cases. We
 describe the \acf{RC} model (Section \ref{sec:res-models}), which enables
-sending inputs to, and harvesting the computations of complex systems to solve
+sending inputs to and harvesting the computations of complex systems to solve
 problems, which we apply in Chapter~\ref{cha:learn-effic-compl}. This model was
-developed with \acp{RNN} but we describe how \acp{CA} and other complex systems
+developed with \acp{RNN}, but we describe how \acp{CA} and other complex systems
 can be a suitable replacement and the benefits of this approach.
 
 \section{Cellular automata}\label{sec:cellular-automata-sec}
 
 The \acf{CA} model was simultaneously proposed by Stanislaw Ulam and John Von
-Neumann in the 1940s as a model of the growth of crystals and an attempt at
-constructing an autonomously self-replicating system
+Neumann in the 1940s as a model of crystal growth and an attempt to construct an autonomously self-replicating system
 \parencite{vonneumannTheorySelfreproducingAutomata1966}.
 
 \subsection{Definition}\label{sec:definition}
@@ -62,7 +60,7 @@ adjacent cells. This type of 1D neighborhood is usually associated with a
 \end{equation}
 
 A larger radius $r$ would correspond to including more cells in the
-neighborhood, going in each direction from the initial cell. On two dimensional
+neighborhood, going in each direction from the initial cell. On two-dimensional
 grids, there are multiple ways to define the neighborhood. Some common examples
 are the Moore neighborhood (see Figure \ref{fig:moore}) and the Von Neumann
 neighborhood (see Figure \ref{fig:von_neumann}). In the rest we omit the
@@ -109,7 +107,7 @@ neighborhood function $\boldsymbol{N}$, we have the following update rule:
 
 The details of an update step in a 1 dimensional \ac{CA} is shown on Figure
 \ref{fig:ca_base} for example. The neighborhood of the cell $c_{i}$ is $c_{i}$
-itself as well as its two immediately adjacent cells.
+itself, as well as its two immediately adjacent cells.
 
 \begin{figure}[htbp]
   \centering
@@ -130,8 +128,8 @@ outputs.
 A useful rule representation can be obtained by listing all output states
 corresponding to input configurations in a predetermined order. This results in
 a list of values $[o_1, \ldots, o_{s^{|\mathcal{S}|}}]$, with $\forall i,\ o_{i} \in \mathcal{S}$, where $s$ is
-the number of cells in a neighborhood, $\mathcal{S}$ is the space of available states and
-$|\mathcal{S}|$ is the number of available states per cell. Using the $o_{i}$ as the
+the number of cells in a neighborhood, $\mathcal{S}$ is the space of available states, and
+$|\mathcal{S}|$ is the number of available states per cell. Using $o_{i}$ as the
 digits of a base-$|\mathcal{S}|$ number, each rule is uniquely represented by a number.
 For example, as explained in more details in Section \ref{sec:elem-cell-autom},
 the 256 binary rules in one dimension with neighborhood size 3 can be numbered
@@ -160,7 +158,7 @@ only superficial since many concepts from dynamical systems theory, such as
 rigourous definition in the continuous state and continuous time models. Wolfram
 proposed a qualitative classification of CA behavior roughly analogous to
 classifications in dynamical systems theory, with four classes defined as
-follows:
+follows.
 
 \begin{description}
   \item[Class 1] All initial configurations relax after a transient
@@ -168,9 +166,9 @@ follows:
   \item[Class 2] All initial configurations relax after a transient period to some
         fixed point or some temporally periodic cycle of configurations, but
         which one depends on the initial configuration. (\ac{CA} defined on
-        finite lattices always end up having a periodic behavior because there
+        finite lattices always have a periodic behavior because there
         is only a finite number of grid configurations. Class 2 does not refer to
-        this type of periodic behavior but rather to cycles with periods much
+        this type of periodic behavior, but rather to cycles with periods much
         shorter than the total number of possible states).
   \item[Class 3] All initial configurations quickly exhibit chaotic behavior
         after a transient period. (The term “chaotic” here refers to
@@ -184,31 +182,31 @@ clear consensus on which of the \acp{ECA} rules belong to class 4 or class 3.
 Class 4 \ac{CA} rules are speculated to be capable of universal computation
 \parencite{wolframUniversalityComplexityCellular1984}. For example,
 \textcite{liStructureElementaryCellular1990} claimed that \ac{ECA} rule 110 has
-class 4 behavior, and it was eventually proven to be universal
+class 4 behavior, and was eventually proven to be universal
 \parencite{cookUniversalityElementaryCellular2004}, but no other \ac{ECA} has
 been proven universal since.
 
 \textcite{zenilCompressionBasedInvestigationDynamical2010} studied the
 compression size of the space-time diagrams of all \ac{ECA} for a fixed-length
 simulation. Using a simple k-means clustering technique, he obtained two groups
-roughly matching Wolfram’s classes 1 and 2 and classes 3 and 4. We reproduce
-these results on figure \ref{subfig:comp_scores}. They offer an interesting
-non-qualitative confirmation of the results of Wolfram's classification.
-However, these results vary significantly if we modify the initial conditions as
+that roughly match Wolfram’s classes 1 and 2 and classes 3 and 4. We reproduce
+these results in figure \ref{subfig:comp_scores}. They offer an interesting
+nonqualitative confirmation of the results of Wolfram's classification.
+However, these results vary significantly if we modify the initial conditions, as
 well as the grid size, data representation, or compression algorithm
 \parencite{hudcovaClassificationComplexSystems2020}.
 
 \textcite{wuenscheGlobalDynamicsCellular1992} studied the behavior of \acp{ECA}
-when the simulations are reversed and compute the preimages of each
+when the simulations are reversed and computed the preimages of each
 configuration. They introduced the Z-parameter, which is the probability that a
 partial preimage can be extended by one symbol for each \ac{CA}. He speculates
 that class 4 occurs at $\text{Z} \approx 0.75$. This is not a classification, but a
 class 4 membership test that can be computed from the rule directly, making it
-practical compared to alternatives. However when tested in practice, Wuensche's
+practical compared to alternatives. However, when tested in practice, Wuensche's
 hypothesis that $\text{Z} \approx 0.75$ corresponds to class 4 is rarely verified.
 
-Hudcová defined a \ac{CA} classification that is based on the form of the
-asymptotic growth of their transients, obtained through repeated simulation of
+Hudcová defined a classification of \ac{CA} that is based on the form of the
+asymptotic growth of its transients, obtained by repeated simulation of
 \ac{CA} rules starting from various initial conditions and using the best
 fitting function for the asymptotic growth of its transients
 \parencite{hudcovaClassificationComplexSystems2020,
@@ -226,7 +224,7 @@ neighborhood size 3 --- the cell and its two direct neighbors on the 1D grid.
 There are 8 possible configurations of a neighborhood with 3 cells and 2 states
 per cell, which corresponds to 256 possible ways to define an \ac{ECA} --- two
 possible outputs for each of these 8 possible configurations; hence
-$2^{8} = 256$ possible \ac{CA}. This relatively small number of rules enables
+$2^{8} = 256$ possible \ac{CA}. This relatively small number of rules enables an
 exhaustive exploration of the rule space and mapping of the properties of \ac{ECA},
 which would not be possible for general \acp{CA}.
 
@@ -237,7 +235,7 @@ which would not be possible for general \acp{CA}.
   \label{fig:eca_150_rule}
 \end{figure}
 
-These \acp{CA} are studied extensively, and offer an interesting combination of
+These \acp{CA} are studied extensively and offer an interesting combination of
 trivial definition and implementation and complex and unpredictable properties.
 One of the fundamental problems of \ac{CA} research is to classify the 256 rules
 into well-defined behavior types and order them by complexity, which was
@@ -248,7 +246,7 @@ attempted in several previous works
   zenilCompressionBasedInvestigationDynamical2010,
   hudcovaClassificationComplexSystems2020,
   hudcovaComputationalHierarchyElementary2021}. We discuss these classifications
-in more details in section \ref{sec:class-cell-autom}.
+in more detail in Section \ref{sec:class-cell-autom}.
 
 \begin{figure}[htbp]
   \centering
@@ -272,25 +270,25 @@ in more details in section \ref{sec:class-cell-autom}.
 \end{figure}
 
 
-\ac{ECA} rules are easily visualized because there are only 8 possible
-neighborhood configurations that need to be shown. For example, figure
+\ac{ECA} rules are easily visualized because there are only eight possible
+neighborhood configurations that need to be shown. For example, Figure
 \ref{fig:eca_150_rule} shows the transition table for \ac{ECA} rule 150. If we
 assign 1 to the black state and 0 to the white state, the possible neighborhood
 configurations are ordered in their binary order from right to left, with the
-leftmost bit being the most significant one. This is how the rule number is
+leftmost bit being the most significant. This is how the rule number is
 computed, using the output states (last row in figure \ref{fig:eca_150_rule}) as
 a binary representation.
 
-There are several well known \ac{ECA} rules with particularly interesting
+There are several well-known \ac{ECA} rules with particularly interesting
 properties. For example, a universal computer has been constructed in rule 110
 \parencite{cookUniversalityElementaryCellular2004}, making it the first (and
-only so far) Turing complete \ac{ECA}.
+only to date, although rule 54 is postulated to be as well) Turing complete \ac{ECA}.
 
 \paragraph{Totalistic cellular automata.}
-Totalistic \ac{CA} are a subset of \ac{CA} which rules can be expressed as a
+Totalistic \ac{CA} are a subset of \ac{CA} whose rules can be expressed as a
 function of the sum of neighboring cell values. These \ac{CA} were introduced by
 Stephen Wolfram \parencite{wolframStatisticalMechanicsCellular1983}. For
-example, \ac{ECA} 150 which rule is shown in figure \ref{fig:eca_150_rule} is a
+example, \ac{ECA} 150 which rule is shown in Figure \ref{fig:eca_150_rule} is a
 totalistic \ac{CA}. Its rule could be summarized as ``if exactly two states are
 1 or all states are 0, the next state is 0, otherwise if one or three states are
 1, the next state is 1''. Conway's Game of Life, presented in the following paragraph, is an example
@@ -299,15 +297,15 @@ of a totalistic \ac{CA} in two dimensions.
 \paragraph{Game of Life.\label{sec:game-life}}
 The game of life is one of the most famous \ac{CA}. It was proposed by
 mathematician John Conway in 1970 \parencite{gardnerMathematicalGames1970}. It
-is a two dimensional binary \ac{CA}. Its two states are often called ``alive''
+is a two-dimensional binary \ac{CA}. Its two states are often called ``alive''
 and ``dead''. Its rule can be summarized in three sentences as follows.
 \begin{itemize}
   \item Any live cell with two or three live neighbors survives.
-  \item Any dead cell with three live neighbors becomes a live cell.
+  \item Any dead cell with three living neighbors becomes a live cell.
   \item Other live cells and already dead cells are dead in the next generation.
 \end{itemize}
 This \ac{CA} has a particularly active community dedicated to finding
-interesting patterns with particular properties such as long cycling periods or
+interesting patterns with particular properties, such as long cycling periods or
 particular speeds of movement through the grid. Some of these patterns have been
 used as memory registers and communication channels to build a Universal
 Computer \parencite{IgblanLifeUniversal}. This construction proved that the game
@@ -349,22 +347,22 @@ they can simulate any algorithm.
 
 \paragraph{Asynchronous cellular automata}
 A cellular automaton is said to be asynchronous when its cells are not all
-updated in parallel at each time step. Several cell update schemes can be
+updated in parallel at each time step. Various cell update schemes can be
 chosen. Contrary to regular cellular automata, the grid has to be finite for an
 update rule to exist. This is because asynchronous \ac{CA} have to define an
-order of update of the cells which would not be defined on an infinite grid.
+order of update of the cells, which would not be defined on an infinite grid.
 This update order can be random, follow a predefined order, or be decided by a
 global controller. Groups of cells can be updated simultaneously, or updates can
-be done cell by cell. The many effects of the asynchronous updates can be hard
-to predict and can make these types of \ac{CA} relatively hard to work with.
+be done cell by cell. The many effects of asynchronous updates can be difficult
+to predict and can make these types of \ac{CA} relatively difficult to work with.
 
 Asynchronous \ac{CA} are an appealing model when using large systems for which
 parallel update is prohibitively expensive. The rule could adapt itself and
-preferentially update cells in active or useful parts of the \ac{CA} while doing
-slower updates to the less active parts of the \ac{CA}. An asynchronous \ac{CA}
+preferentially update cells in active or useful parts of \ac{CA} while doing
+slower updates to the less active parts of \ac{CA}. An asynchronous \ac{CA}
 with evolutionary properties was constructed in
 \parencite{nehanivEvolutionAsynchronousCellular2003}. The authors argue that
-asynchronicity is a strong advantage for constructing systems that can evolve
+asynchronicity is a strong advantage in constructing systems that can evolve
 within \acp{CA}.
 
 \paragraph{Stochastic cellular automata}
@@ -447,9 +445,9 @@ cell has 6 direct neighbors.
 \label{fig:hexagonal}
 \end{figure}
 
-One advantage of this type of \acp{CA} over the regular grids is the absence of
-preferred direction, since they are all equivalent. On a square grid, diagonally
-adjacent cells span more distance that directly adjacent cells, whereas on an
+One advantage of this type of \acp{CA} over regular grids is the absence of
+preferred direction, since they are all equivalent. In a square grid, diagonally
+adjacent cells span more distance than directly adjacent cells, whereas on a
 hexagonal grid all neighbors are equivalent
 \parencite{moreeHexagonalSquareLattice2004}.
 
@@ -457,11 +455,10 @@ hexagonal grid all neighbors are equivalent
 As explained in Section \ref{sec:challenges}, one of the main challenges of
 working with complex systems is the parametrization and control of the behavior
 of that system. \ac{CA} are no exception, and several parametrization schemes
-have been proposed, having their respective benefits and drawbacks. There are
+have been proposed, with their respective benefits and drawbacks. There are
 infinitely many ways to define rules for \acp{CA}, and for each of these
-definition a very large number of rules is available, making it impossible to
-sample a significant portion of the rule space. A good parametrization allows
-scanning a wide range of behavior of \ac{CA} by traversing the space in an
+definitions, a very large number of rules are available, making it impossible to
+sample a significant portion of the rule space. A good parametrization allows one to scan a wide range of behavior of \ac{CA} by traversing the space in an
 interesting way.
 
 \paragraph{Langton's lambda\label{sec:langtons-lambda}}
@@ -510,12 +507,12 @@ chaotic.
 \end{figure}
 
 \paragraph{Dirichlet sampling}
-For an arbitrary number of states and arbitrary neighborhood size, it can be
+For an arbitrary number of states and an arbitrary neighborhood size, it can be
 challenging to sample \acp{CA} while scanning the wide range of behavior these
 models are capable of simulating. This is because the size of the space of
 \acp{CA} rules is very large. The naive method of uniformly sampling each
 transition output is not useful in large rule spaces with multiple states, large
-neighborhoods or grid dimension higher than 1.
+neighborhoods, or grid dimension higher than 1.
 
 Rules with equal proportions of transitions leading to all states tend to be the
 most chaotic. This is also what Langton observed when studying the $\lambda$
@@ -537,28 +534,28 @@ The probability mass function of this distribution is
 This quantity becomes vanishingly small for large $n$ (that is rules with many
 states or large neighborhoods) and rules with an output transition skewed
 towards a specific state. For example, the binary game of life rule has 372
-transitions that lead to state 0 and 140 that lead to state 1. The probability
+transitions leading to state 0 and 140 leading to state 1. The probability
 of sampling a rule with these transition proportions is $8.24\mathrm{e}{-26}$
-(compared to a $17\%$ chance of sampling a rule with between 254 and 257
-transition to 0). It is therefore very unlikely that a rule of the type of game
+(compared to a $17\%$ probability of sampling a rule with between 254 and 257
+transitions to 0). It is therefore very unlikely that a rule of the type of game
 of life, let alone the rule itself, would be obtained with a uniform transition
 sampling method.
 
 We propose a Dirichlet sampling method as an alternative way to sample rules
-with fixed ratios of transitions leading to each output states. For a rule with
+with fixed ratios of transitions leading to each output state. For a rule with
 $K$ states, we sample a $K$-uple from a Dirichlet distribution of order $K$ with
 parameters $(\alpha_{k})_{k\in [1, K]}$ where $\alpha_{0} = \alpha_{1} = \ldots = \alpha_{K} = \alpha < 1$. The
 result is a quantile $K$-uple $(q_{1}, \ldots, q_{K})$. For $\alpha < 1$, the distribution
 is concentrated around the corners of a simplex of dimension $K$, which means
-that it preferably samples tuple with one of their values dominating the others.
+that it preferably samples a tuple with one of their values dominating the others.
 
-Rules are sampled so that the number of transition to each output state matches
-the quantile generated from the Dirichlet distribution. Samples will be more
-likely to have a dominant quantile which can be associated with the quiescent
+Rules are sampled so that the number of transitions to each output state matches
+the quantile generated from the Dirichlet distribution. The samples will be more
+likely to have a dominant quantile, which can be associated with the quiescent
 state in Langton's $\lambda$ calculation. The resulting sampling of cellular automata
-is much better for scanning the whole space of rules and generating \ac{CA}
-rules which would be unreachable with the naive sampling method, as illustrated
-on figure \ref{fig:ca_rule_sampling}.
+is much better for scanning the entire space of rules and generating \ac{CA}
+rules that would be unreachable with the naive sampling method, as illustrated
+in Figure \ref{fig:ca_rule_sampling}.
 
 \begin{figure}[htbp]
   \centering
@@ -579,14 +576,14 @@ on figure \ref{fig:ca_rule_sampling}.
 
 The recurrent convolutional network analogy of \acp{CA} (see Section
 \ref{sec:cell-autom-rnns} for details) formulates a \ac{CA} as a neural network.
-In this paradigm, the rule of a \ac{CA} is entirely determined by the parameters
+In this paradigm, the rule of a \ac{CA} is completely determined by the parameters
 of that neural network. This allows modifying the \ac{CA} rules like we would
 change the weights of a neural network. For example, as long as all simulation
 steps are differentiable, the backpropagation algorithm can be applied and used
 to update a \ac{CA} rule by updating the weights of the neural network with
 gradient descent. Dimensionality reduction methods applied to the parameter
-space of the neural network can help understand the structure of that space and
-the \acp{CA} behaviors that different sets of parameters produce.
+space of the neural network can help to understand the structure of that space and
+the \acp{CA} behaviors produced by different sets of parameters.
 
 
 \section{Cellular automata and RNNs}\label{sec:cell-autom-rnns}
@@ -598,20 +595,20 @@ of convolutional operations that can be derived from any \ac{CA} rule.
 
 This connection yields interesting consequences both for the theoretical
 properties of these models and the potential applications of \acp{CA} and
-recurrent networks. It shows for instance that emergent properties with
+recurrent networks. It shows, for instance, that emergent properties with
 increasing complexity and perhaps open-ended development that we expect from
 complex systems such as \acp{CA} are possible within the hidden state of a
 recurrent neural network.
 
 The conceptual similarity between \acp{CA} and neural networks is not surprising. 
-Fundamentally, \ac{CA} represent the paradigm of emergence, in which
+Fundamentally, \ac{CA} represents the paradigm of emergence, in which
 the origins of complex behaviors are searched for in an assemblage of possibly
 very simple parts rather than being viewed as a sum of complex building blocks. It is
 often argued that there is no better known example of a truly emergent
 phenomenon than that of the emergence of consciousness out of the large network
 of functionally simple (and certainly unconscious) neuronal components that make
 up the human brain. A biological neural network, such as a \ac{CA}, consists of a
-large space of interconnected nodes, with a dynamical behavior that is a local
+large space of interconnected nodes, with dynamic behavior that is a local
 function of the other nodes to which it is connected. Artificial neural networks can
 be thought of as being a set of biologically inspired CA rules
 \parencite{ilachinskiCellularAutomataDiscrete2001}. The more precise parallel
@@ -651,30 +648,29 @@ the consequences of that relation.
     followed by the application of a non-linear function.}
 \end{figure}
 
-We write the definition of a \ac{CA} with \ac{RNN}-inspired formalism and
-notation. This parallel is illustrated in figures \ref{fig:ca_cnn} and
-\ref{fig:standard_rnn}. The grid state at time $t$ is denoted $h_t$ and
+We write the definition of a \ac{CA} with a formalism and notation inspired by the \ac{RNN}. This parallel is illustrated in figures \ref{fig:ca_cnn} and
+\ref{fig:standard_rnn}. The state of the grid at time $t$ is denoted $h_t$ and
 corresponds to the hidden state in a RNN\@. In the case of classical \acp{CA},
 it is a 1 or 2D vector of discrete values (see Section \ref{sec:definition}),
 but~\parencite{mordvintsevGrowingNeuralCellular2020} and other \acp{CA}
-extensions use continuous values, much like the usual \acp{RNN}.
+extensions use continuous values, much like usual \acp{RNN}.
 
 The transformation $\Phi$ operates only on the hidden state. Because it is local,
 it can be shown to be equivalent to a convolutional layer, as explained below in
-Section~\ref{sec:transition-rule-as}. Inputs and outputs
-$(\mathbf{x}, \mathbf{o})$ from figure \ref{fig:standard_rnn} are not included
-in the classical definition of CAs but are an easy to implement extension as
+Section~\ref{sec:transition-rule-as}. The inputs and outputs
+$(\mathbf{x}, \mathbf{o})$ in Figure \ref{fig:standard_rnn} are not included
+in the classical definition of \acp{CA}, but are an easy to implement extension as
 discussed in Section~\ref{sec:adding-inputs-outp}.
 
 \subsection{Transition rule as a set of convolutions\label{sec:transition-rule-as}}
 
-Each cell $c_i$ from the \ac{CA} definition can be in one of $k$ states. We
+Each cell $c_i$ from the \ac{CA} definition can be in one of the $k$ states. We
 represent the cells as vectors of size $k$ the number of states, with only
-zeroes expect for a one in the $k$-th position. A neighborhood of size $3$ in a
+zeros expected for a one in the $k$-th position. A neighborhood of size $3$ in a
 1D CA can be represented as a $3 \times k$ vector
 $\mathbf{u}_i = [u_{i-1}, u_{i}, u_{i+1}]$. Each $u_{i}$ is a vector of size $k$
-with a $1$ in position $s_i$. This is illustrated in the 1D (resp.\ 2D) case on
-the left (resp.\ right) of Figure~\ref{fig:cell}. For a CA with only two states,
+with a $1$ in position $s_i$. This is illustrated in the 1D (resp. 2D) case on
+the left (resp. right) of Figure~\ref{fig:cell}. For a CA with only two states,
 it is redundant to have a $3 \times 2$ vector, but the ``one-hot'' encoding
 becomes useful when working with more states.
 
@@ -690,7 +686,7 @@ becomes useful when working with more states.
 \end{figure}
 
 With this representation, we can express the transition rule $\Phi$ as a simple
-convolutional neural network. This network would be made up of 2 layers, which
+convolutional neural network. This network would be made up of two layers, which
 are shown in Figure~\ref{fig:ca_cnn_2dims} for the 2D case:
 
 \begin{figure}[htbp]
@@ -724,10 +720,10 @@ is composed of $k^{2r + 1}$ filters of dimension $k \times (2r + 1)$ with only o
 and zeros, which are the mirror of a possible configuration of size $(2r+1)$ of
 the neighborhood.
 
-The product of each filter with an input neighborhood on the grid will be an
-integer between $0$ and $2r + 1$. By applying a ReLU nonlinearity preceded by a
+The product of each filter with an input neighborhood in the grid will be an
+integer between $0$ and $2r + 1$. Applying a ReLU nonlinearity preceded by a
 constant vector of value $2r$ as bias, we obtain the input to the second layer,
-a vector of size $k^{2r + 1}$ for each cell containing all zeroes except for a
+a vector of size $k^{2r + 1}$ for each cell containing all zeros except for
 one corresponding to the detected neighborhood. This vector plays the role of an
 indicator of the current input configuration.
 
@@ -738,7 +734,7 @@ output value of the rule corresponding to the detected neighborhood state.
 
 With some circular padding that wraps around the edges of the grid or applies
 constant values outside of the main grid, the size of the output is the same as
-the input. This means the CNN step can be applied multiple times, simulating a
+the input. This means that the CNN step can be applied multiple times, simulating a
 single \ac{CA} step every time.
 
 \subsubsection{Recurrent convolutions in machine learning}
@@ -750,9 +746,9 @@ learning such as NLP or computer vision
 
 \subsection{Adding inputs and outputs\label{sec:adding-inputs-outp}}
 
-Figure~\ref{fig:standard_rnn} shows clearly where the inputs and outputs could
+Figure~\ref{fig:standard_rnn} shows clearly where inputs and outputs could
 be added to the Game of Life or any other \ac{CA}. We list many possible forms
-the input and outputs can take, and how it can interact with the \ac{CA} rule.
+that the addition of input and output can take and how it can interact with the \ac{CA} rule.
 
 \subsubsection{Inputs}
 There are many ways to add inputs to the recurrent \ac{CNN} model presented

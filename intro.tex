@@ -125,7 +125,7 @@ behaviors. We provide a detailed description of cellular automata in Section
 of learning in complex systems and open-ended evolution and demonstrates the
 potential of cellular automata as a model for studying these phenomena.
 
-\section{Motivation}
+\section{Motivation}\label{sec:motivation}
 
 It is possible that some form of evolutionary mechanism may be necessary in
 order to achieve certain types of AI, particularly if the goal is to create
@@ -136,7 +136,7 @@ robustness, or the ability to learn continuously
 \parencite{parisiContinualLifelongLearning2019}. The natural intelligence of
 biological systems seems to depend on emerging properties selected through
 evolution. For example, biological life exhibits a pattern of major evolutionary
-transitions in which lower-level autonomously replicating entities merged to form a
+transitions in which autonomously replicating entities at the lower level merged to form a
 single more complex corporate body
 \parencite{lorenzEmergenceModularityBiological2011}. This is believed to have
 occurred for the emergence of eukaryotic cells, as well as for multicellular
@@ -221,7 +221,7 @@ external influence. For many complex systems, their emergent mechanisms are
 poorly understood. We identify four main challenges associated with the study of
 complex systems: (i) the questions of the design choices in defining and sampling a
 complex system (section \ref{sec:design-compl-syst}), (ii) which will in turn define
-their potential for supporting a form of open-ended evolution (section
+their potential to support a form of open-ended evolution (section
 \ref{sec:open-ended-evolution}) and (iii) how we can expect to build an interface to
 communicate with it (section \ref{sec:compl-syst-inputs}), (iv) which is essential to
 achieve some form of control of that system (section \ref{sec:compl-syst-contr}).
@@ -291,7 +291,7 @@ an open-ended way without supervision, it may still be useful to steer them
 locally towards specific targets. A major challenge that follows from this goal
 is that many complex systems are chaotic. A deterministic dynamical system is
 said to be chaotic if its evolution is highly sensitive to its initial
-conditions. This is illustrated with a simple \ac{CA} rule in Figure \ref{fog:ca_comp}. 
+conditions. This is illustrated with a simple \ac{CA} rule in Figure \ref{fig:ca_comp}. 
 Because of this property, it is often very hard to predict how a
 given system will evolve over time, and therefore hard to steer its evolution
 towards a particular final state or along a chosen trajectory. This is an
@@ -311,7 +311,7 @@ are standalone objects that evolve according to a set of internal rules.
 A common challenge for such systems is to define the inputs and outputs in a way
 that preserves their internal dynamics. This is also connected to the control
 problem of Section \ref{sec:compl-syst-contr}, because controlling a complex
-system implies being able to send a control signal and read back the current
+system implies being able to send a control signal and read the current
 state of the system.
 
 Throughout this work, we use reservoir computing for this purpose. Reservoir
@@ -413,6 +413,8 @@ The thesis has led to the following publications.
 \end{itemize}
 
 The code to reproduce the experiments of all three publications is available on
-GitHub. We also published a dataset that we used for our benchmark in our last
+GitHub: \url{https://github.com/hugcis/evolving-structures-in-complex-systems},
+\url{https://github.com/hugcis/benchmark_learning_efficiency}. We also published a
+dataset that we used for our benchmark in our last
 publication. It is available at
 \url{https://github.com/hugcis/incremental_tasks/}.
