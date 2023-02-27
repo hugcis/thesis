@@ -6,12 +6,15 @@ measuring its predictive power on a test dataset. This approach favors
 complicated models that can smoothly fit complex functions and generalize well
 from training data points. Although essential components of intelligence, speed
 and data efficiency of this learning process are rarely reported or compared
-between different candidate models. In this chapter, we introduce a benchmark of
-increasingly difficult tasks together with a data efficiency metric to measure
-how quickly machine learning models learn from training data. We compare the
-learning speed of some established sequential supervised models, such as RNNs,
-LSTMs, or Transformers, with relatively less known alternative models based on
-reservoir computing. The proposed tasks require a wide range of computational
+between different candidate models. In this chapter, we introduce a benchmark 
+of increasingly difficult tasks together with a data efficiency metric to measure 
+how quickly machine learning models learn from training data. We also highlight 
+that within complex systems, there are computations taking place that can be 
+harnessed for various purposes. To that end, we compare the learning speed of 
+some established sequential supervised models, such as RNNs, LSTMs, or Transformers, 
+with relatively less known alternative models based on reservoir computing, which 
+is a tool for harvesting the computations happening within a complex system.
+ The proposed tasks require a wide range of computational
 primitives, such as memory or the ability to compute Boolean functions, to be
 effectively solved. Surprisingly, we observe that reservoir computing systems
 that rely on dynamically evolving feature maps learn faster than fully

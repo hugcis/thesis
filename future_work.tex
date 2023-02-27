@@ -20,7 +20,7 @@ that are progressively more complex (according to the complexity metric).
 
 It is difficult to apply this principle in practice. Because many complexity metrics such as the algorithmic complexity \ref{sec:algo-complexity} are approximating some uncomputable ideal value. Candidate systems that maximize a particular metric are often unsatisfying because they exploit a particular flaw of that approximation. This could be accounted for in future
 works using multiple complementary complexity metrics or using other surrogate
-metrics, such as the ability to learn to solve auxiliary tasks and generalize.
+metrics, such as the ability to learn to solve auxiliary tasks and generalize from basic tasks to harder ones.
 This approach motivated our work from Chapter \ref{cha:learn-effic-compl}, where
 we design a benchmark of progressively more complex tasks that could be used to
 evaluate the ability of a system to perform complex computations.
@@ -28,7 +28,7 @@ evaluate the ability of a system to perform complex computations.
 \section{Feedback reservoir computing}
 
 In Chapter \ref{cha:learn-effic-compl}, we explored the applications of the
-\ac{RC} paradigm to \acp{CA}. In general, \ac{RC} assumes a purely forward
+\acf{RC} paradigm to \acp{CA}. In general, \ac{RC} assumes a purely forward
 model, which means that the inputs are fed into the reservoir and the outputs are decoded from
 it. The trainable decoder layer is trained offline on a training dataset and
 is then tested. We illustrate the  principle of \ac{RC} in figure
