@@ -18,9 +18,7 @@ a particular task, it seems appealing to use complexity as a fitness
 function for a genetic algorithm. Such an algorithm would generate new rules
 that are progressively more complex (according to the complexity metric).
 
-It is difficult to apply this principle in practice. Because complexity metrics are
-often approximating some uncomputable ideal metric, results become less satisfying
-as we maximize a particular metric. This could be accounted for in future
+It is difficult to apply this principle in practice. Because many complexity metrics such as the algorithmic complexity \ref{sec:algo-complexity} are approximating some uncomputable ideal value. Candidate systems that maximize a particular metric are often unsatisfying because they exploit a particular flaw of that approximation. This could be accounted for in future
 works using multiple complementary complexity metrics or using other surrogate
 metrics, such as the ability to learn to solve auxiliary tasks and generalize.
 This approach motivated our work from Chapter \ref{cha:learn-effic-compl}, where
