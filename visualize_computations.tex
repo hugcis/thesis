@@ -219,7 +219,7 @@ define $f$ to map each supercell $s_i$ as follows:
 \end{align}
 where $\alpha$ is a chosen threshold.
 
-\subsubsection{Partitioning the histogram.}
+\subsubsection{Partitioning the histogram}
 This method can be understood as partitioning the histogram of supercell
 frequency. In equation~\eqref{eq:alpha}, supercells with low probability
 --- with higher self-information --- are mapped to state \texttt{1} whereas
@@ -240,7 +240,7 @@ CAs, we use the same method but with quadratic partition of the histogram
 ($1/k^2$ instead of $1/k$, with $k$ the number of output states, chosen because
 of better visual results).
 
-\subsubsection{Dithering.}\label{sec:dithering}
+\subsubsection{Dithering}\label{sec:dithering}
 Histogram partitioning introduces another set of parameters to be manually
 tuned, adding complexity to the procedure. An alternative way to produce an
 output image from the histogram is to use dithering. Dithering is an image
@@ -288,7 +288,7 @@ partitioning (Floyd–Steinberg's algorithm was used
 \end{figure}
 
 
-\subsubsection{Visualization.}
+\subsubsection{Visualization}
 One advantage of this frequency histogram-based method is that it naturally
 highlights rarer events in the simulation grid, creating a ``heatmap'' of the
 simulation's activity. Since we sort supercells according to their observed
@@ -326,7 +326,7 @@ helpful when dealing with large grids\footnote{Several figures in this chapter
 \end{figure}
 
 
-\subsubsection{Hierarchical coarse-graining.}
+\subsubsection{Hierarchical coarse-graining}
 The above procedure can be applied recursively to the same cellular automaton or
 with larger block sizes to get a progressively coarser representation. Since
 information is systematically discarded in the process, it cannot be applied any
