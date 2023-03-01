@@ -16,8 +16,9 @@ can be a suitable replacement and the benefits of this approach.
 
 \section{Cellular automata}\label{sec:cellular-automata-sec}
 
-The \acf{CA} model was simultaneously proposed by Stanislaw Ulam and John Von
-Neumann in the 1940s as a model of crystal growth and an attempt to construct an autonomously self-replicating system
+Stanislaw Ulam and John Von
+Neumann proposed the \ac{CA} model in the 1940s as a means 
+of modeling crystal growth and creating an autonomous self-replicating system
 \parencite{vonneumannTheorySelfreproducingAutomata1966}.
 
 \subsection{Definition}\label{sec:definition}
@@ -276,8 +277,11 @@ neighborhood configurations that need to be shown. For example, Figure
 assign 1 to the black state and 0 to the white state, the possible neighborhood
 configurations are ordered in their binary order from right to left, with the
 leftmost bit being the most significant. This is how the rule number is
-computed, using the output states (last row in figure \ref{fig:eca_150_rule}) as
-a binary representation.
+computed, using the output states (last row in Figure \ref{fig:eca_150_rule}) as
+a binary representation. Example simulations of the \ac{ECA} rule 150 starting 
+from various initial states are shown on Figure~\ref{fig:eca_150}. In these 
+representations, time flows from top to bottom, and each row of cells represents 
+a single CA internal state at a single time step.
 
 There are several well-known \ac{ECA} rules with particularly interesting
 properties. For example, a universal computer has been constructed in rule 110

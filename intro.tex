@@ -4,8 +4,11 @@
 
 \section{Goal}
 
-In many natural complex systems, learning is a key process that allows the
-system to adapt and evolve over time. 
+Complex systems are systems composed of many interconnected elements that 
+interact with each other, often in non-linear ways, giving rise to emergent 
+properties that cannot be explained by the properties of the individual 
+elements alone. In many natural complex systems, learning is a key process that 
+allows the system to adapt and evolve over time. 
 In this thesis, we explore complex systems
 as a framework for studying learning and adaptation in natural and artificial
 systems. The aim of this thesis is to develop methods for studying and using
@@ -21,12 +24,18 @@ markets, social networks, and biological organisms.
 This objective is broken down into the following subgoals:
 
 \begin{enumerate}
-  \item The first subgoal is to identify complex dynamical systems with the potential to exhibit
-        emergent open-ended growth of complexity and evolutionary-like
-        properties. There are many ways to define complex systems, and as
+  \item The first subgoal is to identify complex dynamical systems that have the 
+  potential to display emergent open-ended growth, which refers to the ability of 
+  a system to spontaneously generate new levels of complexity over time without 
+  reaching a state of equilibrium. This growth is often associated with 
+  evolutionary-like properties, such as variation, selection, and inheritance.
+  There are many ways to define complex systems, and as
         illustrated in Figure \ref{fig:comparison_ca}, some may exhibit more
-        interesting and promising behaviors than others. Interesting systems,
-        such as the cellular automaton (CA) in Figure \ref{fig:structured_sys}
+        interesting and promising behaviors than others. A cellular automaton (CA) 
+        is an instance of a complex system that can be described as a grid of cells that can 
+        take on a finite set of states and change their state over time according to a set 
+        of rules that depend on the states of their neighboring cells. Interesting \acp{CA}, such 
+        as the one shown in Figure \ref{fig:structured_sys}
         may be hard to find depending on how the
         search space is defined. The work presented in Chapter
         \ref{cha:meas-compl-evolv} aims to construct a metric of complexity
@@ -59,16 +68,17 @@ This objective is broken down into the following subgoals:
 
   \item The second subgoal is to measure the fraction of systems that have the most complex and rapidly
         evolving behavior. Defining these notions is also part of the goal.
-        This differs from the first sub-goal which is about system design in general, whereas this one is about defining ways to measure complexity growth.
+        This subgoal is distinct from the first one, which focuses on complex system design in 
+        general. Instead, this subgoal involves establishing approaches to evaluate growth 
+        in complexity.
         We believe that systems with the most complex and rapidly
         evolving behavior are promising for further use since
         they may exhibit open-ended complexity growth. In Chapters
         \ref{cha:meas-compl-evolv} and \ref{cha:visu-comp-large}, we present
         different methods to measure evolving complexity and understand when the
-        complexity increases over time. In Chapter \ref{cha:visu-comp-large} we
-        study the importance of multiscale analysis for the complexity of
-        cellular automata, and identify complex systems with behavior that
-        changes when we scale the system up or down.
+        complexity increases over time. Chapter \ref{cha:visu-comp-large} of this thesis is dedicated to investigating the importance of multiscale analysis for the complexity of
+        cellular automata, which is the process of studying a system at different levels of detail or resolution.   Additionally, we identify complex systems with behavior that
+        changes when we manipulate the scale of the system, either by increasing or decreasing its size.
 \begin{figure}[htbp]
   \centering
  \includegraphics[width=.9\linewidth]{figures/rule18_small}
@@ -89,7 +99,7 @@ visible in (b) with a filtering method. This Figure is discussed in more details
         Figure~\ref{fig:ca_lm}, where a \ac{CA} is used to implement a language
         model, a probabilistic model that is used to generate text to complete
         sentences. In Chapter \ref{cha:background}, we explore the similarities
-        between \acp{CA} networks and highlight the numerous potential applications of CAs.
+        between \acp{CA} networks and highlight the numerous potential applications of \acp{CA}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figures/ca_lm}
@@ -128,7 +138,8 @@ potential of cellular automata as a model for studying these phenomena.
 \section{Motivation}\label{sec:motivation}
 
 It is possible that some form of evolutionary mechanism may be necessary in
-order to achieve certain types of AI, particularly if the goal is to create
+order to achieve advanced forms of artificial intelligence (AI), particularly 
+if the goal is to create
 intelligent systems that can adapt and learn in complex and changing
 environments. Complex dynamical systems could be key to overcome the problems
 with existing learning algorithms, such as difficulties in generalization,
@@ -150,8 +161,8 @@ an artificial system to exhibit a path comparable to the natural evolutionary
 process within its state space, which involves the transition from basic 
 constituents to intricate entities. Producing emerging
 phenomena similar to those of nature \emph{in silico} is a long-standing
-challenge. There are many algorithms that attempt to apply evolutionary
-design to solve particular tasks, called evolutionary algorithms
+challenge. There are many algorithms that attempt to mimic evolutionary
+properties to solve particular tasks, called evolutionary algorithms
 \parencite{fogelArtificialIntelligenceSimulated1966,
   ,millerDesigningNeuralNetworks1989, backOverviewEvolutionaryAlgorithms1993}.
 However, many of these methods focus on searching the space of solutions using
@@ -214,10 +225,12 @@ and diverse solutions to deceptive problems.
 \end{figure}
 
 The study of complex systems presents a range of difficult challenges by itself
-\parencite{sanmiguelChallengesComplexSystems2012}. The complexity of a
-system is an emergent property that arises from its intricate structure, its
-number of elements, how it functions, and how it responds to different kinds of
-external influence. For many complex systems, their emergent mechanisms are
+\parencite{sanmiguelChallengesComplexSystems2012}. 
+The complexity of a system is an emergent property that arises from various factors, 
+including its intricate structure, the number of elements it contains, how it functions, 
+and how it responds to different kinds of external influences. These factors contribute 
+to the overall complexity of the system, which could be measured in various ways.
+For many complex systems, their emergent mechanisms are
 poorly understood. We identify four main challenges associated with the study of
 complex systems: (i) the questions of the design choices in defining and sampling a
 complex system (section \ref{sec:design-compl-syst}), (ii) which will in turn define
@@ -230,8 +243,11 @@ achieve some form of control of that system (section \ref{sec:compl-syst-contr})
 
 The first challenge is to construct a suitable complex system. The definition of a 
 complex system is broad, and several systems with
-interesting dynamics have been studied under that name. For example, abstract models such as L-Systems,
-Random Boolean networks, Turing machines, and \Acfp{CA}. In this thesis, we
+interesting dynamics have been studied under that name. For example, abstract models such as L-Systems (formal grammars used to model the growth and development of organic structures),
+Random Boolean networks (dynamical systems that consist of a fixed number of binary nodes 
+that are randomly connected to each other and updated based on the state of its neighboring 
+nodes), Turing machines (abstract deterministic computing machines consisting of a tape and 
+a read-write head), and \Acfp{CA}. In this thesis, we
 focus mainly on the last listed element: the \acl{CA}. There are multiple
 benefits to working with this model. It is very simple to define, and its high
 parallelism makes its implementation straightforward. Moreover, \acp{CA} have
@@ -289,17 +305,24 @@ the connectivity pattern in Chapter \ref{cha:learn-effic-compl}.
 Even if we want complex systems that evolve in unexpected directions and grow in
 an open-ended way without supervision, it may still be useful to steer them
 locally towards specific targets. A major challenge that follows from this goal
-is that many complex systems are chaotic. A deterministic dynamical system is
-said to be chaotic if its evolution is highly sensitive to its initial
-conditions. This is illustrated with a simple \ac{CA} rule in Figure \ref{fig:ca_comp}. 
+is that many complex systems are chaotic. Deterministic dynamical systems can 
+exhibit behavior that is extremely sensitive to their initial conditions. This sensitivity 
+is sometimes referred to as chaos, where even tiny perturbations in the initial conditions 
+can result in significantly different outcomes or trajectories. This is illustrated 
+with a simple \ac{CA} rule in Figure \ref{fig:ca_comp}. 
 Because of this property, it is often very hard to predict how a
 given system will evolve over time, and therefore hard to steer its evolution
-towards a particular final state or along a chosen trajectory. This is an
-advantage for creating open-ended systems, but it can be challenging to apply
-these systems to some basic tasks.
+towards a particular final state or along a chosen trajectory. While it can be challenging 
+to apply these systems to certain basic tasks, their ability to generate unexpected solutions 
+to difficult problems is an advantage in developing open-ended systems. Such systems 
+need to continually produce new and diverse solutions, without a 
+predefined endpoint, and the sensitivity to initial conditions an advantage in 
+achieving this goal.
 
 This problem is also related to the issue of sending a control signal to a
-complex system that depends on the choice of encoding.
+complex system that depends on the choice of encoding for that signal. This
+encoding can significantly impact the system's ability to respond to the control 
+signal and generate the desired outcome. 
 
 \subsection{Complex systems inputs and outputs\label{sec:compl-syst-inputs}}
 
@@ -314,7 +337,8 @@ problem of Section \ref{sec:compl-syst-contr}, because controlling a complex
 system implies being able to send a control signal and read the current
 state of the system.
 
-Throughout this work, we use reservoir computing for this purpose. Reservoir
+Throughout this work, we use a framework called \emph{reservoir computing} (RC) for this 
+purpose. Reservoir
 computing allows one to harvest the internal computations of complex systems, or
 \emph{read} information from its internal state by learning a linear regression
 that maps that internal state to desired outputs (see Section
