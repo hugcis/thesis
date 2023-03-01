@@ -291,11 +291,12 @@ only to date, although rule 54 is postulated to be as well) Turing complete \ac{
 \paragraph{Totalistic cellular automata.}
 Totalistic \ac{CA} are a subset of \ac{CA} whose rules can be expressed as a
 function of the sum of neighboring cell values. These \ac{CA} were introduced by
-Stephen Wolfram \parencite{wolframStatisticalMechanicsCellular1983}. For
-example, \ac{ECA} 150 which rule is shown in Figure \ref{fig:eca_150_rule} is a
-totalistic \ac{CA}. Its rule could be summarized as ``if exactly two states are
-1 or all states are 0, the next state is 0, otherwise if one or three states are
-1, the next state is 1''. Conway's Game of Life, presented in the following paragraph, is an example
+Stephen Wolfram \parencite{wolframStatisticalMechanicsCellular1983}. \ac{ECA} 150 is 
+an example of a totalistic \ac{CA}, and its rule and typical space-time diagram are depicted in Figure~\ref{fig:eca_150_rule} and Figure~\ref{fig:eca_150}. Its rule could be summarized 
+in natural language as 
+``if exactly two states are 1 or all states are 0, the next state is 0, otherwise if 
+one or three states are 1, the next state is 1''. Conway's Game of Life, presented 
+in the following paragraph, is an example
 of a totalistic \ac{CA} in two dimensions.
 
 \paragraph{Game of Life.\label{sec:game-life}}
@@ -451,7 +452,7 @@ cell has 6 direct neighbors.
 
 One advantage of this type of \acp{CA} over regular grids is the absence of
 preferred direction, since they are all equivalent. In a square grid, diagonally
-adjacent cells span more distance than directly adjacent cells, whereas on a
+adjacent cells span more distance than directly adjacent cells, whereas on a   
 hexagonal grid all neighbors are equivalent
 \parencite{moreeHexagonalSquareLattice2004}.
 
@@ -462,7 +463,8 @@ of that system. \ac{CA} are no exception, and several parametrization schemes
 have been proposed, with their respective benefits and drawbacks. There are
 infinitely many ways to define rules for \acp{CA}, and for each of these
 definitions, a very large number of rules are available, making it impossible to
-sample a significant portion of the rule space. A good parametrization allows one to scan a wide range of behavior of \ac{CA} by traversing the space in an
+sample a significant portion of the rule space. A good parametrization allows one 
+to scan a wide range of behavior of \ac{CA} by traversing the space in an
 interesting way.
 
 \paragraph{Langton's lambda\label{sec:langtons-lambda}}
@@ -541,9 +543,8 @@ towards a specific state. For example, the binary game of life rule has 372
 transitions leading to state 0 and 140 leading to state 1. The probability
 of sampling a rule with these transition proportions is $8.24\mathrm{e}{-26}$
 (compared to a $17\%$ probability of sampling a rule with between 254 and 257
-transitions to 0). It is therefore very unlikely that a rule of the type of game
-of life, let alone the rule itself, would be obtained with a uniform transition
-sampling method.
+transitions to 0). Using a uniform transition sampling method makes it highly 
+improbable to obtain a rule resembling the Game of Life, let alone the rule itself.
 
 We propose a Dirichlet sampling method as an alternative way to sample rules
 with fixed ratios of transitions leading to each output state. For a rule with
@@ -670,7 +671,8 @@ discussed in Section~\ref{sec:adding-inputs-outp}.
 
 Each cell $c_i$ from the \ac{CA} definition can be in one of the $k$ states. We
 represent the cells as vectors of size $k$ the number of states, with only
-zeros expected for a one in the $k$-th position. A neighborhood of size $3$ in a
+zeros expected for a one in the $k$-th position, which can be interpreted as a 
+one-hot encoding of the cell state. A neighborhood of size $3$ in a
 1D CA can be represented as a $3 \times k$ vector
 $\mathbf{u}_i = [u_{i-1}, u_{i}, u_{i+1}]$. Each $u_{i}$ is a vector of size $k$
 with a $1$ in position $s_i$. This is illustrated in the 1D (resp. 2D) case on
