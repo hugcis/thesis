@@ -6,11 +6,12 @@ thesis. We begin by describing the \acf{CA} model, which is the complex system
 we focus on in most of the thesis (Section \ref{sec:cellular-automata-sec}).
 Next, we describe the similarities between \acp{CA} and \acfp{RNN}, which is
 useful for understanding the characteristics and applications these two models
-share (Section \ref{sec:cell-autom-rnns}). \acp{CA} can be completely reformulated as a special case of \acp{RNN}. With this reformulation, using
-\acp{CA} as a replacement of \acp{RNN} becomes natural for several use cases. We
+share (Section \ref{sec:cell-autom-rnns}). \acp{CA} can be completely reformulated 
+as a special case of \acp{RNN}. This reformulation makes it natural to replace 
+recurrent \acp{RNN} with \acp{CA} in several use cases. We
 describe the \acf{RC} model (Section \ref{sec:res-models}), which enables
-sending inputs to and harvesting the computations of complex systems to solve
-problems, which we apply in Chapter~\ref{cha:learn-effic-compl}. This model was
+sending inputs to and harvesting the computations of complex systems to perform machine learning tasks, without requiring explicit knowledge of the underlying system dynamics or the need to solve complex optimization problems.
+ We apply reservoir computing to sequential language-like tasks in Chapter~\ref{cha:learn-effic-compl}. This model was
 developed with \acp{RNN}, but we describe how \acp{CA} and other complex systems
 can be a suitable replacement and the benefits of this approach.
 
@@ -38,7 +39,7 @@ general form:
 \begin{equation}
   \begin{aligned}
 \boldsymbol{N}_{\mathcal{L}} :\quad & \mathcal{S} \rightarrow \mathcal{S}^{s}\\
-&c_{i} \mapsto [c_{j}]_{j\in \mathcal{N}_{c_{i}}},
+&{c_i} \mapsto [{j}]_{j\in \mathcal{N}_{c_{i}}},
   \end{aligned}
 \end{equation}
 where $\mathcal{N}_{c_{i}}$ is the neighborhood of cell $c_{i}$, $s$ is the
@@ -52,9 +53,9 @@ adjacent cells. This type of 1D neighborhood is usually associated with a
   \begin{aligned}
 \boldsymbol{N}_{\mathcal{L}_{T_{10}}} :\quad & \mathcal{S} \rightarrow \mathcal{S}^{3} \\
 &\boldsymbol{N}_{\mathcal{L}_{T_{10}}}(c_{i}) = \begin{cases}
-                      [c_{i - 1}, c_{i}, c_{i + 1}],& \text{if}\quad i \in \{2,\ldots , 9\}\\
-                       [c_{10}, c_{1}, c_{2}], & \text{if} \quad i = 1 \\
-                       [c_{9}, c_{10}, c_{1}], & \text{if} \quad i = 10. \\
+                      [{i - 1}, {i}, {i + 1}],& \text{if}\quad i \in \{2,\ldots , 9\}\\
+                       [{10}, {1}, {2}], & \text{if} \quad i = 1 \\
+                       [{9}, {10}, {1}], & \text{if} \quad i = 10. \\
                     \end{cases}
   \end{aligned}
   \label{eq:torus_index}
@@ -102,11 +103,12 @@ step 0 --- \ie a set of cells $\left(c_{i}^{(0)}\right)_{i \in \mathcal{L}} \in 
 neighborhood function $\boldsymbol{N}$, we have the following update rule:
 \begin{equation}
 \begin{aligned}
-\forall i \in \mathcal{L}, \quad c_{i}^{(t + 1)} = \boldsymbol{\Phi}\left(\boldsymbol{N}\left(c_{i}^{(t)}\right)\right).
+\forall i \in \mathcal{L}, \quad c_{i}^{(t + 1)} = \boldsymbol{\Phi}\left(
+\left(c_{j}^{(t)}\right)_{j \in \boldsymbol{N}(c_i)}\right).
 \end{aligned}
 \end{equation}
 
-The details of an update step in a 1 dimensional \ac{CA} is shown on Figure
+The details of an update step in a 1 dimensional \ac{CA} is shown in Figure
 \ref{fig:ca_base} for example. The neighborhood of the cell $c_{i}$ is $c_{i}$
 itself, as well as its two immediately adjacent cells.
 
@@ -125,28 +127,30 @@ states. In an implementation of the \ac{CA} model, these output states can be
 looked up from a table containing all possible transitions from inputs to
 outputs.
 
-\paragraph{Rule representation}
+\paragraph{Rule representation.}
 A useful rule representation can be obtained by listing all output states
-corresponding to input configurations in a predetermined order. This results in
-a list of values $[o_1, \ldots, o_{s^{|\mathcal{S}|}}]$, with $\forall i,\ o_{i} \in \mathcal{S}$, where $s$ is
+corresponding to input neighborhood configurations in a predetermined order. This 
+results in a list of values $[o_1, \ldots, o_{s^{|\mathcal{S}|}}]$, with 
+$\forall i,\ o_{i} \in \mathcal{S}$, where $s$ is
 the number of cells in a neighborhood, $\mathcal{S}$ is the space of available states, and
 $|\mathcal{S}|$ is the number of available states per cell. Using $o_{i}$ as the
 digits of a base-$|\mathcal{S}|$ number, each rule is uniquely represented by a number.
-For example, as explained in more details in Section \ref{sec:elem-cell-autom},
-the 256 binary rules in one dimension with neighborhood size 3 can be numbered
+For example, as explained in more detail in Section \ref{sec:elem-cell-autom},
+a one-dimensional cellular automaton with a neighborhood of size 3 has 8 possible configurations of neighboring cells (000, 001, 010, 011, 100, 101, 110, and 111), each of which can map to 2 states (0 or 1), resulting in a total of 256 possible input configurations. To obtain the rule number, we concatenate the new states for each of the input configurations, resulting in an 8-bit number. 
+The 256 binary rules in one dimension with neighborhood size 3 can be numbered
 from 0 to 255, and are referred to by their number in the literature.
 
-\paragraph{Boundary conditions}
+\paragraph{Boundary conditions.}
 The grid of a \ac{CA} can be finite or infinite. In the infinite case, the grid
 is assumed to be initialized to a uniform state, except for a few cells set to
 other states. The simulation is then run on these few cells, while the rest of
 the infinite grid does not have to be simulated from the start. For a finite
 grid, an exhaustive simulation can be run, but one needs to define
-boundary conditions. The boundaries can be set to wrap to the other side of the
+boundary conditions. The boundaries can be set to wrap around the other side of the
 grid, forming a torus. An example of the corresponding indexing is given in
-\eqref{eq:torus_index}. Other choices of boundary condition consists in adding
+\eqref{eq:torus_index}. Other choices of boundary condition consist of adding
 virtual padding cells outside of the main grid. They can be set to a fixed
-state, a randomly chosen state, or mirror the cells on the inside of the grid.
+state, a randomly chosen state, or they can mirror the cells inside the grid.
 Each of these choices affects the evolution and properties of the \ac{CA}, but
 the importance of these boundaries decreases for very large grids.
 
@@ -162,18 +166,18 @@ classifications in dynamical systems theory, with four classes defined as
 follows.
 
 \begin{description}
-  \item[Class 1] All initial configurations relax after a transient
-        period to the same fixed configuration (e.g., all 1s).
+  \item[Class 1] All initial configurations converge to a single fixed configuration, such as a configuration consisting entirely of ones.
   \item[Class 2] All initial configurations relax after a transient period to some
         fixed point or some temporally periodic cycle of configurations, but
         which one depends on the initial configuration. (\ac{CA} defined on
-        finite lattices always have a periodic behavior because there
+        finite lattices always have periodic behavior because there
         is only a finite number of grid configurations. Class 2 does not refer to
         this type of periodic behavior, but rather to cycles with periods much
         shorter than the total number of possible states).
-  \item[Class 3] All initial configurations quickly exhibit chaotic behavior
-        after a transient period. (The term “chaotic” here refers to
-        apparently unpredictable space-time behavior.)
+  \item[Class 3] All initial configurations exhibit chaotic behavior
+        after a short transient period. (The term “chaotic” here refers to
+        apparently unpredictable space-time behavior, not the standard notion 
+        of chaos in dynamical system theory.)
   \item[Class 4] Some initial configurations result in complex localized
         structures that can persist for a long time.
 \end{description}
@@ -183,7 +187,7 @@ clear consensus on which of the \acp{ECA} rules belong to class 4 or class 3.
 Class 4 \ac{CA} rules are speculated to be capable of universal computation
 \parencite{wolframUniversalityComplexityCellular1984}. For example,
 \textcite{liStructureElementaryCellular1990} claimed that \ac{ECA} rule 110 has
-class 4 behavior, and was eventually proven to be universal
+class 4 behavior and was eventually proven to be universal
 \parencite{cookUniversalityElementaryCellular2004}, but no other \ac{ECA} has
 been proven universal since.
 
@@ -278,15 +282,15 @@ assign 1 to the black state and 0 to the white state, the possible neighborhood
 configurations are ordered in their binary order from right to left, with the
 leftmost bit being the most significant. This is how the rule number is
 computed, using the output states (last row in Figure \ref{fig:eca_150_rule}) as
-a binary representation. Example simulations of the \ac{ECA} rule 150 starting 
-from various initial states are shown on Figure~\ref{fig:eca_150}. In these 
+a binary representation. Example simulations of \ac{ECA} rule 150 starting 
+from various initial states are shown in Figure~\ref{fig:eca_150}. In these 
 representations, time flows from top to bottom, and each row of cells represents 
-a single CA internal state at a single time step.
+a single internal \ac{CA} state at a single time step.
 
 There are several well-known \ac{ECA} rules with particularly interesting
 properties. For example, a universal computer has been constructed in rule 110
 \parencite{cookUniversalityElementaryCellular2004}, making it the first (and
-only to date, although rule 54 is postulated to be as well) Turing complete \ac{ECA}.
+only to date, although \ac{ECA} rule 54 is postulated to be as well) Turing complete \ac{ECA}.
 
 \paragraph{Totalistic cellular automata.}
 Totalistic \ac{CA} are a subset of \ac{CA} whose rules can be expressed as a
@@ -300,7 +304,7 @@ in the following paragraph, is an example
 of a totalistic \ac{CA} in two dimensions.
 
 \paragraph{Game of Life.\label{sec:game-life}}
-The game of life is one of the most famous \ac{CA}. It was proposed by
+The game of life is one of the most famous \ac{CA}. It was proposed by the
 mathematician John Conway in 1970 \parencite{gardnerMathematicalGames1970}. It
 is a two-dimensional binary \ac{CA}. Its two states are often called ``alive''
 and ``dead''. Its rule can be summarized in three sentences as follows.
@@ -367,7 +371,7 @@ preferentially update cells in active or useful parts of \ac{CA} while doing
 slower updates to the less active parts of \ac{CA}. An asynchronous \ac{CA}
 with evolutionary properties was constructed in
 \parencite{nehanivEvolutionAsynchronousCellular2003}. The authors argue that
-asynchronicity is a strong advantage in constructing systems that can evolve
+asynchronicity is a strong advantage in the construction of systems that can evolve
 within \acp{CA}.
 
 \paragraph{Stochastic cellular automata}
@@ -397,11 +401,11 @@ write
   \label{eq:phi_cont}
 \end{equation}
 
-Examples of continuous \ac{CA} include Lenia which uses convolutional operators
+Examples of continuous \ac{CA} include Lenia, which uses convolutional operators
 followed by thresholding for the update rule
 \parencite{chanLeniaBiologyArtificial2019a}, or \acp{NCA}
 \parencite{mordvintsevGrowingNeuralCellular2020} which represents \acp{CA} as
-neural networks (more details in Section \ref{sec:cell-autom-rnns} and
+neural networks (more details in Sections \ref{sec:cell-autom-rnns} and
 \ref{sec:neur-cell-autom}). \textcite{garzonRealComputationCellular1993}
 explores the condition for a real-valued \ac{CA} to be able to compute
 real-valued functions.
@@ -491,10 +495,10 @@ manner by varying the value of the parameter. His procedure starts with a rule
 with all transitions leading to the quiescent state. The value of $\lambda$ is
 increased in discrete steps to $1 - 1 / K^{n}$ by randomly changing the
 transitions of the rule to lead to a different state. An illustration of the
-behavior change of a \ac{CA} rule under this procedure is shown on figure
+behavior change of a \ac{CA} rule under this procedure is shown in Figure
 \ref{fig:langton_lambda}. Langton collected various measures of the dynamical
 behavior of \ac{CA} and studied them as a function of $\lambda$. He observes a phase
-transition as $\lambda$ approaches its maximal value, where the \acp{CA} seem to behave
+transition as $\lambda$ approaches its maximal value, where \acp{CA} seem to behave
 in the most complex way, with long transients and large-scale propagating
 structures. He calls this phase transition ``edge of chaos'' because it
 corresponds to $\lambda$ values just before the generated \acp{CA} become
@@ -552,7 +556,7 @@ $K$ states, we sample a $K$-uple from a Dirichlet distribution of order $K$ with
 parameters $(\alpha_{k})_{k\in [1, K]}$ where $\alpha_{0} = \alpha_{1} = \ldots = \alpha_{K} = \alpha < 1$. The
 result is a quantile $K$-uple $(q_{1}, \ldots, q_{K})$. For $\alpha < 1$, the distribution
 is concentrated around the corners of a simplex of dimension $K$, which means
-that it preferably samples a tuple with one of their values dominating the others.
+that it preferably samples a tuple with one of its values dominating the others.
 
 Rules are sampled so that the number of transitions to each output state matches
 the quantile generated from the Dirichlet distribution. The samples will be more
@@ -598,7 +602,7 @@ convolutional neural networks have very strong connections and to draw this
 parallel as clearly as possible. We express the \ac{CA} update function as a set
 of convolutional operations that can be derived from any \ac{CA} rule.
 
-This connection yields interesting consequences both for the theoretical
+This connection yields interesting consequences for both the theoretical
 properties of these models and the potential applications of \acp{CA} and
 recurrent networks. It shows, for instance, that emergent properties with
 increasing complexity and perhaps open-ended development that we expect from
@@ -623,7 +627,7 @@ been drawn by several other researchers
   gilpinCellularAutomataConvolutional2018,
   mordvintsevGrowingNeuralCellular2020}.
 
-In this section we formally describe the relation between \acp{CA} and \acp{RNN}
+In this section, we formally describe the relation between \acp{CA} and \acp{RNN}
 and discuss the extensions this implies for the \ac{CA} model as well as some of
 the consequences of that relation.
 
@@ -653,7 +657,7 @@ the consequences of that relation.
     followed by the application of a non-linear function.}
 \end{figure}
 
-We write the definition of a \ac{CA} with a formalism and notation inspired by the \ac{RNN}. This parallel is illustrated in figures \ref{fig:ca_cnn} and
+We write the definition of a \ac{CA} with a formalism and notation inspired by \acp{RNN}. This parallel is illustrated in figures \ref{fig:ca_cnn} and
 \ref{fig:standard_rnn}. The state of the grid at time $t$ is denoted $h_t$ and
 corresponds to the hidden state in a RNN\@. In the case of classical \acp{CA},
 it is a 1 or 2D vector of discrete values (see Section \ref{sec:definition}),
@@ -752,7 +756,7 @@ learning such as NLP or computer vision
 
 \subsection{Adding inputs and outputs\label{sec:adding-inputs-outp}}
 
-Figure~\ref{fig:standard_rnn} shows clearly where inputs and outputs could
+Figure~\ref{fig:standard_rnn} clearly shows where inputs and outputs could
 be added to the Game of Life or any other \ac{CA}. We list many possible forms
 that the addition of input and output can take and how it can interact with the \ac{CA} rule.
 
@@ -765,7 +769,7 @@ hidden state without changing it directly and affect the rule.
 
 \paragraph{Hidden-state augmentation and rule modulation.}
 Inputs are usually added to the hidden state just before the application of the
-nonlinearity in standard RNNs.
+non-linearity in standard RNNs.
 
 In the case of cellular automata, it can also be done in the following ways:
 
@@ -782,7 +786,7 @@ In the case of cellular automata, it can also be done in the following ways:
         dimension. For example, a 1D automaton would actually be represented by
         a vector of dimension $N\times 2$ where the first vector of size $N$ is the
         state of the grid and the other is the input. The update rule would be
-        changed to add this new component into account. One can see this model
+        changed to take this new component into account. One can see this model
         as using multiple CA rules at the same time, with the input state
         conditioning the rule being chosen for a given update step.
 
@@ -800,7 +804,7 @@ In the case of cellular automata, it can also be done in the following ways:
 
   \item \textbf{Concatenation.} Input can be concatenated to the hidden state (\eg~on
         the grid boundaries) before applying the update rule, forming a sort of
-        fixed read-only memory space. The concatenation is illustrated in
+        fixed read-only memory space. Concatenation is illustrated in
         Figure~\ref{fig:concat}. A possible disadvantage of this method is the
         fact that information needs to propagate through the grid if it is to be
         processed far from where the read-only memory was positioned.
@@ -864,18 +868,18 @@ above.
 \subsubsection{Cellular automata and computations}
 
 From a computational point of view, the hidden state can be seen as a working
-tape that some kind of \emph{parallel Turing machine} (the cellular automaton)
-is performing computations on. In this framework, the input is encoded as the
+tape on which some kind of \emph{parallel Turing machine} (the cellular automaton)
+performs computations. In this framework, the input is encoded as the
 initial state of the tape and decoded from the last state of the tape (as
-illustrated on Figure~\ref{fig:encode_decode}). The recurrent convolutional
+illustrated in Figure~\ref{fig:encode_decode}). The recurrent convolutional
 neural network (RCNN), or \ac{CA}, then plays the role of a fixed computer
-program which is executed. This is the setting adopted in previous works on
-constructing computations with cellular automata: a task is chosen, and one
-searches for rules which can execute that task on input/output
-pairs~\parencite{mitchellComputationCellularAutomata2005}. Previous successes
+program that is executed. This is the setting adopted in previous work on
+constructing computations with cellular automata: a task is chosen and rules that 
+can execute that task on input/output pairs
+are searched~\parencite{mitchellComputationCellularAutomata2005}. Previous successes
 with \acp{RNN} demonstrate that this model is powerful enough to learn complex
 functions when the grid is made of continuous numbers and the transformation is
-not local thanks to optimization, for instance in language modeling.
+not local thanks to optimization, for instance, in language modeling.
 
 However, another interesting point of view can be taken when we consider the
 hidden state (or tape) as encoding both some data and a computer program, as is

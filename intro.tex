@@ -56,7 +56,7 @@ This objective is broken down into the following subgoals:
   \caption{A \acl{CA} with visible emergent structures.}
   \label{fig:structured_sys}
 \end{subfigure}
-\caption{Two examples of complex systems (\acf{CA}) with different behavior
+\caption{Two examples of complex systems (cellular automata) with different behavior
   types. \ref{fig:structured_sys} and \ref{fig:disordered_sys} show a single state 
   of a randomly initialized 2D \ac{CA} simulated for a fixed number of steps. Some \acp{CA} 
   appear more promising than others for the design of
@@ -68,8 +68,8 @@ This objective is broken down into the following subgoals:
 
   \item The second subgoal is to measure the fraction of systems that have the most complex and rapidly
         evolving behavior. Defining these notions is also part of the goal.
-        This subgoal is distinct from the first one, which focuses on complex system design in 
-        general. Instead, this subgoal involves establishing approaches to evaluate growth 
+        This sub-goal is distinct from the first one, which focuses on complex system design in 
+        general. Instead, this sub-goal involves establishing approaches to evaluate growth 
         in complexity.
         We believe that systems with the most complex and rapidly
         evolving behavior are promising for further use since
@@ -127,9 +127,9 @@ We are particularly interested in systems that can develop through
 internal evolution rules without any input, which is the case for many complex
 systems.
 
-Throughout the thesis, we work toward achieving these goals, focusing on one
+Throughout the thesis, we work towards achieving these goals, focusing on one
 particular complex system: the \acl{CA} \parencite{vonneumannTheorySelfreproducingAutomata1966}. This model has been extensively studied
-due to its simple definition and ability to simulate a wide range of complex
+due to its simple definition and its ability to simulate a wide range of complex
 behaviors. We provide a detailed description of cellular automata in Section
 \ref{sec:cellular-automata-sec}. This thesis provides new insights into the role
 of learning in complex systems and open-ended evolution and demonstrates the
@@ -141,7 +141,7 @@ It is possible that some form of evolutionary mechanism may be necessary in
 order to achieve advanced forms of artificial intelligence (AI), particularly 
 if the goal is to create
 intelligent systems that can adapt and learn in complex and changing
-environments. Complex dynamical systems could be key to overcome the problems
+environments. Complex dynamical systems could be the key to overcome the problems
 with existing learning algorithms, such as difficulties in generalization,
 robustness, or the ability to learn continuously
 \parencite{parisiContinualLifelongLearning2019}. The natural intelligence of
@@ -180,7 +180,7 @@ the family of algorithms used for learning from unlabeled data, objectives are
 still central. For example, the well-known K-means clustering algorithm minimizes
 the sum of square distances to cluster centers.
 
-This reliance on objective functions creates two main issues: (i) the objective
+This reliance on objective functions creates two main issues: (i) The objective
 is not always clearly defined or can be too broad for general-purpose
 applications. For example, a possible objective function of a walking robot
 could be ``not fall when stepping through its surrounding environment''. This
@@ -228,7 +228,7 @@ The study of complex systems presents a range of difficult challenges by itself
 \parencite{sanmiguelChallengesComplexSystems2012}. 
 The complexity of a system is an emergent property that arises from various factors, 
 including its intricate structure, the number of elements it contains, how it functions, 
-and how it responds to different kinds of external influences. These factors contribute 
+and how it responds to different types of external influences. These factors contribute 
 to the overall complexity of the system, which could be measured in various ways.
 For many complex systems, their emergent mechanisms are
 poorly understood. We identify four main challenges associated with the study of
@@ -312,11 +312,11 @@ can result in significantly different outcomes or trajectories. This is illustra
 with a simple \ac{CA} rule in Figure \ref{fig:ca_comp}. 
 Because of this property, it is often very hard to predict how a
 given system will evolve over time, and therefore hard to steer its evolution
-towards a particular final state or along a chosen trajectory. While it can be challenging 
+towards a particular final state or along a chosen trajectory. Although it can be challenging 
 to apply these systems to certain basic tasks, their ability to generate unexpected solutions 
-to difficult problems is an advantage in developing open-ended systems. Such systems 
+to difficult problems is an advantage for the development of open-ended systems. Such systems 
 need to continually produce new and diverse solutions, without a 
-predefined endpoint, and the sensitivity to initial conditions an advantage in 
+predefined endpoint, and the sensitivity to initial conditions is an advantage in 
 achieving this goal.
 
 This problem is also related to the issue of sending a control signal to a
@@ -327,8 +327,8 @@ signal and generate the desired outcome.
 \subsection{Complex systems inputs and outputs\label{sec:compl-syst-inputs}}
 
 Some of the complex systems we study in this thesis are closed systems. They do
-not expect inputs or have any well-defined outputs. For example, \ac{CA} and
-\ac{RBN} do not have a notion of inputs and outputs built into the model. They
+not expect inputs or have well-defined outputs. For example, \ac{CA} and
+\ac{RBN} do not have the notion of inputs and outputs built into the model. They
 are standalone objects that evolve according to a set of internal rules.
 
 A common challenge for such systems is to define the inputs and outputs in a way
@@ -353,9 +353,9 @@ Another challenge is posed by the lack of a clear objective in the design of
 unsupervised learning systems. Even without an objective, it is still essential
 to understand which complex systems to choose from all available options or how
 to tune their parameters so that they behave in interesting ways. For example,
-\acp{CA} such as the one shown in Figure \ref{fig:disordered_sys} are unlikely 
-to be useful for constructing systems that demonstrate a growth of complexity 
-due to their disordered nature in both space and time. As a result, they cannot
+\acp{CA} such as the one shown in Figure \ref{fig:disordered_sys} is unlikely 
+to be useful for building systems that demonstrate a growth of complexity 
+due to their disordered nature in both space and time. Because of this disordered behavior, they cannot
 preserve information about the past.
 
 Because our goal is to create a system that has the property of evolving in an
@@ -395,8 +395,7 @@ The main contributions of this thesis are as follows.
 Chapter \ref{cha:background} presents some background notions about complex
 systems, cellular automata, and reservoir computing.
 
-In Chapter \ref{cha:literature-review}, we review relevant methods and tools for
-measuring the complexity of complex systems and using their computations for
+In Chapter \ref{cha:literature-review}, we review relevant methods and tools to measure the complexity of complex systems and use their computations for
 various tasks.
 
 Chapter \ref{cha:meas-compl-evolv} introduces a complexity metric that allows us 
@@ -418,7 +417,7 @@ than usual machine learning algorithms in constrained data and computation
 settings.
 
 Chapter \ref{cha:future_work} outlines potential avenues for further research in 
-the field. It provides suggestions for how the current work could be expanded or 
+the field. It provides suggestions on how the current work could be expanded or 
 improved, highlighting areas that require additional investigation to advance the 
 understanding of the subject. We propose some experiments that could extend the 
 potential applications of cellular automata, as well as a theoretical framework 
