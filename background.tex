@@ -367,8 +367,8 @@ to predict and can make these types of \acp{CA} relatively difficult to work wit
 
 Asynchronous \acp{CA} are an appealing model when using large systems for which
 parallel update is prohibitively expensive. The rule could adapt itself and
-preferentially update cells in active or useful parts of \acp{CA} while doing
-slower updates to the less active parts of \acp{CA}. An asynchronous \ac{CA}
+preferentially update cells in active or useful parts of the \ac{CA} while doing
+slower updates to the less active parts of the \ac{CA}. An asynchronous \ac{CA}
 with evolutionary properties was constructed in
 \parencite{nehanivEvolutionAsynchronousCellular2003}. The authors argue that
 asynchronicity is a strong advantage in the construction of systems that can evolve
@@ -384,7 +384,7 @@ configuration. We can write
   \forall i \in \mathcal{L},\ s \in \mathcal{S} \quad p\left(c_{i}^{(t + 1)} = s \right) = \boldsymbol{\Phi} \left(\boldsymbol{N}\left(c_{i}^{(t)}\right)\right)(s).
 \end{aligned}
 \end{equation}
-These \ac{CA} have had successful applications in physics
+These \acp{CA} have had successful applications in physics
 \parencite{vichniacSimulatingPhysicsCellular1984,
   ottaviSimulationIsingModel1989} or biology
 \parencite{boasCellularPottsModel2018}, because their stochasticity allows
@@ -404,13 +404,13 @@ write
 Examples of continuous \acp{CA} include Lenia, which uses convolutional operators
 followed by thresholding for the update rule
 \parencite{chanLeniaBiologyArtificial2019a}, or \acp{NCA}
-\parencite{mordvintsevGrowingNeuralCellular2020} which represents \acp{CA} as
+\parencite{mordvintsevGrowingNeuralCellular2020} which represent \acp{CA} as
 neural networks (more details in Sections \ref{sec:cell-autom-rnns} and
 \ref{sec:neur-cell-autom}). \textcite{garzonRealComputationCellular1993}
 explores the condition for a real-valued \ac{CA} to be able to compute
 real-valued functions.
 
-\paragraph{Higher dimensional cellular automata}
+\paragraph{Higher dimensional cellular automata.}
 \acp{CA} of dimension greater than 2 have been comparatively less studied for
 several reasons, including the limits that arise when simulating and visualizing
 systems in more than 2 dimensions on a computer screen. Another problem is with
@@ -419,20 +419,20 @@ neighbors per cell grows exponentially with dimension, and the number of
 possible rules has a doubly exponential growth rate. This makes the
 convenient representation of \acp{CA} rules as tables infeasible, since the size
 of that table quickly exceeds the available memory of most computers. For
-example, there are $2^{512} \approx 10^{154}$ possible 2D rules with 2 states and a
-Moore neighborhood, which is already an incomprehensibly large number, but there
-are $2^{134,217,728} \approx 10^{40,403,562}$ such rules in 3D.
+example, there are $2^9 = 512$ possible $3\times 3$ configurations of a binary Moore neighborhood (see \ref{fig:moore}) in 2D that can each lead to 2 states, which means there exists $2^{512} \approx 10^{154}$ distinct 2D rules with 2 states and a
+Moore neighborhood. This is already an incomprehensibly large number, but there
+are $2^{134,217,728} \approx 10^{40,403,562}$ such rules in 3D. In general, in dimension $n$ there are $2^{3^n}$ possible binary \ac{CA} rules with a Moore-like neighborhood.
 
-Despite these limitations, several works have studied higher dimensions \acp{CA},
+Despite these limitations, several works have studied higher dimensional \acp{CA},
 although mostly in 3 dimensions
 \parencite{tsalidesThreedimensionalCellularAutomata1989,
   sudhakaranGrowing3DArtefacts2021}. For example, there are several examples of
-successful 3D \acp{CA} simulations applied to material sciences
+successful 3D \ac{CA} simulations applied to material sciences
 \parencite{gandin3DCellularAutomaton1997, arataFreeformShapeModeling1999,
   panStudyFailureScale2009, dicaprio3DCellularAutomata2016}.
 
-\paragraph{Hexagonal cellular automata}
-Hexagonal cellular automata are defined on grids tiled with hexagons, where each
+\paragraph{Hexagonal cellular automata.}
+Hexagonal \acp{CA} are defined on grids tiled with hexagons, where each
 cell has 6 direct neighbors.
 
 \begin{figure}[htbp]
@@ -463,15 +463,15 @@ hexagonal grid all neighbors are equivalent
 \subsection{Parametrizing and sampling CA rules}
 As explained in Section \ref{sec:challenges}, one of the main challenges of
 working with complex systems is the parametrization and control of the behavior
-of that system. \ac{CA} are no exception, and several parametrization schemes
+of that system. \acp{CA} are no exception, and several parametrization schemes
 have been proposed, with their respective benefits and drawbacks. There are
 infinitely many ways to define rules for \acp{CA}, and for each of these
 definitions, a very large number of rules are available, making it impossible to
 sample a significant portion of the rule space. A good parametrization allows one 
-to scan a wide range of behavior of \ac{CA} by traversing the space in an
+to scan a wide range of behaviors of \acp{CA} by traversing the space in an
 interesting way.
 
-\paragraph{Langton's lambda\label{sec:langtons-lambda}}
+\paragraph{Langton's lambda\label{sec:langtons-lambda}.}
 
 Christopher Langton proposed one of the first parameters that could be used to
 control the behavior of \acp{CA} to a certain extent
@@ -490,7 +490,7 @@ have
   \end{aligned}
 \end{equation}
 
-For Langton, the purpose of $\lambda$ is to search the space of \ac{CA} in an ordered
+For Langton, the purpose of $\lambda$ is to search the space of \acp{CA} in an ordered
 manner by varying the value of the parameter. His procedure starts with a rule
 with all transitions leading to the quiescent state. The value of $\lambda$ is
 increased in discrete steps to $1 - 1 / K^{n}$ by randomly changing the
@@ -516,7 +516,7 @@ chaotic.
   \label{fig:langton_lambda}
 \end{figure}
 
-\paragraph{Dirichlet sampling}
+\paragraph{Dirichlet sampling.}
 For an arbitrary number of states and an arbitrary neighborhood size, it can be
 challenging to sample \acp{CA} while scanning the wide range of behavior these
 models are capable of simulating. This is because the size of the space of
@@ -543,7 +543,7 @@ The probability mass function of this distribution is
 
 This quantity becomes vanishingly small for large $n$ (that is rules with many
 states or large neighborhoods) and rules with an output transition skewed
-towards a specific state. For example, the binary game of life rule has 372
+towards a specific state. For example, the binary Game of Life rule has 372
 transitions leading to state 0 and 140 leading to state 1. The probability
 of sampling a rule with these transition proportions is $8.24\mathrm{e}{-26}$
 (compared to a $17\%$ probability of sampling a rule with between 254 and 257
@@ -563,7 +563,7 @@ the quantile generated from the Dirichlet distribution. The samples will be more
 likely to have a dominant quantile, which can be associated with the quiescent
 state in Langton's $\lambda$ calculation. The resulting sampling of cellular automata
 is much better for scanning the entire space of rules and generating \ac{CA}
-rules that would be unreachable with the naive sampling method, as illustrated
+rules that would be impossible to reach with the naive sampling method, as illustrated
 in Figure \ref{fig:ca_rule_sampling}.
 
 \begin{figure}[htbp]
@@ -576,7 +576,7 @@ in Figure \ref{fig:ca_rule_sampling}.
     state close to 0.5, meaning approximately as many transitions towards both
     states. Dirichlet sampling can control, through the choice of parameter $\alpha$,
     how much rules with more skewed transitions should be sampled which is
-    visible with the spiked on the blue histogram close to 0 and 1.}
+   shown by the spikes on the blue histogram close to 0 and 1.}
   \label{fig:ca_rule_sampling}
 \end{figure}
 
@@ -586,7 +586,7 @@ in Figure \ref{fig:ca_rule_sampling}.
 The recurrent convolutional network analogy of \acp{CA} (see Section
 \ref{sec:cell-autom-rnns} for details) formulates a \ac{CA} as a neural network.
 In this paradigm, the rule of a \ac{CA} is completely determined by the parameters
-of that neural network. This allows modifying the \ac{CA} rules like we would
+of that neural network. This allows us to modify the \ac{CA} rules as we would
 change the weights of a neural network. For example, as long as all simulation
 steps are differentiable, the backpropagation algorithm can be applied and used
 to update a \ac{CA} rule by updating the weights of the neural network with
@@ -595,7 +595,7 @@ space of the neural network can help to understand the structure of that space a
 the \acp{CA} behaviors produced by different sets of parameters.
 
 
-\section{Cellular automata and RNNs}\label{sec:cell-autom-rnns}
+\section{Cellular automata and Recurrent neural networks}\label{sec:cell-autom-rnns}
 
 The purpose of this section is to show that cellular automata and recurrent
 convolutional neural networks have very strong connections and to draw this
@@ -616,9 +616,10 @@ very simple parts rather than being viewed as a sum of complex building blocks. 
 often argued that there is no better known example of a truly emergent
 phenomenon than that of the emergence of consciousness out of the large network
 of functionally simple (and certainly unconscious) neuronal components that make
-up the human brain. A biological neural network, such as a \ac{CA}, consists of a
+up the human brain. A biological neural network consists of a
 large space of interconnected nodes, with dynamic behavior that is a local
-function of the other nodes to which it is connected. Artificial neural networks can
+function of the other nodes to which it is connected, which is strikingly similar
+to a \ac{CA}. Artificial neural networks can
 be thought of as being a set of biologically inspired CA rules
 \parencite{ilachinskiCellularAutomataDiscrete2001}. The more precise parallel
 between cellular automata and a form of recurrent/convolutional network has also
@@ -628,7 +629,7 @@ been drawn by several other researchers
   mordvintsevGrowingNeuralCellular2020}.
 
 In this section, we formally describe the relation between \acp{CA} and \acp{RNN}
-and discuss the extensions this implies for the \ac{CA} model as well as some of
+and discuss the extensions this implies for the \ac{CA} model, as well as some of
 the consequences of that relation.
 
 \subsection{RNN formalism}
@@ -657,8 +658,7 @@ the consequences of that relation.
     followed by the application of a non-linear function.}
 \end{figure}
 
-We write the definition of a \ac{CA} with a formalism and notation inspired by \acp{RNN}. This parallel is illustrated in figures \ref{fig:ca_cnn} and
-\ref{fig:standard_rnn}. The state of the grid at time $t$ is denoted $h_t$ and
+We write the definition of a \ac{CA} with a formalism and notation inspired by \acp{RNN}. This parallel is illustrated in Figures~\ref{fig:standard_rnn} and \ref{fig:ca_cnn}. The state of the grid at time $t$ is denoted $h_t$ and
 corresponds to the hidden state in a RNN\@. In the case of classical \acp{CA},
 it is a 1 or 2D vector of discrete values (see Section \ref{sec:definition}),
 but~\parencite{mordvintsevGrowingNeuralCellular2020} and other \acp{CA}
