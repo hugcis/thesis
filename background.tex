@@ -637,8 +637,8 @@ the consequences of that relation.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figures/rnn_and_gol.pdf}
-  \caption{\label{fig:standard_rnn} Standard RNN architecture (left) and Game of
-    Life seen as a RNN with no inputs and outputs (right). For the \ac{CA}, the
+  \caption{\label{fig:standard_rnn} Standard RNN architecture (top) and Game of
+    Life seen as a RNN with no inputs and outputs (bottom). For the \ac{CA}, the
     ``hidden'' state $h_t$ is the current state of the grid at timestep $t$. The
     operator $\boldsymbol{\Phi}$ is the \ac{CA} update rule which is
     equivalent to a \ac{CNN} (see Section~\ref{sec:transition-rule-as}). This
@@ -654,7 +654,7 @@ the consequences of that relation.
   \centering
   \includegraphics[width=.3\linewidth]{figures/ca_cnn}
   \caption{\label{fig:ca_cnn}The CA update rule is local and can be represented
-    by a convolutional neural networks: linear local uniform transformations
+    by a set of \acp{CNN}: linear local uniform transformations
     followed by the application of a non-linear function.}
 \end{figure}
 
@@ -668,14 +668,14 @@ The transformation $\Phi$ operates only on the hidden state. Because it is local
 it can be shown to be equivalent to a convolutional layer, as explained below in
 Section~\ref{sec:transition-rule-as}. The inputs and outputs
 $(\mathbf{x}, \mathbf{o})$ in Figure \ref{fig:standard_rnn} are not included
-in the classical definition of \acp{CA}, but are an easy to implement extension as
+in the classical definition of \acp{CA}, but are an easy to implement extension, as
 discussed in Section~\ref{sec:adding-inputs-outp}.
 
 \subsection{Transition rule as a set of convolutions\label{sec:transition-rule-as}}
 
 Each cell $c_i$ from the \ac{CA} definition can be in one of the $k$ states. We
-represent the cells as vectors of size $k$ the number of states, with only
-zeros expected for a one in the $k$-th position, which can be interpreted as a 
+represent the cells as vectors of size $k$, where $k$ is the number of states, with only
+zeros excepted for a one in the $k$-th position, which can be interpreted as a 
 one-hot encoding of the cell state. A neighborhood of size $3$ in a
 1D CA can be represented as a $3 \times k$ vector
 $\mathbf{u}_i = [u_{i-1}, u_{i}, u_{i+1}]$. Each $u_{i}$ is a vector of size $k$
@@ -689,7 +689,7 @@ becomes useful when working with more states.
   \includegraphics[width=.4\linewidth]{figures/repr}
   \caption{\label{fig:cell}A \ac{CA} neighborhood vector representation example
     with 2 states. A $3\times 3$ square of cells with two states can be represented
-    by a $3\times 3 \times 2$ vector. Left: 1D 3-neighbors representation. Right: 2D $3\times3$
+    by a $3\times 3 \times 2$ tensor. Left: 1D 3-neighbors representation. Right: 2D $3\times3$
     neighbors representation. The last dimension of the vector encodes a
     ``one-hot'' representation of the state of the cell.}
 
@@ -697,23 +697,24 @@ becomes useful when working with more states.
 
 With this representation, we can express the transition rule $\Phi$ as a simple
 convolutional neural network. This network would be made up of two layers, which
-are shown in Figure~\ref{fig:ca_cnn_2dims} for the 2D case:
+are shown in Figure~\ref{fig:ca_cnn_2dims} for the 2D case. We describe a simple construction of a \ac{CNN} representing any binary \ac{CA} rule below:
 
 \begin{figure}[htbp]
   \centering
   \begin{subfigure}[b]{\linewidth}
     \centering
   \includegraphics[width=.9\linewidth]{figures/global_schema}
-  \caption{\label{fig:global_schema}A representation of any 2-states 2D CA rule
-    operating on $3\times 3$ neighborhoods as a 2 layers CNN. There are 512 filters
+  \caption{\label{fig:global_schema}A representation of any binary 2D CA rule
+    operating on $3\times 3$ neighborhoods as a 2-layer \ac{CNN}. There are 512 filters
     receptive to each $3\times 3$ neighborhood states in the first layer. The second
     layer determines the output value for each neighborhood state.}
   \end{subfigure}
+  \vspace{5pt}
   \begin{subfigure}[b]{\linewidth}
     \centering
   \includegraphics[width=.9\linewidth]{figures/one_d_global_schema}
-  \caption{\label{fig:one_d_global_schema}A representation of any 2-states 1D CA
-    rule operating on neighborhoods of size 3 as a 2 layers CNN. There are 8
+  \caption{\label{fig:one_d_global_schema}A representation of any binary 1D CA
+    rule operating on neighborhoods of size 3 as a 2-layer \ac{CNN}. There are 8
     filters of size 3 in the first convolutional layer, and 8 filters of size 1
     in the second one.}
   \end{subfigure}
@@ -737,7 +738,7 @@ a vector of size $k^{2r + 1}$ for each cell containing all zeros except for
 one corresponding to the detected neighborhood. This vector plays the role of an
 indicator of the current input configuration.
 
-\paragraph{A second convolutional layer} It has $k^{2r + 1}$ filters of size $1$
+\paragraph{A second convolutional layer.} It has $k^{2r + 1}$ filters of size $1$
 that are $0$s or $1$s depending on the desired output value of that transition.
 When applied on the indicator vector above, the obtained output will be the
 output value of the rule corresponding to the detected neighborhood state.
@@ -752,13 +753,15 @@ single \ac{CA} step every time.
 Recurrent convolutional networks have been used in some areas of machine
 learning such as NLP or computer vision
 \parencite{pinheiroRecurrentConvolutionalNeural2014,
-  laiRecurrentConvolutionalNeural2015}.
+  laiRecurrentConvolutionalNeural2015}. These models are similar 
 
 \subsection{Adding inputs and outputs\label{sec:adding-inputs-outp}}
 
-Figure~\ref{fig:standard_rnn} clearly shows where inputs and outputs could
-be added to the Game of Life or any other \ac{CA}. We list many possible forms
-that the addition of input and output can take and how it can interact with the \ac{CA} rule.
+Figure ~\ref{fig:standard_rnn} depicts the locations where inputs and 
+outputs can be incorporated into the Game of Life or any other \ac{CA}. 
+We provide a variety of examples on how input and output can be integrated 
+and how they can interact with the \ac{CA}'s rule.
+
 
 \subsubsection{Inputs}
 There are many ways to add inputs to the recurrent \ac{CNN} model presented
@@ -776,41 +779,43 @@ In the case of cellular automata, it can also be done in the following ways:
 \begin{figure*}[ht]
   \centering
   \includegraphics[width=.9\linewidth]{figures/encode_decode.pdf}
-  \caption{\label{fig:encode_decode} Inputs and outputs can be directly
-    encoded within the hidden state.}
+  \caption{\label{fig:encode_decode} Inputs $x$ and outputs $y$ can be directly
+    encoded within the hidden state. $U$ and $V$ are the operators mapping $x$ 
+    to a hidden state tensor and decoding a hidden state tensor to an output $y$.}
 \end{figure*}
 
 \begin{itemize}
-  \item \textbf{Vector state.} A naive way to add inputs to a \ac{CA} is to
+  \item \textbf{Vector state.} A straightforward way to add inputs to a \ac{CA} is to
         consider the grid as having an additional (possibly read-only)
-        dimension. For example, a 1D automaton would actually be represented by
+        dimension. For example, a 1D automaton of size $N$ would actually be represented by
         a vector of dimension $N\times 2$ where the first vector of size $N$ is the
         state of the grid and the other is the input. The update rule would be
         changed to take this new component into account. One can see this model
-        as using multiple CA rules at the same time, with the input state
+        as using multiple \ac{CA} rules at the same time, with the input state
         conditioning the rule being chosen for a given update step.
 
   \item \textbf{Variable update rule.} Inputs can also influence a CA's evolution by
         changing the update rule. With this configuration, the update rule $\Phi$
         is now a function of the input $x$. We now have $\Phi_x = G(x)$, where
 
-        \[G: \mathcal{X} \rightarrow \left({\{ 1, \ldots, k \}}^{2r+1} \to \{1, \ldots, k\}\right)\]
+        \[G: \mathcal{X} \rightarrow \left({\{ 1, \ldots, k \}}^{2r+1} \to \{1, \ldots, k\}\right),\]
 
-
+        and $\mathcal{X}$ is the input space.
+        
         A similar approach was used in
         \parencite{adamsFormalDefinitionsUnbounded2017}. It showed that
         conditioning a CA update rule on another CA's evolution could enable a
         higher diversity of behavior.
 
-  \item \textbf{Concatenation.} Input can be concatenated to the hidden state (\eg~on
-        the grid boundaries) before applying the update rule, forming a sort of
-        fixed read-only memory space. Concatenation is illustrated in
-        Figure~\ref{fig:concat}. A possible disadvantage of this method is the
-        fact that information needs to propagate through the grid if it is to be
-        processed far from where the read-only memory was positioned.
-
-        This approach is more computer-like, reserving some space for different
-        functionalities of the data.
+  \item \textbf{Concatenation.} One way to incorporate input is by concatenating 
+  it with the hidden state, such as at the grid boundaries, before applying the
+  update rule. This creates a fixed read-only memory space, as shown in 
+  Figure~\ref{fig:concat}. However, a potential drawback of this method is that 
+  information must propagate through the grid in order to be processed in locations 
+  far from the read-only memory's position. 
+        
+        This approach is more reminiscent of computer architecture, where designated 
+        areas are reserved for specific data functions.
 
 \begin{figure}[ht]
   \centering \includegraphics[width=.5\linewidth]{figures/concat.pdf}
