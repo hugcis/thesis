@@ -709,16 +709,16 @@ are shown in Figure~\ref{fig:ca_cnn_2dims} for the 2D case. We describe a simple
     receptive to each $3\times 3$ neighborhood states in the first layer. The second
     layer determines the output value for each neighborhood state.}
   \end{subfigure}
-  \vspace{5pt}
+  \vspace{20pt}
   \begin{subfigure}[b]{\linewidth}
     \centering
   \includegraphics[width=.9\linewidth]{figures/one_d_global_schema}
   \caption{\label{fig:one_d_global_schema}A representation of any binary 1D CA
     rule operating on neighborhoods of size 3 as a 2-layer \ac{CNN}. There are 8
-    filters of size 3 in the first convolutional layer, and 8 filters of size 1
+    filters of size $3\times 3$ in the first convolutional layer, and 8 filters of size $1\times 1$
     in the second one.}
   \end{subfigure}
-  \caption{Two examples of \acp{CA} rules represented as a simple CNN. Padding
+  \caption{Two examples of \ac{CA} rules represented as a simple CNN. Padding
     ensures the grid obtained after the CNN step is of the same size as the
     original grid.}\label{fig:ca_cnn_2dims}
 \end{figure}
@@ -798,7 +798,7 @@ In the case of cellular automata, it can also be done in the following ways:
         changing the update rule. With this configuration, the update rule $\Phi$
         is now a function of the input $x$. We now have $\Phi_x = G(x)$, where
 
-        \[G: \mathcal{X} \rightarrow \left({\{ 1, \ldots, k \}}^{2r+1} \to \{1, \ldots, k\}\right),\]
+            \[G: \mathcal{X} \rightarrow \left({\{ 1, \ldots, k \}}^{2r+1} \to \{1, \ldots, k\}\right),\]
 
         and $\mathcal{X}$ is the input space.
         
@@ -895,7 +895,7 @@ without any need for optimization. Making a universal \ac{CA} compute some
 program amounts to encoding the program into the right language and
 communicating it by embedding it within the hidden state. In practice, figuring
 out the right encoding is often the biggest challenge. This is also the reason
-that the few Turing complete \ac{CA} are not so useful in practice, since we do
+that the few Turing complete \acp{CA} are not so useful in practice, since we do
 not know of any efficient encoding for programming them.
 
 \subsection{Consequences}
@@ -914,7 +914,7 @@ complete~\parencite{siegelmannComputationalPowerNeural1992}, with very little
 practical implications. Our model is relatively far from a real-world CNN with a
 fixed number of layers independent from one another --- compared to a variable
 number of steps and shared layers for the automaton-RCNN. Thus this property
-does not bear any consequence on \acp{CNN}.
+does not seem to bear any consequence on \acp{CNN}.
 
 \subsubsection{Differentiable cellular automata}
 
@@ -944,7 +944,7 @@ R\ac{CNN} counterpart and vice versa. However, there are several ways to make
 that representation of \ac{CA} rules more efficient, using neural network with
 less parameters. For instance, we can make the first layer of filters receptive
 to both a given configuration and its inverse (\eg~$(1, 0, 1)$ and $(0, 1, 0)$
-in a ECA) by using negative values in the filter (use a filter $(1, -1, 1)$
+in an \acl{ECA}) by using negative values in the filter (use a filter $(1, -1, 1)$
 instead of $(1, 0, 1)$ and $(0, 1, 0)$ separately).
 
 For example, the game of life rule does not need more than 2 convolutional
@@ -954,7 +954,7 @@ the alive state and the current state of the cell.
 
 
 \section{Reservoir computing \label{sec:res-models}}
-\Ac{RC} is a computational framework that aims to exploit the states of a
+\Acf{RC} is a computational framework that aims to exploit the states of a
 complex dynamical system to perform some target task
 \parencite{tanakaRecentAdvancesPhysical2019}. It relies on a \emph{reservoir} of
 computations, that is, a dynamical system performing some computations on its
@@ -972,7 +972,7 @@ figure \ref{fig:reservoir_diagram}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.8\linewidth]{figures/reservoir_schema}
-  \caption{Diagram of the general functioning of a \ac{RC} system. Input values
+  \caption{Diagram of the general functioning of a \acf{RC} system. Input values
     are projected in the state or evolution function of a dynamical system which
     is run according to its internal rule. Output values are decoded from the
     internal state of the dynamical systems with a trainable layer.}
@@ -987,10 +987,10 @@ Some early known formulations of the \ac{RC} idea were done by
 \textcite{buonomanoTemporalInformationTransformed1995} used a random spiking
 neural network with excitatory and inhibitory elements. Neuron connection
 probabilities were inspired by real rat brain data
-\parencite{masonSynapticTransmissionIndividual1991}. He observed a interval
+\parencite{masonSynapticTransmissionIndividual1991}. The authors observed a interval
 sensitive response of these neurons when subjected to pulses spaced by varying
 time intervals. This indicates an ability to encode temporal information. To
-measure this phenomenon he trained an output linear layer to recognize specific
+measure this phenomenon they trained an output linear layer to recognize specific
 patterns in the activation of the last layer of neurons. This idea of using a
 randomly initialized \ac{RNN} with fixed weights and train a simple linear layer
 to decode outputs was reinvented and popularized later under the names
@@ -1000,8 +1000,8 @@ state machines'' \parencite{maassRealTimeComputingStable2002}.
 Another advantage of reservoir computing is that the reservoirs can be
 implemented using a variety of physical systems, substrates, and devices. These
 types of reservoir are sometimes called ``exotic''
-\parencite{lukoseviciusReservoirComputingApproaches2009} by opposition with
-\ac{RNN} based reservoirs. Physical \ac{RC} are a promising area of research
+\parencite{lukoseviciusReservoirComputingApproaches2009} in contrast to
+\ac{RNN}-based reservoirs. Physical \ac{RC} are a promising area of research
 that may help us develop cheap and efficient machine learning hardware and can
 inform us on the nature and behavior of the underlying physical systems.
 \textcite{tanakaRecentAdvancesPhysical2019} identifies four characteristics that
@@ -1023,7 +1023,7 @@ make a reservoir suitable for solving a computational task:
         maassRealTimeComputingStable2002, maassFadingMemoryKernel2004}. This
         property relates asymptotic properties of the excited reservoir dynamics
         to the driving signal. A reservoir with the echo-state property will
-        asymptotically forget all input values. This make some reservoir unable
+        asymptotically forget all input values. This makes some reservoir unable
         to solve tasks where unbounded memory is possibly required, such as
         context-free grammar parsing
         \parencite{schmidhuberTrainingRecurrentNetworks2007}. Later, reservoir
@@ -1042,11 +1042,11 @@ We list common types of \ac{RC} that are based on various families of reservoirs
 below:
 
 \begin{description}
-  \item[Dynamical systems] This refers to a broad category of \ac{RC} models
+  \item[Dynamical systems.] This refers to a broad category of \ac{RC} models
         based on other dynamical systems than the random \acp{RNN}. This
         includes reservoir computing with \aclp{CA}, which we give more detail
         about in section \ref{sec:app-ca-res}.
-  \item[Electronic \ac{RC}] These models are implemented on electronic circuits,
+  \item[Electronic \ac{RC}.] These models are implemented on electronic circuits,
         such as artificial neural networks implemented on physical circuits or
         other neuromorphic circuits. For example, \ac{RC} models can be build on
         FPGAs \parencite{antonikApplicationFPGAReal2018,
@@ -1056,12 +1056,12 @@ below:
         \parencite{yangInvestigationsStaircaseMemristor2016,
         merkelMemristiveReservoirComputing2014,
         donahueDesignAnalysisNeuromemristive2015}.
-  \item[Mechanical \ac{RC}] Soft mechanical bodies have complex nonlinear
+  \item[Mechanical \ac{RC}.] Soft mechanical bodies have complex nonlinear
         dynamics that can be used as a reservoir to build a \ac{RC} model
         \parencite{pfeiferHowBodyShapes2007}. For example, a reservoir using a
         mass-spring network was proposed by
         \textcite{hauserTheoreticalFoundationMorphological2011}.
-  \item[Biological \ac{RC}] There have been multiple hypotheses on whether the
+  \item[Biological \ac{RC}.] There have been multiple hypotheses on whether the
         parts of the brain behave like a \ac{RC} system
         \parencite{yamazakiCerebellumLiquidState2007}. The goal of this area of
         research is to study the \ac{RC}-like properties of
@@ -1070,7 +1070,7 @@ below:
         context-dependent eye movement
         \parencite{domineyComplexSensorymotorSequence1995,
         domineyModelCorticostriatalPlasticity1995}.
-  \item[Photonic \ac{RC}] The principle of photonic \ac{RC} is to use optical
+  \item[Photonic \ac{RC}.] The principle of photonic \ac{RC} is to use optical
         reservoirs to generate the computations. A first example using
         semiconductor optical amplifiers (SOAs) was proposed by
         Vandoorne and colleague \parencite{vandoorneOpticalSignalProcessing2008,
@@ -1084,7 +1084,7 @@ below:
         Some of the implementations use the scattering of light in complex media
         \parencite{dongOpticalReservoirComputing2020,
         rafayelyanLargeScaleOpticalReservoir2020}.
-  \item[Spintronics \ac{RC}] Some \ac{RC} works used nanosacle electronics
+  \item[Spintronics \ac{RC}.] Some \ac{RC} works used nanosacle electronics
         involving the charge and spin of electrons called \emph{spintronics}
         \parencite{wolfSpintronicsSpinBasedElectronics2001}. Spintronics have
         been used in multiple ways to build \ac{RC} models, using spin torque
@@ -1117,7 +1117,8 @@ The \acf{ESN} (and simultaneously developed model \emph{Liquid state machine}
 to drive a \ac{RNN} with some input signal, which will excite the neurons within
 the reservoir and induce several nonlinear response signals. This is combined
 with a trainable linear regression to extract a desired output from a
-combination of these response signals.
+combination of these response signals. The \ac{ESN} model is illustrated in 
+Figure \ref{fig:echo_state_network}.
 
 In practice, the input projection is often fixed but it can also be trainable.
 The output can also be fed back to the reservoir like an input, and the
@@ -1134,48 +1135,50 @@ structure of the \ac{RNN} reservoir can be adapted to various applications.
   \label{fig:echo_state_network}
 \end{figure}
 
-We define an input sequence to be $(\vx_{t})_{t=1}^{T} \in \mathbb{R^{n\times T}}$. The
+We define an input sequence to be $(\vx_{t})_{t=1}^{T} \in 
+\mathbb{R}^{ n \times T}$, where $n$ is the input dimension and $T$ is the 
+number of input time steps. The
 initial state of the reservoir at $t = 0$ is $\vr_{0}$. The echo-state network
 is based on the following update equation:
 \begin{equation}
   \label{eq:esn}
-  \vr_{t + 1} = (1 - \alpha) \vr_{t}
+  \vr_{t + 1} = (1 - \beta) \vr_{t}
   +
   \beta \tanh(\mW_{h}\: \vr_{t} + \mW_{\text{in}}\: \vx_{t + 1}),
 \end{equation}
 where $\vr_{t}$ is the $K$-dimensional state vector corresponding to
 hidden neurons --- at time $t$, $\beta$ is the leak rate,
 $\mW_{h} \in \mathbb{R}^{K \times K}$ is a sparsely connected random hidden
-layer matrix, and $\mW_{\text{in}} \in \mathbb{R}^{L \times K}$ is the input
-projection matrix. The matrices $\mW_{h}$ and $\mW_{\text{in}}$ are set to
+layer matrix and $\mW_{\text{in}} \in \mathbb{R}^{L \times K}$ is the input
+projection matrix. The matrices $\mW_{h}$ and $\mW_{\text{in}}$ have
 random values.
 
 For the random initialization of $\mW_{h}$ and $\mW_{\text{in}}$,
 \textcite{jaegerLongShortTermMemory2012} recommends: $\mW_{h}$ should have an
-average of 10 nonzeros entries per row, all sampled uniformly in $[-1, 1]$. The
-matrix is then scaled to achieve a set spectral radius $\rho$ which is optimized
+average of 10 non-zeros entries per row, all sampled uniformly in $[-1, 1]$. The
+matrix is then scaled to achieve a set spectral radius $\rho$, which is optimized
 for each experiment in \parencite{jaegerLongShortTermMemory2012}.
-$\mW_{\text{in}}$ has its entries uniformly sampled in $[-1, 1]$. Then, the
-columns of the matrix are individually scaled with factors $\sigma_{1}, \ldots, \sigma_{L}$
+$\mW_{\text{in}}$ has its entries uniformly sampled in $[-1, 1]$. The
+columns of the matrix are then individually scaled with factors $\sigma_{1}, \ldots, \sigma_{L}$
 specific to each experiment. In this formulation, there are multiple parameters
 to optimize:
 
 \begin{itemize}
-  \item The reservoir size $K$
+  \item The size of the reservoir $K$
   \item The spectral radius of $\mW_{h}$, $\rho$
-  \item The input weights scaling parameters $\sigma_{1}, \ldots, \sigma_{L}$
-  \item The leaking rate $\beta$
+  \item The input weight scaling parameters $\sigma_{1}, \ldots, \sigma_{L}$
+  \item The leaking rate $\beta$.
 \end{itemize}
 
 \textcite{jaegerLongShortTermMemory2012} explores three
 optimization schemes for these parameters:
 \begin{description}
-  \item[Blind] The input weights scaling parameters are set to a single
+  \item[Blind.] The input weight scaling parameters are set to a single
         value $\sigma$. The parameters $K$, $\rho$, $\sigma$, and $\beta$ are
         optimized. This corresponds to a search space of dimension 4.
-  \item[Basic] Each of the $\sigma_{i}$ is optimized individually, or in
+  \item[Basic.] Each of the $\sigma_{i}$ is optimized individually, or in
         groups. The other parameters are also optimized.
-  \item[Smart] All the parameters are optimized as in the \textbf{Basic}
+  \item[Smart.] All the parameters are optimized as in the \textbf{Basic}
         scheme, and the weights of $\mW_{h}$ are also crafted specifically for
         the target task.
 \end{description}
@@ -1187,18 +1190,19 @@ The $L$-dimensional outputs are computed at times $t > 0$ as
 \tilde{\vx}_{t+ 1} = D(\vr_{t}),
 \end{equation}
 where $D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is a (trained) decoding
-function. For echo-state networks, the decoder is often a linear transformation
+function. For echo state networks, the decoder is often a linear transformation
 $D(\vr_{t}) = \mW_{\text{out}} \vr_{t}$ where $\mW_{\text{out}}$ is a
-$K \times L$-dimensional matrix. In our experiments, we set $\beta = 0$, which
+matrix of dimensions $K \times L$. In our experiments in Chapter \ref{cha:learn-effic-compl}, 
+we set $\beta = 0$, which
 was empirically observed to yield the best results on our tasks. The parameter
-$\beta$, as well as the randomly sampled weight matrix, are sometimes tuned for
+$\beta$, as well as the randomly sampled weight matrix, are sometimes adjusted for
 each task \parencite{jaegerLongShortTermMemory2012}. We only use default values
 to get a task-independent setup with the least possible assumptions and to make
 the methods comparable.
 
 \subsection{Reservoir cellular automata\label{sec:app-ca-res}}
 
-Cellular automata can also be used as the dynamical system in reservoir
+Cellular automata can also be used as a dynamical system in reservoir
 computing. This was originally proposed by Yilmaz in 2014 and later named ReCA
 (Reservoir Cellular Automata) \autocite{yilmazReservoirComputingUsing2014,
   margemExperimentalStudyCellular2017}.
@@ -1209,27 +1213,26 @@ various tasks \autocite{yilmazReservoirComputingUsing2014,
   nicheleReservoirComputingUsing2017, margemReservoirComputingBased2018,
   kleykoCellularAutomataCan2020, babsonReservoirComputingComplex2019,
   ,mcdonaldReservoirComputingExtreme2017a, moranReservoirComputingHardware2018}.
-In this section we lay out a general description of reservoir computing with
+In this section, we lay out a general description of reservoir computing with
 cellular automata based on these previous works and present our proposed
-extensions.
+extensions. We apply reservoir cellular automata to language-like tasks in 
+    Chapter \ref{cha:learn-effic-compl}.
 
-\paragraph{Encoding\label{sec:encoding}}
+\paragraph{Encoding\label{sec:encoding}.}
 Input data is assumed to be categorical and sequential,
 
 \begin{equation}
   X = [X_{1}, \ldots, X_{t}, \ldots],\quad t\in \mathbb{N}, \quad \forall t \ X_{t} \in \mathcal{X} \subset \mathbb{N}.
 \end{equation}
 
-A cellular automaton is a discrete system which is not particularly designed to
-handle inputs. The purpose of the encoding step in ReCA is to convert the input
-data points to vectors that can be embedded in the cellular automaton state
-space. Such encoding should translate --- or embed --- the input space
-$\mathcal{X}$ to a new one that can be combined with the current state of the
+A cellular automaton is a discrete system that is not particularly designed to
+handle input. The purpose of the encoding step in ReCA is to convert the input
+data points to vectors that can be embedded in the state space of the cellular automaton. Such encoding should translate --- or embed --- the input space
+$\mathcal{X}$ into a new one that can be combined with the current state of the
 cellular automaton. The goal is to make a cellular automaton ``react'' to its
 input and leverage the resulting computation to solve a problem.
 
-\paragraph{Input projection}
-
+\paragraph{Input projection.}
 First, each categorical input vector is one-hot encoded into a vector of size
 $L_{in}$, where $L_{in} = |\mathcal{X}|$ is the number of input categories. We have
 \begin{equation}
@@ -1239,33 +1242,33 @@ $L_{in}$, where $L_{in} = |\mathcal{X}|$ is the number of input categories. We h
 with
 $\sum_{i = 1}^{L_{in}}{(\vx_{t})}_{i} = 1$.
 
-Next, the vectors $\vx_{t}$ are projected to vectors
+Next, the vectors $\vx_{t}$ are projected onto the vectors
 $\vp_{t} = P(\vx_{t}) \in \mathcal{P} = {\{0, 1\}}^{L_{d}}$ of fixed size $L_{d}$, where
-$L_{d}$ is the size of the internal state of the \ac{CA}. Usually we have
+$L_{d}$ is the size of the internal state of \ac{CA}. Usually we have
 $L_{d} > L_{in}$, which means that we embed the input in a space of higher
-dimension. In our work we compute this projection in one of three ways:
+dimension. In our work, we compute this projection in one of three ways:
 
 \begin{description}
-  \item[One-to-one] each input bit is mapped to a single index in $\vp$.
+  \item[One-to-one] each input bit is assigned to a single index in $\vp$.
         This is the projection function first proposed in
         \textcite{yilmazReservoirComputingUsing2014}.
 \end{description}
 
-We also propose two novel projection schemes, which potentially offer more
+We also propose two novel projection schemes that potentially offer more
 flexibility than the previous ones. They extend the one-to-one projection and
 allow for a richer variety of produced encodings:
 
 \begin{description}
-  \item[One-to-many] each input bit is mapped to exactly $k$ positions in $P$
+  \item[One-to-many.] Each input bit is assigned exactly to $k$ positions in $P$
         instead of one. This is equivalent to adding $k$ separate and mutually
         exclusive one-to-one projections into a single one.
-  \item[One-to-pattern] each input bit is mapped to a random contiguous pattern
-        of $k$ bits set to a fixed position.
+  \item[One-to-pattern.] Each input bit is assigned to a random contiguous pattern
+        of $k$ bits set in a fixed position.
 \end{description}
 
 The effect of applying our three methods on a simple input with three components
-is illustrated in Fig.~\ref{fig:enc_meth}. Projections are chosen so as to make
-each input bit map to a unique output configuration.
+is illustrated in Fig.~\ref{fig:enc_meth}. Projections are chosen to map
+each input bit to a unique output configuration.
 
 \begin{figure}[htbp]
   \centering
@@ -1282,15 +1285,15 @@ larger than the initial one. The projections are randomly generated $R$ times,
 applied and concatenated as a single large encoder to create the full CA input
 vector. The parameter $R$ is called \emph{redundancy}.
 
-For cellular automata in 1D, the space $\mathcal{P}$ is one-dimensional and the
-concatenation is simply done over this dimension. In higher dimensional spaces,
+For cellular automata in 1D, the space $\mathcal{P}$ is one-dimensional, and the
+concatenation is done over this dimension. In higher-dimensional spaces,
 this concatenation has to be defined in some other way.
 
 We write the $R$ projection functions $E_{1}, E_{2}, \ldots, E_{R}$. The final size
 of the input vector and the CA state grid is now $R \times L_{d}$ instead of $L_{d}$.
 We have
 \begin{align}
-  \vp_{t} = P(\vx_{t}) = E_{1}(\vx_{t})\mathbin\Vert \ldots \mathbin \Vert E_{R}(\vx_{t})
+  \vp_{t} = P(\vx_{t}) = E_{1}(\vx_{t})\mathbin\Vert \ldots \mathbin \Vert E_{R}(\vx_{t}),
 \end{align}
 where $\mathbin\Vert$ is the concatenation operator.
 
@@ -1299,24 +1302,23 @@ Other projections have been proposed and implemented, for example in
 above because they are simple to understand and implement and their effects can
 be explored thoroughly.
 
-\paragraph{Input combination}
-There are multiple ways to combine the input vector with the current \ac{CA}
-state. \textcite{gloverDynamicalLandscapeReservoir2021} propose to use a XOR
-function between the projected input and the \ac{CA} state.
+\paragraph{Input combination.}
+There are multiple ways to combine the input vector with the current state of the \ac{CA}. \textcite{gloverDynamicalLandscapeReservoir2021} propose to use a XOR
+function between the projected input and the state of the \ac{CA}.
 
 At each input step $t$, the projected input vector $\vp_{t}$ is XORed
 element-wise with the current CA state $\vs_{t}$, so that each 1 bit from the
 input switches the corresponding bit in the CA state to another value. This
-creates a new state $\vs_{t}'$ that the CA will evolve from. $\vs_{t}'$ is
+creates a new state $\vs_{t}'$ from which the CA will evolve. $\vs_{t}'$ is
 defined as
 \begin{align}
   \vs_{t}' \coloneqq \vp_{t} \otimes \vs_{t},
 \end{align}
 where $\otimes$ is the element-wise XOR operator between two vectors of binary
 values, and $\vs'_{t}$ is the temporary CA state resulting from the combination
-of the CA state and input vectors at time $t$.
+of the CA state and the input vectors at time $t$.
 
-From the \ac{CA} state $\vs'_{t}$, We then compute the next CA states by
+From the state of the \ac{CA} at time $t$, $\vs'_{t}$, we then compute the next CA states
 applying the update function $\Phi$,
 
 \begin{equation}
@@ -1326,19 +1328,19 @@ applying the update function $\Phi$,
 
 This is one of many possible ways to combine an input vector with the current
 state of the CA that may affect its performance as a reservoir. The XOR-based
-input combination gives asymmetrical role to 0 and 1 in the input vectors, which
-is natural considering the way we encode and project the categorical data
+input combination gives an asymmetrical role to 0 and 1 in the input vectors, which
+is natural considering the way we encode and project categorical data
 points. Different cellular automata rules might benefit or get lower performance
 because of these encoding choices. The combination problem can be generalized to
-incorporate it to the \ac{CA} rule search problem. We demonstrate this in the
+incorporate it into the \ac{CA} rule search problem. We demonstrate this in the
 next paragraph.
 
 \paragraph{Generalization.} We generalize the input combination method above by
-incorporating it to the \ac{CA} update rule. Since the input vector $\vp$ is
-binary, we may treat its value at position $i$ as just another virtual \ac{CA}
-cell. For an standard \ac{ECA}, the update step takes into account the three
+incorporating it into the \ac{CA} update rule. Since the input vector $\vp$ is
+binary, we can treat its value at position $i$ as just another virtual \ac{CA}
+cell. For a standard \ac{ECA}, the update step takes into account the three
 immediate neighbors $\vs^{(i - 1)}, \vs^{(i)}, \vs^{(i + 1)}$ plus the
-additional virtual cell $\vp^{(i)}$. Instead of 8 possible input configuration
+additional virtual cell $\vp^{(i)}$. Instead of 8 possible input configurations
 for a binary 1D \ac{CA}, we now have 16. In this extended \ac{CA} space, the
 number of possible rules is $2^{16} = 65536$ instead of 256.
 
@@ -1361,36 +1363,37 @@ number of possible rules is $2^{16} = 65536$ instead of 256.
     combination rule.\label{fig:ca_update_rule}}
 \end{figure}
 
-This method is illustrated in Fig.~\ref{fig:ca_update_rule} along the regular CA
+This method is illustrated in Fig.~\ref{fig:ca_update_rule} during the regular CA
 update. It generalizes the concept of input combination with the state $\vs$.
 The XOR method described above is one of its special cases, but our method also
-contains all the possible boolean function with 4 inputs.
+contains all possible Boolean functions with 4 inputs.
 
 \paragraph{Building the reservoir}
-The final reservoir state $\vr_{t + 1}$ is obtained by stacking $I$ consecutive
-CA states obtained from a single state-input combination $\vs'$ by applying $\Phi$
+The final state of the reservoir $\vr_{t + 1}$ is obtained by stacking $I$ consecutive
+CA states obtained from a combination of inputs of a single state $\vs'$ by applying $\Phi$
 again. The parameter $R$ can be understood as a space redundancy parameter,
-whereas $I$ is a time redundancy one. If the size of the state is $n$, the
-resulting reservoir vector $\vr$ has a dimension $K = I \times n$, where $r$ is
+while $I$ is a time redundancy parameter. If the size of the state is $n$, the
+resulting reservoir vector $\vr$ has dimension $K = I \times n$, where $I$ is
 defined above. Similar to the \ac{ESN}, the $L$-dimensional output tokens are
 calculated at times $t > 0$ as
 
 \begin{equation}
   \begin{aligned}
-    \tilde{\vx}_{t+ 1} & = D(\vr_{t})
+    \tilde{\vx}_{t+ 1} & = D(\vr_{t}),
   \end{aligned}
 \end{equation}
 
-where $D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is the (trained) decoding function. Here we predict
-$\tilde{\vx}_{t+1}$, which corresponds to a language modeling-like task of
+where $D: \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ is the (trained) decoding function. Here, we predict
+$\tilde{\vx}_{t+1}$, which corresponds to a language-modeling-like task of
 predicting the next input. It would also be possible to predict another sequence
-$(\vy_{t})_{t}$Usually a linear decoding function is used, such that
+$(\vy_{t})_{t}$. Usually a linear decoding function is used such that
 $D(\vr_{t}) = \mW_{\text{out}}\vr_{t}$. The complete pipeline of a \ac{RC} model
-with \ac{CA} is summarized in figure \ref{fig:reca-schema}.
+with \ac{CA} is summarized in Figure \ref{fig:reca-schema}.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.6\linewidth]{figures/reca_schema.pdf}
-  \caption{Global illustration of the ReCA model with the XOR-based input and
-    state combination method.}\label{fig:reca-schema}
+  \caption{Illustration of the 1D ReCA model with the XOR-based input and
+    state combination method. The highlighted boxes correspond to $I$ stacked \ac{CA} 
+    states that make up a single reservoir state.}\label{fig:reca-schema}
 \end{figure}
