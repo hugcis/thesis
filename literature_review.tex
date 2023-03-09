@@ -544,7 +544,8 @@ successfully used to evolve rules to perform complex computations
     subspace $\mathcal{G}$ is the goal space, corresponding to the set of
     behaviors that would be considered successful. A small perturbation in the
     genotype will have potentially large consequences on the behavior of the
-    candidate solution.}
+    candidate solution. In the case of a \ac{CA} rule, the genotype could be a 
+    vector ($x$) that encodes a rule ($p$) that will translate into the \ac{CA} behavior $b$.}
   \label{fig:evolutionary_diagram}
 \end{figure}
 
@@ -578,7 +579,7 @@ focused, such as maze navigation and biped locomotion
 \parencite{risiEvolvingPlasticNeural2010}.
 
 The principle of guiding search by novelty alone is closely related to the goal
-this thesis, and especially with the challenge of parametrizing and searching
+of this thesis, and especially with the challenge of parametrizing and searching
 the space of available complex systems without using any explicit goal function.
 The goal of \ac{NS} is to carry out search without a goal function, and we draw
 inspiration from this algorithm throughout our work.
@@ -586,7 +587,7 @@ inspiration from this algorithm throughout our work.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.7\linewidth]{figures/novelty_search}
-  \caption{Illustration of the advantage of \ac{NS} on a maze environment with
+  \caption{Illustration of the advantage of \acf{NS} on a maze environment with
     deceptive dead-ends. Dotted trajectories illustrate the behavior of a
     goal-based search, which will start by minimizing the distance to the goal.
     Blue trajectories are from a novelty search algorithm exploring the space
