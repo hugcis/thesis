@@ -654,32 +654,32 @@ create a process that can display analogous levels of creativity and complexity
 as natural evolution \parencite{eigenHypercycle1979,
   langtonArtificialLifeProceedings1989, dysonOriginsLife1999,
   stanleyWhyOpenEndednessMatters2019, packardOverviewOpenEndedEvolution2019,
-  sorosOpenendednessLastGrand2017}. It build upon the data and understanding we
+  sorosOpenendednessLastGrand2017}. It builds upon the data and understanding we
 collected about the process of life, but abstracts from any specific living
 process and attempts to integrate various approaches into one unified research
 to extract the first principles of life. A major assumption underpinning this
-research is that this natural evolution as a process can be implemented equally
+research is that this natural evolutionary process can be implemented equally
 well in different media \parencite{dennettDarwinDangerousIdea1996}.
 
 A system that behaves like natural evolution, producing a seemingly endless
 amount of novelty and complexity starting from elementary building blocks is
-called \emph{open-ended}. The main challenge of \ac{OEE} research is there is
+called \emph{open-ended}. The main challenge of \ac{OEE} research is that there is
 not a simple single test for the phenomenon, but instead different kinds of
 open-ended evolution exist. Systems can exhibit more than one kind at a time. In
 the report from a workshop on \ac{OEE} at York
 \parencite{taylorOpenEndedEvolutionPerspectives2016}, the authors summarized the
 different kinds of \ac{OEE}, which were further refined in a follow up work
-\parencite{packardOverviewOpenEndedEvolution2019}. They are as follows:
+\parencite{packardOverviewOpenEndedEvolution2019}. They are:
 
 \begin{enumerate}
   \item Interesting new kinds of entities and interactions
   \item Evolution of evolvability
   \item Major transitions
-  \item Semantic evolution
+  \item Semantic evolution.
 \end{enumerate}
 
 The first category describes the ability of a system to construct new entities
-with different properties, behavior, or interactions with other entities. For
+with different properties, behaviors, or interactions with other entities. For
 example, the Tierra simulation sees entities emerge that exploit the computing
 power of others, acting as parasites \parencite{srayApproachSynthesisLife1991}.
 The second type is related to how open-end evolution itself can be evolved
@@ -698,7 +698,7 @@ evolution is related to the work of
 open-ended evolution called semantic evolution, which refers to the evolution of
 semantic relationships within a system. This can be observed in the evolution of
 web services, where the meaning of tags changes as new combinations of tags are
-created. It non-biological in nature and also present in the analysis of
+created. It is non-biological in nature and is also present in the analysis of
 technological evolution \parencite{bedauOpenEndedTechnologicalInnovation2019},
 where the meaning and importance of keywords shift over time.
 
@@ -719,7 +719,7 @@ here. First, \textcite{maleyFourStepsOpenended1999} identifies four requirements
         of niches.
 \end{enumerate}
 Next, \textcite{sorosIdentifyingNecessaryConditions2014} identified four more necessary
-conditions which are as follows
+conditions which are
 
 \begin{enumerate}
   \item A rule should be enforced that individuals must meet some minimal
@@ -779,7 +779,7 @@ create high level evolutionary-like processes and behaviors from elementary
 rules and substrates.
 
 \subsection{Open-endedness in cellular automata}
-One class of system that has rich interactions between each of its components as
+One class of systems that has rich interactions between each of its components as
 well as no predefined evolvable units or assumptions about individuality is the
 \ac{CA}. One of the very first automata, Von Neumann's self-reproducing machine,
 was designed with goals that align with open-ended evolution, which is to build
@@ -837,9 +837,11 @@ represent patterns of arbitrary complexity, and it is able to produce diverse
 self-reproducing patterns.
 
 \paragraph{Cellular automata.}
-\Acfp{CA} can be see as a particular case of lattice molecular systems. For
-example the autopoietic system introduced by
-\textcite{varelaAutopoiesisOrganizationLiving1991} is a 2d square grid with
+\Acfp{CA} can be seen as a particular case of lattice molecular systems. For
+example the autopoietic system (refers to the ability of an organism to continuously 
+sustain itself through the exchange of matter and energy with its environment, 
+while maintaining its own boundaries and identity) introduced by
+\textcite{varelaAutopoiesisOrganizationLiving1991} is a 2D square grid with
 sites that be occupied by \emph{atoms} which is similar to a \ac{CA} with 4
 states. Each of these states is analogous to a chemical component of the system:
 ($\emptyset$) empty site, (S) substrate, (K) catalyst and (L) monomer. Basic rules are
@@ -881,7 +883,7 @@ Moreover, they are also interesting for modeling the behavior of natural complex
 systems. For more details about \acp{CA}, see section
 \ref{sec:cellular-automata-sec}.
 
-\paragraph{Von Neumann's self-reproducing \ac{CA}}
+\paragraph{Von Neumann's self-reproducing \ac{CA}.}
 The early developments of \acp{CA} were guided by Von Neumann's question ``What
 kind of logical organization is sufficient for an automaton to be able to
 reproduce itself?'' Since this question may admit very simple solutions,
@@ -895,7 +897,7 @@ would progressively build that new automaton cell by cell. This was an early
 example of complex computations being carried out by a relatively simple
 decentralized system such as a \ac{CA}.
 
-\paragraph{Universal Computation in Cellular Automata}
+\paragraph{Universal Computation in Cellular Automata.}
 It is not difficult to see that a \ac{CA} can be capable of universal
 computation. The basic approach is to show that it can simulate a Turing
 machine, which we assume has an infinite tape. A \ac{CA} rule can be constructed
@@ -937,9 +939,9 @@ object that can be used to simulate another instance of game of life within the
 game. It is important to note that such embedded computers and Turing machines
 are often very slow and inefficient, and the game of life has brittle structures
 which would be destroyed by the slightest perturbation, making these
-construction unusable for anything else than demonstration.
+constructions unusable for anything else than demonstration.
 
-\paragraph{Evolving cellular automata with genetic algorithms}
+\paragraph{Evolving cellular automata with genetic algorithms.}
 A major step forward from the clever but difficult hand-design of \acp{CA} rules
 to perform computations is the use of learning algorithms to automatically
 design those rules \parencite{mitchellEvolvingCellularAutomata1996}. Genetic
@@ -968,11 +970,11 @@ The problem of density classification was thoroughly explored since it fits the
   mitchellEvolvingCellularAutomata1994,
   crutchfieldEvolutionEmergentComputation1995, dasGeneticAlgorithmDiscovers1994,
   sipperCoevolvingNonuniformCellular1996, andreDiscoveryGeneticProgramming1996}.
-The goal of this task is to have \ac{CA} figure out what the most abundant cell
-state in a binary initial configuration in one dimension. This task is trivial
+The goal of this task is to have \acp{CA} figure out what the most abundant cell
+state in a binary initial configuration in one dimension is. This task is trivial
 for a central controller that can read the state of all the cells in the initial
-grid, but it is much more complex for a decentralized systems like a \ac{CA}
-which has a small radius of interaction with neighbors. The evolved \ac{CA}
+grid, but it is much more complex for decentralized systems like \acp{CA}
+which have a small radius of interaction with neighbors. The evolved \acp{CA}
 developed various strategies to solve the task. Some are unsophisticated, such
 as expanding the 1s or 0s, which does not work on all validation examples. We
 show one of the more sophisticated solutions discovered during some runs of the
@@ -1004,29 +1006,29 @@ from the \ac{CA}.
 \end{figure}
 
 
-\paragraph{Reliable computation in cellular automata}
+\paragraph{Reliable computation in cellular automata.}
 The problem of carrying out reliable computations in \acp{CA} is studied early
-on in its history because of the potential of that model for real hardware
+on in its history because of the potential of that model for a real hardware
 implementation. The first studies used probabilistic approaches for solving the
 error detection and correction problems of automata --- which includes other
 models than \acp{CA} \parencite{neumannProbabilisticLogicsSynthesis1956,
   winogradReliableComputationPresence1963,
   ,tsertsvadzeStochasticAutomataProblem1964,
   ,haraoConsiderationCellularAutomata1973}. Other methods make use of the
-special structure of \ac{CA}, but rely on strong assumptions about the
+special structure of \acp{CA}, but rely on strong assumptions about the
 likelihood of errors \parencite{haraoFaultTolerantCellular1975,
   nishioFaultTolerantCellular1975}. Peter Gács has shown how to construct a 1D
-CA which can perform arbitrarily large reliable computations, assuming that each
+\ac{CA} which can perform arbitrarily large reliable computations, assuming that each
 cell gets an error with a positive probability
 \parencite{gacsReliableComputationCellular1986}. The fault model he describes is
 important from the point of view of ergodic theory because Gács’ result
 invalidates the ``positive probability conjecture'' in statistical physics,
-which states that all one dimensional infinite particle system with positive
-transition probabilities is ergodic, which means that it will visit all parts of
+which states that all one dimensional infinite particle systems with positive
+transition probabilities are ergodic, which means that it will visit all parts of
 its state space eventually. For more recent work on fault-tolerance by Gács, see
 \parencite{gacsReliableCellularAutomata2001}.
 
-\paragraph{Neural cellular automata\label{sec:neur-cell-autom}}
+\paragraph{Neural cellular automata\label{sec:neur-cell-autom}.}
 The principle of \ac{NCA} is based on the analogy between \acp{CA} and two types
 of neural networks: \acp{RNN} and \acp{CNN} (see Section
 \ref{sec:cell-autom-rnns} for more details about the analogy). Following this
@@ -1072,7 +1074,7 @@ perturbations\footnote{\url{https://distill.pub/2020/growing-ca/}}.
 \end{figure}
 \footnotetext{\url{https://colab.research.google.com/github/google-research/self-organising-systems/blob/master/notebooks/growing_ca.ipynb}}
 
-The same authors also used \ac{NCA} to learn to classify digits from the MNIST
+The same authors also used \acp{NCA} to learn to classify digits from the MNIST
 database of handwritten digits
 \parencite{randazzoSelfclassifyingMNISTDigits2020}. The particularity of this
 model is its ability to perform the classification in a decentralized way, by
@@ -1095,7 +1097,7 @@ Again, an advantage of this method is the ability to recover from perturbations.
 \end{figure}
 
 
-We used \ac{NCA} as part of our submission to the Minecraft open-endedness
+We used \acp{NCA} as part of our submission to the Minecraft open-endedness
 challenge 2021\footnote{\url{https://evocraft.life/}}, a competition organized
 at the Gecco 2021 conference competition
 track\footnote{\url{https://gecco-2021.sigevo.org/Competitions}}
@@ -1126,7 +1128,7 @@ In each of the examples in figure \ref{fig:nca}, a separate \ac{CA} was trained
 on a pattern starting from a single black pixel. We extend this setup by
 training a single \ac{NCA} on multiple patterns from different seeds. Instead of
 a single black cell, a small number of black cells are arranged into simple
-shapes. We call these patterns \emph{seeds}. \ac{NCA} are neural network with a
+shapes. We call these patterns \emph{seeds}. \acp{NCA} are neural networks with a
 lot of redundant parameters. This allowed us to learn (and encode) more than one
 pattern (or larger patterns) without adding parameters in the architecture. The
 resulting patterns are of slightly lower quality but still stable under
@@ -1174,15 +1176,16 @@ In an amorphous computing systems, a medium is composed of ``computational
 particles'' spread on a surface or mixed in a volume. The particles have a
 limited computing power, with no knowledge of their position or orientation. The
 particles can communicate with neighbors via some specified mechanism, which may
-be analogous to biological ones. There are two main components to this research
+be analogous to biological ones. The two main components to this research are 
+\emph{synthetic biology} and the choice of computing paradigm.
 \begin{description}
   \item[Synthetic biology.] The design of a substrate from chemical processes or
         genetically engineered biological cells
         \parencite{weissVivoDigitalCircuits2002}. It should behave correctly and
         follow pre-defined rules.
   \item[Computing paradigm.] How to program the individual agents to follow a
-        global predefined goal?
-        \parencite{nagpalProgrammableSelfassemblyConstructing2001}
+        global predefined goal
+        \parencite{nagpalProgrammableSelfassemblyConstructing2001}?
 \end{description}
 
 
