@@ -31,7 +31,7 @@ complexity, the last picture could perhaps be labeled as complex.
 
 \begin{figure}[htbp]
   \centering
-   \begin{subfigure}[b]{.04\linewidth}
+   \begin{subfigure}[b]{.03\linewidth}
     \centering
     \includegraphics[width=\linewidth]{figures/arrow.pdf}
     \caption*{}
@@ -100,7 +100,7 @@ complexity, the last picture could perhaps be labeled as complex.
 
 \end{tikzpicture}}
 \caption{\emph{Ideal} ``complexity'' curve as a function of the ``randomness''
-  of a system. The three \ac{CA} from figure \ref{fig:three_eca_complex} are
+  of a system. The three \acp{CA} from figure \ref{fig:three_eca_complex} are
   displayed at their approximate expected location on that curve. This curve is
   just for illustrative purposes and does not correspond to any true function
   linking randomness and complexity.}
@@ -145,8 +145,8 @@ defined as the negative logarithm of its probability, that is
 
 This metric quantifies how unlikely an event is and depends on how the
 probability $P$ was estimated in practice. This notion is at the foundation of
-information theory. The information content of a finite set of $N$ equally probable
-events is maximal, with $I(E) = \log(N)$.
+information theory. The information content of a finite set of $N$ events is maximal 
+when all events are equally probable, that is $I(E) = \log(N)$.
 
 \subsection{Shannon Entropy}
 Shannon entropy is defined as the expected information content of the input
@@ -180,10 +180,10 @@ weights to events of various probabilities
 \parencite{renyiMeasuresEntropyInformation1961}. It is formally defined for an
 $\alpha \geq 0, \alpha \neq 1$ and $X$ random variable with possible outcomes $0, 1, ..., n$ as
 \begin{align*}
-  H_\alpha(X) = \frac{1}{1-\alpha} \log\left(\sum_{i=0}^np_i^\alpha\right)
+  H_\alpha(X) = \frac{1}{1-\alpha} \log\left(\sum_{i=0}^np_i^\alpha\right).
 \end{align*}
 
-In the limit $\alpha \rightarrow 1$ it is equal to the Shannon entropy, where each events
+In the limit $\alpha \rightarrow 1$ it is equal to the Shannon entropy, where each event
 probabilities are equally important. $\alpha \rightarrow \infty$ yields the Min-entropy, and we have
 $H_{\infty} (X) = \min_{i}(\log(p_{i}))$. With $\alpha \rightarrow 0$ Rényi entropy is the same as
 Max-entropy, or topological entropy. Rényi entropy was used by
@@ -204,7 +204,7 @@ to define "life" in a mathematical way. \textcite{shawDrippingFaucetModel1984}
 and \textcite{grassbergerQuantitativeTheorySelfgenerated1986} also use the
 mutual information measure between two semi-infinite blocks in a sequence to
 define complexity. Mutual information has been used as well to study the
-complexity of \ac{CA} as the parameter $\lambda$ is changed (for details
+complexity of \acp{CA} as the parameter $\lambda$ is changed (for details
 about the $\lambda$ in the context of \ac{CA}, see section \ref{sec:langtons-lambda})
 \parencite{gutowitzMethodsDesigningCellular1988,
   liTransitionPhenomenaCellular1990}.
@@ -250,7 +250,7 @@ From the invariance theorem \parencite{solomonoffFormalTheoryInductive1964,
   solomonoffFormalTheoryInductive1964a,
   kolmogorovThreeApproachesQuantitative1968,
   chaitinLengthProgramsComputing1969}, the difference in algorithmic complexity
-of the same string $s$ in two different description language is bounded,
+of the same string $s$ in two different description languages is bounded,
 although this bound might be very large in practice.
 
 The algorithmic complexity is uncomputable
@@ -320,7 +320,7 @@ logical depth of a string $x$ at a significance level $s$ is defined as
   \min\{T(p): (|p| - |p^{*}| < s ) \wedge (U(p) = x) \},
 \end{equation}
 which is the least time required to compute it by a $s$-incompressible program,
-that is a program which length is within $s$ symbols from the optimal program
+that is a program $p$ which length is within $s$ symbols from the optimal program
 $p^{*}$ of the algorithmic complexity metric.
 % \textcite{gutowitzCellularAutomataSciences1995}
 
@@ -343,7 +343,8 @@ corresponds to how hard it is to put the system together in that state.
 By definition of thermodynamic depth, the average complexity of a state must be
 proportional to the Shannon entropy
 \parencite{shannonMathematicalTheoryCommunication1975} of the set of
-trajectories that experiment determines can lead to that state,
+trajectories that experiment determines can lead to that state. If we write $p_i$ 
+the probability of reaching the target state with the $i$-th possible trajectory, we have 
 
 \begin{equation}
   \label{eq:3}
@@ -417,7 +418,7 @@ general-purpose approach.
 
 \subsection{Sophistication}
 
-Intuitively, \emph{sophistication} is the complexity of a set of string of which
+Intuitively, \emph{sophistication} is the complexity of a set of strings of which
 the string is a ``typical'' member.
 \textcite{motaSophisticationRandomnessDeficiency2013} defines sophistication
 based on the original definition by \textcite{koppelStructure1988,
@@ -429,11 +430,12 @@ low order terms. The definition uses an interemediate quantity called
 \emph{discrepancy} which measures how far a set $S$ is from being a good model
 of a string $x$.
 
-Formally discrepency is defined for a string $x$ and a set $S$ containing $x$ as
+Formally, the discrepency $\Delta$ is defined for a string $x$ and a set $S$ containing $x$ as
 \begin{equation}
   \label{eq:6}
-  \Delta(x|S) := \log |S| - K(x) + K(S).
+  \Delta(x|S) := \log |S| - K(x) + K(S),
 \end{equation}
+where $K$ is the Solomonoff–Kolmogorov-Chaitin complexity function.
 
 The sophistication of $x$ is defined as the complexity of the simplest model of
 $x$ with limited discrepancy:
@@ -442,7 +444,7 @@ $x$ with limited discrepancy:
   \label{eq:7}
   \text{soph}_{c}(x) := \min_{S}\left\{ K(S): \Delta(x|S) \leq c \right\}
 \end{equation}
-where the significance level $c$ tells us how much discrepancy S is allowed to have.
+where the significance level $c$ tells us how much discrepancy the set $S$ is allowed to have.
 
 Koppel’s definition of sophistication, Definition 3.1, may not be stable. Small
 changes in c could cause large changes in $\text{soph}_{c}(x)$. For this reason,
@@ -463,7 +465,7 @@ which is also equivalent to
   \text{csoph}(x) = \min_{c}\left\{ \text{soph}_{c}(x) + c \right\}.
 \end{equation}
 
-Like algorithmic complexity, sophistication is a useful theoretical notions to
+Like algorithmic complexity, sophistication is a useful theoretical notion to
 model ideas of entropy and complexity, but it cannot be directly applied in
 numerical simulations and can only be approximated because it is also
 uncomputable.
@@ -475,7 +477,7 @@ uncomputable.
 
 \section{Emergence}\label{sec:emergence}
 The notion of emergence is central to the study of complex systems. It is a very
-broad concepts that could be phrased as \emph{the properties a composite entity
+broad concept that could be phrased as \emph{the properties a composite entity
   acquires that its composing parts did not possess}. Emergence is often
 described as being similar to self-organization. Although these two concepts are
 closely related, they are fundamentally different ideas
