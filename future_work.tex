@@ -1,9 +1,9 @@
 \chapter{Future Work}\label{cha:future_work}
 
-In this chapter, we present possible future extensions starting from our work.
-This thesis has explored the connections between learning, complex systems, and
-open-ended evolution. These fields have a long history, but many open problems
-still remain, some of them poorly understood, making this research exploratory
+This chapter outlines potential future directions for extending our work. Our 
+thesis has investigated the connections between complex systems, open-ended 
+evolution, and learning. While these fields have been studied for some time, 
+many open problems still remain, some of them poorly understood, making this research exploratory
 in nature. We hope that our work can advance our understanding of learning and
 adaptation in natural and artificial systems, leading to the development of more
 effective and efficient learning algorithms in the future.
@@ -18,10 +18,15 @@ a particular task, it seems appealing to use complexity as a fitness
 function for a genetic algorithm. Such an algorithm would generate new rules
 that are progressively more complex (according to the complexity metric).
 
-It is difficult to apply this principle in practice. Because many complexity metrics such as the algorithmic complexity \ref{sec:algo-complexity} are approximating some uncomputable ideal value. Candidate systems that maximize a particular metric are often unsatisfying because they exploit a particular flaw of that approximation. This could be accounted for in future
-works using multiple complementary complexity metrics or using other surrogate
-metrics, such as the ability to learn to solve auxiliary tasks and generalize from basic tasks to harder ones.
-This approach motivated our work from Chapter \ref{cha:learn-effic-compl}, where
+It is difficult to apply this principle in practice. Because many complexity 
+metrics such as the algorithmic complexity \ref{sec:algo-complexity} are 
+approximating some uncomputable ideal value. Candidate systems that maximize a 
+particular metric are often unsatisfying because they exploit a particular flaw 
+of that approximation. This could be accounted for in future
+work using multiple complementary complexity metrics or using other surrogate
+metrics, such as the ability to learn to solve auxiliary tasks and generalize 
+from basic tasks to harder ones.
+This approach motivated our work in Chapter \ref{cha:learn-effic-compl}, where
 we design a benchmark of progressively more complex tasks that could be used to
 evaluate the ability of a system to perform complex computations.
 
@@ -29,9 +34,9 @@ evaluate the ability of a system to perform complex computations.
 
 In Chapter \ref{cha:learn-effic-compl}, we explored the applications of the
 \acl{RC} paradigm to \acfp{CA}. In general, \ac{RC} assumes a purely forward
-model, which means that the inputs are fed into the reservoir and the outputs are decoded from
+model, which means that inputs are fed into the reservoir and outputs are decoded from
 it. The trainable decoder layer is trained offline on a training dataset and
-is then fixed during testing. We illustrate the  principle of \ac{RC} in figure
+is then fixed during testing. We illustrate the principle of \ac{RC} in Figure
 \ref{fig:classical_reservoir}. This structure is often sufficient for supervised
 tasks when a sufficiently large training dataset is available.
 
@@ -54,8 +59,8 @@ tasks when a sufficiently large training dataset is available.
   \label{fig:reservoir_comp}
 \end{figure}
 
-A straightforward extension that could make \ac{RC} systems fully autonomous
-would be to feed back an error signal within the reservoir state at each
+A straightforward extension that could make the \ac{RC} systems fully autonomous
+would be to transmit an error signal within the reservoir state at each
 output. This extension we call \emph{feedback reservoir computing} is
 illustrated in Figure \ref{fig:feedback_reservoir} alongside the standard
 \ac{RC} model \ref{fig:classical_reservoir}. 
@@ -65,10 +70,10 @@ adjust its future outputs in response to an error signal. This would enable
 the system to gradually enhance its performance over time.
 The only mechanism that should be built into
 this system would be an incentive to minimize the error signals received by
-adaptation. The main limitation to this idea is that the design of such a system with
+adaptation. The main limitation of this idea is that the design of such a system with
 built-in adaptation is not easy. We do not know of a mechanism that can enable
 autonomous adaptation and improvement without external input. The error signal is a 
-type of external input here, but it is not specified how the system should use the 
+type of external input, but it is not specified how the system should use the 
 signal. Our work on
 complex systems points towards cellular automata and other complex systems as
 candidates for supporting such a mechanism, which would rely on growth of
@@ -110,7 +115,7 @@ continuous or discrete. An evolution function $f$ specifies the state of the
 dynamical system at time $t$ given a history of states for $t' < t$. It may be
 deterministic or stochastic.
 
-We study the special case of discrete-time dynamical systems, where the current
+We study the special case of discrete-time dynamical systems where the current
 state depends on the previous state.
 
 \begin{equation}
@@ -118,8 +123,10 @@ state depends on the previous state.
   \label{eq:dyn-update}
 \end{equation}
 
-Inputs $x \in \mathcal{X}$ can be used to condition the update rule and enable the dynamical system
-to interact with an environment. The space $\mathcal{X}$ can be chosen arbitrarily, for example the space of real vectors in dimension $n$, $\mathcal{X} = \mathbb{R}^n$. For an input $x$, we can write the new dynamical update equation
+The inputs $x \in \mathcal{X}$ can be used to condition the update rule and enable the dynamical system
+to interact with an environment. The space $\mathcal{X}$ can be chosen arbitrarily, 
+for example, the space of real vectors in dimension $n$, $\mathcal{X} = \mathbb{R}^n$. 
+For an input $x$, we can write the new dynamical update equation
 
 \begin{equation}
 S_{t+1} = f(S_t, x).
@@ -148,21 +155,20 @@ prompt. An example of such a prompt and question:
   \underbrace{\texttt{How many dogs are there?}}_{\text{Question}}
 \end{equation*}
 More advanced question answering requires reasoning and advanced processing of
-the prompt. In the above example, it would suffice to remember words from the
+the prompt. In the above example, it would suffice to remember the words of the
 prompt.
 
 We consider a trained \ac{RNN} evaluated on a set of question answering tests.
 If the data set was designed correctly, the network should not have prior
 information about a sentence/question pair before reading it. The relevant piece
 of information of the prompt has to be stored within the values of the hidden
-state of the \ac{RNN} and not in the neural network weights since they are not
-being changed during this phase. This transient learning that enables the
+state of the \ac{RNN} and not in the weights of the neural network since they are not changed during this phase. This transient learning that enables the
 \ac{RNN} to memorize the beginning of the prompt is exactly the type of
 dynamical learning that we describe above. \acp{RNN} are trained offline to
 achieve this, but once they are trained, learning happens dynamically.
 
 Modern \acp{RNN} are not designed to take full advantage of this memory
-property and will progressively overwrite memory if ran for more timesteps.
+property and will progressively overwrite the memory if run for more timesteps.
 Still, they illustrate the type of learning we want to emphasize. We expect
 advanced systems to be able to keep that memory and also be capable of
 manipulating stored information to construct a reasoning and form novel concepts.
@@ -172,10 +178,10 @@ manipulating stored information to construct a reasoning and form novel concepts
 We consider another example: a single hidden layer neural network with weight
 matrices $W_1 \in \mathbb{R}^{n \times d}$ and $W_2 \in \mathbb{R}^{d \times o}$. We train the network with
 standard backpropagation and stochastic gradient descent with learning rate $\tau$.
-The neural network is represented by a function $F$ and the loss function
+The neural network is represented by a function $F$, and the loss function
 between the network output and the label is written as $\mathcal{L}$.
 
-Using the notation from Section \ref{sec:generic-model}, we define
+Using the notation of Section \ref{sec:generic-model}, we define
 $S_{t} = \left(W_{1}^{(t)}, W_{2}^{(t)}\right) \in \mathbb{R}^{n \times d} \times \mathbb{R}^{d \times o}$
 containing the neural network parameters at step $t$ of the training. We assume
 that the training pairs $(X_{k}, y_{k})$ are numbered according to their
@@ -188,8 +194,8 @@ The stochastic gradient update function for the state $S_{t}$ is:
       \mathcal{L}(F(X_t), y_t)}{\partial W_2^{(t)}} \right).
 \end{equation}
 
-Note that the function $f$ is deterministic for a given ordering of the training
-pairs. The stochasticity of $f$ is therefore contained in the numbering of
+Note that the function $f$ is deterministic for a given ordering of training
+pairs. Therefore, the stochasticity of $f$ is contained in the numbering of
 training examples.
 
 \begin{figure}[htbp]
@@ -204,7 +210,7 @@ training examples.
 
 We note that $f$ is a fixed update function (from the dynamical system point of
 view of the training pipeline, a training input/output pair $(X, y)$ is a pair
-of input values). In supervised learning, the function $f$ makes the state
+of input values). In supervised learning, the function $f$ causes the state to
 converge to a fixed point. This property is desired when solving a target task
 characterized by a loss $\mathcal{L}$. Because of that convergence property, a neural
 network cannot be expected to produce any novel behavior after the end of its
