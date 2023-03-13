@@ -1,14 +1,14 @@
 \chapter{Measuring complexity in evolving complex systems}
 \label{cha:meas-compl-evolv}
 
-In this chapter, we propose an approach for measuring growth of complexity of
+In this chapter, we propose an approach to measure the growth of the complexity of
 emerging patterns in complex systems such as \acfp{CA}. We discuss several ways
 in which a metric to measure complexity growth can be defined. This includes
 approaches based on compression algorithms and artificial neural networks. We
 believe that such a metric can be useful for designing systems that could exhibit
 open-ended evolution, which itself might be a prerequisite for the development of
 general artificial intelligence. We conduct experiments on 1D and 2D grid worlds
-and demonstrate that using the proposed metric we can automatically construct
+and demonstrate that using the proposed metric, we can automatically construct
 computational models with emerging properties similar to those found in
 Conway's Game of Life, as well as many other emergent phenomena. Interestingly,
 some of the patterns we observe resemble forms of artificial life 
@@ -26,7 +26,7 @@ is further discussed in \parencite{mikolovRoadmapMachineIntelligence2018}).
 Building systems that mimic some key aspects of the behavior of existing
 intelligent organisms (such as the ability to evolve, improve, adapt, etc.)
 might represent a promising path. Intelligent organisms --- for example, human beings but
-also most living organisms if we consider a broad definition of intelligence ---
+also most living organisms, if we consider a broad definition of intelligence ---
 are a form of spontaneously occurring, ever evolving complex systems that
 exhibit these kinds of properties
 \parencite{bookerPerspectivesAdaptationNatural2004}. The ability to sustain
@@ -45,8 +45,7 @@ To recognize self-preservation and growth in complexity, one should be able to
 detect emerging macro-structures composed of smaller elementary components. For
 the purpose of obtaining computational models that grow in complexity over time,
 one should also be able to determine the amount of complexity these systems
-contain. In this chapter, we propose and discuss several ways of estimating the
-complexity and detecting the presence of emerging and stable patterns in complex
+contain. In this chapter, we propose and discuss several ways to estimate complexity and detect the presence of emerging and stable patterns in complex
 systems such as cellular automata. We show that such metrics are useful when
 searching the space of cellular automata with the objective of finding those
 that seem to evolve over time.
@@ -66,7 +65,7 @@ nonexhaustive list of some well-known systems include Tierra
 \parencite{sorosIdentifyingNecessaryConditions2014}. Designs that focus on an objective and make use of reinforcement learning methods to drive evolution
 are also being studied, e.g. in
 \parencite{pathakLearningControlSelfAssembling2019}. Most of these simulated
-``worlds'' have had some success in reproducing key aspects of evolving
+``worlds'' have had some success reproducing key aspects of evolving
 artificial life, enabling the emergence of complex behavior from simple
 organisms. However, they still work within constrained simulated environments
 and usually consider organisms composed of elementary building blocks, while
@@ -87,9 +86,9 @@ updated in discrete time steps using a transition table that defines the next
 state of a cell given the states of its neighbors. They were originally proposed
 by Stanislaw Ulam and studied by Von Neumann
 \parencite{vonneumannTheorySelfreproducingAutomata1966}, who was interested in
-designing a computational system that can self-reproduce itself in a nontrivial
+designing a computational system that can self-reproduce itself in a non-trivial
 way. The trivial self-reproducing patterns were then those that do not have the
-potential to evolve, for example the growth of crystals.
+potential to evolve, for example, the growth of crystals.
 
 Stephen Wolfram later took a more bottom-up approach, beginning with the study
 of simple 1D binary cellular automata (CA), and identifying four qualitative
@@ -121,7 +120,7 @@ complexity and are not robust to perturbations or unexpected interactions with
 the environment.
 
 A genetic algorithm-based search for spontaneously occurring self-replicating
-patterns in 2D cellular automata with several states was undertaken in
+patterns was carried out in 2D cellular automata with several states was undertaken in
 \parencite{bilottaARTIFICIALMICROWORLDSPART2011} using entropy measures of the
 frequency distribution of $3\times 3$ patterns.
 
@@ -151,12 +150,12 @@ automata and observes that it results in a partitioning of the space of 1D CA
 into several clusters that match Wolfram's classes of automata. He also used
 this approach in the output of simple Turing machines and some 1D automata with
 more than two states and larger neighborhoods. Extensions of this work include
-asymptotic sensitivity analysis of compressed length for input
+an asymptotic sensitivity analysis of compressed length for input
 configurations of growing complexity, as introduced in
 \parencite{zenilAsymptoticBehaviorRatios2013,
   zenilWhatNatureLikeComputation2014}.
 
-Additionally, image decompression time as an approximation of Bennet's logical
+Additionally, the image decompression time as an approximation of Bennet's logical
 depth \parencite{bennettLogicalDepthPhysical1995,
   zenilImageCharacterizationClassification2012} and the output distribution of
 simple Turing machines combined with block decomposition of CA to approximate
@@ -171,14 +170,14 @@ review of several measures of complexity and their applications, see
 \section{Compression-based metric}\label{sec:compr-based-metr}
 
 A cellular automaton of size $n$ in 1D can be represented at time $t$ by its
-grid-state $S^{(t)} = \{c_1^{(t)}, ..., c_n^{(t)}\}$ where each $c_i$ (also
+grid state $S^{(t)} = \{c_1^{(t)}, ..., c_n^{(t)}\}$ where each $c_i$ (also
 called a cell) can take one of $k$ possible values (representing the possible
 states) and a transition rule $\phi$. The transition rule is defined with
 respect to a neighborhood radius $r$ with the mapping $\phi(c^{(t)}_{i-r}, ...,
 c^{(t)}_i ..., c^{(t)}_{i+r} ) = c^{(t+1)}_i$ that maps $\{1, ..., k\}^{2r+1}$
 to $\{1, ..., k\}$. The quantity $2r + 1$ corresponds to the number of
 cells taken into account to calculate the next state of a cell, namely the
-cell itself and $r$ neighboring cells in both directions.
+cell itself and the $r$ neighboring cells in both directions.
 
 Simulating a CA amounts to the recursive application of this mapping $\phi$ to
 an initial state $S^{(0)} = \{c_1^{(0)}, ..., c_n^{(0)}\}$.
@@ -208,7 +207,7 @@ We define the compressed length $C$ of a 1D cellular automaton at time $t$ as
   C(S^{T}) = \text{length}\left(\texttt{comp}(c_1\ ||\ c_2\ ||\ ...\ c_n)\right)
 \end{align}
 
-where $||$ denotes the string concatenation operator and the cells $c_i$ are
+where $||$ denotes the string concatenation operator, and cells $c_i$ are
 implicitly converted into string characters (with one symbol per unique state).
 \texttt{comp} is a compression algorithm that takes a string as input and
 outputs a compressed string, and length is the operator that returns the length
@@ -221,7 +220,7 @@ apply the above metric to the 256 ECA run for 512 timesteps and initialized with
 one activated cell in the middle, we obtain the plot of
 Figure~\ref{subfig:comp_scores}. This example is re-used in the rest of the
 chapter as a way to easily visualize and check that the defined complexity
-measures are coherent with one another. The colors on
+measures are coherent with one another. The colors in
 Figure~\ref{subfig:comp_scores} were obtained with a KMeans clustering algorithm
 applied on the compressed length of the automata states.
 
@@ -266,7 +265,7 @@ Ultimately, the theoretical goal of using compression algorithms is to approach
 the theoretical minimum description length of the input
 \parencite{grunwaldMinimumDescriptionLength2007}. For very regular inputs, this
 length should be relatively small and inversely for random inputs. However, gzip
-and PAQ are crude approximations of the minimum description length, and may only
+and PAQ are crude approximations of the minimum description length and may only
 approach it in a given context. As an example, compressing text data (a task
 often performed with gzip in practice) is much more efficient with a language
 model that can assign a very low probability to non grammatically correct
@@ -290,10 +289,10 @@ average lengths might either correspond to interesting rules or slowly growing
 disordered systems.
 
 To cope with this limitation, one should also take into account the dynamics of
-complexity, that is how the system builds on its complexity at a given time as
+complexity, that is, how the system builds on its complexity at a given time as
 it keeps evolving, while retaining some of the structures it had acquired
 earlier. Compression leverages the amount of repetitions in inputs to further
-compress and this may also be used as an estimate of structure overlap, as
+compress, and this may also be used as an estimate of structure overlap, as
 explained in the following section.
 
 \subsection{Joint compression}\label{sec:joint-compression}
@@ -763,16 +762,16 @@ of 1700 randomly generated 2-states 3 by 3 neighborhood rules. For comparison,
 Conway's Game of Life rule (GoL) ranks in the top 1\% of the 2500 rules
 mentioned above for runs that do not end in a static global state. We observe
 that spontaneous glider formation events appear to be captured by our metric.
-Although gliders in cellular automata are a simple process that can manually be
-created, detection of their spontaneous emergence within a random search setting
+Although gliders in cellular automata are a simple process that can be created manually,
+detection of their spontaneous emergence within a random search setting
 is a first step towards finding more complex macro structures that can emerge
 out of simple components. Rules with low scores are overwhelmingly of the
 disordered kind.
 
 Figures~\ref{fig:gliders}, \ref{fig:micro} and \ref{fig:odd} show some three
 states rules that were selected through random sampling on the simplex with the
-neural-network based metric. They were selected among the 30 highest scoring
-rules out of 2500 randomly selected 3 states rules. Their behaviors all involve
+neural network-based metric. They were selected among the 30 highest scoring
+rules out of 2500 randomly selected 3 states rules. All of their behaviors involve
 the growth and interaction of some small structures made of elementary cells.
 
 All automata were initialized with a random disordered square of 20 by 20 cells
@@ -825,23 +824,23 @@ GIFs\footnote{\url{https://bit.ly/interesting_automata}}.
 For some of these rules interesting patterns appear less frequently in smaller
 grids, indicating that the size of the space might impact the ability to
 generate complex macro-structures. Increasing the size of the state space to
-very large grids might therefore make it easier generating very complex patterns.
+very large grids might therefore make it easier to generate very complex patterns.
 
 \section{Conclusion}\label{sec:conclusion}
 
-In this chapter, we have proposed compression-inspired metrics for measuring a
-form of complexity occurring in complex systems. We demonstrated its usefulness
+In this chapter, we have proposed compression-inspired metrics for measuring a type
+of complexity occurring in complex systems. We demonstrated its usefulness
 for selecting CA rules that generate interesting emergent structures from very
-large sets of possible rules. In higher dimensions where linear compression ---
-as in gzip --- is not sufficient to find complex patterns, our metric is also
+large sets of possible rules. In higher dimensions where linear compression, as in gzip,
+is not sufficient to find complex patterns, our metric is also
 useful.
 
 We study 2 and 3 states automata here and we plan to investigate the effects of
 additional states or larger neighborhoods on the ability to evolve more
 structures and obtain more interesting behaviors.
 
-The dataset and code to reproduce our experiments and improvement on the results
-reported are published on
+The dataset and code to reproduce our experiments and improvement on the reported results
+ are published on
 GitHub\footnote{\url{https://github.com/hugcis/evolving-structures-in-complex-systems}}.
 The metrics we introduce in this chapter could be used to design organized
 systems of artificial developing organisms that grow in complexity through an
@@ -852,14 +851,14 @@ complexity.
 
 The proposed metric is theoretically applicable to any complex system where a
 notion of state of an elementary component and locality can be defined. With
-these requirements fulfilled, we can build a similar prediction model that uses
-information about local neighbors to predict the state of a component and
+these requirements satisfied, we can build a similar prediction model that uses
+information about local neighbors to predict the state of a component, and
 thereby assess the structural complexity of an input.
 
 We believe that the capability of creating evolving systems out of such
 elementary components and with few assumptions could be a step towards AGI. By
-devising ways to guide this evolution in a direction we find useful, we would be
-able to find efficient solution to hard problems while retaining adaptability of
+devising ways to guide this evolution in a direction that we find useful, we would be
+able to find an efficient solution to hard problems while retaining the adaptability of
 the system. It might be suitable to avoid over-specialization that can happen in
 systems designed to solve a particular task --- e.g. reinforcement learning
 algorithms that can play games, and supervised learning --- by staying away from
