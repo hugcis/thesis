@@ -23,17 +23,17 @@ of modeling crystal growth and creating an autonomous self-replicating system
 \parencite{vonneumannTheorySelfreproducingAutomata1966}.
 
 \subsection{Definition}\label{sec:definition}
-It is usually defined on a regular lattice in one or two dimensions. Each of its
+It is usually defined in a regular lattice in one or two dimensions. Each of its
 components is called a cell and can be in a state $k \in \mathcal{S}$. $\mathcal{S}$ is the space of
 available states for cells, usually chosen to be $\{0, 1\}$ for binary
 \acp{CA} or $\{1, \ldots, n\}$ for \acp{CA} with $n$ states.
 
 A neighborhood function $\boldsymbol{N}$ is defined that associates each cell
-with its neighbors on the grid. In general, a \ac{CA} can be constructed on any
+with its neighbors in the grid. In general, a \ac{CA} can be constructed on any
 space $\mathcal{L}$ where this function can be defined. The space $\mathcal{L}$ specifies an
-indexing and the relation between the cells. In practice, regular finite or
+index and the relationship between the cells. In practice, regular finite or
 infinite grids are chosen, $\mathcal{L} \subset \mathbb{Z}$ or $\mathcal{L} \subset \mathbb{Z}^{2}$. For example, the grid could
-be a 1 dimensional torus with 10 cells, that is,
+be a one-dimensional torus with 10 cells, that is,
 $\mathcal{L}_{{T_{10}}} = \{1, 2, \ldots, 10 \}$. The neighborhood function has the following
 general form:
 \begin{equation}
@@ -43,11 +43,11 @@ general form:
   \end{aligned}
 \end{equation}
 where $\mathcal{N}_{c_{i}}$ is the neighborhood of cell $c_{i}$, $s$ is the
-number of cells in the neighborhood and the returned value is a finite set of
+number of cells in the neighborhood, and the returned value is a finite set of
 cells: the neighbors of cell $c_{i}$. For the torus $\mathcal{L}_{T_{10}}$
 above, we can define the neighbors to be the cell itself and the two immediately
 adjacent cells. This type of 1D neighborhood is usually associated with a
-\emph{radius} parameter $r = 1$. The $r=1$ neighborhood is illustrated in Figure
+\emph{radius} parameter $r = 1$. The neighborhood $r=1$ is illustrated in Figure
 \ref{fig:1d_neigh}. It corresponds to the following neighborhood function:
 \begin{equation}
   \begin{aligned}
@@ -65,7 +65,7 @@ A larger radius $r$ would correspond to including more cells in the
 neighborhood, going in each direction from the initial cell. On two-dimensional
 grids, there are multiple ways to define the neighborhood. Some common examples
 are the Moore neighborhood (see Figure \ref{fig:moore}) and the Von Neumann
-neighborhood (see Figure \ref{fig:von_neumann}). In the rest we omit the
+neighborhood (see Figure \ref{fig:von_neumann}). In the rest, we omit the
 subscript on the neighborhood function $\boldsymbol{N}$ as we almost always work
 with regular grids on a torus, for which it is simpler to just mention the size
 and dimension.
@@ -171,7 +171,7 @@ follows.
         which one depends on the initial configuration. (\ac{CA} defined on
         finite lattices always have periodic behavior because there
         is only a finite number of grid configurations. Class 2 does not refer to
-        this type of periodic behavior, but rather to cycles with periods much
+        this type of periodic behavior but rather to cycles with periods much
         shorter than the total number of possible states).
   \item[Class 3] All initial configurations exhibit chaotic behavior
         after a short transient period. (The term “chaotic” here refers to
@@ -196,7 +196,7 @@ simulation. Using a simple k-means clustering technique, he obtained two groups
 that roughly match Wolfram’s classes 1 and 2 and classes 3 and 4. We reproduce
 these results in Figure~\ref{subfig:comp_scores} in Chapter~\ref{cha:meas-compl-evolv}.
 They offer an interesting
-non-qualitative confirmation of the results of Wolfram's classification.
+nonqualitative confirmation of the results of Wolfram's classification.
 However, these results vary significantly if we modify the initial conditions, as
 well as the grid size, data representation, or compression algorithm
 \parencite{hudcovaClassificationComplexSystems2020}.
@@ -220,7 +220,7 @@ fitting function for the asymptotic growth of its transients
 \subsection{Cellular automata variants}
 
 Several \ac{CA} variants have been proposed, modifying or
-constraining various parts of the definition in Section \ref{sec:definition}.
+restricting various parts of the definition in Section \ref{sec:definition}.
 Here, we list some common ones.
 
 \paragraph{Elementary cellular automata.\label{sec:elem-cell-autom}}
@@ -229,7 +229,7 @@ neighborhood size 3 --- the cell and its two direct neighbors on the 1D grid.
 There are 8 possible configurations of a neighborhood with 3 cells and 2 states
 per cell, which corresponds to 256 possible ways to define an \ac{ECA} --- two
 possible outputs for each of these 8 possible configurations; hence
-$2^{8} = 256$ possible \ac{CA}. This relatively small number of rules enables an
+$2^{8} = 256$ possible \ac{CA}. This relatively small number of rules allows for an
 exhaustive exploration of the rule space and mapping of the properties of \ac{ECA},
 which would not be possible for general \acp{CA}.
 
@@ -240,7 +240,7 @@ which would not be possible for general \acp{CA}.
   \label{fig:eca_150_rule}
 \end{figure}
 
-These \acp{CA} are extensively studied and offer an interesting combination of
+These \acp{CA} have been extensively studied and offer an interesting combination of
 trivial definition and implementation and complex and unpredictable properties.
 One of the fundamental problems of \ac{CA} research is to classify the 256 rules
 into well-defined behavior types and order them by complexity, which was
@@ -260,13 +260,13 @@ in more detail in Section \ref{sec:class-cell-autom}.
   \includegraphics[width=\linewidth]{figures/arrow.pdf}
   \caption*{}
 \end{subfigure}
-\begin{subfigure}[b]{.45\linewidth}
+\begin{subfigure}[t]{.45\linewidth}
   \centering
   \includegraphics[width=\linewidth]{figures/eca_150_single.pdf}
   \caption{Single cell initialization}
   \label{fig:eca_150_single}
 \end{subfigure}
-\begin{subfigure}[b]{.45\linewidth}
+\begin{subfigure}[t]{.45\linewidth}
   \centering
   \includegraphics[width=\linewidth]{figures/eca_150_random.pdf}
   \caption{Random initialization}
@@ -282,20 +282,20 @@ in more detail in Section \ref{sec:class-cell-autom}.
 
 \ac{ECA} rules are easily visualized because there are only eight possible
 neighborhood configurations that need to be shown. For example, Figure
-\ref{fig:eca_150_rule} shows the transition table for \ac{ECA} rule 150. If we
+\ref{fig:eca_150_rule} shows the transition table for \ac{ECA} Rule 150. If we
 assign 1 to the black state and 0 to the white state, the possible neighborhood
 configurations are ordered in their binary order from right to left, with the
 leftmost bit being the most significant. This is how the rule number is
 computed, using the output states (last row in Figure \ref{fig:eca_150_rule}) as
 a binary representation. Example simulations of \ac{ECA} rule 150 starting 
 from various initial states are shown in Figure~\ref{fig:eca_150}. In these 
-representations, time flows from top to bottom, and each row of cells represents 
+representations, time flows from top to bottom and each row of cells represents 
 a single internal \ac{CA} state at a single time step.
 
 There are several well-known \ac{ECA} rules with particularly interesting
 properties. For example, a universal computer has been constructed in rule 110
 \parencite{cookUniversalityElementaryCellular2004}, making it the first (and
-only to date, although \ac{ECA} rule 54 is postulated to be as well) Turing complete \ac{ECA}.
+only to date, although \ac{ECA} Rule 54 is postulated to be as well) Turing complete \ac{ECA}.
 
 \paragraph{Totalistic cellular automata.}
 Totalistic \ac{CA} are a subset of \ac{CA} whose rules can be expressed as a
@@ -360,7 +360,7 @@ they can simulate any algorithm.
 
 
 \paragraph{Asynchronous cellular automata.}
-A cellular automaton is said to be asynchronous when its cells are not all
+A cellular automaton is said to be asynchronous when its cells are not
 updated in parallel at each time step. Various cell update schemes can be
 chosen. Contrary to regular cellular automata, the grid has to be finite for an
 update rule to exist. This is because asynchronous \acp{CA} have to define an
@@ -424,11 +424,11 @@ neighbors per cell grows exponentially with dimension, and the number of
 possible rules has a doubly exponential growth rate. This makes the
 convenient representation of \acp{CA} rules as tables infeasible, since the size
 of that table quickly exceeds the available memory of most computers. For
-example, there are $2^9 = 512$ possible $3\times 3$ configurations of a binary Moore neighborhood (see \ref{fig:moore}) in 2D that can each lead to 2 states, which means there exists $2^{512} \approx 10^{154}$ distinct 2D rules with 2 states and a
+example, there are $2^9 = 512$ possible $3\times 3$ configurations of a binary Moore neighborhood (see \ref{fig:moore}) in 2D that can each lead to 2 states, which means that there exists $2^{512} \approx 10^{154}$ distinct 2D rules with 2 states and a
 Moore neighborhood. This is already an incomprehensibly large number, but there
 are $2^{134,217,728} \approx 10^{40,403,562}$ such rules in 3D. In general, in dimension $n$ there are $2^{3^n}$ possible binary \ac{CA} rules with a Moore-like neighborhood.
 
-Despite these limitations, several works have studied higher dimensional \acp{CA},
+Despite these limitations, several works have studied higher dimensions \acp{CA},
 although mostly in 3 dimensions
 \parencite{tsalidesThreedimensionalCellularAutomata1989,
   sudhakaranGrowing3DArtefacts2021}. For example, there are several examples of
@@ -527,14 +527,14 @@ challenging to sample \acp{CA} while scanning the wide range of behavior these
 models are capable of simulating. This is because the size of the space of
 \acp{CA} rules is very large. The naive method of uniformly sampling each
 transition output is not useful in large rule spaces with multiple states, large
-neighborhoods, or grid dimension higher than 1.
+neighborhoods, or grid dimensions larger than 1.
 
 Rules with equal proportions of transitions leading to all states tend to be the
 most chaotic. This is also what Langton observed when studying the $\lambda$
 parameter. This is explained by the fact that sampling each transition output
 uniformly is equivalent to sampling the rules from a multinomial distribution
 with the number of possible states ($K$), number of possible transitions
-($n = K^{K^{s}}$, with $s$ the number of cells in a neighborhood), and uniform
+($n = K^{K^{s}}$, with $s$ the number of cells in a neighborhood), and the uniform
 probabilities $p_{1}= \ldots= p_{K}$ as parameters. A random variable
 $X = (X_{1}, \ldots, X_{K})$ indicates the number of times each result is observed.
 The probability mass function of this distribution is
@@ -546,7 +546,7 @@ The probability mass function of this distribution is
   \end{aligned}
 \end{equation}
 
-This quantity becomes vanishingly small for large $n$ (that is rules with many
+This quantity becomes vanishingly small for large $n$ (that is, rules with many
 states or large neighborhoods) and rules with an output transition skewed
 towards a specific state. For example, the binary Game of Life rule has 372
 transitions leading to state 0 and 140 leading to state 1. The probability
@@ -669,11 +669,11 @@ it is a 1 or 2D vector of discrete values (see Section \ref{sec:definition}),
 but~\parencite{mordvintsevGrowingNeuralCellular2020} and other \acp{CA}
 extensions use continuous values, much like usual \acp{RNN}.
 
-The transformation $\Phi$ operates only on the hidden state. Because it is local,
+The mapping $\Phi$ operates only on the hidden state. Because it is local,
 it can be shown to be equivalent to a convolutional layer, as explained below in
 Section~\ref{sec:transition-rule-as}. The inputs and outputs
 $(\mathbf{x}, \mathbf{o})$ in Figure \ref{fig:standard_rnn} are not included
-in the classical definition of \acp{CA}, but are an easy to implement extension, as
+in the classical definition of \acp{CA}, but are an easy-to-implement extension, as
 discussed in Section~\ref{sec:adding-inputs-outp}.
 
 \subsection{Transition rule as a set of convolutions\label{sec:transition-rule-as}}
@@ -745,7 +745,7 @@ indicator of the current input configuration.
 
 \paragraph{A second convolutional layer.} It has $k^{2r + 1}$ filters of size $1$
 that are $0$s or $1$s depending on the desired output value of that transition.
-When applied on the indicator vector above, the obtained output will be the
+When applied to the indicator vector above, the output obtained will be the
 output value of the rule corresponding to the detected neighborhood state.
 
 With some circular padding that wraps around the edges of the grid or applies
@@ -762,10 +762,10 @@ learning such as NLP or computer vision
 
 \subsection{Adding inputs and outputs\label{sec:adding-inputs-outp}}
 
-Figure ~\ref{fig:standard_rnn} depicts the locations where inputs and 
+Figure ~\ref{fig:standard_rnn} shows the locations where inputs and 
 outputs can be incorporated into the Game of Life or any other \ac{CA}. 
 We provide a variety of examples on how input and output can be integrated 
-and how they can interact with the \ac{CA}'s rule.
+and how they can interact with the rule of the \ac{CA}.
 
 
 \subsubsection{Inputs}
@@ -792,12 +792,12 @@ In the case of cellular automata, it can also be done in the following ways:
 \begin{itemize}
   \item \textbf{Vector state.} A straightforward way to add inputs to a \ac{CA} is to
         consider the grid as having an additional (possibly read-only)
-        dimension. For example, a 1D automaton of size $N$ would actually be represented by
+        dimension. For example, a 1D automaton of size $N$ would be represented by
         a vector of dimension $N\times 2$ where the first vector of size $N$ is the
         state of the grid and the other is the input. The update rule would be
-        changed to take this new component into account. One can see this model
+        changed to take into account this new component. One can see this model
         as using multiple \ac{CA} rules at the same time, with the input state
-        conditioning the rule being chosen for a given update step.
+        conditioning the rule chosen for a given update step.
 
   \item \textbf{Variable update rule.} Inputs can also influence a CA's evolution by
         changing the update rule. With this configuration, the update rule $\Phi$
@@ -889,7 +889,7 @@ can execute that task on input/output pairs
 are searched~\parencite{mitchellComputationCellularAutomata2005}. Previous successes
 with \acp{RNN} demonstrate that this model is powerful enough to learn complex
 functions when the grid is made of continuous numbers and the transformation is
-not local thanks to optimization, for instance, in language modeling.
+not local due to optimization, for instance, in language modeling.
 
 However, another interesting point of view can be taken when we consider the
 hidden state (or tape) as encoding both some data and a computer program, as is
@@ -905,8 +905,7 @@ not know of any efficient encoding for programming them.
 
 \subsection{Consequences}
 
-Viewing cellular automata as recurrent convolutional neural networks, like
-described above has several interesting consequences, of which we list a few
+Viewing cellular automata as recurrent convolutional neural networks, as described above, has several interesting consequences, of which we list a few
 here.
 
 \subsubsection{Turing-completeness of the system}
@@ -923,14 +922,14 @@ does not seem to bear any consequence on \acp{CNN}.
 
 \subsubsection{Differentiable cellular automata}
 
-Every step of the computations involved in computing a step of a cellular
+Each step of the computations involved in computing a step of a cellular
 automaton represented as a RCNN is differentiable. Therefore, we can
 theoretically couple this framework with backpropagation to create
 \emph{learnable} cellular automata that can adapt their rules to minimize a
 target loss function.
 
 This is the direction taken by~\textcite{mordvintsevGrowingNeuralCellular2020}.
-The authors use supervised learning on a \ac{CA} and train it to get a stable
+The authors use supervised learning on a \ac{CA} and train it to obtain a stable
 self-repairing target shape. However, because supervised \ac{CA} can only do as
 much as they have been trained to do, it may defeat the purpose of working with
 a model capable of spontaneous complex emergent behavior. An open-ended
@@ -943,18 +942,18 @@ of that training process as a way to help understand the structure of the
 
 \subsection{Beyond the naive rule representation}
 
-The representation of \ac{CA} rules we built in Section
+The representation of \ac{CA} rules that we built in Section
 \ref{sec:transition-rule-as} is a one-to-one mapping. Each rule has its
-R\ac{CNN} counterpart and vice versa. However, there are several ways to make
-that representation of \ac{CA} rules more efficient, using neural network with
-less parameters. For instance, we can make the first layer of filters receptive
+R\ac{CNN} counterpart, and vice versa. However, there are several ways to make
+that representation of \ac{CA} rules more efficient, using a neural network with
+fewer parameters. For example, we can make the first layer of filters receptive
 to both a given configuration and its inverse (\eg~$(1, 0, 1)$ and $(0, 1, 0)$
 in an \acl{ECA}) by using negative values in the filter (use a filter $(1, -1, 1)$
 instead of $(1, 0, 1)$ and $(0, 1, 0)$ separately).
 
-For example, the game of life rule does not need more than 2 convolutional
+For example, the rule of the game of life does not need more than 2 convolutional
 filters on the first layer to be represented by a \ac{CNN} because it is
-totalistic. The new state of a cell only depends on its number of neighbors in
+totalistic. The new state of a cell depends only on its number of neighbors in
 the alive state and the current state of the cell.
 
 
@@ -990,30 +989,29 @@ Some early known formulations of the \ac{RC} idea were done by
   schomakerSimulationRecognitionHandwriting1991,
   schomakerNeuralOscillatornetworkModel1992}. In another early work,
 \textcite{buonomanoTemporalInformationTransformed1995} used a random spiking
-neural network with excitatory and inhibitory elements. Neuron connection
-probabilities were inspired by real rat brain data
-\parencite{masonSynapticTransmissionIndividual1991}. The authors observed a interval
-sensitive response of these neurons when subjected to pulses spaced by varying
+neural network with excitatory and inhibitory elements. The probabilities of neuron 
+connection were inspired by the real rat brain data
+\parencite{masonSynapticTransmissionIndividual1991}. The authors observed an interval-sensitive response of these neurons when subjected to pulses spaced by varying
 time intervals. This indicates an ability to encode temporal information. To
-measure this phenomenon they trained an output linear layer to recognize specific
+measure this phenomenon, they trained an output linear layer to recognize specific
 patterns in the activation of the last layer of neurons. This idea of using a
-randomly initialized \ac{RNN} with fixed weights and train a simple linear layer
+randomly initialized \ac{RNN} with fixed weights and training a simple linear layer
 to decode outputs was reinvented and popularized later under the names
 ``Echo-state networks'' \parencite{jaegerEchoStateApproach2001} and ``Liquid
 state machines'' \parencite{maassRealTimeComputingStable2002}.
 
-Another advantage of reservoir computing is that the reservoirs can be
+Another advantage of reservoir computing is that reservoirs can be
 implemented using a variety of physical systems, substrates, and devices. These
 types of reservoir are sometimes called ``exotic''
 \parencite{lukoseviciusReservoirComputingApproaches2009} in contrast to
-\ac{RNN}-based reservoirs. Physical \ac{RC} are a promising area of research
+\ac{RNN}-based reservoirs. Physical \ac{RC} is a promising area of research
 that may help us develop cheap and efficient machine learning hardware and can
-inform us on the nature and behavior of the underlying physical systems.
+inform us about the nature and behavior of the underlying physical systems.
 \textcite{tanakaRecentAdvancesPhysical2019} identifies four characteristics that
-make a reservoir suitable for solving a computational task:
+make a reservoir suitable for solving a computational task.
 
 \begin{enumerate}
-  \item The inputs need to be mapped to a high-dimensional space, which
+  \item The inputs must be mapped to a high-dimensional space, which
         corresponds to the internal state of the reservoir. This
         high-dimensionality ensures that the inputs are separated with high
         probability.
@@ -1026,7 +1024,7 @@ make a reservoir suitable for solving a computational task:
         \parencite{jaegerEchoStateApproach2001, yildizRevisitingEchoState2012},
         or fading memory \parencite{boydFadingMemoryProblem1985,
         maassRealTimeComputingStable2002, maassFadingMemoryKernel2004}. This
-        property relates asymptotic properties of the excited reservoir dynamics
+        property relates the asymptotic properties of the excited reservoir dynamics
         to the driving signal. A reservoir with the echo-state property will
         asymptotically forget all input values. This makes some reservoir unable
         to solve tasks where unbounded memory is possibly required, such as
@@ -1125,8 +1123,8 @@ with a trainable linear regression to extract a desired output from a
 combination of these response signals. The \ac{ESN} model is illustrated in 
 Figure \ref{fig:echo_state_network}.
 
-In practice, the input projection is often fixed but it can also be trainable.
-The output can also be fed back to the reservoir like an input, and the
+In practice, the input projection is often fixed, but it can also be trainable.
+The output can also be fed back to the reservoir as an input, and the
 structure of the \ac{RNN} reservoir can be adapted to various applications.
 
 \begin{figure}[htbp]
@@ -1140,7 +1138,7 @@ structure of the \ac{RNN} reservoir can be adapted to various applications.
   \label{fig:echo_state_network}
 \end{figure}
 
-We define an input sequence to be $(\vx_{t})_{t=1}^{T} \in 
+We define an input sequence as $(\vx_{t})_{t=1}^{T} \in 
 \mathbb{R}^{ n \times T}$, where $n$ is the input dimension and $T$ is the 
 number of input time steps. The
 initial state of the reservoir at $t = 0$ is $\vr_{0}$. The echo-state network
@@ -1183,8 +1181,8 @@ optimization schemes for these parameters:
         optimized. This corresponds to a search space of dimension 4.
   \item[Basic.] Each of the $\sigma_{i}$ is optimized individually, or in
         groups. The other parameters are also optimized.
-  \item[Smart.] All the parameters are optimized as in the \textbf{Basic}
-        scheme, and the weights of $\mW_{h}$ are also crafted specifically for
+  \item[Smart.] All parameters are optimized as in the \textbf{Basic}
+        scheme, and the weights of $\mW_{h}$ are also designed specifically for
         the target task.
 \end{description}
 
@@ -1199,16 +1197,16 @@ function. For echo state networks, the decoder is often a linear transformation
 $D(\vr_{t}) = \mW_{\text{out}} \vr_{t}$ where $\mW_{\text{out}}$ is a
 matrix of dimensions $K \times L$. In our experiments in Chapter \ref{cha:learn-effic-compl}, 
 we set $\beta = 0$, which
-was empirically observed to yield the best results on our tasks. The parameter
+was empirically observed to yield the best results on our tasks. Parameter
 $\beta$, as well as the randomly sampled weight matrix, are sometimes adjusted for
 each task \parencite{jaegerLongShortTermMemory2012}. We only use default values
-to get a task-independent setup with the least possible assumptions and to make
+to obtain a task-independent setup with the least possible assumptions and to make
 the methods comparable.
 
 \subsection{Reservoir cellular automata\label{sec:app-ca-res}}
 
 Cellular automata can also be used as a dynamical system in reservoir
-computing. This was originally proposed by Yilmaz in 2014 and later named ReCA
+computing. This was originally proposed by Yilmaz in 2014 and later was named ReCA
 (Reservoir Cellular Automata) \autocite{yilmazReservoirComputingUsing2014,
   margemExperimentalStudyCellular2017}.
 
@@ -1230,7 +1228,7 @@ Input data is assumed to be categorical and sequential,
   X = [X_{1}, \ldots, X_{t}, \ldots],\quad t\in \mathbb{N}, \quad \forall t \ X_{t} \in \mathcal{X} \subset \mathbb{N}.
 \end{equation}
 
-A cellular automaton is a discrete system that is not particularly designed to
+A \ac{CA} is a discrete system that is not specifically designed to
 handle input. The purpose of the encoding step in ReCA is to convert the input
 data points to vectors that can be embedded in the state space of the cellular automaton. Such encoding should translate --- or embed --- the input space
 $\mathcal{X}$ into a new one that can be combined with the current state of the
@@ -1271,7 +1269,7 @@ allow for a richer variety of produced encodings:
         of $k$ bits set in a fixed position.
 \end{description}
 
-The effect of applying our three methods on a simple input with three components
+The effect of applying our three methods to a simple input with three components
 is illustrated in Fig.~\ref{fig:enc_meth}. Projections are chosen to map
 each input bit to a unique output configuration.
 
@@ -1286,12 +1284,11 @@ Following \parencite{yilmazReservoirComputingUsing2014,
   nicheleReservoirComputingUsing2017, nicheleDeepLearningCellular2017}, the
 input is projected multiple times to add redundancy to the encoding. This was
 experimentally observed to improve performance. We also use a projection vector
-larger than the initial one. The projections are randomly generated $R$ times,
-applied and concatenated as a single large encoder to create the full CA input
+larger than the initial one. Projections are generated randomly $R$ times, applied, and concatenated as a single large encoder to create the full \ac{CA} input
 vector. The parameter $R$ is called \emph{redundancy}.
 
-For cellular automata in 1D, the space $\mathcal{P}$ is one-dimensional, and the
-concatenation is done over this dimension. In higher-dimensional spaces,
+For cellular automata in 1D, the space $\mathcal{P}$ is one dimensional, and the
+concatenation is performed on this dimension. In higher-dimensional spaces,
 this concatenation has to be defined in some other way.
 
 We write the $R$ projection functions $E_{1}, E_{2}, \ldots, E_{R}$. The final size
@@ -1312,7 +1309,7 @@ There are multiple ways to combine the input vector with the current state of th
 function between the projected input and the state of the \ac{CA}.
 
 At each input step $t$, the projected input vector $\vp_{t}$ is XORed
-element-wise with the current CA state $\vs_{t}$, so that each 1 bit from the
+element-wise with the current CA state $\vs_{t}$, so that each 1 bit of the
 input switches the corresponding bit in the CA state to another value. This
 creates a new state $\vs_{t}'$ from which the CA will evolve. $\vs_{t}'$ is
 defined as
@@ -1335,8 +1332,7 @@ This is one of many possible ways to combine an input vector with the current
 state of the CA that may affect its performance as a reservoir. The XOR-based
 input combination gives an asymmetrical role to 0 and 1 in the input vectors, which
 is natural considering the way we encode and project categorical data
-points. Different cellular automata rules might benefit or get lower performance
-because of these encoding choices. The combination problem can be generalized to
+points. Different rules of \acp{CA} might benefit or lose performance due to these encoding choices. The combination problem can be generalized to
 incorporate it into the \ac{CA} rule search problem. We demonstrate this in the
 next paragraph.
 
