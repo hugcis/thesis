@@ -12,7 +12,7 @@ and demonstrate that using the proposed metric, we can automatically construct
 computational models with emerging properties similar to those found in
 Conway's Game of Life, as well as many other emergent phenomena. Interestingly,
 some of the patterns we observe resemble forms of artificial life 
-\ref{langtonEditorIntroduction1993}. We test our
+\parencite{langtonEditorIntroduction1993}. We test our
 metric of structural complexity growth on cellular automata, but it can also be
 applied to a wide range of complex systems.
 
@@ -27,7 +27,7 @@ Building systems that mimic some key aspects of the behavior of existing
 intelligent organisms (such as the ability to evolve, improve, adapt, etc.)
 might represent a promising path. Intelligent organisms --- for example, human beings but
 also most living organisms, if we consider a broad definition of intelligence ---
-are a form of spontaneously occurring, ever evolving complex systems that
+are a form of spontaneously occurring, ever-evolving complex systems that
 exhibit these kinds of properties
 \parencite{bookerPerspectivesAdaptationNatural2004}. The ability to sustain
 open-ended evolution appears to be a requirement in order to enable the emergence of
@@ -75,7 +75,7 @@ level with fewer assumptions. For this reason, we consider cellular automata in
 the rest of the chapter because they rely on very few assumptions while
 offering a very large expressive power and a potentially wide range of behaviors
 that can be discovered. However, the metrics defined in this work have the
-potential to be applied to other types of complex systems, as discussed in
+potential to be applied to other types of complex system, as discussed in
 Section~\ref{sec:conclusion}.
 
 \subsection{Cellular automata}
@@ -98,7 +98,7 @@ classes of cellular automaton behavior
 \begin{description}
 \item[Class 1] evolves to a homogeneous state.
 \item[Class 2] evolves to simple periodic patterns.
-\item[Class 3] yields aperiodic disordered patterns.
+\item[Class 3] produces aperiodic disordered patterns.
 \item[Class 4] produces complex aperiodic and localized structures, including
   propagating structures.
 \end{description}
@@ -126,12 +126,12 @@ frequency distribution of $3\times 3$ patterns.
 
 \subsection{Compression and complexity}
 Compression has often been used as a measure of complexity. Lempel and Ziv have
-introduced in \parencite{lempelComplexityFiniteSequences1976} the now widespread
+introduced in \parencite{lempelComplexityFiniteSequences1976} the now widely used
 Lempel-Ziv (LZ) algorithm as a method for measuring the complexity of a
 sequence. By constructing back-references to previous parts of a string, the LZ
 algorithm is capable of taking advantage of duplicate patterns in the input to
 reduce its size. The DEFLATE algorithm that we use in the following section
-combines LZ with Huffman coding for efficient representation of the symbols
+combines LZ with Huffman coding for an efficient representation of the symbols
 obtained after the first step. It is one of the most widespread compression
 algorithms and is, for instance, used in gzip and PNG file compression standards.
 
@@ -151,7 +151,7 @@ into several clusters that match Wolfram's classes of automata. He also used
 this approach in the output of simple Turing machines and some 1D automata with
 more than two states and larger neighborhoods. Extensions of this work include
 an asymptotic sensitivity analysis of compressed length for input
-configurations of growing complexity, as introduced in
+configurations of increasing complexity, as introduced in
 \parencite{zenilAsymptoticBehaviorRatios2013,
   zenilWhatNatureLikeComputation2014}.
 
@@ -461,7 +461,7 @@ the log probability of the observed data given the model, or the quantity
 where $\mathds{1}_{\{s_k\}}$ denotes the indicator function of the singleton set
 $\{s_k\}$. An illustration of the counting process is represented in
 Figure~\ref{fig:schema-count}. The quantity $L$ is minimal when the
-$\Lambda(n_{r,i})_{s_k}$ always equal one, which means the state of every cell
+$\Lambda(n_{r,i})_{s_k}$ is always equal to one, which means that the state of every cell
 is entirely determined by its neighborhood.
 
 \begin{figure}[htbp]
@@ -520,24 +520,23 @@ rules are at the bottom. This indicates coherence between the two metrics.
   \label{fig:nn_archi}
 \end{figure}
 
-The frequency based predictor described above still has limitations:
+The frequency-based predictor described above still has limitations:
 \begin{itemize}
 \item It does not take into account any redundancy in the input which may lead to
   suboptimal predictions (in a CA, very similar positions might have similar
   center cell state distribution, e.g. a glider in Game of Life should be
   recognized by the model no matter the rest of the neighborhood).
 \item For the same reasons, when considering large window sizes, the number of
-  possible neighborhood configuration gets much larger than the number of
+  possible neighborhood configurations grows much larger than the number of
   observed ones, leading to an input sparsity problem.
 \end{itemize}
-More sophisticated models can cope with above limitations by dealing with high
-dimensional inputs without sparsity problems, and taking into account redundancy
+More sophisticated models can cope with above limitations by dealing with high-dimensional inputs without sparsity problems, and taking into account redundancy
 of inputs and potential interactions between states for prediction.
 
 We measure the cross-entropy loss of this simple model on the training set after
-a standard learning procedure which is the same for all rules. The procedure is
-applied to a one hidden layer neural network with a fixed hidden layer size. We
-use a ReLU non-linearity for the hidden layer and a softmax to obtain the output
+a standard learning procedure, which is the same for all rules. The procedure is
+applied to a one-hidden-layer neural network with a fixed hidden-layer size. We
+use a ReLU nonlinearity for the hidden layer and a softmax to obtain the output
 probabilities.
 
 For $n$ possible states ${s_1, ..., s_n}$, a cell in state $s_k$ is represented
@@ -557,13 +556,13 @@ procedure in order to minimize with respect to $\theta$ the following quantity,
 \end{align}
 where the neural network depending on parameter $\theta$ is denoted $f_\theta$,
 and $n_{r,i}^{(T)}$, the neighborhood of cell $i$ with radius $r$ at time $T$ is
-defined in the same way as in eq.~\eqref{eq:loss_count}. Loss is computed with
+defined in the same way as in eq.~\eqref{eq:loss_count}. Loss is calculated with
 respect to the testing set at time $T + \tau$ by computing the same quantity at
 this subsequent timestep.
 
 The training procedure is selected to achieve reasonable convergence of the loss
 for the tested examples. It must be well defined and stay the same to allow for
-comparison of the results across several rules. Score at timestep $T$ for a
+comparison of the results across several rules. The score in timestep $T$ for a
 delay $\tau$ is computed with the following formula
 \begin{align}
   \mu_\tau = \dfrac{L^{(T)}}{L^{(T + \tau)}}
@@ -582,34 +581,33 @@ properties --- not trivially simple but not completely disordered because the
 model transposes well --- as well as a large amount of overlap between a given
 step and the future ones, indicating persistence of the spatial properties from
 one state to another. We also selected the metric among other quantities
-computed from $L^{(T)}$ and $L^{(T+\tau)}$ because it yielded the best score on
-our experimental datasets.
+computed from $L^{(T)}$ and $L^{(T+\tau)}$ because it gave the best score in our experimental datasets.
 
 \section{Experiments}\label{sec:experiments}
 
 We carried out several experiments on a dataset of 500 randomly generated 3
 states ($n=3$) rules with radius $r=1$. Those rules were manually annotated for
-interestingness, defined as the presence of visually detectable non trivial
+interestingness, defined as the presence of visually detectable non-trivial
 structures. The dataset contains 46 rules labeled as interesting and 454
 uninteresting rules. Ranking those rules with the metrics introduced above
-allows to study the influence of parameters and the adequacy between
+allows us to study the influence of parameters and the adequacy between
 interestingness as we understand it and what the metric measures.
 
-The task of finding interesting rules can either be framed as a classification
+The task of finding interesting rules can be framed as either a classification
 problem or a ranking problem with respect to the score we compute on the
 dataset. The performance of our metric can be measured with usual evaluation
-metrics used on these problems, and notably the average precision (AP) of the
+metrics used on these problems and, notably, the average precision (AP) of the
 resulting classifier.
 
 Average precision scores for the neural network and count-based methods for time
-windows of 5, 50 and 300 timesteps are given in Table~\ref{experiments_table}.
+windows of 5, 50, and 300 timesteps are given in Table~\ref{experiments_table}.
 Scores were computed on automata of size $256\times 256$ cells, ran for 1000
 timesteps ($T + \tau = 1000$). Scores were computed for radii ranging from 1
 cell (8 nearest neighbors) to 5 cells (120 neighbors), with a one layer neural
 network containing 10 hidden units trained for 30 epochs with batches
-of 8 examples. Best AP for each time window is shown in bold.
+of 8 examples. The best AP for each time window is shown in bold.
 Results for the frequency lookup table predictor are only shown for $r=1, 2$
-because of sparsity issues with the lookup table from $r=2$ and above making it
+because of the sparsity issues with the lookup table from $r=2$ and above, making it
 unpractical to use the table --- $3^{24}$ possible entries for the lookup table
 with $r=2$ against only $256^2$ observed states.
 
@@ -640,7 +638,7 @@ with $r=2$ against only $256^2$ observed states.
       delays $\tau = 5, 50, 300$ and several radii values $r$.}\end{flushleft}
 \end{table}
 
-From these experiments, bigger radii appear to perform slightly better, although
+From these experiments, larger radii appear to perform slightly better, although
 not in a radical way. Since the number of neighbors scales with the square of
 the radius, reasonably small radii might be a good trade-off between performance
 and computational cost of the metric.
@@ -648,13 +646,13 @@ and computational cost of the metric.
 We also study the performance of our metrics --- lookup table and neural
 network-based --- as inputs of a binary classifier against two simple baselines
 on a random 70/30 split of our dataset. The first baseline classifies all
-example as negative. The second baseline is based on compressed length as
+examples as negative. The second baseline is based on compressed length as
 defined in \parencite{zenilCompressionBasedInvestigationDynamical2010} and computed by choosing a pair
 of thresholds that minimize mean square error when classifying examples in
 between as positive --- this is based on the observation made in
 Section~\ref{sec:compr-based-metr} that interesting rules have intermediate
 compressed lengths. Results are in Table~\ref{experiments_table2} where only the
-best radius is shown. The lookup table performs better than the baselines but
+best radius is shown. The lookup table performs better than the baselines, but
 the neural network gives the best score.
 
 \begin{table}[t!]
