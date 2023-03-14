@@ -576,11 +576,11 @@ in Figure \ref{fig:ca_rule_sampling}.
   \includegraphics[width=.5\linewidth]{figures/ca_rule_sampling_hist}
   \caption{An illustration of the difference between naive uniform rule sampling
     and Dirichlet sampling on binary rules. 10000 2D binary CA rules were
-    sampled with each method, the plot displays an histogram of their average
+    sampled with each method, the plot displays a histogram of their average
     output state. Uniform sampling leads to more rules with an average output
-    state close to 0.5, meaning approximately as many transitions towards both
+    state close to 0.5, meaning approximately as many transitions toward both
     states. Dirichlet sampling can control, through the choice of parameter $\alpha$,
-    how much rules with more skewed transitions should be sampled which is
+    how many rules with more skewed transitions should be sampled, which is
    shown by the spikes on the blue histogram close to 0 and 1.}
   \label{fig:ca_rule_sampling}
 \end{figure}
@@ -764,7 +764,7 @@ learning such as NLP or computer vision
 
 Figure ~\ref{fig:standard_rnn} shows the locations where inputs and 
 outputs can be incorporated into the Game of Life or any other \ac{CA}. 
-We provide a variety of examples on how input and output can be integrated 
+We provide a variety of examples of how input and output can be integrated 
 and how they can interact with the rule of the \ac{CA}.
 
 
@@ -786,7 +786,7 @@ In the case of cellular automata, it can also be done in the following ways:
   \includegraphics[width=.9\linewidth]{figures/encode_decode.pdf}
   \caption{\label{fig:encode_decode} Inputs $x$ and outputs $y$ can be directly
     encoded within the hidden state. $U$ and $V$ are the operators mapping $x$ 
-    to a hidden state tensor and decoding a hidden state tensor to an output $y$.}
+    to a hidden state tensor and decoding a hidden state tensor to output $y$.}
 \end{figure*}
 
 \begin{itemize}
@@ -813,7 +813,7 @@ In the case of cellular automata, it can also be done in the following ways:
         higher diversity of behavior.
 
   \item \textbf{Concatenation.} One way to incorporate input is by concatenating 
-  it with the hidden state, such as at the grid boundaries, before applying the
+  it with the hidden state, such as at the boundaries of the grid, before applying the
   update rule. This creates a fixed read-only memory space, as shown in 
   Figure~\ref{fig:concat}. However, a potential drawback of this method is that 
   information must propagate through the grid in order to be processed in locations 
@@ -845,7 +845,7 @@ state.
   \item \textbf{Masking.} Input data can serve as a mask on top of the current
         grid state, forcing some cells into states that depend on the input
         values. If we view the state activations in the CA as some neural
-        pattern, this approch can be seen as a form of \emph{neuromodulation},
+        pattern, this approach can be seen as a form of \emph{neuromodulation},
         which has previously been used in machine learning
         \parencite{soltoggioEvolutionaryAdvantagesNeuromodulated2008,
         ishiguroNeuromodulatedControlBipedal2003,
@@ -853,7 +853,7 @@ state.
 
         A mask can be constructed from an input vector $x$ by linearly
         transforming $x$ and applying an activation function (\eg~step
-        function). It controls which channels are activated, and where
+        function). It controls which channels are activated and where
         information can flow or not. This kind of mask can be applied with
         element-wise multiplication or addition but also more elaborate
         operations. It is illustrated in Figure~\ref{fig:mask}.
@@ -884,11 +884,11 @@ initial state of the tape and decoded from the last state of the tape (as
 illustrated in Figure~\ref{fig:encode_decode}). The recurrent convolutional
 neural network (RCNN), or \ac{CA}, then plays the role of a fixed computer
 program that is executed. This is the setting adopted in previous work on
-constructing computations with cellular automata: a task is chosen and rules that 
+constructing computations with cellular automata: a task is chosen, and rules that 
 can execute that task on input/output pairs
 are searched~\parencite{mitchellComputationCellularAutomata2005}. Previous successes
 with \acp{RNN} demonstrate that this model is powerful enough to learn complex
-functions when the grid is made of continuous numbers and the transformation is
+functions when the grid is made of continuous numbers, and the transformation is
 not local due to optimization, for instance, in language modeling.
 
 However, another interesting point of view can be taken when we consider the
@@ -900,7 +900,7 @@ without any need for optimization. Making a universal \ac{CA} compute some
 program amounts to encoding the program into the right language and
 communicating it by embedding it within the hidden state. In practice, figuring
 out the right encoding is often the biggest challenge. This is also the reason
-that the few Turing complete \acp{CA} are not so useful in practice, since we do
+that the few Turing complete \acp{CA} are not so useful in practice since we do
 not know of any efficient encoding for programming them.
 
 \subsection{Consequences}
@@ -914,10 +914,10 @@ Because we can simulate rule 110 ECA in the above RCNN system, it follows from
 the Turing completeness of this CA rule that the RCNN is Turing complete. This
 is an interesting result, although not very significant since \acp{RNN} have
 already been proven to be Turing
-complete~\parencite{siegelmannComputationalPowerNeural1992}, with very little
+complete~\parencite{siegelmannComputationalPowerNeural1992}, with very few
 practical implications. Our model is relatively far from a real-world CNN with a
 fixed number of layers independent from one another --- compared to a variable
-number of steps and shared layers for the automaton-RCNN. Thus this property
+number of steps and shared layers for the automaton-RCNN. Thus, this property
 does not seem to bear any consequence on \acp{CNN}.
 
 \subsubsection{Differentiable cellular automata}
@@ -951,7 +951,7 @@ to both a given configuration and its inverse (\eg~$(1, 0, 1)$ and $(0, 1, 0)$
 in an \acl{ECA}) by using negative values in the filter (use a filter $(1, -1, 1)$
 instead of $(1, 0, 1)$ and $(0, 1, 0)$ separately).
 
-For example, the rule of the game of life does not need more than 2 convolutional
+For example, the rule of the game of life does not need more than two convolutional
 filters on the first layer to be represented by a \ac{CNN} because it is
 totalistic. The new state of a cell depends only on its number of neighbors in
 the alive state and the current state of the cell.
@@ -990,7 +990,7 @@ Some early known formulations of the \ac{RC} idea were done by
   schomakerNeuralOscillatornetworkModel1992}. In another early work,
 \textcite{buonomanoTemporalInformationTransformed1995} used a random spiking
 neural network with excitatory and inhibitory elements. The probabilities of neuron 
-connection were inspired by the real rat brain data
+connection was inspired by the real rat brain data
 \parencite{masonSynapticTransmissionIndividual1991}. The authors observed an interval-sensitive response of these neurons when subjected to pulses spaced by varying
 time intervals. This indicates an ability to encode temporal information. To
 measure this phenomenon, they trained an output linear layer to recognize specific
@@ -1005,7 +1005,7 @@ implemented using a variety of physical systems, substrates, and devices. These
 types of reservoir are sometimes called ``exotic''
 \parencite{lukoseviciusReservoirComputingApproaches2009} in contrast to
 \ac{RNN}-based reservoirs. Physical \ac{RC} is a promising area of research
-that may help us develop cheap and efficient machine learning hardware and can
+that may help us develop cheap and efficient machine-learning hardware and can
 inform us about the nature and behavior of the underlying physical systems.
 \textcite{tanakaRecentAdvancesPhysical2019} identifies four characteristics that
 make a reservoir suitable for solving a computational task.
@@ -1026,7 +1026,7 @@ make a reservoir suitable for solving a computational task.
         maassRealTimeComputingStable2002, maassFadingMemoryKernel2004}. This
         property relates the asymptotic properties of the excited reservoir dynamics
         to the driving signal. A reservoir with the echo-state property will
-        asymptotically forget all input values. This makes some reservoir unable
+        asymptotically forget all input values. This makes some reservoirs unable
         to solve tasks where unbounded memory is possibly required, such as
         context-free grammar parsing
         \parencite{schmidhuberTrainingRecurrentNetworks2007}. Later, reservoir
@@ -1034,7 +1034,7 @@ make a reservoir suitable for solving a computational task.
         \parencite{pascanuNeurodynamicalModelWorking2011}.
 
   \item A reservoir should separate responses from different signals into
-        different parts of the space, while being insensitive to small
+        different parts of the space while being insensitive to small
         perturbations of the input. For a given system, this trade-off is often
         obtained at the transition between chaotic and non-chaotic regimes
         \parencite{bertschingerRealtimeComputationEdge2004,
@@ -1087,9 +1087,9 @@ below:
         Some of the implementations use the scattering of light in complex media
         \parencite{dongOpticalReservoirComputing2020,
         rafayelyanLargeScaleOpticalReservoir2020}.
-  \item[Spintronics \ac{RC}.] Some \ac{RC} works used nanosacle electronics
+  \item[Spintronics \ac{RC}.] Some \ac{RC} works used nanoscale electronics
         involving the charge and spin of electrons called \emph{spintronics}
-        \parencite{wolfSpintronicsSpinBasedElectronics2001}. Spintronics have
+        \parencite{wolfSpintronicsSpinBasedElectronics2001}. Spintronics has
         been used in multiple ways to build \ac{RC} models, using spin torque
         oscillators (STO)
         \parencite{torrejonNeuromorphicComputingNanoscale2017,
@@ -1179,7 +1179,7 @@ optimization schemes for these parameters:
   \item[Blind.] The input weight scaling parameters are set to a single
         value $\sigma$. The parameters $K$, $\rho$, $\sigma$, and $\beta$ are
         optimized. This corresponds to a search space of dimension 4.
-  \item[Basic.] Each of the $\sigma_{i}$ is optimized individually, or in
+  \item[Basic.] Each $\sigma_{i}$ is optimized individually or in
         groups. The other parameters are also optimized.
   \item[Smart.] All parameters are optimized as in the \textbf{Basic}
         scheme, and the weights of $\mW_{h}$ are also designed specifically for
@@ -1206,7 +1206,7 @@ the methods comparable.
 \subsection{Reservoir cellular automata\label{sec:app-ca-res}}
 
 Cellular automata can also be used as a dynamical system in reservoir
-computing. This was originally proposed by Yilmaz in 2014 and later was named ReCA
+computing. Yilmaz originally proposed this in 2014 and later was named ReCA
 (Reservoir Cellular Automata) \autocite{yilmazReservoirComputingUsing2014,
   margemExperimentalStudyCellular2017}.
 
@@ -1228,7 +1228,7 @@ Input data is assumed to be categorical and sequential,
   X = [X_{1}, \ldots, X_{t}, \ldots],\quad t\in \mathbb{N}, \quad \forall t \ X_{t} \in \mathcal{X} \subset \mathbb{N}.
 \end{equation}
 
-A \ac{CA} is a discrete system that is not specifically designed to
+A \ac{CA} is a discrete system not specifically designed to
 handle input. The purpose of the encoding step in ReCA is to convert the input
 data points to vectors that can be embedded in the state space of the cellular automaton. Such encoding should translate --- or embed --- the input space
 $\mathcal{X}$ into a new one that can be combined with the current state of the
@@ -1257,9 +1257,9 @@ dimension. In our work, we compute this projection in one of three ways:
         \textcite{yilmazReservoirComputingUsing2014}.
 \end{description}
 
-We also propose two novel projection schemes that potentially offer more
+We also propose two novel projection schemes that offer more
 flexibility than the previous ones. They extend the one-to-one projection and
-allow for a richer variety of produced encodings:
+allow for a wider variety of produced encodings:
 
 \begin{description}
   \item[One-to-many.] Each input bit is assigned exactly to $k$ positions in $P$
@@ -1284,28 +1284,30 @@ Following \parencite{yilmazReservoirComputingUsing2014,
   nicheleReservoirComputingUsing2017, nicheleDeepLearningCellular2017}, the
 input is projected multiple times to add redundancy to the encoding. This was
 experimentally observed to improve performance. We also use a projection vector
-larger than the initial one. Projections are generated randomly $R$ times, applied, and concatenated as a single large encoder to create the full \ac{CA} input
+larger than the initial one. Projections are generated randomly $R$ times, applied,
+and concatenated as a single large encoder to create the full \ac{CA} input
 vector. The parameter $R$ is called \emph{redundancy}.
 
 For cellular automata in 1D, the space $\mathcal{P}$ is one dimensional, and the
 concatenation is performed on this dimension. In higher-dimensional spaces,
-this concatenation has to be defined in some other way.
+this concatenation must be defined in another way.
 
 We write the $R$ projection functions $E_{1}, E_{2}, \ldots, E_{R}$. The final size
-of the input vector and the CA state grid is now $R \times L_{d}$ instead of $L_{d}$.
+of the input vector and the \ac{CA} state grid is now $R \times L_{d}$ instead of $L_{d}$.
 We have
 \begin{align}
   \vp_{t} = P(\vx_{t}) = E_{1}(\vx_{t})\mathbin\Vert \ldots \mathbin \Vert E_{R}(\vx_{t}),
 \end{align}
 where $\mathbin\Vert$ is the concatenation operator.
 
-Other projections have been proposed and implemented, for example, in
+For example, other projections have been proposed and implemented in
 \parencite{yilmazReservoirComputingUsing2014}. We choose to present the three
 above because they are simple to understand and implement, and their effects can
 be explored thoroughly.
 
 \paragraph{Input combination.}
-There are multiple ways to combine the input vector with the current state of the \ac{CA}. \textcite{gloverDynamicalLandscapeReservoir2021} propose to use a XOR
+There are multiple ways to combine the input vector with the current state of the \ac{CA}.
+\textcite{gloverDynamicalLandscapeReservoir2021} propose to use a XOR
 function between the projected input and the state of the \ac{CA}.
 
 At each input step $t$, the projected input vector $\vp_{t}$ is XORed
@@ -1331,7 +1333,7 @@ applying the update function $\Phi$,
 This is one of many possible ways to combine an input vector with the current
 state of the CA that may affect its performance as a reservoir. The XOR-based
 input combination gives an asymmetrical role to 0 and 1 in the input vectors, which
-is natural considering the way we encode and project categorical data
+is natural considering how we encode and project categorical data
 points. Different rules of \acp{CA} might benefit or lose performance due to these encoding choices. The combination problem can be generalized to
 incorporate it into the \ac{CA} rule search problem. We demonstrate this in the
 next paragraph.

@@ -23,7 +23,7 @@ metrics such as the algorithmic complexity \ref{sec:algo-complexity} are
 approximating some uncomputable ideal value. Candidate systems that maximize a 
 particular metric are often unsatisfying because they exploit a particular flaw 
 of that approximation. This could be accounted for in future
-work using multiple complementary complexity metrics or using other surrogate
+work using multiple complementary complexity metrics or using another surrogate
 metrics, such as the ability to learn to solve auxiliary tasks and generalize 
 from basic tasks to harder ones.
 This approach motivated our work in Chapter \ref{cha:learn-effic-compl}, where
@@ -64,8 +64,8 @@ would be to transmit an error signal within the reservoir state at each
 output. This extension we call \emph{feedback reservoir computing} is
 illustrated in Figure \ref{fig:feedback_reservoir} alongside the standard
 \ac{RC} model \ref{fig:classical_reservoir}. 
-An ideal system would use an internal learning algorithm, embedded within 
-the reservoir state update function and acting on the reservoir state, to 
+An ideal system would use an internal learning algorithm embedded within 
+the reservoir state update function and act on the reservoir state, to 
 adjust its future outputs in response to an error signal. This would enable 
 the system to gradually enhance its performance over time.
 The only mechanism that should be built into
@@ -76,7 +76,7 @@ autonomous adaptation and improvement without external input. The error signal i
 type of external input, but it is not specified how the system should use the 
 signal. Our work on
 complex systems points towards cellular automata and other complex systems as
-candidates for supporting such a mechanism, which would rely on growth of
+candidates for supporting such a mechanism, which would rely on the growth of
 complexity.
 
 \section{Learning in dynamical systems}
@@ -98,7 +98,7 @@ without external changes to its parameters. This type of learning is already
 present in various machine learning systems, including some \acfp{RNN}, which
 use short-term dynamical learning to solve language-based tasks (see Section
 \ref{sec:dynam-learn-acprnn}). Transformers are another type of neural network 
-that has been popular for processing text sequences. The memory of transformer 
+that has been popular for processing text sequences. The memory of the transformer 
 is not an emergent byproduct of the training process of the neural network because 
 the attention mechanism is directly processing a "window" of input tokens. Emergent 
 memory is also present in some form in the \ac{RC}
@@ -133,7 +133,7 @@ S_{t+1} = f(S_t, x).
 \label{eq:11}
 \end{equation}
 
-An output can be observed from the current state $S_t$ with a decoding function
+Outputs can be observed from the current state $S_t$ with a decoding function
 $D$. We define the output for time step $t$,
 \begin{equation}
   \label{eq:10}
@@ -145,7 +145,7 @@ We give a few well-known examples of learning in dynamical systems from the
 field of machine learning.
 
 \paragraph{Dynamical learning in \acp{RNN}}\label{sec:dynam-learn-acprnn}
-We study the example of a question answering task with a pre-trained \ac{RNN}.
+We study the example of a question-answering task with a pre-trained \ac{RNN}.
 It is easy to see that a \ac{RNN} can be written fully using \eqref{eq:11} and
 \eqref{eq:10}. The task of answering questions is about reading information from
 a prompt and answering a question that involves recalling some data from the
@@ -158,7 +158,7 @@ More advanced question answering requires reasoning and advanced processing of
 the prompt. In the above example, it would suffice to remember the words of the
 prompt.
 
-We consider a trained \ac{RNN} evaluated on a set of question answering tests.
+We consider a trained \ac{RNN} evaluated on a set of question-answering tests.
 If the data set was designed correctly, the network should not have prior
 information about a sentence/question pair before reading it. The relevant piece
 of information of the prompt has to be stored within the values of the hidden
@@ -177,7 +177,7 @@ manipulating stored information to construct a reasoning and form novel concepts
 \label{sec:superv-learn-with}
 We consider another example: a single hidden layer neural network with weight
 matrices $W_1 \in \mathbb{R}^{n \times d}$ and $W_2 \in \mathbb{R}^{d \times o}$. We train the network with
-standard backpropagation and stochastic gradient descent with learning rate $\tau$.
+standard backpropagation and stochastic gradient descent with a learning rate $\tau$.
 The neural network is represented by a function $F$, and the loss function
 between the network output and the label is written as $\mathcal{L}$.
 
@@ -203,7 +203,7 @@ training examples.
   \includegraphics[width=.9\linewidth]{figures/learning_nn.pdf}
   \caption{\label{fig:label} Learning happens within the ``activations'' of this
     dynamical system, which in this example are the weights of a neural
-    network being update with the stochastic gradient descent algorithm (SGD). 
+    network being updated with the stochastic gradient descent algorithm (SGD). 
     The fixed update function depends on an input pair $(X, y)$
     and the previous state vector $S = (W_1, W_2)$.}
 \end{figure}
@@ -215,6 +215,6 @@ converge to a fixed point. This property is desired when solving a target task
 characterized by a loss $\mathcal{L}$. Because of that convergence property, a neural
 network cannot be expected to produce any novel behavior after the end of its
 training. On the contrary, we know that other complex dynamical systems that we
-study in this thesis, like cellular automata, may exhibit behavior of increasing
+study in this thesis, like cellular automata, may exhibit a behavior of increasing
 complexity during their development, with no sign of convergence towards a
 stable state.
