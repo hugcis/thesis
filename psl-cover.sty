@@ -306,20 +306,20 @@
 
       \fontsize{11}{13}\selectfont
       %% french keywords
-      \node[yshift=-5mm, above] (frKeywords) at (o) {
-        \pslbacknode{MOTS CL\'{E}S}{\@frkeywords{}}{10}{12}
+      \node[yshift=-2mm, above] (frKeywords) at (o) {
+        \pslbacknode{MOTS CL\'{E}S}{\@frkeywords{}}{10}{12}{french}
       };
       %% french abstract
-      \node[yshift=2mm, above] at (frKeywords.north) {
-        \pslbacknode{R\'{E}SUM\'{E}}{\@frabstract{}}{9}{11}
+      \node[yshift=0mm, above] at (frKeywords.north) {
+        \pslbacknode{R\'{E}SUM\'{E}}{\@frabstract{}}{9}{11}{french}
       };
       %% english abstract
-      \node[yshift=-15mm, below] (enAbstract) at (o) {
-        \pslbacknode{ABSTRACT}{\@enabstract{}}{9}{11}
+      \node[yshift=-5mm, below] (enAbstract) at (o) {
+        \pslbacknode{ABSTRACT}{\@enabstract{}}{9}{11}{english}
       };
       %% english keywords
       \node[yshift=-2mm, below] at (enAbstract.south) {
-        \pslbacknode{KEYWORDS}{\@enkeywords{}}{10}{12}
+        \pslbacknode{KEYWORDS}{\@enkeywords{}}{10}{12}{english}
       };
 
     \end{tikzpicture}
@@ -334,13 +334,14 @@
     #2 & \emph{#3} \\[3.5mm]
   }
 }
-\newcommand{\pslbacknode}[4]{
+\newcommand{\pslbacknode}[5]{
   \begin{minipage}[ht]{.8\paperwidth}
     {\color{pslblue}\fontsize{12}{15}\selectfont #1}\unskip\strut\par
     \vspace{-2.5mm}
     \tikz{\draw[pslblue, line width=.5mm] (0, 0) -- (16.8, 0);}
-
+    
     \vspace{3mm}
+    \selectlanguage{#5}
     {\color{black}\fontsize{#3}{#4}\selectfont #2}\unskip\strut\par
   \end{minipage}
 }

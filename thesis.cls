@@ -8,7 +8,7 @@
 % packages 
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
-\RequirePackage[english]{babel}
+\RequirePackage[english,french]{babel}
 
 \RequirePackage{graphicx}
 % \RequirePackage{caption}

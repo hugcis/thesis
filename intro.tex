@@ -86,7 +86,7 @@ This objective is broken down into the following subgoals:
    uncovers a highly structured behavior with the propagation of area boundaries
    within the apparent randomness. (a) shows 300 timesteps
 of a randomly initialized rule 18 simulation. Notice the complex structures made
-visible in (b) with a filtering method. This Figure is discussed in more details in Chapter \ref{cha:visu-comp-large}.}
+visible in (b) with a filtering method. This Figure is discussed in more detail in Chapter \ref{cha:visu-comp-large}.}
   \label{fig:rule_18}
 \end{figure}
 
@@ -105,7 +105,7 @@ visible in (b) with a filtering method. This Figure is discussed in more details
   \includegraphics[width=\linewidth]{figures/ca_lm}
   \caption{An example of using a \acl{CA} and reservoir computing to implement a
     language model. Tokens are encoded within the \acl{CA} internal state. The
-    \acl{CA} update rule is then applied and an output value is decoded from the
+    \acl{CA} update rule is then applied, and an output value is decoded from the
     final state. Each vertical bar represents two consecutive internal \ac{CA} states, which 
     are enriched with the encoded input.}
   \label{fig:ca_lm}
@@ -141,7 +141,7 @@ It is possible that some form of evolutionary mechanism may be necessary in
 order to achieve advanced forms of artificial intelligence (AI), particularly 
 if the goal is to create
 intelligent systems that can adapt and learn in complex and changing
-environments. Complex dynamical systems could be the key to overcome the problems
+environments. Complex dynamical systems could be the key to overcoming the problems
 with existing learning algorithms, such as difficulties in generalization,
 robustness, or the ability to learn continuously
 \parencite{parisiContinualLifelongLearning2019}. The natural intelligence of
@@ -211,7 +211,7 @@ and diverse solutions to deceptive problems.
   \centering
   \includegraphics[width=.98\linewidth]{figures/challenges}
   \caption{The challenges of working with complex systems encountered across
-    this thesis can be broken down in several categories. \textbf{(1)} The choice
+    this thesis can be broken down into several categories. \textbf{(1)} The choice
     and design of the system, \textbf{(2)} the control of the system which
     involves understanding the complex mapping between a parameter space and the
     possibly unpredictable behavior of a system, \textbf{(3)} the search for
@@ -256,7 +256,7 @@ shown the ability to simulate a wide range of complex behaviors
 
 Choosing the right complex system architecture is essential because it defines
 the search space over which interesting and useful systems can be found.
-Correctly parameterizing that space can also be challenging, because too many
+Correctly parameterizing that space can also be challenging because too many
 degrees of freedom make it difficult to search for and find good systems, while
 too few might indicate a lack of expressivity. An example parameterization of
 \ac{CA} with little expressivity is Langton's lambda parameter
@@ -270,7 +270,7 @@ in continuous or discrete space. For discrete state and space cellular automata,
 the number of states and the window of the update function can vary, as well as the
 topology of the simulation space. We tackle this issue from various angles
 throughout the thesis, exploring the question of rule definition in Chapter
-\ref{cha:meas-compl-evolv}, the scale in Chapter \ref{cha:visu-comp-large} and
+\ref{cha:meas-compl-evolv}, the scale in Chapter \ref{cha:visu-comp-large}, and
 the connectivity pattern in Chapter \ref{cha:learn-effic-compl}.
 
 \subsection{Complex systems control}\label{sec:compl-syst-contr}
@@ -293,7 +293,7 @@ the connectivity pattern in Chapter \ref{cha:learn-effic-compl}.
   \begin{subfigure}[t]{.45\linewidth}
     \centering
     \includegraphics[width=.93\linewidth]{figures/ca_comp_b}
-    \caption{\ac{CA} rule 22 on a tape of size 100, ran from a slightly
+    \caption{\ac{CA} rule 22 on a tape of size 100 ran from a slightly
       different initial state. The cells different from Figure \ref{fig:ca_comp_a} are
       overlayed in red.}
     \label{fig:ca_comp_b}
@@ -309,7 +309,7 @@ the connectivity pattern in Chapter \ref{cha:learn-effic-compl}.
 
 Even if we want complex systems that evolve in unexpected directions and grow in
 an open-ended way without supervision, it may still be useful to steer them
-locally towards specific targets. A major challenge that follows from this goal
+locally toward specific targets. A major challenge that follows from this goal
 is that many complex systems are chaotic. Deterministic dynamical systems can 
 exhibit behavior that is extremely sensitive to their initial conditions. This sensitivity 
 is sometimes referred to as chaos, where even tiny perturbations in the initial conditions 
@@ -321,7 +321,7 @@ towards a particular final state or along a chosen trajectory. Although it can b
 to apply these systems to certain basic tasks, their ability to generate unexpected solutions 
 to difficult problems is an advantage for the development of open-ended systems. Such systems 
 need to continuously produce new and diverse solutions without a 
-predefined endpoint, and their sensitivity to initial conditions is an advantage in 
+predefined endpoint and their sensitivity to initial conditions is an advantage in 
 achieving this goal.
 
 This problem is also related to the issue of sending a control signal to a
@@ -369,7 +369,7 @@ should not be used as an additional objective function, as doing so would result
 in the problems described in Section \ref{sec:motivation}. We address this 
 challenge in particular
 in Chapter~\ref{cha:meas-compl-evolv}, by designing a complexity metric that can
-help select interesting complex systems, without relying on a specific
+help select interesting complex systems without relying on a specific
 task-based performance score.
 
 \section{Contributions}
@@ -390,7 +390,7 @@ The main contributions of this thesis are as follows.
         cellular automata and other discrete systems with local interactions (Chapter \ref{cha:visu-comp-large}). Our findings were published in \cite{cisnerosVisualizingComputationLargescale2020}.
 
   \item Our fourth contribution is the introduction of a learning efficiency metric for learning
-        algorithms as well as a benchmark dataset of progressively harder
+        algorithms and a benchmark dataset of progressively harder
         language tasks (Chapter \ref{cha:learn-effic-compl}). Our findings were published in \cite{cisnerosBenchmarkingLearningEfficiency2022}.
 \end{enumerate}
 
