@@ -4,7 +4,7 @@
 It is common to evaluate the performance of a machine learning model by
 measuring its predictive power on a test dataset. This approach favors
 complicated models that can smoothly fit complex functions and generalize well
-from training data points. Although essential components of intelligence, speed
+from training data points. Although essential components of intelligence, speed, 
 and data efficiency of this learning process are rarely reported or compared
 between different candidate models. In this chapter, we introduce a benchmark 
 of increasingly difficult tasks together with a data efficiency metric to measure 
@@ -12,7 +12,7 @@ how quickly machine learning models learn from training data. We also highlight
 that within complex systems, there are computations taking place that can be 
 harnessed for various purposes. To that end, we compare the learning speed of 
 some established sequential supervised models, such as RNNs, LSTMs, or Transformers, 
-with relatively less known alternative models based on reservoir computing, which 
+with relatively less-known alternative models based on reservoir computing, which 
 is a tool for harvesting the computations happening within a complex system.
  The proposed tasks require a wide range of computational
 primitives, such as memory or the ability to compute Boolean functions, to be
@@ -31,18 +31,18 @@ generalize, and adapt quickly from a few examples -- is crucial for practical
 intelligence \parencite{kanazawaGeneralIntelligenceDomainspecific2004} and
 low-data machine learning applications, yet rarely used to evaluate models.
 Supervised learning systems are theoretically limited in their learning speed by
-the optimization algorithms used for training. These algorithms such as
-stochastic gradient descent (SGD) have various speed guarantees depending on the
+the optimization algorithms used for training. These algorithms, such as
+stochastic gradient descent (SGD), have various speed guarantees depending on the
 structure of the function to be
 optimized~\parencite{bottouOptimizationMethodsLargescale2018}. However, when
-intelligent beings learn, they appear to quickly re-use past knowledge and
+intelligent beings learn, they appear to quickly reuse past knowledge and
 progressively improve over time. Their learning speed depends on a dynamically
 evolving internal state.
 To measure the learning efficiency of various systems, in this work, we propose the \ac{WADE}
 metric based on the time taken to reach several test accuracy checkpoints. We
 also design a simple modular benchmark composed of a set of sequential tasks.
 They begin with the task of recognizing a simple periodic sequence in an input
-string and end with elaborate question answering tasks that require counting
+string and end with elaborate question-answering tasks that require counting
 occurrences of patterns and long-term memory.
 
 Established sequential supervised models such as recurrent neural networks
@@ -54,7 +54,7 @@ trained. These models can also be expensive to train, requiring a large number
 of labeled training examples to reach reasonable performance, leading to poor
 learning speeds. In this work, we use the newly proposed \ac{WADE} metric and
 the benchmark dataset to experimentally compare the learning speed of these
-well-established models, such as RNNs, LSTMs and Transformers, with less
+well-established models, such as RNNs, LSTMs, and Transformers, with less
 explored {\em reservoir computing models}.
 
 Reservoir computing is a computational framework that aims to exploit the states
@@ -68,7 +68,7 @@ is added as a decoder to extract valuable representation from the hidden state
 for some downstream task. Freezing the weights of these recurrent models is
 useful when available supervision is very limited or non-existent or for
 reinforcement learning with sparse rewards since direct training would be
-impossible. In such cases a reservoir computer creates a continuously evolving
+impossible. In such cases, a reservoir computer creates a continuously evolving
 pool of random functions that can be combined using the last trainable layer.
 
 
@@ -84,7 +84,7 @@ We wish to investigate whether complex dynamical systems --- in
 particular RNNs with frozen weights (echo-state networks)
 \parencite{jaegerEchoStateApproach2001} and reservoir cellular automata
 \parencite{yilmazReservoirComputingUsing2014} --- create representations that
-allow them to learn faster as measured by our metric.
+allow them to learn faster, as measured by our metric.
 
 \paragraph{Contributions.} In this chapter, we make the following main
 contributions: First, we introduce the \acf{WADE} metric to measure the learning
@@ -103,12 +103,12 @@ The \ac{WADE} metric is a generalization of the \emph{Time-to-threshold} metric
   taylorTransferLearningInterTask2007} introduced for measuring transfer
 learning in reinforcement learning contexts. In general, the Time-to-threshold
 is simply defined as the number of training steps needed to reach a fixed
-threshold performance. However this definition leaves open the choice of
+threshold performance. However, this definition leaves open the choice of
 threshold or the definition of a training step. \ac{WADE} alleviates this issue
 by aggregating several of these thresholds into a single number that summarizes
 the learning speed.
 
-Other metrics for measuring how quickly a model adpats to new tasks have been
+Other metrics for measuring how quickly a model adapts to new tasks have been
 introduced in the context of transfer learning, few-shot and zero-shot learning.
 In few-shot learning, one tries to obtain the best performance for a particular
 task using a small amount of labeled data compared to the task's fully
@@ -133,7 +133,7 @@ and one has to examine the learning curves
 a general approach to measure the learning efficiency of machine learning
 models. We use it to benchmark a few standard models on the IMDB text
 classification tasks \parencite{maasLearningWordVectors2011} and propose a set of
-modular and extensible language based tasks.
+modular and extensible language-based tasks.
 
 Synthetic tasks such as ours have played a vital role in a series of crucial
 advances in machine learning algorithms. For example, the XOR problem has
@@ -177,7 +177,7 @@ made up of sequential tasks that begin with straightforward pattern recognition
 and progressively increase in complexity to approach the complexity of natural
 language and other complex real-world tasks.
 
-We do not focus on the prediction performance of our models, but rather on their
+We do not focus on the prediction performance of our models but rather on their
 data efficiency --- the number of example sequences they need to learn from before
 reaching a target accuracy on a validation set.
 
@@ -234,7 +234,7 @@ We describe the performance metric and the benchmark next.
 \subsection{Performance metric\label{sec:performance-metric}}
 
 We introduce the Weighted Average Data Efficiency (WADE) metric as a way to
-measure how quickly a model learns, using a weighted average of inverse times
+measure how quickly a model learns using a weighted average of inverse times
 taken to reach various test accuracy \emph{checkpoints} over time.
 
 It is computed for an evenly distributed set of target accuracies $\sA$. They
@@ -262,7 +262,7 @@ $\text{T}(\alpha, \va)$ is in $[1, + \infty [$.
 
 \begin{figure}[htbp]
   \centering
- \includegraphics[width=.4\linewidth]{figures/metric_tto}
+ \includegraphics[width=.6\linewidth]{figures/metric_tto}
  \caption{Illustration of the calculation of $\text{T}(\cdot, \cdot)$,
    representing the number of training steps (x axis) needed to reach a certain test
    accuracy $\alpha$ (y axis) from a learning curve. In this example,
@@ -282,7 +282,7 @@ The choice of checkpoints $\sA$ does not need to be tuned in any specific way
 because $\text{WADE}(\va)$ quickly converges to a single value when $\sA$
 approaches the continuous interval $[0, 1]$. The approximation is good enough as
 long as $\sA$ is not too coarse (more than ten elements was enough in our
-experiments) and the WADE values computed from the same set $\sA$ are
+experiments), and the WADE values computed from the same set $\sA$ are
 comparable.
 
 The time-to-threshold $\text{T}$ is always greater than or equal to 1 step for any threshold and sequence of accuracy scores.
@@ -698,7 +698,7 @@ state network (ESN) with the same internal state size for each task.
       \textbf{Transformer} \parencite{vaswaniAttentionAllYou2017} with the same number of parameters.
       %as the cellular automaton reservoir.
       The dash ``---'' indicates that the task was too difficult to complete from
-      memory alone for the human expert. Accuracy scores are also reported in
+      memory alone for the human expert. The dots indicate that the task name is the same as on the first line. Accuracy scores are also reported in
       Table \ref{tab:accuracy_all}.}\label{tab:summary}
 \end{table}
 
@@ -711,8 +711,8 @@ times more steps to approach the accuracy the reservoir CA model reached in less
 than 1000 training steps.
 
 Echo-state networks (ESN) and reservoir cellular automata (ReCA) appear to learn
-at similar rates, with no clear advantage for one or the other as each model
-outperforms the other on five tasks out of ten. On tasks 2, 4, 8, and 10 the ESN
+at similar rates, with no clear advantage for one or the other, as each model
+outperforms the others on five tasks out of ten. On tasks 2, 4, 8, and 10, the ESN
 is visibly faster than the ReCA (see curves Figure \ref{fig:all_metrics}), which
 explains the ESN's higher WADE scores even though ReCA reaches higher accuracy
 values after several more training steps.
@@ -778,7 +778,7 @@ sequential methods (RNNs and LSTMs) in terms of learning speeds. This better
 learning efficiency could be explained by the internal state structure
 introduced by the CA rules and the special form of the ESN random matrix which
 favors memory retention whereas usual recurrent network initialization does not
---- we initialize the weights of the full trained models from a uniform
+--- we initialize the weights of the fully trained models from a uniform
 distribution $\mathcal{U}( - \sqrt{h^{-1}} ,\sqrt{h^{-1}})$ in our experiments, where $h$
 is the hidden size.
 
@@ -786,10 +786,10 @@ The human expert scores are estimated based on the authors' performance on
 obfuscated versions of the tasks --- all input tokens are mapped to random
 symbols. These scores may appear surprisingly low in some of these experiments.
 Although the task examples presented in Section~\ref{sec:descr-tasks-benchm}
-seem easy to understand, we rely heavily on our prior knowledge about the
+seem easy to understand. We rely heavily on our prior knowledge about the
 symbols to understand the patterns --- the words in tasks 5--10 or the numbers in
 tasks 3 and 4. These symbols are randomly remapped in our human experiments, and
-more examples as well as a good memory are needed to understand the tasks and
+more examples, as well as a good memory, are needed to understand the tasks and
 learn the mapping itself, hence the slower learning.
 
 \begin{figure}[htbp]
@@ -797,7 +797,7 @@ learn the mapping itself, hence the slower learning.
   \includegraphics[width=.98\linewidth]{figures/all_metrics_new.pdf}
   \caption{Average learning curves and WADE scores (shown in parentheses in the
     legend) for each task in the benchmark. The dark blue curves represent the
-    best elementary cellular automata (CA) rule and the green curves represent
+    best elementary cellular automata (CA) rule, and the green curves represent
     the echo-state networks (ESN). Note that the x-axis is logarithmic, showing
     ten times more training steps for the RNN and LSTM. Shaded areas represent
     one standard deviation around the average over the 100 different
@@ -827,9 +827,9 @@ once.
 
 \section{Human performance evaluation}
 \label{sec:human}
-The proposed benchmark is relatively simple to understand and hence one may ask
+The proposed benchmark is relatively simple to understand, and hence one may ask
 what would be the human performance and what WADE values this would correspond
-to. In particular, the language tasks appear to be readily solvable just from
+to. In particular, language tasks appear to be readily solvable just from
 one's understanding of the English language. However, similar to how words are
 encoded as vectors before being processed by a neural network, we need This
 could be achieved in a number of ways. For example, if we map all the available
@@ -858,17 +858,17 @@ We apply the following procedure in our human evaluation experiments:
   \item Present the sequences one by one with the tokens to be predicted hidden.
   \item The user enters his predicted answer.
   \item The valid sequence is shown so the user can learn from their mistakes.
-  \item Step 3-5 are repeated until 10 sequences are correctly solved in a row.
+  \item Steps 3-5 are repeated until 10 sequences are correctly solved in a row.
   Then we go back to step 2 with a new task.
 \end{enumerate}
 We add the requirement that no external device such as pen and paper or
-note-taking program should be used during the experiment so the user relies
+note-taking program should be used during the experiment, so the user relies
 solely on their memory. The accuracy is computed by counting the number of right
 answers in a row. For example, three right answers in a row would correspond to
-an accuracy of 30\%, while ten right answers in a row is 100\% which also
+an accuracy of 30\%, while ten right answers in a row are 100\% which also
 corresponds to a switch of a task. This accuracy score is attributed to the
 first correct answer of the series of correct answers. This means that a series
-of five correct answers starting from question 6 until question 11 will
+of five correct answers starting from question 6 until question 11, will
 correspond to reaching the accuracy of 50\% on question 6. This ensures that ten
 correct answers on the first attempt will yield a WADE score of 1.
 
@@ -916,7 +916,7 @@ chosen for our experiments are listed below:
         in the prompt, and the query has either one, two, or all three symbols.
   \item[Hard symbol counting (4):] Available symbols are the same as for the previous
         task. Generated sequences have between 1 and 45 symbols
-        with separators in the prompt. There is a minimum of 1 query, and can be
+        with separators in the prompt. There is a minimum of 1 query and can be
         as many queries as there are different patterns in the prompt.
   \item[Question answering (5):] There are five available names and two verbs. The
         prompt consists of between one and five names, and the question is about one
@@ -950,30 +950,30 @@ tasks (tasks with ID 1 to 5).
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.6\linewidth]{figures/aggregate_results.pdf}
-  \caption{Average test accuracies across rules, hyperparameters and runs for
-    each task. The best solution for each task are shown in
+  \includegraphics[width=.8\linewidth]{figures/aggregate_results.pdf}
+  \caption{Average test accuracies across rules, hyperparameters, and runs for
+    each task. The best solution for each task is shown in
     red.}\label{fig:aggregate-results}
 \end{figure}
 
 Fig.~\ref{fig:aggregate-results} shows a summary of the accuracy scores for each
 task. Score distributions vary a lot from task to task because of the different
-output spaces (binary for Periodic, Inc-per and QA and multi-modal for the
+output spaces (binary for Periodic, Inc-per, and QA and multi-modal for the
 others).
 
-Next, we give a more in depth analysis of the best performing \acp{ECA} on the
+Next, we give a more in-depth analysis of the best performing \acp{ECA} on the
 first two tasks.
 
 \subsection{Binary sequences}
 
 The binary sequence task should be the simplest to solve. Since it requires some
-memory we expect some CA rules with very chaotic behavior --- like ECA rule 30
---- to fail at it. We observed that the best rules are consistently from the
-periodic and ordered type.
+memory, we expect some CA rules with very chaotic behavior --- like ECA rule 30
+--- to fail at it. We observed that the best rules are consistent from the
+periodic and ordered types.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.6\linewidth]{figures/periodic_top.pdf}
+  \includegraphics[width=.7\linewidth]{figures/periodic_top.pdf}
   \caption{Top performing rules and hyperparameters for the binary periodic
     sequence task. All of the best rules seem to make use of a lateral
     translation, which is an effective memory mechanism. Rule 2, 130 and 194
@@ -982,9 +982,9 @@ periodic and ordered type.
 \end{figure}
 
 The four best rules displayed in figure \ref{fig:top-binary-seq} all implement a
-similar mechanism, using translations of cells from one column to the next at
-every step. This translation is a memory mechanism, because it shifts any cell
-that was turned on in reaction to an input before it can be overwritten by a
+a similar mechanism, using translations of cells from one column to the next at
+every step. This translation is a memory mechanism because it shifts any cell
+that was turned on in reaction to input before it could be overwritten by a
 subsequent input that would be mapped to the same grid position.
 
 \begin{table}[htbp]

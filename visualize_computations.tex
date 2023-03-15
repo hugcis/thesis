@@ -68,11 +68,11 @@ should also hold true for CAs; we further discuss this question in
     our method.}
 \end{figure}
 
-In this chapter, we investigate techniques which can help us visualize large
+In this chapter, we investigate techniques that can help us visualize large
 space-time diagrams of CAs. We demonstrate that simple clustering and
-coarse-graining techniques can be used in order to perceive structures which
+coarse-graining techniques can be used in order to perceive structures that
 cannot emerge on smaller grids. This is also useful for disordered cellular
-automata with hidden structures as it is the case for the elementary cellular
+automata with hidden structures as is the case for the elementary cellular
 automaton rule 18, illustrated in Figure~\ref{fig:rule18_small} --- more details
 in~\nameref{sec:results}.
 
@@ -84,7 +84,7 @@ grids~\parencite{grassbergerQuantitativeTheorySelfgenerated1986,
   soler-toscanoCalculatingKolmogorovComplexity2014,
   zenilTwodimensionalKolmogorovComplexity2015}. Common metrics of complexity are
 often limited by the number of components in the systems (number of cells in a
-CA grid, timesteps, etc.) or may not be effective when small scale patterns are
+CA grid, timesteps, etc.) or may not be effective when small-scale patterns are
 less relevant than large-scale ones.
 
 \section{Related work}
@@ -101,11 +101,11 @@ cellular automata.
 Coarse-graining is an approximation procedure used to speed up computations in
 systems made of many components. It originated
 in~\parencite{levittComputerSimulationProtein1975} and is now widely used in physics
-to model complex systems at various granularity levels, and is successful at
+to model complex systems at various granularity levels and is successful at
 modeling bio-molecules \parencite{potoyanRecentSuccessesCoarsegrained2013,
   ingolfssonPowerCoarseGraining2014, kmiecikCoarseGrainedProteinModels2016}.
 
-Exact coarse-graining of elementary cellular automata (ECA) has been
+The exact coarse-graining of elementary cellular automata (ECA) has been
 investigated extensively
 in~\parencite{israeliComputationalIrreducibilityPredictability2004,
   israeliCoarsegrainingCellularAutomata2006}. Authors found ways of rewriting
@@ -628,17 +628,17 @@ local averaging. This could be attributed to the fact that contrary to the
 latter two, the histogram and autoencoder both represent well anomalies (rare
 events). This is because rare events are explicitly captured and kept by the
 histogram method. They also represent useful information that may be kept for
-the reconstruction using the autoencoder.
+reconstruction using the autoencoder.
 
 \subsection{Discussion}\label{sec:discussion}
 
 Downscaling by local averaging is not an effective solution to the
 coarse-graining problem for several reasons. In particular, it tends to favor
 the majority state in a supercell because of the averaging effect. Thin
-structures spanning only few cells placed on a uniform background are likely to
-disappear after coarse-graining although they may still be relevant with respect
-to the large-scale patterns. The histogram-based method explicitly encodes those
-more rare events in a supercell, even if their size is relatively small compared
+structures spanning only a few cells placed on a uniform background are likely to
+disappear after coarse-graining, although they may still be relevant with respect
+to large-scale patterns. The histogram-based method explicitly encodes those
+rare events in a supercell, even if their size is relatively small compared
 to the supercell size.
 %The autoencoder may automatically encode this
 %information too because those few cells are more useful to reconstruct the
@@ -647,17 +647,17 @@ to the supercell size.
 Figure~\ref{fig:qualitative} is a qualitative comparison of coarse-graining
 methods. This cellular automaton was selected from the experimental dataset.
 When simulated on large grids, it generates large linear structures that are
-4-cells wide. These structure disappear after downscaling by averaging because
+4-cells wide. These structures disappear after downscaling by averaging because
 the background dominates the average. Other methods correctly highlight these
 structures when downscaling the grids by a factor of 8. In
 Figure~\ref{fig:dynamics_levels}, we show another rule that was selected for its
-high complexity score at multiple coarse-graining scales from our dataset. The
+high complexity score on multiple coarse-graining scales from our dataset. The
 CA has significantly different dynamics depending on the chosen scale.
 Example~\ref{subfig:single} is a spontaneously occurring stable oscillating
 glider with period 3. Large structures emerge from these simple gliders when
 observing large grids. The online project page\footnote{\projecturl} shows
-animated example for Figure~\ref{fig:dynamics_levels}, emphasizing the advantage
-of using coarse-graining for visualization.
+animated examples for Figure~\ref{fig:dynamics_levels}, emphasizing the advantage
+of using coarse-graining for visualization. Figures \ref{fig:extra1} and \ref{fig:extra2} show more comparisons of large-scale coarse-graining of interesting \acp{CA}.
 
 A crucial advantage of the frequency histogram method is its speed and ease of
 implementation compared to autoencoders. Other than a few hyper-parameters for
@@ -693,14 +693,14 @@ coarse-grained output.
     \caption{\label{subfig:waves_c} $4096 \times 4096$ cells coarse-grained to $256 \times 256$.}
   \end{subfigure}
   \caption{\label{fig:dynamics_levels} Changing CA dynamics at multiple scales.
-    (a) shows a single glider, oscillating between 3 positions. Such gliders
-    emerge spontaneously from a random initialization of a small grid as shown
+    (a) shows a single glider oscillating between 3 positions. Such gliders
+    emerge spontaneously from a random initialization of a small grid, as shown
     in (b). When scaling the grid up, trails of gliders begin to appear,
-    creating moving straight and diagonal lines as shown in (c). Scaling-up even
+    creating moving straight and diagonal lines, as shown in (c). Scaling up even
     more, individual gliders are not visible anymore, as shown in (d). In an
     even larger grid, shown in (e), many more triangular-shaped waves travel and
     collide with each other. Please note that (d) and (e) are coarse-grained to
-    $256 \times 256$, otherwise the patterns are not visible.}
+    $256 \times 256$. Otherwise, the patterns would not be visible.}
 \end{figure}
 
 
@@ -720,6 +720,8 @@ coarse-grained output.
   coarse-grained to $256 \times 256$. Comparison of the histogram
   (\ref{fig:histogram_cg1}) and autoencoder (\ref{fig:autoencoder_cg1})
   methods.}
+      \label{fig:extra1}
+
 \end{figure}
 
 \begin{figure}[htbp]
@@ -739,6 +741,7 @@ coarse-grained output.
     coarse-grained to $256 \times 256$. Comparison of the histogram
     (\ref{fig:histogram_cg2}) and autoencoder (\ref{fig:autoencoder_cg2})
     methods.}
+    \label{fig:extra2}
 \end{figure}
 
 \section{Conclusion\label{sec:conclusion-vc}}

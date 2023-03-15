@@ -133,7 +133,7 @@ to output.
 
 There are many ways to define \acp{CA}, and we gave a broad
 definition that includes many rarely used \ac{CA} variants. For another more straightforward
-definition of common \acp{CA}, see, for example, \autocite{kariBasicConceptsCellular2012}.
+definition of \acp{CA}, see, for example, \autocite{kariBasicConceptsCellular2012}.
 
 \paragraph{Rule representation.}
 A useful rule representation can be obtained by listing all output states
@@ -438,7 +438,7 @@ neighbors per cell grows exponentially with dimension, and the number of
 possible rules has a doubly exponential growth rate. This makes the
 convenient representation of \acp{CA} rules as tables infeasible since the size
 of that table quickly exceeds the available memory of most computers. For
-example, there are $2^9 = 512$ possible $3\times 3$ configurations of a binary Moore neighborhood (see \ref{fig:moore}) in 2D that can each lead to 2 states, which means that there exists $2^{512} \approx 10^{154}$ distinct 2D rules with 2 states and a
+example, there are $2^9 = 512$ possible $3\times 3$ configurations of a binary Moore neighborhood (see Figure~\ref{fig:moore}) in 2D that can each lead to 2 states, which means that there exists $2^{512} \approx 10^{154}$ distinct 2D rules with 2 states and a
 Moore neighborhood. This is already an incomprehensibly large number, but there
 are $2^{134,217,728} \approx 10^{40,403,562}$ such rules in 3D. In general, there are $2^{3^n}$ possible binary \ac{CA} rules with a Moore-like neighborhood in dimension $n$.
 
@@ -629,7 +629,7 @@ complex systems such as \acp{CA} are possible within the hidden state of a
 recurrent neural network.
 
 The conceptual similarity between \acp{CA} and neural networks is not surprising. 
-Fundamentally, \ac{CA} represents the paradigm of emergence, in which
+Fundamentally, \acp{CA} represent the paradigm of emergence, in which
 the origins of complex behaviors are searched for in an assemblage of possibly
 very simple parts rather than being viewed as a sum of complex building blocks. It is
 often argued that there is no better-known example of a truly emergent
@@ -638,7 +638,7 @@ of functionally simple (and certainly unconscious) neuronal components that make
 up the human brain. A biological neural network consists of a
 large space of interconnected nodes with dynamic behavior that is a local
 function of the other nodes to which it is connected, which is strikingly similar
-to a \ac{CA}. Artificial neural networks can
+to the principle of a \ac{CA}. Artificial neural networks can
 be thought of as being a set of biologically inspired CA rules
 \parencite{ilachinskiCellularAutomataDiscrete2001}. The more precise parallel
 between cellular automata and a form of recurrent/convolutional network has also
@@ -900,18 +900,15 @@ neural network (RCNN), or \ac{CA}, then plays the role of a fixed computer
 program that is executed. This is the setting adopted in previous work on
 constructing computations with cellular automata: a task is chosen, and rules that 
 can execute that task on input/output pairs
-are searched~\parencite{mitchellComputationCellularAutomata2005}. Previous successes
-with \acp{RNN} demonstrate that this model is powerful enough to learn complex
-functions when the grid is made of continuous numbers, and the transformation is
-not local due to optimization, for instance, in language modeling.
+are searched~\parencite{mitchellComputationCellularAutomata2005}.
 
-However, another interesting point of view can be taken when we consider the
+Another interesting point of view can be taken when we consider the
 hidden state (or tape) as encoding both some data and a computer program, as is
-the case with a Turing machine. We can then expect a \ac{CA} (or \ac{RNN}) not
-only to compute the result of a particular function but to be equivalent to a
+the case with a Turing machine. We can then expect a \ac{CA} (or \ac{RNN}) to not
+only compute the result of a particular function but to be equivalent to a
 general-purpose computer capable of computing the result of any chosen algorithm
 without any need for optimization. Making a universal \ac{CA} compute some
-program amounts to encoding the program into the right language and
+program amounts to encoding the program in the right language and
 communicating it by embedding it within the hidden state. In practice, figuring
 out the right encoding is often the biggest challenge. This is also the reason
 that the few Turing complete \acp{CA} are not so useful in practice since we do
