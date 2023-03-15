@@ -1,17 +1,20 @@
 \chapter{Background}
 \label{cha:background}
 
-In this chapter, we provide background on some of the topics that we study in the
-thesis. We begin by describing the \acf{CA} model, which is the complex system
-we focus on in most of the thesis (Section \ref{sec:cellular-automata-sec}).
-Next, we describe the similarities between \acp{CA} and \acfp{RNN}, which is
-useful for understanding the characteristics and applications these two models
-share (Section \ref{sec:cell-autom-rnns}). \acp{CA} can be completely reformulated 
-as a special case of \acp{RNN}. This reformulation makes it natural to replace 
-recurrent \acp{RNN} with \acp{CA} in several use cases. We
-describe the \acf{RC} model (Section \ref{sec:res-models}), which enables
-sending inputs to and harvesting the computations of complex systems to perform machine learning tasks without requiring explicit knowledge of the underlying system dynamics or the need to solve complex optimization problems.
- We apply reservoir computing to sequential language-like tasks in Chapter~\ref{cha:learn-effic-compl}. This model was
+In this chapter, we provide background on some of the topics that we study in
+the thesis. We begin by describing the \acf{CA} model, which is the complex
+system we focus on in most of the thesis (Section
+\ref{sec:cellular-automata-sec}). Next, we describe the similarities between
+\acp{CA} and \acfp{RNN}, which is useful for understanding the characteristics
+and applications these two models share (Section \ref{sec:cell-autom-rnns}).
+\acp{CA} can be completely reformulated as a special case of \acp{RNN}. This
+reformulation makes it natural to replace recurrent \acp{RNN} with \acp{CA} in
+several use cases. We describe the \acf{RC} model (Section
+\ref{sec:res-models}), which enables sending inputs to and harvesting the
+computations of complex systems to perform machine learning tasks without
+requiring explicit knowledge of the underlying system dynamics or the need to
+solve complex optimization problems. We apply reservoir computing to sequential
+language-like tasks in Chapter~\ref{cha:learn-effic-compl}. This model was
 developed with \acp{RNN}, but we describe how \acp{CA} and other complex systems
 can be a suitable replacement, and the benefits of this approach.
 
@@ -29,11 +32,11 @@ available states for cells, usually chosen to be $\{0, 1\}$ for binary
 \acp{CA} or $\{1, \ldots, n\}$ for \acp{CA} with $n$ states.
 
 A neighborhood function $\boldsymbol{N}$ is defined that associates each cell
-with the indexes of its neighbors in the grid. In general, a \ac{CA} can be constructed on any
-space $\mathcal{L}$ where this function can be defined. The space $\mathcal{L}$ specifies an
-index and the relationship between the cells. In practice, regular finite or
-infinite grids are chosen, $\mathcal{L} \subset \mathbb{Z}$ or $\mathcal{L} \subset \mathbb{Z}^{2}$. For example, the grid could
-be a one-dimensional torus with 10 cells, that is,
+with the indexes of its neighbors in the grid. In general, a \ac{CA} can be
+constructed on any space $\mathcal{L}$ where this function can be defined. The space $\mathcal{L}$
+specifies an index and the relationship between the cells. In practice, regular
+finite or infinite grids are chosen, $\mathcal{L} \subset \mathbb{Z}$ or $\mathcal{L} \subset \mathbb{Z}^{2}$. For example, the
+grid could be a one-dimensional torus with 10 cells, that is,
 $\mathcal{L}_{{T_{10}}} = \{1, 2, \ldots, 10 \}$. The neighborhood function has the following
 general form:
 \begin{equation}
@@ -96,9 +99,10 @@ and dimension.
 \end{figure}
 
 A \ac{CA} evolves in discrete time steps. An update rule
-$\boldsymbol{\Phi}: \mathcal{S}^{s} \rightarrow \mathcal{S}$ defines the new state of a cell as a
-function of its local neighborhood at the current time step. The local group of cells is said to be in a particular \emph{configuration}. The function $\boldsymbol{\Phi}$ is applied in
-parallel to all cells. For a \ac{CA} in its initial state at time
+$\boldsymbol{\Phi}: \mathcal{S}^{s} \rightarrow \mathcal{S}$ defines the new state of a cell as a function of its
+local neighborhood at the current time step. The local group of cells is said to
+be in a particular \emph{configuration}. The function $\boldsymbol{\Phi}$ is
+applied in parallel to all cells. For a \ac{CA} in its initial state at time
 step 0 --- \ie a set of cells $\left(c_{i}^{(0)}\right)_{i \in \mathcal{L}} \in \mathcal{S}^{|\mathcal{L}|}$, and a
 neighborhood function $\boldsymbol{N}$, we have the following update rule:
 \begin{equation}
@@ -121,23 +125,31 @@ state of the neighbors. This operation is applied in parallel to the entire grid
   \label{fig:ca_base}
 \end{figure}
 
-The function $\boldsymbol{\Phi}$ is often called a \emph{rule table} because it
+The function $\boldsymbol{\Phi}$ is sometimes called a \emph{rule table} because it
 associates an output state for each possible combination of input neighbor
 states. In an implementation of the \ac{CA} model, these output states can be
-looked up from a table or array containing all possible transitions from input to output.
+looked up from a table or array containing all possible transitions from input
+to output.
+
+There are many ways to define \acp{CA}, and we chose to give a very general
+definition that includes many rarely used \ac{CA} variants. For another simpler
+definition of common \acp{CA}, see \autocite{kariBasicConceptsCellular2012}.
 
 \paragraph{Rule representation.}
 A useful rule representation can be obtained by listing all output states
-corresponding to input neighborhood configurations in a predetermined order. This 
-results in a list of values $[o_1, \ldots, o_{s^{|\mathcal{S}|}}]$, with 
-$\forall i,\ o_{i} \in \mathcal{S}$, where $s$ is
-the number of cells in a neighborhood, $\mathcal{S}$ is the space of available states, and
-$|\mathcal{S}|$ is the number of available states per cell. Using $o_{i}$ as the
-digits of a base-$|\mathcal{S}|$ number, each rule is uniquely represented by a number.
-For example, as explained in more detail in Section \ref{sec:elem-cell-autom},
-a one-dimensional cellular automaton with a neighborhood of size 3 has 8 possible configurations of neighboring cells (000, 001, 010, 011, 100, 101, 110, and 111), each of which can map to 2 states (0 or 1). To obtain the rule number, we concatenate the new states for each of the input configurations, resulting in an 8-bit number. 
-The 256 possible binary rules in one dimension with neighborhood size 3 can be numbered
-from 0 to 255 with this standard method and are referred to by their number in the literature.
+corresponding to input neighborhood configurations in a predetermined order.
+This results in a list of values $[o_1, \ldots, o_{s^{|\mathcal{S}|}}]$, with
+$\forall i,\ o_{i} \in \mathcal{S}$, where $s$ is the number of cells in a neighborhood, $\mathcal{S}$ is
+the space of available states, and $|\mathcal{S}|$ is the number of available states per
+cell. Using $o_{i}$ as the digits of a base-$|\mathcal{S}|$ number, each rule is uniquely
+represented by a number. For example, as explained in more detail in Section
+\ref{sec:elem-cell-autom}, a one-dimensional cellular automaton with a
+neighborhood of size 3 has 8 possible configurations of neighboring cells (000,
+001, 010, 011, 100, 101, 110, and 111), each of which can map to 2 states (0 or
+1). To obtain the rule number, we concatenate the new states for each of the
+input configurations, resulting in an 8-bit number. The 256 possible binary
+rules in one dimension with neighborhood size 3 can be numbered from 0 to 255
+with this standard method and are referred to by their number in the literature.
 
 \paragraph{Boundary conditions.}
 The grid of a \ac{CA} can be finite or infinite. In the infinite case, the grid
@@ -211,11 +223,13 @@ practical compared to alternatives. However, when tested in practice, Wuensche's
 hypothesis that $\text{Z} \approx 0.75$ corresponds to class 4 is rarely verified.
 
 Hudcová defined a classification of \ac{CA} that is based on the form of the
-asymptotic growth of its transients, obtained by repeated simulation of
-the rules of \ac{CA} starting from various initial conditions and using the best
+asymptotic growth of its transients, obtained by repeated simulation of the
+rules of \ac{CA} starting from various initial conditions and using the best
 fitting function for the asymptotic growth of its transients
 \parencite{hudcovaClassificationComplexSystems2020,
-  hudcovaClassificationDiscreteDynamical2022}.
+  hudcovaClassificationDiscreteDynamical2022}. For a thorough review of existing
+\acp{CA} classifications and challenges, see
+\autocite{vispoelProgressGapsObstacles2022}.
 
 \subsection{Cellular automata variants}
 
