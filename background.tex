@@ -29,7 +29,7 @@ available states for cells, usually chosen to be $\{0, 1\}$ for binary
 \acp{CA} or $\{1, \ldots, n\}$ for \acp{CA} with $n$ states.
 
 A neighborhood function $\boldsymbol{N}$ is defined that associates each cell
-with its neighbors in the grid. In general, a \ac{CA} can be constructed on any
+with the indexes of its neighbors in the grid. In general, a \ac{CA} can be constructed on any
 space $\mathcal{L}$ where this function can be defined. The space $\mathcal{L}$ specifies an
 index and the relationship between the cells. In practice, regular finite or
 infinite grids are chosen, $\mathcal{L} \subset \mathbb{Z}$ or $\mathcal{L} \subset \mathbb{Z}^{2}$. For example, the grid could
@@ -97,7 +97,7 @@ and dimension.
 
 A \ac{CA} evolves in discrete time steps. An update rule
 $\boldsymbol{\Phi}: \mathcal{S}^{s} \rightarrow \mathcal{S}$ defines the new state of a cell as a
-function of its local neighborhood at the current time step. It is applied in
+function of its local neighborhood at the current time step. The local group of cells is said to be in a particular \emph{configuration}. The function $\boldsymbol{\Phi}$ is applied in
 parallel to all cells. For a \ac{CA} in its initial state at time
 step 0 --- \ie a set of cells $\left(c_{i}^{(0)}\right)_{i \in \mathcal{L}} \in \mathcal{S}^{|\mathcal{L}|}$, and a
 neighborhood function $\boldsymbol{N}$, we have the following update rule:
@@ -108,7 +108,7 @@ neighborhood function $\boldsymbol{N}$, we have the following update rule:
 \end{aligned}
 \end{equation}
 
-The details of an update step in a 1 dimensional \ac{CA} is shown in Figure
+The details of an update step in a 1-dimensional \ac{CA} is shown in Figure
 \ref{fig:ca_base} for example. The neighborhood of the cell $c_{i}$ is $c_{i}$
 itself, as well as its two immediately adjacent cells.
 
@@ -116,15 +116,15 @@ itself, as well as its two immediately adjacent cells.
   \centering
  \includegraphics[width=.7\linewidth]{figures/ca_base}
   \caption{Illustration of a \acl{CA} update rule in 1 dimension. For each cell,
-  we look up the neighboring cells and update its state according to the current
-state of the neighbors.}
+  we look up the neighboring cells and update their state according to the current
+state of the neighbors. This operation is applied in parallel to the entire grid.}
   \label{fig:ca_base}
 \end{figure}
 
 The function $\boldsymbol{\Phi}$ is often called a \emph{rule table} because it
 associates an output state for each possible combination of input neighbor
 states. In an implementation of the \ac{CA} model, these output states can be
-looked up from a table containing all possible transitions from input to output.
+looked up from a table or array containing all possible transitions from input to output.
 
 \paragraph{Rule representation.}
 A useful rule representation can be obtained by listing all output states
@@ -290,7 +290,7 @@ computed, using the output states (last row in Figure \ref{fig:eca_150_rule}) as
 a binary representation. Example simulations of \ac{ECA} rule 150 starting 
 from various initial states are shown in Figure~\ref{fig:eca_150}. In these 
 representations, time flows from top to bottom, and each row of cells represents 
-a single internal \ac{CA} state at a single time step.
+a single internal \ac{CA} state at a single time step. This representation of an \ac{ECA} rule is often called a \emph{spacetime diagram}.
 
 There are several well-known \ac{ECA} rules with particularly interesting
 properties. For example, a universal computer has been constructed in rule 110
