@@ -131,9 +131,9 @@ states. In an implementation of the \ac{CA} model, these output states can be
 looked up from a table or array containing all possible transitions from input
 to output.
 
-There are many ways to define \acp{CA}, and we chose to give a very general
-definition that includes many rarely used \ac{CA} variants. For another simpler
-definition of common \acp{CA}, see \autocite{kariBasicConceptsCellular2012}.
+There are many ways to define \acp{CA}, and we gave a broad
+definition that includes many rarely used \ac{CA} variants. For another more straightforward
+definition of common \acp{CA}, see, for example, \autocite{kariBasicConceptsCellular2012}.
 
 \paragraph{Rule representation.}
 A useful rule representation can be obtained by listing all output states
@@ -144,8 +144,8 @@ the space of available states, and $|\mathcal{S}|$ is the number of available st
 cell. Using $o_{i}$ as the digits of a base-$|\mathcal{S}|$ number, each rule is uniquely
 represented by a number. For example, as explained in more detail in Section
 \ref{sec:elem-cell-autom}, a one-dimensional cellular automaton with a
-neighborhood of size 3 has 8 possible configurations of neighboring cells (000,
-001, 010, 011, 100, 101, 110, and 111), each of which can map to 2 states (0 or
+neighborhood of size three has eight possible configurations of neighboring cells (000,
+001, 010, 011, 100, 101, 110, and 111), each of which can map to two states (0 or
 1). To obtain the rule number, we concatenate the new states for each of the
 input configurations, resulting in an 8-bit number. The 256 possible binary
 rules in one dimension with neighborhood size 3 can be numbered from 0 to 255
@@ -227,8 +227,8 @@ asymptotic growth of its transients, obtained by repeated simulation of the
 rules of \ac{CA} starting from various initial conditions and using the best
 fitting function for the asymptotic growth of its transients
 \parencite{hudcovaClassificationComplexSystems2020,
-  hudcovaClassificationDiscreteDynamical2022}. For a thorough review of existing
-\acp{CA} classifications and challenges, see
+  hudcovaClassificationDiscreteDynamical2022}. For a 
+detailed review of the current methods and challenges of \acp{CA} classifications, see
 \autocite{vispoelProgressGapsObstacles2022}.
 
 \subsection{Cellular automata variants}
