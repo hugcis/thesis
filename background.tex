@@ -20,7 +20,7 @@ can be a suitable replacement, and the benefits of this approach.
 
 \section{Cellular automata}\label{sec:cellular-automata-sec}
 
-Stanislaw Ulam and John Von
+Stanislaw Ulam and John von
 Neumann proposed the \ac{CA} model in the 1940s as a means 
 of modeling crystal growth and creating an autonomous self-replicating system
 \parencite{vonneumannTheorySelfreproducingAutomata1966}.
@@ -41,8 +41,8 @@ $\mathcal{L}_{{T_{10}}} = \{1, 2, \ldots, 10 \}$. The neighborhood function has 
 general form:
 \begin{equation}
   \begin{aligned}
-\boldsymbol{N}_{\mathcal{L}} :\quad & \mathcal{S} \rightarrow \mathcal{S}^{s}\\
-&{c_i} \mapsto [{j}]_{j\in \mathcal{N}_{c_{i}}},
+\boldsymbol{N}_{\mathcal{L}} :\quad & \mathcal{L} \rightarrow \mathcal{L}^{s}\\
+&{i} \mapsto [{c_{j}}]_{j\in \mathcal{N}_{c_{i}}},
   \end{aligned}
 \end{equation}
 where $\mathcal{N}_{c_{i}}$ is the neighborhood of cell $c_{i}$, $s$ is the
@@ -54,11 +54,11 @@ adjacent cells. This type of 1D neighborhood is usually associated with a
 \ref{fig:1d_neigh}. It corresponds to the following neighborhood function:
 \begin{equation}
   \begin{aligned}
-\boldsymbol{N}_{\mathcal{L}_{T_{10}}} :\quad & \mathcal{S} \rightarrow \mathcal{S}^{3} \\
-&\boldsymbol{N}_{\mathcal{L}_{T_{10}}}(c_{i}) = \begin{cases}
-                      [{i - 1}, {i}, {i + 1}],& \text{if}\quad i \in \{2,\ldots , 9\}\\
-                       [{10}, {1}, {2}], & \text{if} \quad i = 1 \\
-                       [{9}, {10}, {1}], & \text{if} \quad i = 10. \\
+\boldsymbol{N}_{\mathcal{L}_{T_{10}}} :\quad & \mathcal{L} \rightarrow \mathcal{L}^{3} \\
+&\boldsymbol{N}_{\mathcal{L}_{T_{10}}}({i}) = \begin{cases}
+                      [c_{i - 1}, c_{i}, c_{i + 1}],& \text{if}\quad i \in \{2,\ldots , 9\}\\
+                       [c_{10}, c_{1}, c_{2}], & \text{if} \quad i = 1 \\
+                       [c_{9}, c_{10}, c_{1}], & \text{if} \quad i = 10. \\
                     \end{cases}
   \end{aligned}
   \label{eq:torus_index}
@@ -67,7 +67,7 @@ adjacent cells. This type of 1D neighborhood is usually associated with a
 A larger radius $r$ would correspond to including more cells in the
 neighborhood, going in each direction from the initial cell. On two-dimensional
 grids, there are multiple ways to define the neighborhood. Some common examples
-are the Moore neighborhood (see Figure \ref{fig:moore}) and the Von Neumann
+are the Moore neighborhood (see Figure \ref{fig:moore}) and the von Neumann
 neighborhood (see Figure \ref{fig:von_neumann}). In the rest, we omit the
 subscript on the neighborhood function $\boldsymbol{N}$ as we almost always work
 with regular grids on a torus, for which it is simpler to just mention the size
@@ -90,7 +90,7 @@ and dimension.
   \begin{subfigure}[c]{.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{figures/von_neumann}
-    \caption{Von Neumann neighborhood}
+    \caption{von Neumann neighborhood}
     \label{fig:von_neumann}
   \end{subfigure}
 
@@ -505,14 +505,14 @@ have
 \begin{equation}
   \label{eq:langton}
   \begin{aligned}
-    \lambda = \frac{K^{s} - n}{K^{n}}.
+    \lambda = \frac{K^{s} - n}{K^{s}}.
   \end{aligned}
 \end{equation}
 
 For Langton, the purpose of $\lambda$ is to search the space of \acp{CA} in an ordered
 manner by varying the value of the parameter. His procedure starts with a rule
 with all transitions leading to the quiescent state. The value of $\lambda$ is
-increased in discrete steps to $1 - 1 / K^{n}$ by randomly changing the
+increased in discrete steps to $1 - 1 / K^{s}$ by randomly changing the
 transitions of the rule to lead to a different state. An illustration of the
 behavior change of a \ac{CA} rule under this procedure is shown in Figure
 \ref{fig:langton_lambda}. Langton collected various measures of the dynamical
@@ -767,12 +767,12 @@ constant values outside of the main grid, the size of the output is the same as
 the input. This means that the CNN step can be applied multiple times, simulating a
 single \ac{CA} step every time.
 
-\subsubsection{Recurrent convolutions in machine learning}
+% \subsubsection{Recurrent convolutions in machine learning}
 
-Recurrent convolutional networks have been used in some areas of machine
-learning such as NLP or computer vision
-\parencite{pinheiroRecurrentConvolutionalNeural2014,
-  laiRecurrentConvolutionalNeural2015}. These models are similar 
+% Recurrent convolutional networks have been used in some areas of machine
+% learning such as NLP or computer vision
+% \parencite{pinheiroRecurrentConvolutionalNeural2014,
+%   laiRecurrentConvolutionalNeural2015}. These models are similar
 
 \subsection{Adding inputs and outputs\label{sec:adding-inputs-outp}}
 

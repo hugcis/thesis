@@ -17,6 +17,49 @@ computations happening within complex systems (Section
 
 \section{Measuring complexity\label{sec:measuring-complexity}}
 
+
+\begin{figure}[htbp]
+  \centering
+  \scalebox{1}{
+\begin{tikzpicture}
+% define normal distribution function 'normaltwo'
+\def\normaltwo{\x,{2*1/exp(((\x-3)^2)/2)}}
+
+% input y parameter
+\def\ya{4.9}
+\def\fya{2*1/exp(((\ya-3)^2)/2)}
+
+\def\yb{1.4}
+\def\fyb{2*1/exp(((\yb-3)^2)/2)}
+
+\def\yc{3}
+\def\fyc{2*1/exp(((\yc-3)^2)/2)}
+
+% Draw and label normal distribution function
+\draw[color=blue,domain=0:6,smooth,samples=50, line width=0.25mm] plot (\normaltwo) node[right] {};
+
+% Add dashed line dropping down from normal.
+\draw[dashed] ({\ya},{\fya}) -- ({\ya},0) node[below] {\ref{fig:random}};
+\draw[dashed] ({\yb},{\fyb}) -- ({\yb},0) node[below] {\ref{fig:simple}};
+\draw[dashed] ({\yc},{\fyc}) -- ({\yc},0) node[below] {\ref{fig:complex}};
+
+
+% Add axis labels
+\draw (-.2,1.5) node[left] {Complexity};
+\draw (3,-.5) node[below] {Randomness};
+
+% Add axes
+\draw[->,line width=0.1mm] (0,0) -- (6.2,0) node[right] {};
+\draw[->,line width=0.1mm] (0,0) -- (0,2) node[above] {};
+
+\end{tikzpicture}}
+\caption{\emph{Ideal} ``complexity'' curve as a function of the ``randomness''
+  of a system. The three \acp{CA} from figure \ref{fig:three_eca_complex} are
+  displayed at their approximate expected location on that curve. This curve is
+  just for illustrative purposes and does not correspond to any true function
+  linking randomness and complexity.}
+\label{fig:complexity_curve}
+\end{figure}
 Measuring the complexity of a system is a fundamentally difficult task. Many
 complex systems exhibit what Peter Grassberger calls \emph{self-generated
   complexity} \parencite{grassbergerQuantitativeTheorySelfgenerated1986}. This
@@ -64,50 +107,7 @@ complexity, the last picture could be labeled as complex.
   \label{fig:three_eca_complex}
 \end{figure}
 
-\begin{figure}[htbp]
-  \centering
-  \scalebox{1}{
-\begin{tikzpicture}
-% define normal distribution function 'normaltwo'
-\def\normaltwo{\x,{2*1/exp(((\x-3)^2)/2)}}
-
-% input y parameter
-\def\ya{4.9}
-\def\fya{2*1/exp(((\ya-3)^2)/2)}
-
-\def\yb{1.4}
-\def\fyb{2*1/exp(((\yb-3)^2)/2)}
-
-\def\yc{3}
-\def\fyc{2*1/exp(((\yc-3)^2)/2)}
-
-% Draw and label normal distribution function
-\draw[color=blue,domain=0:6,smooth,samples=50, line width=0.25mm] plot (\normaltwo) node[right] {};
-
-% Add dashed line dropping down from normal.
-\draw[dashed] ({\ya},{\fya}) -- ({\ya},0) node[below] {\ref{fig:random}};
-\draw[dashed] ({\yb},{\fyb}) -- ({\yb},0) node[below] {\ref{fig:simple}};
-\draw[dashed] ({\yc},{\fyc}) -- ({\yc},0) node[below] {\ref{fig:complex}};
-
-
-% Add axis labels
-\draw (-.2,1.5) node[left] {Complexity};
-\draw (3,-.5) node[below] {Randomness};
-
-% Add axes
-\draw[->,line width=0.1mm] (0,0) -- (6.2,0) node[right] {};
-\draw[->,line width=0.1mm] (0,0) -- (0,2) node[above] {};
-
-\end{tikzpicture}}
-\caption{\emph{Ideal} ``complexity'' curve as a function of the ``randomness''
-  of a system. The three \acp{CA} from figure \ref{fig:three_eca_complex} are
-  displayed at their approximate expected location on that curve. This curve is
-  just for illustrative purposes and does not correspond to any true function
-  linking randomness and complexity.}
-\label{fig:complexity_curve}
-\end{figure}
-
-No clear observables quantities and protocols have been proposed that would give a
+No clear observable quantities and protocols have been proposed that would give a
 quantitative notion of complexity.
 \textcite{grassbergerProblemsQuantifyingSelfgenerated1989} argued that no single
 quantity is sufficient to measure complexity since it depends on exactly how the
@@ -153,7 +153,7 @@ Shannon entropy is defined as the expected information content of the input
 \parencite{shannonMathematicalTheoryCommunication1975}. We have
 
 \begin{align*}
-  H(X) := \mathbb{E}[-\log(P(X))].
+  H(X) := \mathbb{E}[-\log(P(x))]_{x\in X}.
 \end{align*}
 
 This measure is a lower bound on the number of bits that the input could be
@@ -214,18 +214,19 @@ Algorithms can be described by their space and time complexity, which
 respectively correspond to the amount of memory storage and CPU time necessary
 to run them \parencite{traubInformationUncertaintyComplexity1983,
   packelRecentDevelopmentsInformationbased1987,
-  hopcroftIntroductionAutomataTheory2007}. Algorithms that depend on a parameter
-$N$ will be said to be NP-hard if the time needed to run them increases
-exponentially with the parameter $N$. NP-hard algorithms can be said to be
-complex as they require a supposedly irreducible amount of computation to
+  hopcroftIntroductionAutomataTheory2007}. A problem that depend on a parameter
+$N$ will be said to be NP-hard if the time needed to find a solution to them
+increases exponentially with the parameter $N$. NP-hard problems can be said
+to be complex as they require a supposedly irreducible amount of computation to
 compute their output. In practice, this description only applies to computations
 that were generated by a hand-designed algorithm and not the kind of
 computations self-generated by a complex system that we are interested in. For
 example, the computations generated by one \ac{CA} cannot be said to be
-computationally more complex than those of another \ac{CA} because the algorithm that
-implements them is fundamentally the same and computationally simple. The
-computational complexity of an algorithm performed by a dynamical system thus
-cannot be effectively used as a measure of the complexity of that system.
+computationally more complex than those of another \ac{CA} because the algorithm
+that implements them is fundamentally the same and computationally simple.
+% The
+% computational complexity of an algorithm performed by a dynamical system thus
+% cannot be effectively used as a measure of the complexity of that system.
 
 \subsection{Solomonoff–Kolmogorov-Chaitin complexity (algorithmic
   complexity)}\label{sec:algo-complexity}
@@ -318,9 +319,11 @@ logical depth of a string $x$ at a significance level $s$ is defined as
   \label{eq:2}
   \min\{T(p): (|p| - |p^{*}| < s ) \wedge (U(p) = x) \},
 \end{equation}
-which is the least time required to compute it by a $s$-incompressible program,
-that is a program $p$ which length is within $s$ symbols from the optimal program
-$p^{*}$ of the algorithmic complexity metric.
+where $T$ is the number of steps that the universal computer runs the program
+$p$ for. This quantity corresponds to the least time required to compute the
+string $x$ by a $s$-incompressible program, that is a program $p$ whose length
+is within $s$ symbols from the optimal program $p^{*}$ of the algorithmic
+complexity metric.
 % \textcite{gutowitzCellularAutomataSciences1995}
 
 \textcite{antunesComputationalDepthConcept2006} considered logical depth to be
