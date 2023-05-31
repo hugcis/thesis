@@ -533,6 +533,143 @@ low max accuracy score.
 Our new WADE metric gives a complementary view of a model's abilities, which may be significantly different from what can be obtained from the usual
 performance metrics focused on the final accuracy of the model.
 
+\section{Reservoir computing and reservoir cellular automata \label{sec:rc-and-reca}}
+
+We use %the notation and
+names adapted from \parencite{jaegerLongShortTermMemory2012} in
+this section. An echo-state network is a random recurrent neural network with
+frozen weights and skip-connections. Its random weights are sampled in a
+specific way so that it performs random combinations of input vectors with its
+current state while keeping a history of past inputs \parencite{jaegerEchoStateApproach2001}.
+
+
+% \subsection{Reservoir cellular automata}
+Reservoir cellular automaton (ReCA) is a model similar to echo-state networks
+% (described in Section~\ref{sec:echo-state-networks})
+but where a cellular automaton (CA) replaces the random RNN. The cellular
+automaton can be seen as a \ac{RNN} with additional weigth-sharing similar to
+convolutional neural network. The special structure of a recurrent CA update
+makes it more likely than random RNNs to generate complex structures
+\parencite{wolframStatisticalMechanicsCellular1983, wolframNewKindScience2002}.
+% A CA can also be seen as a special RNN with a large amount of parameter sharing.
+Because CAs were not designed to make use of inputs or produce outputs, we
+extend the model to make it accept input vectors and to make reading from the CA
+state possible (details in Section~\ref{sec:app-ca-res}).
+
+We also propose two novel projection schemes that offer more flexibility than
+existing ones. They extend the one-to-one projection and allow for a wider
+variety of produced encodings:
+
+\begin{description}
+  \item[One-to-many.] Each input bit is assigned exactly to $k$ positions in $P$
+        instead of one. This is equivalent to adding $k$ separate and mutually
+        exclusive one-to-one projections into a single one.
+  \item[One-to-pattern.] Each input bit is assigned to a random contiguous pattern
+        of $k$ bits set in a fixed position.
+\end{description}
+
+The effect of applying our three methods to a simple input with three components
+is illustrated in Fig.~\ref{fig:enc_meth}. Projections are chosen to map
+each input bit to a unique output configuration.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/encoding_methods.pdf}
+  \caption{Three encoding methods. From left to right: \emph{one-to-one},
+    \emph{one-to-many} and \emph{one-to-pattern}.}\label{fig:enc_meth}
+\end{figure}
+
+Following \parencite{yilmazReservoirComputingUsing2014,
+  nicheleReservoirComputingUsing2017, nicheleDeepLearningCellular2017}, the
+input is projected multiple times to add redundancy to the encoding. This was
+experimentally observed to improve performance. We also use a projection vector
+larger than the initial one. Projections are generated randomly $R$ times, applied,
+and concatenated as a single large encoder to create the full \ac{CA} input
+vector. The parameter $R$ is called \emph{redundancy}.
+
+For cellular automata in 1D, the space $\mathcal{P}$ is one dimensional, and the
+concatenation is performed on this dimension. In higher-dimensional spaces,
+this concatenation must be defined in another way.
+
+We write the $R$ projection functions $E_{1}, E_{2}, \ldots, E_{R}$. The final size
+of the input vector and the \ac{CA} state grid is now $R \times L_{d}$ instead of $L_{d}$.
+We have
+\begin{align}
+  \vp_{t} = P(\vx_{t}) = E_{1}(\vx_{t})\mathbin\Vert \ldots \mathbin \Vert E_{R}(\vx_{t}),
+\end{align}
+where $\mathbin\Vert$ is the concatenation operator.
+
+For example, other projections have been proposed and implemented in
+\parencite{yilmazReservoirComputingUsing2014}. We choose to present the three
+above because they are simple to understand and implement, and their effects can
+be explored thoroughly.
+
+\paragraph{Input combination.}
+There are multiple ways to combine the input vector with the current state of the \ac{CA}.
+\textcite{gloverDynamicalLandscapeReservoir2021} propose to use a XOR
+function between the projected input and the state of the \ac{CA}.
+
+At each input step $t$, the projected input vector $\vp_{t}$ is XORed
+element-wise with the current CA state $\vs_{t}$, so that each 1 bit of the
+input switches the corresponding bit in the CA state to another value. This
+creates a new state $\vs_{t}'$ from which the CA will evolve. $\vs_{t}'$ is
+defined as
+\begin{align}
+  \vs_{t}' \coloneqq \vp_{t} \otimes \vs_{t},
+\end{align}
+where $\otimes$ is the element-wise XOR operator between two vectors of binary
+values, and $\vs'_{t}$ is the temporary CA state resulting from the combination
+of the CA state and the input vectors at time $t$.
+
+From the state of the \ac{CA} at time $t$, $\vs'_{t}$, we then compute the next CA states
+applying the update function $\Phi$,
+
+\begin{equation}
+  \label{eq:ca-state}
+  \vs_{t + 1} = \Phi(\vs'_{t}).
+\end{equation}
+
+This is one of many possible ways to combine an input vector with the current
+state of the CA that may affect its performance as a reservoir. The XOR-based
+input combination gives an asymmetrical role to 0 and 1 in the input vectors,
+which is natural considering how we encode and project categorical data points.
+Different rules of \acp{CA} might benefit or lose performance due to these
+encoding choices. The combination problem can be generalized to incorporate it
+into the \ac{CA} rule search problem. We demonstrate this in the next paragraph.
+
+\paragraph{Generalization.} We generalize the input combination method above by
+incorporating it into the \ac{CA} update rule. Since the input vector $\vp$ is
+binary, we can treat its value at position $i$ as just another virtual \ac{CA}
+cell. For a standard \ac{ECA}, the update step takes into account the three
+immediate neighbors $\vs^{(i - 1)}, \vs^{(i)}, \vs^{(i + 1)}$ plus the
+additional virtual cell $\vp^{(i)}$. Instead of 8 possible input configurations
+for a binary 1D \ac{CA}, we now have 16. In this extended \ac{CA} space, the
+number of possible rules is $2^{16} = 65536$ instead of 256.
+
+\begin{figure}[htbp]
+  \centering
+    \begin{subfigure}[b]{.387\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/ca_update_rule.pdf}
+    \caption{Regular CA update only takes neighbor states into
+      account.}\label{fig:standard-ca-update}
+  \end{subfigure}
+  \hspace{10pt}
+  \begin{subfigure}[b]{.55\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/generalized_ca_update_rule.pdf}
+    \caption{The extended neighborhood update also uses an input value to
+      decide the next state of a cell.}\label{fig:generalized-ca-update}
+  \end{subfigure}
+  \caption{Comparison of standard CA update rule and our extended input
+    combination rule.\label{fig:ca_update_rule}}
+\end{figure}
+
+This method is illustrated in Fig.~\ref{fig:ca_update_rule} during the regular CA
+update. It generalizes the concept of input combination with the state $\vs$.
+The XOR method described above is one of its special cases, but our method also
+contains all possible Boolean functions with 4 inputs.
+
 
 \section{New benchmark: compared methods\label{sec:compared-methods}}
 
@@ -592,26 +729,11 @@ dropout, regularization, or normalization, is used for these fully trained basel
 
 \subsection{Echo-state networks and reservoir cellular automata\label{sec:echo-state-networks}}
 
-We use %the notation and
-names adapted from \parencite{jaegerLongShortTermMemory2012} in
-this section. An echo-state network is a random recurrent neural network with
-frozen weights and skip-connections. Its random weights are sampled in a
-specific way so that it performs random combinations of input vectors with its
-current state while keeping a history of past inputs \parencite{jaegerEchoStateApproach2001}.
+In our experiments, we also use two reservoir based models. The first is an echo
+state network (ESN). We compare this model with reservoir cellular automata
+(ReCA, see Sections \ref{sec:app-ca-res} and \ref{sec:rc-and-reca} for more
+details).
 
-
-% \subsection{Reservoir cellular automata}
-Reservoir cellular automaton (ReCA) is a model similar to echo-state networks
-% (described in Section~\ref{sec:echo-state-networks})
-but where a cellular automaton (CA) replaces the random RNN. The cellular
-automaton can be seen as a \ac{RNN} with additional weigth-sharing similar to
-convolutional neural network. The special structure of a recurrent CA update
-makes it more likely than random RNNs to generate complex structures
-\parencite{wolframStatisticalMechanicsCellular1983, wolframNewKindScience2002}.
-% A CA can also be seen as a special RNN with a large amount of parameter sharing.
-Because CAs were not designed to make use of inputs or produce outputs, we
-extend the model to make it accept input vectors and to make reading from the CA
-state possible (details in Section~\ref{sec:app-ca-res}).
 
 \subsection{Experimental set-up}
 We ran 100 separate experiments with different random seeds for each of the CA
